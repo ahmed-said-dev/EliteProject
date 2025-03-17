@@ -1,6 +1,6 @@
 import { Button } from '@/components/ui/Button';
 import { Section } from '@/components/ui/Section';
-import Header from '@/components/Header';
+import Header from '@/components/Header/Header';
 
 export default function Home() {
   return (
