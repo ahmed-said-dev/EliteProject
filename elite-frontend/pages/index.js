@@ -5,7 +5,7 @@ import Header from '@/components/Header';
 export default function Home() {
   return (
     <>
-      <Header />
+      {/* <Header /> */}
       <main>
         {/* Hero Section */}
         <Section bgColor="bg-purple-600" className="text-white">
