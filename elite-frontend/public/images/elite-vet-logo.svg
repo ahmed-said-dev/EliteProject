@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="140" height="45" viewBox="0 0 140 45" xmlns="http://www.w3.org/2000/svg">
+  <g fill="none" fill-rule="evenodd">
+    <!-- Heart shape with medical cross -->
+    <path d="M38 12c-4-4-10.5-4-14.5 0l-1.5 1.5L20.5 12c-4-4-10.5-4-14.5 0s-4 10.5 0 14.5l16 16 16-16c4-4 4-10.5 0-14.5z" fill="#6B4E98"/>
+    <path d="M27 17h-4v-4h-2v4h-4v2h4v4h2v-4h4z" fill="#FFF"/>
+    
+    <!-- Text -->
+    <g transform="translate(45, 0)">
+      <!-- Elite Vet text -->
+      <text x="0" y="20" font-family="Cairo" font-size="18" font-weight="700" fill="#6B4E98" letter-spacing="0.5">
+        ELITE VET
+      </text>
+      <!-- Arabic text -->
+      <text x="0" y="38" font-family="Cairo" font-size="16" font-weight="500" fill="#6B4E98" direction="rtl" text-anchor="start">
+        التقنية البيطرية
+      </text>
+    </g>
+  </g>
+</svg>
