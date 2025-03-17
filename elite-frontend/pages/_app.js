@@ -1,8 +1,17 @@
 import '@/styles/globals.css';
+import '@fortawesome/fontawesome-free/css/all.min.css';
+import feather from 'feather-icons';
 import Head from 'next/head';
 import Layout from '@/components/Layout';
+import { useEffect } from 'react';
 
 function MyApp({ Component, pageProps }) {
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      feather.replace();
+    }
+  }, []);
+
   return (
     <>
       <Head>

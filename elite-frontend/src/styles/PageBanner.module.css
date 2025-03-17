@@ -1,0 +1,116 @@
+.bannerContainer {
+  position: relative;
+  background-size: cover;
+  background-position: center;
+  padding: 100px 0;
+}
+
+.overlay {
+  position: relative;
+  background-color: rgba(107, 78, 152, 0.7);
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 15px;
+}
+
+.entry {
+  text-align: center;
+  color: white;
+}
+
+.title {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  font-weight: 700;
+}
+
+.breadcrumb {
+  display: flex;
+  justify-content: center;
+  list-style: none;
+  padding: 0;
+  margin: 1rem 0;
+}
+
+.breadcrumbItem {
+  color: white;
+  font-size: 1rem;
+}
+
+.breadcrumbItem:not(:last-child)::after {
+  content: "/";
+  margin: 0 0.5rem;
+  display: inline-block;
+}
+
+.phoneContainer {
+  position: absolute;
+  bottom: -25px;
+  right: 50px;
+  background: white;
+  border-radius: 50px;
+  padding: 5px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+  z-index: 10;
+}
+
+.phoneButton {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background-color: #6B4E98;
+  color: white;
+  padding: 12px 25px;
+  border-radius: 50px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.phoneIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+}
+
+.textVertical {
+  position: absolute;
+  left: 30px;
+  top: 70%;
+  transform: translate(0, -50%) rotate(-90deg);
+  transform-origin: left center;
+  color: white;
+  font-weight: 600;
+}
+
+.socialLinks {
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.socialLinks li {
+  margin: 1rem 0;
+}
+
+.socialLinks a {
+  color: white;
+  font-size: 1.2rem;
+  opacity: 0.1;
+  transition: opacity 0.3s ease;
+}
+
+.socialLinks a:hover {
+  opacity: 1;
+}
