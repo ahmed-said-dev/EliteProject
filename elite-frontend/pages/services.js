@@ -1,5 +1,6 @@
 import { Section } from '@/components/ui/Section';
 import { Button } from '@/components/ui/Button';
+import PageBanner from '@/components/PageBanner/PageBanner';
 
 export default function Services() {
   const services = [
@@ -37,6 +38,10 @@ export default function Services() {
 
   return (
     <main>
+      <PageBanner 
+        title="Our Services"
+        backgroundImage="/images/banner/bnr1.webp"
+      />
       <Section bgColor="bg-purple-600" className="text-white">
         <div className="text-center">
           <h1 className="text-4xl font-bold mb-4">خدماتنا</h1>

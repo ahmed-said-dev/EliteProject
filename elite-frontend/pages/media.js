@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Section } from '@/components/ui/Section';
 import { Gallery } from '@/features/media/Gallery';
+import PageBanner from '@/components/PageBanner/PageBanner';
 
 export default function Media() {
   const [activeTab, setActiveTab] = useState('photos');
@@ -71,6 +72,10 @@ export default function Media() {
 
   return (
     <main>
+      <PageBanner 
+        title="Media Gallery"
+        backgroundImage="/images/banner/bnr1.webp"
+      />
       <Section bgColor="bg-purple-600" className="text-white">
         <div className="text-center">
           <h1 className="text-4xl font-bold mb-4">معرض الوسائط</h1>

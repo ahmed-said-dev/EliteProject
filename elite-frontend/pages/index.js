@@ -1,12 +1,14 @@
 import { Button } from '@/components/ui/Button';
 import { Section } from '@/components/ui/Section';
 import Header from '@/components/Header/Header';
+import PageBanner from '@/components/PageBanner/PageBanner';
 
 export default function Home() {
   return (
     <>
       {/* <Header /> */}
       <main>
+
         {/* Hero Section */}
         <Section bgColor="bg-purple-600" className="text-white">
           <div className="flex flex-col items-center text-center">

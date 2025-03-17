@@ -1,5 +1,6 @@
 import { Section } from '@/components/ui/Section';
 import { PricingCard } from '@/features/memberships/PricingCard';
+import PageBanner from '@/components/PageBanner/PageBanner';
 
 export default function Memberships() {
   const plans = [
@@ -65,6 +66,10 @@ export default function Memberships() {
 
   return (
     <main>
+      <PageBanner 
+        title="Memberships"
+        backgroundImage="/images/banner/bnr1.webp"
+      />
       <Section bgColor="bg-purple-600" className="text-white">
         <div className="text-center">
           <h1 className="text-4xl font-bold mb-4">باقات العضوية</h1>

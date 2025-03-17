@@ -1,6 +1,7 @@
 import { Section } from '@/components/ui/Section';
 import { ContactForm } from '@/features/contact/ContactForm';
 import { SITE_CONFIG } from '@/utils/constants';
+import PageBanner from '@/components/PageBanner/PageBanner';
 
 export default function Contact() {
   const contactInfo = [
@@ -34,6 +35,10 @@ export default function Contact() {
 
   return (
     <main>
+      <PageBanner 
+        title="Contact Us"
+        backgroundImage="/images/banner/bnr1.webp"
+      />
       <Section bgColor="bg-purple-600" className="text-white">
         <div className="text-center">
           <h1 className="text-4xl font-bold mb-4">اتصل بنا</h1>
