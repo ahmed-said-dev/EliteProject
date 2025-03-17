@@ -7,13 +7,25 @@
 
 .overlay {
   position: relative;
-  background-color: rgba(107, 78, 152, 0.7);
+}
+
+.overlay::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(107, 78, 152, 0.85);
+  z-index: 1;
 }
 
 .container {
+  position: relative;
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 15px;
+  z-index: 2;
 }
 
 .entry {
@@ -88,6 +100,11 @@
   transform-origin: left center;
   color: white;
   font-weight: 600;
+  font-size: 1rem;
+  letter-spacing: 1px;
+  white-space: nowrap;
+  opacity: 0.9;
+  z-index: 2;
 }
 
 .socialLinks {
@@ -98,6 +115,7 @@
   list-style: none;
   padding: 0;
   margin: 0;
+  z-index: 2;
 }
 
 .socialLinks li {

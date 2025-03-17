@@ -7,7 +7,7 @@ export default function About() {
     <main>
       <PageBanner 
         title="About Us"
-        backgroundImage="/images/banner/bnr1.webp"
+        backgroundImage="img1.webp"
       />
     </main>
   );
