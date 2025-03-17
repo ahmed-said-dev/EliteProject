@@ -45,6 +45,7 @@
   list-style: none;
   padding: 0;
   margin: 1rem 0;
+  flex-direction: row-reverse;
 }
 
 .breadcrumbItem {
@@ -52,10 +53,11 @@
   font-size: 1rem;
 }
 
-.breadcrumbItem:not(:last-child)::after {
+.breadcrumbItem:first-child::before {
   content: "/";
   margin: 0 0.5rem;
   display: inline-block;
+  opacity: 0.6;
 }
 
 .phoneContainer {
@@ -86,6 +88,10 @@
   font-size: 1.1rem;
 }
 
+.phoneButton:hover {
+  background-color: #5a4180;
+}
+
 .phoneIcon {
   display: flex;
   align-items: center;
@@ -96,7 +102,6 @@
   border-radius: 50%;
   padding: 6px;
 }
-
 
 .textVertical {
   position: absolute;
