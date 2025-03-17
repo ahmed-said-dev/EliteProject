@@ -38,25 +38,25 @@ const PageBanner = ({ title, backgroundImage }) => {
             data-wow-duration="0.8s"
           >
             <ul className={styles.breadcrumb}>
-              <li className={styles.breadcrumbItem}>{title}</li>
               <li className={styles.breadcrumbItem}>
                 <Link href="/" style={{ color: '#ffffff', textDecoration: 'none' }}>
                   Home
                 </Link>
               </li>
+              <li className={styles.breadcrumbItem}>{title}</li>
             </ul>
           </nav>
         </div>
       </div>
       <div className={styles.phoneContainer}>
         <a
-          href="tel:+11234567890"
+          href="tel:78904561231"
           className={styles.phoneButton}
         >
           <span className={styles.phoneIcon}>
             <i className="fa-solid fa-phone"></i>
           </span>
-          +1 123 456 7890
+          7890 456 123 1+
         </a>
       </div>
       <span 

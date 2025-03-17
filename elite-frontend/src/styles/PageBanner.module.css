@@ -74,14 +74,16 @@
 .phoneButton {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 15px;
   background-color: #6B4E98;
   color: white;
   padding: 12px 25px;
   border-radius: 50px;
   text-decoration: none;
-  font-weight: 600;
+  font-weight: 500;
   transition: all 0.3s ease;
+  flex-direction: row-reverse;
+  font-size: 1.1rem;
 }
 
 .phoneIcon {
@@ -90,7 +92,11 @@
   justify-content: center;
   width: 24px;
   height: 24px;
+  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  padding: 6px;
 }
+
 
 .textVertical {
   position: absolute;
