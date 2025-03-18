@@ -22,11 +22,10 @@ export default function AboutUsIntro() {
       <section className={`content-inner ${styles.contentInner}`}>
         <div className={`container ${styles.container}`}>
           <div className={`row ${styles.contentWrapper}`}>
-
             <div className={`col-xl-6 ${styles.colXl6}`}>
               <div className={styles.contentSection}>
-                <h2 className={styles.title}>Who We Are</h2>
-                <p className={styles.description}>
+                <h2 className={styles.title} style={{ textAlign: 'left' }}>Who We Are</h2>
+                <p className={styles.description} style={{ textAlign: 'left' }}>
                   At Elite Clinic, we're passionate about providing state-of-the-art
                   veterinary care for your beloved pets. Since the establishment of our pet
                   clinic in 2013, we've been dedicated to delivering exceptional medical

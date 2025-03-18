@@ -1,5 +1,5 @@
 .contentInner {
-  padding: 80px 0;
+  padding: 70px 0;
   background: #fff;
 }
 
@@ -14,6 +14,7 @@
   display: flex;
   flex-wrap: wrap;
   margin: 0 -15px;
+  align-items: center;
 }
 
 .colXl6 {
@@ -24,64 +25,67 @@
 
 .contentSection {
   padding: 30px 0;
+  text-align: left;
 }
 
 .title {
-  font-size: 36px;
+  font-size: 2.5rem;
   font-weight: 700;
+  margin-bottom: 1.5rem;
   color: #4A2D71;
-  margin-bottom: 20px;
   font-family: 'Cairo', sans-serif;
 }
 
 .description {
+  font-size: 1rem;
+  line-height: 1.8;
+  margin-bottom: 2rem;
   color: #666;
-  line-height: 1.6;
-  margin-bottom: 30px;
-  font-size: 16px;
+  text-align: left;
 }
 
 .services {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 20px;
-  margin-bottom: 40px;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
 }
 
 .serviceItem {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 1rem;
+  text-align: left;
   color: #4A2D71;
   font-size: 16px;
 }
 
 .serviceItem .icon {
   color: #7C58D3;
-  font-size: 20px;
+  font-size: 1.5rem;
 }
 
 .actionArea {
   display: flex;
   align-items: center;
-  gap: 30px;
+  gap: 2rem;
+  margin-top: 2rem;
 }
 
 .appointmentButton {
-  background: #4A2D71;
-  color: #fff;
-  padding: 15px 30px;
-  border-radius: 12px;
-  display: flex;
+  display: inline-flex;
   align-items: center;
-  gap: 10px;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  background: #7C58D3;
+  color: #fff;
+  border-radius: 8px;
   text-decoration: none;
-  font-weight: 500;
   transition: all 0.3s ease;
 }
 
 .appointmentButton:hover {
-  background: #7C58D3;
+  background: #4A2D71;
 }
 
 .rightIcon {
@@ -92,6 +96,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  font-size: 1rem;
 }
 
 .rightIcon svg {
@@ -102,35 +107,36 @@
 .emergencyHotline {
   display: flex;
   align-items: center;
-  gap: 15px;
+  gap: 1rem;
 }
 
 .hotlineIcon {
-  width: 45px;
-  height: 45px;
-  background: #7C58D3;
-  border-radius: 12px;
+  width: 40px;
+  height: 40px;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #fff;
-  font-size: 20px;
+  background: rgba(124, 88, 211, 0.1);
+  border-radius: 8px;
+  color: #7C58D3;
 }
 
 .hotlineContent {
   display: flex;
   flex-direction: column;
+  text-align: left;
 }
 
 .hotlineContent span {
+  display: block;
+  font-size: 0.875rem;
   color: #666;
-  font-size: 14px;
 }
 
 .hotlineContent strong {
+  display: block;
+  font-size: 1rem;
   color: #4A2D71;
-  font-size: 16px;
-  font-weight: 600;
 }
 
 .imageWrapper {
@@ -248,6 +254,10 @@
     max-width: 100%;
   }
   
+  .contentSection {
+    margin-bottom: 2rem;
+  }
+  
   .imageWrapper {
     height: 400px;
     margin-bottom: 30px;
@@ -262,10 +272,10 @@
   .actionArea {
     flex-direction: column;
     align-items: flex-start;
+    gap: 1rem;
   }
   
-  .appointmentButton {
-    width: 100%;
-    justify-content: center;
+  .title {
+    font-size: 2rem;
   }
 }
