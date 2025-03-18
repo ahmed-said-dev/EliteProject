@@ -9,12 +9,12 @@ import {
   FaClinicMedical,
   FaPhoneAlt,
   FaArrowRight,
-  FaVideo,
   FaPhone,
   FaMicrophone,
-  FaCamera,
+  FaVideo,
   FaComment
 } from "react-icons/fa";
+import AboutUsInfoCollapse from "./AboutUsInfoCollapse/AboutUsInfoCollapse";
 
 export default function AboutUsIntro() {
   return (
@@ -22,49 +22,7 @@ export default function AboutUsIntro() {
       <section className={`content-inner ${styles.contentInner}`}>
         <div className={`container ${styles.container}`}>
           <div className={`row ${styles.contentWrapper}`}>
-            <div className={`col-xl-6 ${styles.colXl6}`}>
-              <div className={styles.imageWrapper}>
-                <div className={styles.emergencyCall}>
-                  <div className={styles.callBox}>
-                    <div className={styles.callIcons}>
-                      <a href="/#" className={styles.iconLink}>
-                        <FaCamera />
-                      </a>
-                      <a href="/#" className={styles.iconLink}>
-                        <FaComment />
-                      </a>
-                      <a href="/#" className={`${styles.iconLink} ${styles.active}`}>
-                        <FaPhone />
-                      </a>
-                      <a href="/#" className={styles.iconLink}>
-                        <FaMicrophone />
-                      </a>
-                      <a href="/#" className={styles.iconLink}>
-                        <FaVideo />
-                      </a>
-                    </div>
-                  </div>
-                </div>
-                <div className={styles.clinicHours}>
-                  <div className={styles.hoursIcon}>
-                    <FaPaw />
-                  </div>
-                  <div className={styles.hoursContent}>
-                    <h3>Clinic Hours</h3>
-                    <div className={styles.schedule}>
-                      <div className={styles.scheduleRow}>
-                        <span>Monday - Saturday</span>
-                        <strong>08:00 - 22:00</strong>
-                      </div>
-                      <div className={styles.scheduleRow}>
-                        <span>Emergency Care</span>
-                        <strong>24/7</strong>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+
             <div className={`col-xl-6 ${styles.colXl6}`}>
               <div className={styles.contentSection}>
                 <h2 className={styles.title}>Who We Are</h2>
@@ -121,10 +79,12 @@ export default function AboutUsIntro() {
                 </div>
               </div>
             </div>
+            <div className={`col-xl-6 ${styles.colXl6}`}>
+              <AboutUsInfoCollapse />
+            </div>
           </div>
         </div>
       </section>
-
     </>
   );
 }
