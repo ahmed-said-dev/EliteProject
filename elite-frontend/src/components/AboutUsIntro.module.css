@@ -1,0 +1,271 @@
+.contentInner {
+  padding: 80px 0;
+  background: #fff;
+}
+
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 15px;
+}
+
+.contentWrapper {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 -15px;
+}
+
+.colXl6 {
+  flex: 0 0 50%;
+  max-width: 50%;
+  padding: 0 15px;
+}
+
+.imageWrapper {
+  position: relative;
+  height: 600px;
+  background-image: url('/images/clinic-exterior.jpg');
+  background-size: cover;
+  background-position: center;
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+.emergencyCall {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 220px;
+}
+
+.callBox {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border-radius: 15px;
+  padding: 15px;
+}
+
+.callIcons {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.iconLink {
+  color: #fff;
+  font-size: 18px;
+  transition: all 0.3s ease;
+  width: 35px;
+  height: 35px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+}
+
+.iconLink:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.iconLink.active {
+  background: #7C58D3;
+}
+
+.clinicHours {
+  position: absolute;
+  bottom: 30px;
+  left: 30px;
+  right: 30px;
+  background: #fff;
+  border-radius: 15px;
+  padding: 20px;
+  display: flex;
+  gap: 20px;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+}
+
+.hoursIcon {
+  width: 50px;
+  height: 50px;
+  background: #7C58D3;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 24px;
+}
+
+.hoursContent {
+  flex: 1;
+}
+
+.hoursContent h3 {
+  font-size: 18px;
+  font-weight: 600;
+  margin: 0 0 10px;
+  color: #4A2D71;
+}
+
+.schedule {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.scheduleRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 14px;
+}
+
+.scheduleRow span {
+  color: #666;
+}
+
+.scheduleRow strong {
+  color: #4A2D71;
+  font-weight: 600;
+}
+
+.contentSection {
+  padding: 30px 0;
+}
+
+.title {
+  font-size: 36px;
+  font-weight: 700;
+  color: #4A2D71;
+  margin-bottom: 20px;
+  font-family: 'Cairo', sans-serif;
+}
+
+.description {
+  color: #666;
+  line-height: 1.6;
+  margin-bottom: 30px;
+  font-size: 16px;
+}
+
+.services {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+  margin-bottom: 40px;
+}
+
+.serviceItem {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: #4A2D71;
+  font-size: 16px;
+}
+
+.serviceItem .icon {
+  color: #7C58D3;
+  font-size: 20px;
+}
+
+.actionArea {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+}
+
+.appointmentButton {
+  background: #4A2D71;
+  color: #fff;
+  padding: 15px 30px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.appointmentButton:hover {
+  background: #7C58D3;
+}
+
+.rightIcon {
+  width: 30px;
+  height: 30px;
+  background: #fff;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.rightIcon svg {
+  color: #4A2D71;
+  font-size: 14px;
+}
+
+.emergencyHotline {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.hotlineIcon {
+  width: 45px;
+  height: 45px;
+  background: #7C58D3;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 20px;
+}
+
+.hotlineContent {
+  display: flex;
+  flex-direction: column;
+}
+
+.hotlineContent span {
+  color: #666;
+  font-size: 14px;
+}
+
+.hotlineContent strong {
+  color: #4A2D71;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+@media (max-width: 1200px) {
+  .colXl6 {
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
+  
+  .imageWrapper {
+    height: 400px;
+    margin-bottom: 30px;
+  }
+}
+
+@media (max-width: 768px) {
+  .services {
+    grid-template-columns: 1fr;
+  }
+  
+  .actionArea {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .appointmentButton {
+    width: 100%;
+    justify-content: center;
+  }
+}
