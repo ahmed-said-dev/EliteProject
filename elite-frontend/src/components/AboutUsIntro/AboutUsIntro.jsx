@@ -19,7 +19,13 @@ import AboutUsInfoCollapse from "./AboutUsInfoCollapse/AboutUsInfoCollapse";
 export default function AboutUsIntro() {
   return (
     <>
-      <section className={`content-inner ${styles.contentInner}`}>
+      <section className={`content-inner ${styles.contentInner}`}
+                style={{
+                  backgroundImage: 'url(/background/bg1.png)',
+                  backgroundRepeat: 'no-repeat',
+                  backgroundPosition: 'right bottom'
+                }}
+      >
         <div className={`container ${styles.container}`}>
           <div className={`row ${styles.contentWrapper}`}>
             <div className={`col-xl-6 ${styles.colXl6}`}>

@@ -1,6 +1,17 @@
 .contentInner {
   padding: 70px 0;
+  position: relative;
+  background-image: url(/background/bg1.png);
+  background-repeat: no-repeat;
+  background-position: right bottom;
+  background-size: 15%;
+  overflow: hidden;
   background: #fff;
+  z-index: 1;
+}
+
+[dir="rtl"] .contentInner {
+  background-position: left bottom;
 }
 
 .container {
@@ -8,6 +19,8 @@
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 15px;
+  position: relative;
+  z-index: 2;
 }
 
 .contentWrapper {
@@ -249,6 +262,10 @@
 }
 
 @media (max-width: 1200px) {
+  .contentInner {
+    background-size: 25%;
+    padding: 50px 0;
+  }
   .colXl6 {
     flex: 0 0 100%;
     max-width: 100%;
@@ -256,11 +273,6 @@
   
   .contentSection {
     margin-bottom: 2rem;
-  }
-  
-  .imageWrapper {
-    height: 400px;
-    margin-bottom: 30px;
   }
 }
 
@@ -277,5 +289,15 @@
   
   .title {
     font-size: 2rem;
+  }
+  
+  .contentInner {
+    background-size: 45%;
+    padding: 40px 0;
+    background-position: center bottom;
+  }
+  
+  [dir="rtl"] .contentInner {
+    background-position: center bottom;
   }
 }
