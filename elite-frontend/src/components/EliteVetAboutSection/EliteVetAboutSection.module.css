@@ -1,15 +1,13 @@
+/* Section Styles */
 .contentInner {
   position: relative;
   padding-top: 100px;
   padding-bottom: 70px;
   background: linear-gradient(to top, rgba(0, 0, 0, 0) 0%, #ffffff 100%);
   background-color: rgba(245, 240, 255, 1);
-  box-sizing: border-box;
-  outline: none;
-  scrollbar-color: rgba(223, 223, 223, 0.9) rgba(255, 255, 255, 0);
-  scrollbar-width: thin;
 }
 
+/* Container Styles */
 .container {
   width: 100%;
   padding-right: calc(20px * 0.5);
@@ -17,10 +15,9 @@
   margin-right: auto;
   margin-left: auto;
   max-width: 1330px;
-  box-sizing: border-box;
-  outline: none;
 }
 
+/* Grid Layout */
 .row {
   display: flex;
   flex-wrap: wrap;
@@ -28,8 +25,6 @@
   margin-right: calc(-0.5 * 3rem);
   margin-left: calc(-0.5 * 3rem);
   align-items: center;
-  box-sizing: border-box;
-  outline: none;
 }
 
 .colLeft {
@@ -40,8 +35,6 @@
   flex: 0 0 auto;
   width: 58.3333%;
   margin-bottom: 10px;
-  box-sizing: border-box;
-  outline: none;
 }
 
 .colRight {
@@ -52,48 +45,34 @@
   flex: 0 0 auto;
   width: 41.6667%;
   margin-bottom: 30px;
-  box-sizing: border-box;
-  outline: none;
 }
 
+/* Section Header */
 .sectionHead {
   max-width: 600px;
   margin-bottom: 30px;
-  box-sizing: border-box;
-  outline: none;
 }
 
 .title {
-  margin-top: 0;
-  margin-bottom: 0.5rem;
+  margin: 0 0 0.5rem;
   font-family: 'Poppins', sans-serif;
   color: #4a2d71;
   line-height: 1.3;
   font-size: 45px;
   font-weight: 700;
   text-transform: capitalize;
-  visibility: visible;
-  animation-duration: 0.8s;
-  animation-delay: 0.2s;
-  animation-name: fadeInUp;
-  box-sizing: border-box;
-  outline: none;
+  animation: fadeInUp 0.8s ease-out;
 }
 
 .description {
-  margin-top: 0;
-  margin-bottom: 1rem;
+  margin: 0 0 1rem;
   line-height: 1.6;
   font-size: 16px;
   font-weight: 400;
-  visibility: visible;
-  animation-duration: 0.8s;
-  animation-delay: 0.4s;
-  animation-name: fadeInUp;
-  box-sizing: border-box;
-  outline: none;
+  animation: fadeInUp 0.8s ease-out 0.2s;
 }
 
+/* Icon Boxes */
 .iconBox {
   margin-bottom: 20px;
   margin-right: 25px;
@@ -101,27 +80,28 @@
   padding: 20px 25px;
   border-radius: 15px;
   gap: 25px;
-  transition: 0.2s;
-  background-color: rgb(255, 255, 255);
+  transition: all 0.2s ease;
+  background-color: #ffffff;
   display: flex;
   align-items: center;
-  box-shadow: rgba(0, 0, 0, 0.02) 0px 10px 30px;
-  visibility: visible;
-  animation-duration: 0.8s;
-  animation-delay: 0.2s;
-  animation-name: fadeInUp;
-  box-sizing: border-box;
-  outline: none;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.02);
+  animation: fadeInUp 0.8s ease-out 0.4s;
 }
 
 .iconBox.right {
   margin-right: 0;
   margin-left: 25px;
-  animation-delay: 0.4s;
+  animation-delay: 0.6s;
 }
 
+.iconBox:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.05);
+}
+
+/* Icon Styles */
 .icon {
-  transition: 0.5s;
+  transition: all 0.5s ease;
   position: relative;
   width: 70px;
   min-width: 70px;
@@ -129,16 +109,24 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 65px;
-  color: #7c58d3;
-  box-sizing: border-box;
-  outline: none;
 }
 
+.iconSvg {
+  width: 40px;
+  height: 40px;
+  color: #7c58d3;
+}
+
+.checkIcon {
+  width: 20px;
+  height: 20px;
+  color: #7c58d3;
+  flex-shrink: 0;
+}
+
+/* Content Styles */
 .iconContent {
   overflow: hidden;
-  box-sizing: border-box;
-  outline: none;
 }
 
 .iconTitle {
@@ -146,39 +134,20 @@
   font-weight: 600;
   color: #4a2d71;
   line-height: 1.4;
-  position: relative;
-  margin-top: 0;
+  margin: 0 0 5px;
   font-size: 20px;
-  margin-bottom: 5px;
-  box-sizing: border-box;
-  outline: none;
 }
 
-.imageWrapper {
-  border-radius: 15px;
-  height: 700px;
-  overflow: hidden;
-  position: relative;
-  box-sizing: border-box;
-  outline: none;
+.iconText {
+  margin: 0 0 1rem;
+  line-height: 1.6;
 }
 
-.image {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  box-sizing: border-box;
-  outline: none;
-  vertical-align: middle;
-  border-style: none;
-}
-
+/* List Styles */
 .list {
   padding: 0;
-  margin: 0.5rem 0 0 0;
+  margin: 0.5rem 0 0;
   list-style: none;
-  box-sizing: border-box;
-  outline: none;
 }
 
 .listItem {
@@ -186,45 +155,76 @@
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  box-sizing: border-box;
-  outline: none;
-  list-style: none;
 }
 
 .listItem:last-child {
   margin-bottom: 0;
 }
 
+.listItem span {
+  flex: 1;
+}
+
+/* Image Styles */
+.imageWrapper {
+  border-radius: 15px;
+  height: 700px;
+  overflow: hidden;
+  position: relative;
+}
+
+.image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  vertical-align: middle;
+}
+
+/* Animations */
 @keyframes fadeInUp {
   from {
     opacity: 0;
-    transform: translate3d(0, 100%, 0);
+    transform: translateY(20px);
   }
   to {
     opacity: 1;
-    transform: translate3d(0, 0, 0);
+    transform: translateY(0);
   }
 }
 
-:global {
-  html {
-    scroll-behavior: smooth;
-    overflow: unset;
+/* Responsive Styles */
+@media (max-width: 992px) {
+  .colLeft,
+  .colRight {
+    width: 100%;
   }
 
-  body {
-    margin: 0;
-    font-family: "Poppins", sans-serif;
-    font-size: 1rem;
-    font-weight: 400;
-    line-height: 1.6;
-    color: #7a6e99;
-    text-align: var(--bs-body-text-align);
-    background-color: #ffffff;
-    text-size-adjust: 100%;
-    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-    background-attachment: fixed;
-    background-size: cover;
-    overflow: clip scroll;
+  .iconBox {
+    margin-right: 0;
+    margin-left: 0;
+  }
+
+  .imageWrapper {
+    height: 500px;
+  }
+}
+
+@media (max-width: 768px) {
+  .title {
+    font-size: 32px;
+  }
+
+  .iconBox {
+    flex-direction: column;
+    text-align: center;
+    padding: 25px 20px;
+  }
+
+  .icon {
+    margin-bottom: 15px;
+  }
+
+  .imageWrapper {
+    height: 400px;
   }
 }
