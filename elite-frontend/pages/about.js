@@ -4,6 +4,7 @@ import PageBanner from '@/components/PageBanner/PageBanner';
 import AboutUsIntro from '@/components/AboutUsIntro/AboutUsIntro';
 import ImageGallerySlider from '@/components/ImageGallerySlider';
 import EliteVetAboutSection from '@/components/EliteVetAboutSection/EliteVetAboutSection';
+import EliteVetBenefits from '@/components/EliteVetBenefits/EliteVetBenefits';
 
 export default function About() {
   return (
@@ -21,6 +22,7 @@ export default function About() {
         <ImageGallerySlider />
       </Section>
       <EliteVetAboutSection/>
+      <EliteVetBenefits/>
     </main>
   );
 }

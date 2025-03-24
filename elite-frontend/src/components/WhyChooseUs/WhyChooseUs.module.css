@@ -1,0 +1,123 @@
+.whyChooseSection {
+  position: relative;
+  background-repeat: no-repeat;
+  background-position: right center;
+  background-size: cover;
+  overflow: hidden;
+  background-blend-mode: luminosity;
+  background-color: rgba(107, 78, 152, 0.85);
+  padding: 120px 0;
+}
+
+.contentWrapper {
+  align-items: center;
+}
+
+.mediaColumn {
+  margin-bottom: 30px;
+}
+
+.contentMedia {
+  position: relative;
+}
+
+.mediaWrapper {
+  position: relative;
+  z-index: 1;
+}
+
+.mainImage {
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+}
+
+.experienceBox {
+  position: absolute;
+  bottom: 30px;
+  right: -30px;
+  z-index: 2;
+}
+
+.infoWidget {
+  background-color: #6B4E98;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 0 50px rgba(0, 0, 0, 0.1);
+}
+
+.counterText {
+  font-size: 48px;
+  font-weight: 700;
+  color: white;
+  line-height: 1;
+  margin-bottom: 10px;
+  display: block;
+}
+
+.counter {
+  display: inline-block;
+}
+
+.title {
+  color: white;
+  margin-bottom: 0;
+  font-size: 24px;
+  line-height: 1.4;
+  font-weight: 600;
+}
+
+.sectionHead {
+  margin-bottom: 30px;
+}
+
+.sectionHead .title {
+  font-size: 36px;
+  line-height: 1.4;
+  margin-bottom: 0;
+}
+
+.featuresGrid {
+  margin: 0 -15px;
+}
+
+.iconBox {
+  text-align: center;
+  color: white;
+  margin-bottom: 30px;
+}
+
+.iconWrapper {
+  background-color: #6B4E98;
+  width: 80px;
+  height: 80px;
+  margin: 0 auto 20px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+.iconBox:hover .iconWrapper {
+  transform: translateY(-5px);
+  box-shadow: 0 5px 15px rgba(107, 78, 152, 0.3);
+}
+
+.iconCell {
+  line-height: 1;
+}
+
+.featureTitle {
+  color: white;
+  font-size: 20px;
+  margin-bottom: 15px;
+  font-weight: 600;
+}
+
+.iconContent p {
+  color: rgba(255, 255, 255, 0.8);
+  margin-bottom: 0;
+  font-size: 16px;
+  line-height: 1.6;
+}
