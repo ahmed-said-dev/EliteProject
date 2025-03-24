@@ -3,6 +3,7 @@ import { Button } from '@/components/ui/Button';
 import PageBanner from '@/components/PageBanner/PageBanner';
 import AboutUsIntro from '@/components/AboutUsIntro/AboutUsIntro';
 import ImageGallerySlider from '@/components/ImageGallerySlider';
+import EliteVetAboutSection from '@/components/EliteVetAboutSection/EliteVetAboutSection';
 
 export default function About() {
   return (
@@ -19,6 +20,7 @@ export default function About() {
         </div>
         <ImageGallerySlider />
       </Section>
+      <EliteVetAboutSection/>
     </main>
   );
 }
