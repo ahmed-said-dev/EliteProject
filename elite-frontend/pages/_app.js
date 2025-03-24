@@ -1,5 +1,9 @@
 import '@/styles/globals.css';
 import '@fortawesome/fontawesome-free/css/all.min.css';
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
+import '@/styles/swiper-custom.css';
 import feather from 'feather-icons';
 import Head from 'next/head';
 import Layout from '@/components/Layout';
