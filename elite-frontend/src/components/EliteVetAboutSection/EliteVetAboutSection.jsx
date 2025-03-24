@@ -8,6 +8,16 @@ export default function EliteVetAboutSection() {
     <section className={styles.contentInner}>
       <div className={styles.container}>
         <div className={styles.row}>
+          <div className={styles.colRight}>
+            <div className={styles.imageWrapper}>
+              <img
+                src="/AboutUs/img8.webp"
+                alt="Elite Veterinary Care Facility"
+                className={styles.image}
+              />
+            </div>
+          </div>
+
           <div className={styles.colLeft}>
             <div className={styles.sectionHead}>
               <h2 className={styles.title}>
@@ -68,16 +78,6 @@ export default function EliteVetAboutSection() {
                   </li>
                 </ul>
               </div>
-            </div>
-          </div>
-
-          <div className={styles.colRight}>
-            <div className={styles.imageWrapper}>
-              <img
-                src="/AboutUs/img8.webp"
-                alt="Elite Veterinary Care Facility"
-                className={styles.image}
-              />
             </div>
           </div>
         </div>
