@@ -2,23 +2,122 @@
 .swiper-button-next,
 .swiper-button-prev {
   color: #6B4E98;
-  background: rgba(255, 255, 255, 0.8);
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.9);
+  width: 48px;
+  height: 48px;
+  border-radius: 24px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  margin-top: 0;
+  transform: translateY(-50%);
+}
+
+.swiper-button-next {
+  right: 5%;
+}
+
+.swiper-button-prev {
+  left: 5%;
+}
+
+.swiper-button-next:hover,
+.swiper-button-prev:hover {
+  background: #fff;
+  box-shadow: 0 6px 12px rgba(107, 78, 152, 0.2);
+  transform: translateY(-50%) scale(1.05);
 }
 
 .swiper-button-next:after,
 .swiper-button-prev:after {
-  font-size: 20px;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+/* Active slide styles */
+.swiper-slide-active {
+  opacity: 1 !important;
+  transform: scale(1) !important;
+  box-shadow: 0 8px 24px rgba(107, 78, 152, 0.15) !important;
+  filter: blur(0) !important;
+  z-index: 2;
+}
+
+/* Adjacent slides */
+.swiper-slide-prev,
+.swiper-slide-next {
+  opacity: 0.3 !important;
+  transform: scale(0.75) !important;
+  filter: blur(1px) !important;
 }
 
 /* Custom pagination */
+.swiper-pagination {
+  bottom: 20px !important;
+}
+
 .swiper-pagination-bullet {
+  width: 10px;
+  height: 10px;
   background: #6B4E98;
-  opacity: 0.5;
+  opacity: 0.3;
+  transition: all 0.3s ease;
+  margin: 0 6px !important;
 }
 
 .swiper-pagination-bullet-active {
   opacity: 1;
+  width: 24px;
+  border-radius: 5px;
+  background: #6B4E98;
+}
+
+/* Dynamic bullets animation */
+.swiper-pagination-bullet {
+  transform: scale(0.8);
+}
+
+.swiper-pagination-bullet-active-prev,
+.swiper-pagination-bullet-active-next {
+  transform: scale(0.9);
+  opacity: 0.6;
+}
+
+.swiper-pagination-bullet-active {
+  transform: scale(1);
+}
+
+/* Coverflow effect enhancement */
+.swiper-slide-shadow-left,
+.swiper-slide-shadow-right {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .swiper-button-next,
+  .swiper-button-prev {
+    width: 40px;
+    height: 40px;
+  }
+
+  .swiper-button-next {
+    right: 2%;
+  }
+
+  .swiper-button-prev {
+    left: 2%;
+  }
+
+  .swiper-button-next:after,
+  .swiper-button-prev:after {
+    font-size: 20px;
+  }
+
+  .swiper-pagination-bullet {
+    width: 8px;
+    height: 8px;
+  }
+
+  .swiper-pagination-bullet-active {
+    width: 20px;
+  }
 }

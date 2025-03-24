@@ -14,8 +14,8 @@ export default function About() {
       <AboutUsIntro/>
       <Section>
         <div className="text-center mb-8">
-          <h2 className="text-3xl font-bold mb-4">معرض أعمالنا</h2>
-          <p className="text-gray-600">نقدم لكم مجموعة من الصور التي تعكس جودة خدماتنا وتجهيزات عيادتنا</p>
+          <h2 className="text-3xl font-bold mb-4">Our Portfolio</h2>
+          <p className="text-gray-600">Explore our state-of-the-art facilities and professional veterinary services</p>
         </div>
         <ImageGallerySlider />
       </Section>

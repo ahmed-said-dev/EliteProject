@@ -1,42 +1,49 @@
 import React from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Navigation, Pagination, Autoplay } from 'swiper/modules';
+import { Navigation, Pagination, Autoplay, EffectCoverflow } from 'swiper/modules';
 
 // Import Swiper styles
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
+import 'swiper/css/effect-coverflow';
 import styles from './ImageGallerySlider.module.css';
 
 const ImageGallerySlider = () => {
   const images = [
-    { id: 1, src: './portfolio/pic1.png', alt: 'خدمات العيادة البيطرية ١' },
-    { id: 2, src: '/portfolio/pic2.png', alt: 'خدمات العيادة البيطرية ٢' },
-    { id: 3, src: '/portfolio/pic3.png', alt: 'خدمات العيادة البيطرية ٣' },
-    { id: 4, src: '/portfolio/pic4.png', alt: 'خدمات العيادة البيطرية ٤' },
-    { id: 5, src: '/portfolio/pic5.png', alt: 'خدمات العيادة البيطرية ٥' },
-    { id: 6, src: '/portfolio/pic6.png', alt: 'خدمات العيادة البيطرية ٦' },
+    { id: 1, src: '/portfolio/pic1.png', alt: 'Veterinary Services 1' },
+    { id: 2, src: '/portfolio/pic2.png', alt: 'Veterinary Services 2' },
+    { id: 3, src: '/portfolio/pic3.png', alt: 'Veterinary Services 3' },
+    { id: 4, src: '/portfolio/pic4.png', alt: 'Veterinary Services 4' },
+    { id: 5, src: '/portfolio/pic5.png', alt: 'Veterinary Services 5' },
+    { id: 6, src: '/portfolio/pic6.png', alt: 'Veterinary Services 6' },
   ];
 
   return (
     <div className={styles.sliderContainer}>
       <Swiper
-        modules={[Navigation, Pagination, Autoplay]}
-        spaceBetween={30}
-        slidesPerView={1}
+        modules={[Navigation, Pagination, Autoplay, EffectCoverflow]}
+        effect="coverflow"
+        grabCursor={true}
+        centeredSlides={true}
+        slidesPerView={3}
+        initialSlide={1}
+        loop={true}
+        coverflowEffect={{
+          rotate: 0,
+          stretch: 0,
+          depth: 200,
+          modifier: 1,
+          slideShadows: false,
+        }}
         navigation
-        pagination={{ clickable: true }}
+        pagination={{ 
+          clickable: true,
+          dynamicBullets: true
+        }}
         autoplay={{
           delay: 3000,
           disableOnInteraction: false,
-        }}
-        breakpoints={{
-          640: {
-            slidesPerView: 2,
-          },
-          1024: {
-            slidesPerView: 3,
-          },
         }}
         className={styles.swiper}
       >
