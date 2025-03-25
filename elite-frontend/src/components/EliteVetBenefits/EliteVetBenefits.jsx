@@ -31,32 +31,58 @@ const benefits = [
 export default function EliteVetBenefits() {
   return (
     <>
-      <section className={`content-inner overlay-secondary-dark background-blend-luminosity bg-img-fix overflow-hidden ${styles.contentInner}`}> 
+      <section className={styles.contentInner}> 
         <div className={styles.overlay} />
-        <div className={`container ${styles.container}`}>
-          <div className={`row content-wrapper style-7 align-items-center ${styles.contentWrapper}`}>
-            <div className={`col-lg-6 m-b30 wow fadeInUp ${styles.column} ${styles.fadeInUp}`}> 
-              <div className={`section-head style-1 m-b30 ${styles.sectionHead}`}>
-                <h2 className={`title text-white m-b0 wow fadeInUp ${styles.title}`}>
+        <div className={styles.container}>
+          <div className={styles.contentWrapper}>
+            {/* Image Column - Now first in order */}
+            <div className={`${styles.column} ${styles.imageColumn} wow fadeInUp`}> 
+              <div className={styles.contentMedia}>
+                <div className={styles.dzMedia}>
+                  <img 
+                    src="/images/About-us/img5.webp" 
+                    alt="Elite Vet Experience" 
+                    className={styles.image} 
+                  />
+                </div>
+                <div className={styles.item1}>
+                  <div className={styles.infoWidget}>
+                    <span className={styles.contentText}>
+                      <span className="counter">20</span>
+                      <span className={styles.counterSpan}>+</span>
+                    </span>
+                    <h3 className={styles.title}>
+                      Years
+                      <br />
+                      Experienced
+                    </h3>
+                  </div>
+                </div>
+              </div>
+            </div>
+            {/* Content Column - Now second in order */}
+            <div className={`${styles.column} ${styles.contentColumn} wow fadeInUp`}> 
+              <div className={styles.sectionHead}>
+                <h2 className={styles.title}>
                   Why Choose Elite Vet?
                   <br />
                   Your Pet's Well-being, Our Priority
                 </h2>
               </div>
-              <div className={`row row-wrapper g-5 ${styles.rowWrapper}`}> 
+              <div className={styles.rowWrapper}> 
                 {benefits.map((item, index) => (
-                  <div key={index} className={`col-sm-6 ${styles.column}`}> 
+                  <div key={index} className={styles.column}> 
                     <div 
-                      className={`icon-bx-wraper style-4 text-center text-white wow fadeInUp ${styles.iconBxWrapper}`} 
+                      className={styles.iconBxWrapper} 
                       style={{ animationDelay: item.delay }}
                     > 
-                      <div className={`icon-bx bg-primary ${styles.iconBx}`}>
+                      <div className={styles.iconBx}>
                         <span className="icon-cell">
                           <i className={`fas fa-${item.icon} fa-2x`} />
                         </span>
                       </div>
-                      <div className={`icon-content ${styles.iconContent}`}>
-                        <h3 className={`dz-title ${styles.dzTitle}`}>
+                      <div className={styles.iconContent}>
+                        <h3 className={styles.dzTitle}>
                           {item.title}
                         </h3>
                         <p className={styles.description}> 
@@ -68,34 +94,9 @@ export default function EliteVetBenefits() {
                 ))}
               </div>
             </div>
-            <div className={`col-lg-6 m-b30 wow fadeInUp ${styles.column} ${styles.fadeInUp}`}> 
-              <div className={`content-media ${styles.contentMedia}`}>
-                <div className={`dz-media ${styles.dzMedia}`}>
-                  <img 
-                    src="/images/About-us/img5.webp" 
-                    alt="Elite Vet Experience" 
-                    className={styles.image} 
-                  />
-                </div>
-                <div className={`item1 ${styles.item1}`}>
-                  <div className={`info-widget style-11 bg-primary text-center ${styles.infoWidget}`}>
-                    <span className={`content-text text-white ${styles.contentText}`}>
-                      <span className="counter">20</span>
-                      <span className={styles.counterSpan}>+</span> 
-                    </span>
-                    <h3 className={`title m-b0 text-white ${styles.title}`}>
-                      Years
-                      <br />
-                      Experienced
-                    </h3>
-                  </div>
-                </div>
-              </div>
-            </div>
           </div>
         </div>
       </section>
-      {/* Remove the inline <style> tag */}
     </>
   );
 }
