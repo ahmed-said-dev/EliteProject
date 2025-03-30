@@ -10,6 +10,8 @@
   },
   "dependencies": {
     "@fortawesome/fontawesome-free": "^6.5.1",
+    "@iconscout/react-unicons": "^2.2.4",
+    "@radix-ui/react-accordion": "^1.2.3",
     "bootstrap": "^5.3.3",
     "clsx": "^2.0.0",
     "feather-icons": "^4.29.2",
@@ -26,11 +28,14 @@
     "@tailwindcss/aspect-ratio": "^0.4.2",
     "@tailwindcss/forms": "^0.5.10",
     "@tailwindcss/line-clamp": "^0.4.4",
+    "@types/node": "^22.13.14",
+    "@types/react": "^19.0.12",
     "autoprefixer": "^10.4.21",
     "eslint": "^8.54.0",
     "eslint-config-next": "^14.0.0",
     "postcss": "^8.5.3",
     "postcss-import": "^16.1.0",
-    "tailwindcss": "^3.4.17"
+    "tailwindcss": "^3.4.17",
+    "typescript": "^5.8.2"
   }
 }
