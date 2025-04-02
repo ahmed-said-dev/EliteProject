@@ -51,12 +51,11 @@ const Introduction = () => {
       <div className="container mx-auto px-4">
         <div className="text-center mb-12">
           <h2 className="text-3xl font-bold text-[#44396F] mb-4">Welcome to Elite Veterinary Clinic</h2>
-          <div className="flex justify-center items-center gap-4">
-            <FontAwesomeIcon icon={faPaw} style={{ height: '2em', width: '2em' }} className="text-purple-600 transform -rotate-45 opacity-90" />
-            <FontAwesomeIcon icon={faCat} style={{ height: '2em', width: '2em' }} className="text-purple-600 opacity-80" />
-            <FontAwesomeIcon icon={faDog} style={{ height: '2em', width: '2em' }} className="text-purple-600 transform rotate-45 opacity-85" />
-            <FontAwesomeIcon icon={faFish} style={{ height: '2em', width: '2em' }} className="text-purple-600 transform rotate-90 opacity-75" />
-            <FontAwesomeIcon icon={faOtter} style={{ height: '2em', width: '2em' }} className="text-purple-600 transform -rotate-90 opacity-70" />
+          {/* Wavy divider */}
+          <div className="w-32 h-6 mx-auto relative mb-6">
+            <svg viewBox="0 0 200 30" className="w-full">
+              <path d="M0,15 Q40,0 80,15 Q120,30 160,15 Q200,0 240,15" stroke="#8B5CF6" fill="none" strokeWidth="4"/>
+            </svg>
           </div>
           <p className="text-gray-600 mt-4 max-w-2xl mx-auto">
             Your trusted partner in pet healthcare. We provide comprehensive veterinary services with a focus on compassionate care and medical excellence.

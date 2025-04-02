@@ -13,16 +13,12 @@ const Contact = () => {
         {/* Content */}
         <div className="relative z-10">
           <h2 className="text-yellow-400 text-3xl font-bold mb-3">CONTACT US!</h2>
-          
-          {/* Animal icons */}
-          <div className="flex items-center gap-4 mb-6">
-            <FontAwesomeIcon icon={faPaw} style={{ height: '2em', width: '2em' }} className="text-white transform -rotate-45 opacity-90" />
-            <FontAwesomeIcon icon={faCat} style={{ height: '2em', width: '2em' }} className="text-white opacity-80" />
-            <FontAwesomeIcon icon={faDog} style={{ height: '2em', width: '2em' }} className="text-white transform rotate-45 opacity-70" />
-            <FontAwesomeIcon icon={faFish} style={{ height: '2em', width: '2em' }} className="text-white transform rotate-90 opacity-85" />
-            <FontAwesomeIcon icon={faOtter} style={{ height: '2em', width: '2em' }} className="text-white transform -rotate-90 opacity-75" />
+          {/* Wavy divider */}
+          <div className="w-32 h-6 mx-auto relative mb-6">
+            <svg viewBox="0 0 200 30" className="w-full">
+              <path d="M0,15 Q40,0 80,15 Q120,30 160,15 Q200,0 240,15" stroke="#FFD700" fill="none" strokeWidth="4"/>
+            </svg>
           </div>
-          
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             <div className="text-white">
               <div className="mb-8 relative">
