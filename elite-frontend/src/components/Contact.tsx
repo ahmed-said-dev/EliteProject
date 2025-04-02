@@ -14,90 +14,87 @@ const Contact = () => {
         <div className="relative z-10">
           <h2 className="text-yellow-400 text-3xl font-bold mb-3">CONTACT US!</h2>
           
-          {/* Paw prints instead of wavy line */}
-          <div className="flex items-center gap-4 mb-4">
-            <FontAwesomeIcon icon={faPaw} style={{ height: '2em', width: '2em' }} className="text-white transform -rotate-12" />
-            <FontAwesomeIcon icon={faPaw} style={{ height: '2em', width: '2em' }} className="text-white" />
-            <FontAwesomeIcon icon={faPaw} style={{ height: '2em', width: '2em' }} className="text-white transform rotate-12" />
+          {/* Paw prints */}
+          <div className="flex items-center gap-4 mb-6">
+            <FontAwesomeIcon icon={faPaw} style={{ height: '2em', width: '2em' }} className="text-white transform -rotate-45 opacity-80" />
+            <FontAwesomeIcon icon={faPaw} style={{ height: '2em', width: '2em' }} className="text-white opacity-90" />
+            <FontAwesomeIcon icon={faPaw} style={{ height: '2em', width: '2em' }} className="text-white transform rotate-45 opacity-80" />
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             <div className="text-white">
-              <div className="mb-8">
+              <div className="mb-8 relative">
                 <p className="text-lg font-bold mb-2">Have a question or concern?</p>
                 <p className="text-sm">Contact us today! Our dedicated team is ready to assist you.</p>
+                <div className="absolute -top-4 -right-4">
+                  <FontAwesomeIcon icon={faPaw} style={{ height: '2em', width: '2em' }} className="text-white opacity-20" />
+                </div>
               </div>
               
-              <div className="flex items-start mb-4">
+              <div className="flex items-start mb-4 relative">
                 <MapPin className="h-5 w-5 mr-2 mt-1 text-white" />
                 <div>
                   <p className="text-sm">Qurtubah gate, Al Thumamah Rd,</p>
                   <p className="text-sm">Qurtubah, Riyadh 13248</p>
                 </div>
+                <div className="absolute -top-2 -right-2">
+                  <FontAwesomeIcon icon={faPaw} style={{ height: '1.5em', width: '1.5em' }} className="text-white opacity-20 transform rotate-45" />
+                </div>
               </div>
               
-              <div className="flex items-center mb-8">
+              <div className="flex items-center mb-8 relative">
                 <Mail className="h-5 w-5 mr-2 text-white" />
                 <p className="text-sm">info@elitevetsa.com</p>
+                <div className="absolute -top-2 -right-2">
+                  <FontAwesomeIcon icon={faPaw} style={{ height: '1.5em', width: '1.5em' }} className="text-white opacity-20 transform -rotate-45" />
+                </div>
               </div>
               
-              <div className="h-48 bg-gray-200 rounded-md overflow-hidden mb-8">
+              <div className="h-48 bg-gray-200 rounded-md overflow-hidden mb-8 relative">
                 {/* Map placeholder */}
                 <div className="w-full h-full bg-gray-200 flex items-center justify-center text-gray-400">
                   Map Location
                 </div>
+                <div className="absolute bottom-2 right-2">
+                  <FontAwesomeIcon icon={faPaw} style={{ height: '2em', width: '2em' }} className="text-gray-300 transform rotate-12" />
+                </div>
               </div>
             </div>
             
-            <div className="bg-white/10 backdrop-blur-sm rounded-lg p-6">
+            <div className="bg-white/10 backdrop-blur-sm rounded-lg p-6 relative">
+              <div className="absolute -top-4 -right-4">
+                <FontAwesomeIcon icon={faPaw} style={{ height: '3em', width: '3em' }} className="text-white opacity-20 transform -rotate-12" />
+              </div>
+              
               <form className="space-y-4">
-                <Input 
-                  placeholder="NAME" 
-                  className="bg-white/80 border-none placeholder:text-gray-500"
-                />
-                <Input 
-                  placeholder="EMAIL" 
-                  className="bg-white/80 border-none placeholder:text-gray-500"
-                />
-                <Textarea 
-                  placeholder="MESSAGE" 
-                  className="bg-white/80 border-none h-32 placeholder:text-gray-500"
-                />
-                <Button className="w-full bg-yellow-400 hover:bg-yellow-500 text-purple-800 font-semibold">
-                  Send
+                <Input type="text" placeholder="Your Name" className="bg-white/20 border-none text-white placeholder:text-white/60" />
+                <Input type="email" placeholder="Your Email" className="bg-white/20 border-none text-white placeholder:text-white/60" />
+                <Input type="tel" placeholder="Phone Number" className="bg-white/20 border-none text-white placeholder:text-white/60" />
+                <Textarea placeholder="Your Message" className="bg-white/20 border-none text-white placeholder:text-white/60 min-h-[120px]" />
+                <Button type="submit" className="w-full bg-yellow-400 hover:bg-yellow-500 text-purple-800">
+                  Send Message
                 </Button>
               </form>
             </div>
           </div>
-          
-          {/* Decorative elements */}
-          <div className="absolute bottom-0 right-0 z-0">
-            <svg width="60" height="60" viewBox="0 0 60 60" fill="#fff" opacity="0.2">
-              <circle cx="20" cy="10" r="8" />
-              <circle cx="40" cy="10" r="8" />
-              <circle cx="10" cy="30" r="8" />
-              <circle cx="30" cy="30" r="8" />
-              <circle cx="50" cy="30" r="8" />
-            </svg>
+        </div>
+        
+        {/* Background paw prints */}
+        <div className="absolute inset-0 overflow-hidden opacity-10">
+          <div className="absolute top-10 left-10">
+            <FontAwesomeIcon icon={faPaw} style={{ height: '4em', width: '4em' }} className="text-white transform rotate-45" />
           </div>
-          
-          {/* Cat images */}
-          <div className="absolute bottom-0 right-0 w-64 h-64 z-10">
-            <img 
-              src="/lovable-uploads/97eb65d8-dcec-46e0-b0f5-7121bb0d32f4.png" 
-              alt="Cat" 
-              className="w-full h-full object-contain"
-            />
+          <div className="absolute top-40 right-20">
+            <FontAwesomeIcon icon={faPaw} style={{ height: '3em', width: '3em' }} className="text-white opacity-80" />
           </div>
-          
-          {/* Yarn ball logo */}
-          <div className="absolute bottom-20 right-40 z-20">
-            <svg width="60" height="60" viewBox="0 0 60 60" fill="none">
-              <circle cx="30" cy="30" r="25" fill="#9b87f5" stroke="white" strokeWidth="2"/>
-              <path d="M15,30 C15,20 30,15 30,30 C30,45 45,40 45,30" stroke="white" strokeWidth="2"/>
-              <path d="M20,20 Q30,25 40,20" stroke="white" strokeWidth="2"/>
-              <path d="M20,40 Q30,35 40,40" stroke="white" strokeWidth="2"/>
-            </svg>
+          <div className="absolute bottom-20 left-40">
+            <FontAwesomeIcon icon={faPaw} style={{ height: '4em', width: '4em' }} className="text-white transform -rotate-45" />
+          </div>
+          <div className="absolute bottom-40 right-60">
+            <FontAwesomeIcon icon={faPaw} style={{ height: '3em', width: '3em' }} className="text-white transform rotate-12 opacity-90" />
+          </div>
+          <div className="absolute top-60 left-60">
+            <FontAwesomeIcon icon={faPaw} style={{ height: '4em', width: '4em' }} className="text-white transform -rotate-12" />
           </div>
         </div>
       </div>

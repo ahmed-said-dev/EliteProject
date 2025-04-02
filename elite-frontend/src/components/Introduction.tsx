@@ -12,14 +12,26 @@ const Introduction = () => {
         <div className="absolute top-10 left-10">
           <FontAwesomeIcon icon={faPaw} style={{ height: '4em', width: '4em' }} className="text-purple-600" />
         </div>
+        <div className="absolute top-40 left-40">
+          <FontAwesomeIcon icon={faPaw} style={{ height: '3em', width: '3em' }} className="text-purple-600 opacity-80" />
+        </div>
         <div className="absolute top-60 right-20">
-          <FontAwesomeIcon icon={faPaw} style={{ height: '4em', width: '4em' }} className="text-purple-600" />
+          <FontAwesomeIcon icon={faPaw} style={{ height: '4em', width: '4em' }} className="text-purple-600 opacity-90" />
+        </div>
+        <div className="absolute top-20 right-40">
+          <FontAwesomeIcon icon={faPaw} style={{ height: '3em', width: '3em' }} className="text-purple-600 opacity-70" />
         </div>
         <div className="absolute bottom-10 left-40">
-          <FontAwesomeIcon icon={faPaw} style={{ height: '4em', width: '4em' }} className="text-purple-600" />
+          <FontAwesomeIcon icon={faPaw} style={{ height: '4em', width: '4em' }} className="text-purple-600 transform rotate-45" />
+        </div>
+        <div className="absolute bottom-40 left-20">
+          <FontAwesomeIcon icon={faPaw} style={{ height: '3em', width: '3em' }} className="text-purple-600 transform -rotate-45 opacity-85" />
         </div>
         <div className="absolute bottom-40 right-60">
-          <FontAwesomeIcon icon={faPaw} style={{ height: '4em', width: '4em' }} className="text-purple-600" />
+          <FontAwesomeIcon icon={faPaw} style={{ height: '4em', width: '4em' }} className="text-purple-600 transform -rotate-12" />
+        </div>
+        <div className="absolute bottom-20 right-20">
+          <FontAwesomeIcon icon={faPaw} style={{ height: '3em', width: '3em' }} className="text-purple-600 transform rotate-12 opacity-75" />
         </div>
       </div>
       

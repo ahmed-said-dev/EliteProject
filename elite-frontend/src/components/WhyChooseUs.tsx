@@ -40,55 +40,63 @@ const WhyChooseUs = () => {
         <div className="relative z-10">
           <h2 className="text-yellow-400 text-3xl font-bold mb-3">WHY CHOOSE US?</h2>
           
-          {/* Paw print icon instead of wavy line */}
-          <div className="mb-4">
-            <FontAwesomeIcon icon={faPaw} style={{ height: '2em', width: '2em' }} className="text-white transform -rotate-12" />
-            <FontAwesomeIcon icon={faPaw} style={{ height: '2em', width: '2em' }} className="text-white mx-4" />
-            <FontAwesomeIcon icon={faPaw} style={{ height: '2em', width: '2em' }} className="text-white transform rotate-12" />
+          {/* Paw prints */}
+          <div className="flex items-center gap-4 mb-6">
+            <FontAwesomeIcon icon={faPaw} style={{ height: '2em', width: '2em' }} className="text-white transform -rotate-45 opacity-80" />
+            <FontAwesomeIcon icon={faPaw} style={{ height: '2em', width: '2em' }} className="text-white opacity-90" />
+            <FontAwesomeIcon icon={faPaw} style={{ height: '2em', width: '2em' }} className="text-white transform rotate-45 opacity-80" />
           </div>
           
-          <div className="text-white max-w-xl mb-12">
-            <p className="mb-2">
-              As a trusted name in the Riyadh veterinary community since 2013, we've helped more than 200,000,000 pets through:
-            </p>
-          </div>
-          
-          {/* Feature cards */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8 relative z-10">
-            <FeatureCard
-              icon={
-                <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
-                  <path d="M30,20 C30,17 25,15 20,15 C15,15 10,17 10,20 C10,23 15,25 20,25 C25,25 30,23 30,20Z" fill="#9b87f5"/>
-                  <path d="M15,15 C15,10 20,10 25,15" stroke="#9b87f5" strokeWidth="2"/>
-                </svg>
-              }
-              title="Latest Technology"
-              description="Cutting-edge equipment for accurate diagnosis."
-            />
+            <div className="bg-white/10 backdrop-blur-sm rounded-lg p-6 relative">
+              <div className="absolute -top-2 -right-2">
+                <FontAwesomeIcon icon={faPaw} style={{ height: '2em', width: '2em' }} className="text-white opacity-20" />
+              </div>
+              <FeatureCard
+                icon={
+                  <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
+                    <path d="M30,20 C30,17 25,15 20,15 C15,15 10,17 10,20 C10,23 15,25 20,25 C25,25 30,23 30,20Z" fill="#9b87f5"/>
+                    <path d="M15,15 C15,10 20,10 25,15" stroke="#9b87f5" strokeWidth="2"/>
+                  </svg>
+                }
+                title="Latest Technology"
+                description="Cutting-edge equipment for accurate diagnosis."
+              />
+            </div>
             
-            <FeatureCard
-              icon={
-                <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
-                  <path d="M15,12 L25,22 M15,22 L25,12" stroke="#9b87f5" strokeWidth="2"/>
-                  <path d="M28,12 C28,12 32,15 32,20 C32,25 28,28 28,28" stroke="#9b87f5" strokeWidth="2"/>
-                  <path d="M12,12 C12,12 8,15 8,20 C8,25 12,28 12,28" stroke="#9b87f5" strokeWidth="2"/>
-                </svg>
-              }
-              title="Personalized Care"
-              description="Tailored treatment plans for each pet."
-            />
+            <div className="bg-white/10 backdrop-blur-sm rounded-lg p-6 relative">
+              <div className="absolute -top-2 -right-2">
+                <FontAwesomeIcon icon={faPaw} style={{ height: '2em', width: '2em' }} className="text-white opacity-20 transform rotate-45" />
+              </div>
+              <FeatureCard
+                icon={
+                  <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
+                    <path d="M15,12 L25,22 M15,22 L25,12" stroke="#9b87f5" strokeWidth="2"/>
+                    <path d="M28,12 C28,12 32,15 32,20 C32,25 28,28 28,28" stroke="#9b87f5" strokeWidth="2"/>
+                    <path d="M12,12 C12,12 8,15 8,20 C8,25 12,28 12,28" stroke="#9b87f5" strokeWidth="2"/>
+                  </svg>
+                }
+                title="Personalized Care"
+                description="Tailored treatment plans for each pet."
+              />
+            </div>
             
-            <FeatureCard
-              icon={
-                <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
-                  <path d="M15,15 L15,30 L30,30 L30,15 Z" stroke="#9b87f5" strokeWidth="2"/>
-                  <path d="M15,15 L20,10 L30,10 L30,15 Z" stroke="#9b87f5" strokeWidth="2"/>
-                  <circle cx="22" cy="20" r="2" fill="#9b87f5"/>
-                </svg>
-              }
-              title="Compassionate Staff"
-              description="A dedicated team that loves animals."
-            />
+            <div className="bg-white/10 backdrop-blur-sm rounded-lg p-6 relative">
+              <div className="absolute -top-2 -right-2">
+                <FontAwesomeIcon icon={faPaw} style={{ height: '2em', width: '2em' }} className="text-white opacity-20 transform -rotate-45" />
+              </div>
+              <FeatureCard
+                icon={
+                  <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
+                    <path d="M15,15 L15,30 L30,30 L30,15 Z" stroke="#9b87f5" strokeWidth="2"/>
+                    <path d="M15,15 L20,10 L30,10 L30,15 Z" stroke="#9b87f5" strokeWidth="2"/>
+                    <circle cx="22" cy="20" r="2" fill="#9b87f5"/>
+                  </svg>
+                }
+                title="Compassionate Staff"
+                description="A dedicated team that loves animals."
+              />
+            </div>
           </div>
           
           <Button className="bg-yellow-400 hover:bg-yellow-500 text-purple-800 rounded-full flex items-center gap-2 mx-auto">
@@ -109,6 +117,25 @@ const WhyChooseUs = () => {
               <circle cx="40" cy="40" r="20" stroke="white" strokeWidth="2" fill="none"/>
               <circle cx="40" cy="40" r="10" stroke="white" strokeWidth="2" fill="none"/>
             </svg>
+          </div>
+        </div>
+        
+        {/* Background paw prints */}
+        <div className="absolute inset-0 overflow-hidden opacity-10">
+          <div className="absolute top-10 left-10">
+            <FontAwesomeIcon icon={faPaw} style={{ height: '4em', width: '4em' }} className="text-white transform rotate-45 opacity-80" />
+          </div>
+          <div className="absolute top-40 right-20">
+            <FontAwesomeIcon icon={faPaw} style={{ height: '3em', width: '3em' }} className="text-white opacity-90" />
+          </div>
+          <div className="absolute bottom-20 left-40">
+            <FontAwesomeIcon icon={faPaw} style={{ height: '4em', width: '4em' }} className="text-white transform -rotate-45 opacity-70" />
+          </div>
+          <div className="absolute bottom-40 right-60">
+            <FontAwesomeIcon icon={faPaw} style={{ height: '3em', width: '3em' }} className="text-white transform rotate-12 opacity-80" />
+          </div>
+          <div className="absolute top-20 right-40">
+            <FontAwesomeIcon icon={faPaw} style={{ height: '4em', width: '4em' }} className="text-white transform -rotate-12 opacity-70" />
           </div>
         </div>
       </div>
