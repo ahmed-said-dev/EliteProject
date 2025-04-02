@@ -1,8 +1,8 @@
 import React from "react";
 import { Button } from "@/components/ui/Button";
-import { Plus } from "lucide-react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPaw } from "@fortawesome/free-solid-svg-icons";
+import { faPaw, faCat, faDog, faFish, faOtter, faDove, faHorse, faSpider, faCrow } from "@fortawesome/free-solid-svg-icons";
+import { Plus } from "lucide-react";
 
 const Hero = () => {
   return (

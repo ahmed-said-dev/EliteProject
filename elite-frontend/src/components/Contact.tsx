@@ -4,7 +4,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { MapPin, Mail } from "lucide-react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPaw } from "@fortawesome/free-solid-svg-icons";
+import { faPaw, faCat, faDog, faFish, faOtter, faDove, faHorse, faSpider } from "@fortawesome/free-solid-svg-icons";
 
 const Contact = () => {
   return (
@@ -14,11 +14,13 @@ const Contact = () => {
         <div className="relative z-10">
           <h2 className="text-yellow-400 text-3xl font-bold mb-3">CONTACT US!</h2>
           
-          {/* Paw prints */}
+          {/* Animal icons */}
           <div className="flex items-center gap-4 mb-6">
-            <FontAwesomeIcon icon={faPaw} style={{ height: '2em', width: '2em' }} className="text-white transform -rotate-45 opacity-80" />
-            <FontAwesomeIcon icon={faPaw} style={{ height: '2em', width: '2em' }} className="text-white opacity-90" />
-            <FontAwesomeIcon icon={faPaw} style={{ height: '2em', width: '2em' }} className="text-white transform rotate-45 opacity-80" />
+            <FontAwesomeIcon icon={faPaw} style={{ height: '2em', width: '2em' }} className="text-white transform -rotate-45 opacity-90" />
+            <FontAwesomeIcon icon={faCat} style={{ height: '2em', width: '2em' }} className="text-white opacity-80" />
+            <FontAwesomeIcon icon={faDog} style={{ height: '2em', width: '2em' }} className="text-white transform rotate-45 opacity-70" />
+            <FontAwesomeIcon icon={faFish} style={{ height: '2em', width: '2em' }} className="text-white transform rotate-90 opacity-85" />
+            <FontAwesomeIcon icon={faOtter} style={{ height: '2em', width: '2em' }} className="text-white transform -rotate-90 opacity-75" />
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -27,7 +29,7 @@ const Contact = () => {
                 <p className="text-lg font-bold mb-2">Have a question or concern?</p>
                 <p className="text-sm">Contact us today! Our dedicated team is ready to assist you.</p>
                 <div className="absolute -top-4 -right-4">
-                  <FontAwesomeIcon icon={faPaw} style={{ height: '2em', width: '2em' }} className="text-white opacity-20" />
+                  <FontAwesomeIcon icon={faDog} style={{ height: '2em', width: '2em' }} className="text-white opacity-20" />
                 </div>
               </div>
               
@@ -46,7 +48,7 @@ const Contact = () => {
                 <Mail className="h-5 w-5 mr-2 text-white" />
                 <p className="text-sm">info@elitevetsa.com</p>
                 <div className="absolute -top-2 -right-2">
-                  <FontAwesomeIcon icon={faPaw} style={{ height: '1.5em', width: '1.5em' }} className="text-white opacity-20 transform -rotate-45" />
+                  <FontAwesomeIcon icon={faCat} style={{ height: '1.5em', width: '1.5em' }} className="text-white opacity-20 transform -rotate-45" />
                 </div>
               </div>
               
@@ -56,14 +58,14 @@ const Contact = () => {
                   Map Location
                 </div>
                 <div className="absolute bottom-2 right-2">
-                  <FontAwesomeIcon icon={faPaw} style={{ height: '2em', width: '2em' }} className="text-gray-300 transform rotate-12" />
+                  <FontAwesomeIcon icon={faOtter} style={{ height: '2em', width: '2em' }} className="text-gray-300 transform rotate-12" />
                 </div>
               </div>
             </div>
             
             <div className="bg-white/10 backdrop-blur-sm rounded-lg p-6 relative">
               <div className="absolute -top-4 -right-4">
-                <FontAwesomeIcon icon={faPaw} style={{ height: '3em', width: '3em' }} className="text-white opacity-20 transform -rotate-12" />
+                <FontAwesomeIcon icon={faFish} style={{ height: '3em', width: '3em' }} className="text-white opacity-20 transform -rotate-12" />
               </div>
               
               <form className="space-y-4">
@@ -79,22 +81,44 @@ const Contact = () => {
           </div>
         </div>
         
-        {/* Background paw prints */}
+        {/* Background animal icons */}
         <div className="absolute inset-0 overflow-hidden opacity-10">
           <div className="absolute top-10 left-10">
             <FontAwesomeIcon icon={faPaw} style={{ height: '4em', width: '4em' }} className="text-white transform rotate-45" />
           </div>
           <div className="absolute top-40 right-20">
-            <FontAwesomeIcon icon={faPaw} style={{ height: '3em', width: '3em' }} className="text-white opacity-80" />
+            <FontAwesomeIcon icon={faCat} style={{ height: '3em', width: '3em' }} className="text-white transform -rotate-30" />
           </div>
           <div className="absolute bottom-20 left-40">
-            <FontAwesomeIcon icon={faPaw} style={{ height: '4em', width: '4em' }} className="text-white transform -rotate-45" />
+            <FontAwesomeIcon icon={faDog} style={{ height: '4em', width: '4em' }} className="text-white transform -rotate-45" />
           </div>
           <div className="absolute bottom-40 right-60">
-            <FontAwesomeIcon icon={faPaw} style={{ height: '3em', width: '3em' }} className="text-white transform rotate-12 opacity-90" />
+            <FontAwesomeIcon icon={faHorse} style={{ height: '3em', width: '3em' }} className="text-white transform rotate-12" />
           </div>
           <div className="absolute top-60 left-60">
-            <FontAwesomeIcon icon={faPaw} style={{ height: '4em', width: '4em' }} className="text-white transform -rotate-12" />
+            <FontAwesomeIcon icon={faSpider} style={{ height: '4em', width: '4em' }} className="text-white transform -rotate-12" />
+          </div>
+          <div className="absolute bottom-20 right-20">
+            <FontAwesomeIcon icon={faDove} style={{ height: '3em', width: '3em' }} className="text-white transform rotate-45" />
+          </div>
+          <div className="absolute top-20 right-40">
+            <FontAwesomeIcon icon={faFish} style={{ height: '4em', width: '4em' }} className="text-white transform -rotate-90" />
+          </div>
+          <div className="absolute bottom-60 left-20">
+            <FontAwesomeIcon icon={faOtter} style={{ height: '3em', width: '3em' }} className="text-white transform rotate-180" />
+          </div>
+          {/* Additional icons for more variety */}
+          <div className="absolute top-80 left-80">
+            <FontAwesomeIcon icon={faPaw} style={{ height: '3em', width: '3em' }} className="text-white transform rotate-90 opacity-80" />
+          </div>
+          <div className="absolute bottom-80 right-80">
+            <FontAwesomeIcon icon={faCat} style={{ height: '4em', width: '4em' }} className="text-white transform -rotate-60 opacity-70" />
+          </div>
+          <div className="absolute top-40 left-60">
+            <FontAwesomeIcon icon={faDog} style={{ height: '3em', width: '3em' }} className="text-white transform rotate-30 opacity-85" />
+          </div>
+          <div className="absolute bottom-40 left-80">
+            <FontAwesomeIcon icon={faFish} style={{ height: '4em', width: '4em' }} className="text-white transform -rotate-120 opacity-75" />
           </div>
         </div>
       </div>
