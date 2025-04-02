@@ -1,6 +1,9 @@
 import '@/styles/globals.css';
 import '@/styles/global.css';
 import '@fortawesome/fontawesome-free/css/all.min.css';
+import '@fortawesome/fontawesome-svg-core/styles.css';
+import { config } from '@fortawesome/fontawesome-svg-core';
+import '../src/lib/fontawesome';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
@@ -10,7 +13,8 @@ import Head from 'next/head';
 import Layout from '@/components/Layout';
 import { useEffect } from 'react';
 
-
+// Prevent Font Awesome from adding its CSS since we did it manually above
+config.autoAddCss = false;
 
 function MyApp({ Component, pageProps }) {
   useEffect(() => {

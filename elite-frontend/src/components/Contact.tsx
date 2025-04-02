@@ -1,9 +1,10 @@
-
 import React from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { MapPin, Mail } from "lucide-react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPaw } from "@fortawesome/free-solid-svg-icons";
 
 const Contact = () => {
   return (
@@ -13,11 +14,11 @@ const Contact = () => {
         <div className="relative z-10">
           <h2 className="text-yellow-400 text-3xl font-bold mb-3">CONTACT US!</h2>
           
-          {/* Wavy line */}
-          <div className="mb-4">
-            <svg width="120" height="20" viewBox="0 0 120 20" className="fill-none">
-              <path d="M0,10 Q20,0 40,10 Q60,20 80,10 Q100,0 120,10" stroke="white" strokeWidth="4" fill="none"/>
-            </svg>
+          {/* Paw prints instead of wavy line */}
+          <div className="flex items-center gap-4 mb-4">
+            <FontAwesomeIcon icon={faPaw} style={{ height: '2em', width: '2em' }} className="text-white transform -rotate-12" />
+            <FontAwesomeIcon icon={faPaw} style={{ height: '2em', width: '2em' }} className="text-white" />
+            <FontAwesomeIcon icon={faPaw} style={{ height: '2em', width: '2em' }} className="text-white transform rotate-12" />
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">

@@ -1,5 +1,6 @@
-
 import React from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPaw } from "@fortawesome/free-solid-svg-icons";
 
 interface PartnerCardProps {
   logo: React.ReactNode;
@@ -23,33 +24,21 @@ const Partners = () => {
       {/* Background paw prints */}
       <div className="absolute inset-0 overflow-hidden opacity-10">
         <div className="absolute top-10 right-10">
-          <svg width="60" height="60" viewBox="0 0 60 60" fill="#8B5CF6">
-            <circle cx="20" cy="10" r="8" />
-            <circle cx="40" cy="10" r="8" />
-            <circle cx="10" cy="30" r="8" />
-            <circle cx="30" cy="30" r="8" />
-            <circle cx="50" cy="30" r="8" />
-          </svg>
+          <FontAwesomeIcon icon={faPaw} style={{ height: '4em', width: '4em' }} className="text-purple-600" />
         </div>
         <div className="absolute bottom-10 left-10">
-          <svg width="60" height="60" viewBox="0 0 60 60" fill="#8B5CF6">
-            <circle cx="20" cy="10" r="8" />
-            <circle cx="40" cy="10" r="8" />
-            <circle cx="10" cy="30" r="8" />
-            <circle cx="30" cy="30" r="8" />
-            <circle cx="50" cy="30" r="8" />
-          </svg>
+          <FontAwesomeIcon icon={faPaw} style={{ height: '4em', width: '4em' }} className="text-purple-600" />
         </div>
       </div>
       
       <div className="container mx-auto px-4 text-center">
         <h2 className="text-3xl font-bold text-[#44396F] mb-2">Our Partners</h2>
         
-        {/* Wavy line */}
-        <div className="w-40 h-6 mx-auto relative my-4">
-          <svg viewBox="0 0 200 30" className="w-full">
-            <path d="M0,15 Q40,0 80,15 Q120,30 160,15 Q200,0 240,15" stroke="#9b87f5" fill="none" strokeWidth="4"/>
-          </svg>
+        {/* Paw prints instead of wavy line */}
+        <div className="flex justify-center items-center gap-4 my-4">
+          <FontAwesomeIcon icon={faPaw} style={{ height: '1.5em', width: '1.5em' }} className="text-[#9b87f5] transform -rotate-12" />
+          <FontAwesomeIcon icon={faPaw} style={{ height: '1.5em', width: '1.5em' }} className="text-[#9b87f5]" />
+          <FontAwesomeIcon icon={faPaw} style={{ height: '1.5em', width: '1.5em' }} className="text-[#9b87f5] transform rotate-12" />
         </div>
         
         {/* Falcon icon with line */}

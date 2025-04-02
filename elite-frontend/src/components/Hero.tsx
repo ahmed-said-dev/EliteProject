@@ -1,7 +1,8 @@
 import React from "react";
 import { Button } from "@/components/ui/Button";
 import { Plus } from "lucide-react";
-import { UilStethoscope, UilSyringe, UilHospital, UilHeartMedical, UilPrescriptionBottle } from "@iconscout/react-unicons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPaw } from "@fortawesome/free-solid-svg-icons";
 
 const Hero = () => {
   return (
@@ -11,53 +12,43 @@ const Hero = () => {
         <div className="h-[600px] bg-[#6B4E98] relative overflow-hidden order-2 md:order-1">
           <div className="absolute inset-0">
             {/* Curved background shape */}
-            <div className="absolute right-0 bottom-0 w-[500px] h-[500px] bg-purple-500 rounded-tl-[80%] z-0"></div>
-
-            {/* Content wrapper with higher z-index */}
-            <div className="relative h-full flex flex-col justify-center px-12 z-10">
-              <h1 className="text-4xl font-bold text-yellow-300 mb-4 leading-tight max-w-xl">
-                EXPERT VETERINARY CARE,<br/>
-                TAILORED TO YOUR PET'S NEEDS
-              </h1>
-              
-              <p className="text-white text-lg mb-8 max-w-xl">
-                A Pioneering Veterinary Clinic, Providing Exceptional Care<br/>
-                Every Step of the Way.
-              </p>
-              
-              <Button className="bg-yellow-400 hover:bg-yellow-500 text-[#6B4E98] font-bold text-lg rounded-full w-fit px-8 py-2 flex items-center gap-2">
-                BOOK AN APPOINTMENT NOW
-                <Plus className="h-5 w-5" />
-              </Button>
-
-              {/* Medical Icons */}
-              <div className="absolute top-8 right-8">
-                <UilStethoscope className="w-10 h-10 text-yellow-300" />
-              </div>
-              
-              <div className="absolute top-24 right-16">
-                <UilSyringe className="w-8 h-8 text-white" />
-              </div>
-
-              <div className="absolute left-16 top-16">
-                <UilHospital className="w-12 h-12 text-yellow-300" />
-              </div>
-
-              <div className="absolute left-24 bottom-32">
-                <UilHeartMedical className="w-8 h-8 text-white" />
-              </div>
-
-              <div className="absolute right-32 bottom-48">
-                <UilPrescriptionBottle className="w-10 h-10 text-yellow-300" />
-              </div>
-
+            <div className="absolute right-0 bottom-0 w-[500px] h-[500px] bg-purple-500 rounded-tl-[80%] z-0">
               {/* Dog image */}
               <div className="absolute bottom-0 right-0">
                 <img 
-                  src="/images/hero-dog.webp" 
+                  src="/Home/Asset 8-.png" 
                   alt="Dog" 
-                  className="w-[400px] h-[400px] object-cover object-center"
+                  className="w-[400px] h-[400px] object-cover object-center bottom-0 right-0"
                 />
+              </div>
+            </div>
+
+            {/* Content wrapper with higher z-index */}
+            <div className="absolute inset-0 z-10">
+              <div className="max-w-lg absolute left-6 md:left-12 top-12" dir="ltr">
+                <h1 className="text-4xl font-bold text-yellow-300 mb-4 leading-tight text-left">
+                  EXPERT VETERINARY CARE,<br/>
+                  TAILORED TO YOUR PET'S NEEDS
+                </h1>
+                
+                <p className="text-white text-lg mb-8 text-left">
+                  A Pioneering Veterinary Clinic, Providing Exceptional Care<br/>
+                  Every Step of the Way.
+                </p>
+                
+                <Button className="bg-yellow-400 hover:bg-yellow-500 text-[#6B4E98] font-bold text-lg rounded-full w-fit px-8 py-2 flex items-center gap-2">
+                  BOOK AN APPOINTMENT NOW
+                  <Plus className="h-5 w-5" />
+                </Button>
+              </div>
+
+              {/* Paw Print Icons - Only 2 icons at bottom left */}
+              <div className="absolute bottom-12 left-8 transform rotate-12">
+                <FontAwesomeIcon icon={faPaw} style={{ height: '6em', width: '6em' }} className="text-yellow-300 opacity-80" />
+              </div>
+              
+              <div className="absolute bottom-32 left-24 transform -rotate-12">
+                <FontAwesomeIcon icon={faPaw} style={{ height: '6em', width: '6em' }} className="text-white opacity-80" />
               </div>
             </div>
           </div>
@@ -84,7 +75,7 @@ const Hero = () => {
           </div>
           {/* Interior image */}
           <img 
-            src="/images/clinic-interior.webp"
+            src="/Home/Asset 1-.png"
             alt="Clinic Interior"
             className="absolute inset-0 w-full h-full object-cover"
           />

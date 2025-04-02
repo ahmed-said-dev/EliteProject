@@ -1,7 +1,8 @@
-
 import React from "react";
 import { Button } from "@/components/ui/button";
 import { Plus } from "lucide-react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPaw } from "@fortawesome/free-solid-svg-icons";
 
 const Introduction = () => {
   return (
@@ -9,40 +10,16 @@ const Introduction = () => {
       {/* Background paw prints */}
       <div className="absolute inset-0 overflow-hidden opacity-10">
         <div className="absolute top-10 left-10">
-          <svg width="60" height="60" viewBox="0 0 60 60" fill="#8B5CF6">
-            <circle cx="20" cy="10" r="8" />
-            <circle cx="40" cy="10" r="8" />
-            <circle cx="10" cy="30" r="8" />
-            <circle cx="30" cy="30" r="8" />
-            <circle cx="50" cy="30" r="8" />
-          </svg>
+          <FontAwesomeIcon icon={faPaw} style={{ height: '4em', width: '4em' }} className="text-purple-600" />
         </div>
         <div className="absolute top-60 right-20">
-          <svg width="60" height="60" viewBox="0 0 60 60" fill="#8B5CF6">
-            <circle cx="20" cy="10" r="8" />
-            <circle cx="40" cy="10" r="8" />
-            <circle cx="10" cy="30" r="8" />
-            <circle cx="30" cy="30" r="8" />
-            <circle cx="50" cy="30" r="8" />
-          </svg>
+          <FontAwesomeIcon icon={faPaw} style={{ height: '4em', width: '4em' }} className="text-purple-600" />
         </div>
         <div className="absolute bottom-10 left-40">
-          <svg width="60" height="60" viewBox="0 0 60 60" fill="#8B5CF6">
-            <circle cx="20" cy="10" r="8" />
-            <circle cx="40" cy="10" r="8" />
-            <circle cx="10" cy="30" r="8" />
-            <circle cx="30" cy="30" r="8" />
-            <circle cx="50" cy="30" r="8" />
-          </svg>
+          <FontAwesomeIcon icon={faPaw} style={{ height: '4em', width: '4em' }} className="text-purple-600" />
         </div>
         <div className="absolute bottom-40 right-60">
-          <svg width="60" height="60" viewBox="0 0 60 60" fill="#8B5CF6">
-            <circle cx="20" cy="10" r="8" />
-            <circle cx="40" cy="10" r="8" />
-            <circle cx="10" cy="30" r="8" />
-            <circle cx="30" cy="30" r="8" />
-            <circle cx="50" cy="30" r="8" />
-          </svg>
+          <FontAwesomeIcon icon={faPaw} style={{ height: '4em', width: '4em' }} className="text-purple-600" />
         </div>
       </div>
       
