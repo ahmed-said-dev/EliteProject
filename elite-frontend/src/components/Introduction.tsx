@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Plus } from "lucide-react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPaw, faCat, faDog, faFish, faOtter, faDove, faHorse, faSpider, faCrow, faKiwiBird, faFrog, faDragon } from "@fortawesome/free-solid-svg-icons";
+import Image from "next/image";
 
 const Introduction = () => {
   return (
@@ -57,35 +58,58 @@ const Introduction = () => {
               <path d="M0,15 Q40,0 80,15 Q120,30 160,15 Q200,0 240,15" stroke="#8B5CF6" fill="none" strokeWidth="4"/>
             </svg>
           </div>
-          <p className="text-gray-600 mt-4 max-w-2xl mx-auto">
+          <p className="text-gray-600 mt-4 max-w-2xl mx-auto mb-12">
             Your trusted partner in pet healthcare. We provide comprehensive veterinary services with a focus on compassionate care and medical excellence.
           </p>
+          <Button className="bg-yellow-500 hover:bg-yellow-600 text-white">
+            Learn More About Us
+            <FontAwesomeIcon icon={faPaw} className="ml-6 h-4 w-4 transform -rotate-45" />
+          </Button>
         </div>
         
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          <div className="bg-white rounded-lg p-6 shadow-md relative">
-            <div className="absolute -top-2 -right-2">
-              <FontAwesomeIcon icon={faCat} style={{ height: '2em', width: '2em' }} className="text-purple-600 opacity-20 transform rotate-45" />
+        {/* Split Sections */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+          {/* First Split Section */}
+          <div className="bg-white rounded-lg overflow-hidden shadow-lg">
+            <div className="relative h-[400px]">
+              <Image
+                src="/images/img1.webp"
+                alt="Elite Veterinary Products"
+                fill
+                style={{ objectFit: 'cover' }}
+                className="transition-transform duration-300 hover:scale-105"
+              />
             </div>
-            <h3 className="text-[#44396F] font-bold mb-2">Expert Care</h3>
-            <p className="text-gray-600">Our team of experienced veterinarians provides the highest standard of care for your beloved pets.</p>
-          </div>
-          
-          <div className="bg-white rounded-lg p-6 shadow-md relative">
-            <div className="absolute -top-2 -right-2">
-              <FontAwesomeIcon icon={faDog} style={{ height: '2em', width: '2em' }} className="text-purple-600 opacity-20 transform -rotate-45" />
+            <div className="p-6">
+              <h3 className="text-[#44396F] font-bold text-xl mb-3">Premium Pet Products</h3>
+              <p className="text-gray-600">
+                We offer a carefully curated selection of high-quality pet food, supplements, and care products to ensure your pets receive the best nutrition and care they deserve.
+              </p>
             </div>
-            <h3 className="text-[#44396F] font-bold mb-2">Modern Facilities</h3>
-            <p className="text-gray-600">State-of-the-art equipment and facilities to ensure the best possible care for your pets.</p>
           </div>
-          
-          <div className="bg-white rounded-lg p-6 shadow-md relative">
-            <div className="absolute -top-2 -right-2">
-              <FontAwesomeIcon icon={faPaw} style={{ height: '2em', width: '2em' }} className="text-purple-600 opacity-20 transform rotate-90" />
+
+          {/* Second Split Section */}
+          <div className="bg-white rounded-lg overflow-hidden shadow-lg">
+            <div className="relative h-[400px]">
+              <Image
+                src="/images/clinic-interior.webp"
+                alt="Elite Veterinary Clinic Interior"
+                fill
+                style={{ objectFit: 'cover' }}
+                className="transition-transform duration-300 hover:scale-105"
+              />
             </div>
-            <h3 className="text-[#44396F] font-bold mb-2">Compassionate Service</h3>
-            <p className="text-gray-600">We treat your pets like family, providing gentle and caring treatment at all times.</p>
+            <div className="p-6">
+              <h3 className="text-[#44396F] font-bold text-xl mb-3">Modern Facilities</h3>
+              <p className="text-gray-600">
+                Experience veterinary care in our state-of-the-art facility, designed to provide comfort and the highest standard of medical care for your beloved pets.
+              </p>
+            </div>
           </div>
+        </div>
+
+        {/* Call to Action */}
+        <div className="text-center mt-12">
         </div>
       </div>
     </div>
