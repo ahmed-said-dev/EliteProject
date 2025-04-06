@@ -58,8 +58,8 @@ const Introduction = () => {
               <path d="M0,15 Q40,0 80,15 Q120,30 160,15 Q200,0 240,15" stroke="#8B5CF6" fill="none" strokeWidth="4"/>
             </svg>
           </div>
-          <p className="text-gray-600 mt-4 max-w-2xl mx-auto mb-12">
-            Your trusted partner in pet healthcare. We provide comprehensive veterinary services with a focus on compassionate care and medical excellence.
+          <p className="text-gray-600 mt-4 max-w-4xl mx-auto mb-12">
+            We are committed to providing top-quality care for your pets. Our veterinary clinic offers a wide range of services, including routine check-ups, vaccinations, surgeries, & dental care, using the latest technology & under the care & expertise of the best veterinarians in KSA.
           </p>
           <Button className="bg-yellow-500 hover:bg-yellow-600 text-white">
             Learn More About Us
