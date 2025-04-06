@@ -71,7 +71,7 @@ const Introduction = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
           {/* First Split Section */}
           <div className="bg-white rounded-lg overflow-hidden shadow-lg">
-            <div className="relative h-[400px]">
+            <div className="relative h-[500px] overflow-hidden">
               <Image
                 src="/images/img1.webp"
                 alt="Elite Veterinary Products"
@@ -80,12 +80,7 @@ const Introduction = () => {
                 className="transition-transform duration-300 hover:scale-105"
               />
             </div>
-            <div className="p-6">
-              <h3 className="text-[#44396F] font-bold text-xl mb-3">Premium Pet Products</h3>
-              <p className="text-gray-600">
-                We offer a carefully curated selection of high-quality pet food, supplements, and care products to ensure your pets receive the best nutrition and care they deserve.
-              </p>
-            </div>
+
           </div>
 
           {/* Second Split Section */}
@@ -100,10 +95,8 @@ const Introduction = () => {
               />
             </div>
             <div className="p-6">
-              <h3 className="text-[#44396F] font-bold text-xl mb-3">Modern Facilities</h3>
-              <p className="text-gray-600">
-                Experience veterinary care in our state-of-the-art facility, designed to provide comfort and the highest standard of medical care for your beloved pets.
-              </p>
+              <h3 className="text-[#44396F] font-bold text-xl mb-3"></h3>
+              <p className="text-gray-600"></p>
             </div>
           </div>
         </div>
