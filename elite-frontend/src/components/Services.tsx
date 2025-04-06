@@ -8,7 +8,7 @@ const ServiceCard = ({ title, icon }: {
   icon: React.ReactNode;
 }) => {
   return (
-    <div className="bg-white rounded-3xl shadow-lg p-6 text-center relative flex flex-col items-center justify-center h-full hover:bg-[#E5EDF8] transition-colors duration-300">
+    <div className="bg-white rounded-3xl shadow-lg p-8 text-center relative flex flex-col items-center justify-center h-full min-h-[250px] hover:bg-[#E5EDF8] transition-colors duration-300">
       {icon}
       <h3 className="text-xl font-bold text-[#44396F] mb-4">{title}</h3>
       <FontAwesomeIcon icon={faStar} className="text-purple-300 absolute top-3 left-8" />
