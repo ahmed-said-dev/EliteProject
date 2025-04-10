@@ -8,7 +8,7 @@ import Image from "next/image";
 const WhyChooseUs = () => {
   return (
     <>
-      <div className="w-full bg-[#9b87f5] relative overflow-hidden py-12 md:py-16" dir="ltr">
+      <div className="w-full bg-[#9b87f5] relative overflow-hidden py-8 sm:py-10 md:py-16" dir="ltr">
         {/* White wavy line at the top */}
         <div className="absolute left-0 top-0 w-full" style={{ zIndex: 1 }}>
           <Image
@@ -53,42 +53,49 @@ const WhyChooseUs = () => {
           
           {/* Content */}
           <div className="relative z-10">
-            <h2 className="text-yellow-400 text-4xl font-bold mb-3 text-left">WHY CHOOSE US?</h2>
+            <h2 className="text-yellow-400 text-4xl font-bold mb-2 text-center md:text-left">WHY CHOOSE US?</h2>
             
-            {/* Cloud shape background - covering full width of section */}
-            <div className="absolute top-[80px] md:top-[75px] left-0 right-0 w-full h-[85%] z-0 overflow-visible">
-              <svg viewBox="0 0 1000 500" className="w-full h-full" preserveAspectRatio="none">
-                <path 
-                  d="M0,50 C150,10 300,80 450,20 C600,-40 750,40 900,0 C950,-10 975,10 1000,0 L1000,500 L0,500 L0,50 Z" 
-                  fill="white" 
-                />
+            {/* Wavy line decoration below heading */}
+            <div className="w-48 h-5 mb-4 relative mx-auto md:mx-0">
+              <svg width="100%" height="100%" viewBox="0 0 200 20" xmlns="http://www.w3.org/2000/svg">
+                <path d="M0,10 C10,5 20,15 30,10 C40,5 50,15 60,10 C70,5 80,15 90,10 C100,5 110,15 120,10 C130,5 140,15 150,10 C160,5 170,15 180,10 C190,5 200,15 200,10" 
+                  stroke="white" strokeWidth="3" fill="none" />
               </svg>
-              
-              {/* Purple stars matching reference image positioning */}
-              <div className="absolute top-10 md:right-1/3 right-1/4">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-                  <path d="M12 2L14.5 9.5H22L16 14L18.5 21.5L12 17L5.5 21.5L8 14L2 9.5H9.5L12 2Z" fill="#C8B6FA" opacity="0.8" />
-                </svg>
-              </div>
-              <div className="absolute top-20 right-20">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
-                  <path d="M12 2L14.5 9.5H22L16 14L18.5 21.5L12 17L5.5 21.5L8 14L2 9.5H9.5L12 2Z" fill="#C8B6FA" opacity="0.6" />
-                </svg>
-              </div>
             </div>
             
-            <div className="flex flex-col md:flex-row md:space-x-8 pt-10 relative z-10">
+            <div className="flex flex-col md:flex-row md:space-x-8 pt-2 px-4 md:px-0">
+              {/* White cloud background using the exact SVG shape provided - extended to cover entire section */}
+              {/* <div className="absolute left-0 top-24 right-0 w-full bottom-0 z-0 overflow-visible">
+                <svg className="w-full h-full" viewBox="0 0 800 600" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M800,160 C800,160 780,120 720,120 C700,80 650,60 600,80 C570,30 510,10 460,30 
+                  C410,0 320,20 300,80 C250,70 210,90 200,130 C150,120 100,150 100,200 
+                  C50,200 0,230 0,300 L0,600 L800,600 L800,160 Z" 
+                  fill="white" />
+                </svg>
+              </div> */}
               
+              {/* Small decorative stars in the cloud */}
+              <div className="absolute top-1/3 left-1/2 transform -translate-x-1/2 z-0">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                  <path d="M12 2L14.5 9.5H22L16 14L18.5 21.5L12 17L5.5 21.5L8 14L2 9.5H9.5L12 2Z" fill="#C8B6FA" opacity="0.4" />
+                </svg>
+              </div>
+              <div className="absolute top-2/3 right-1/3 z-0">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                  <path d="M12 2L14.5 9.5H22L16 14L18.5 21.5L12 17L5.5 21.5L8 14L2 9.5H9.5L12 2Z" fill="#C8B6FA" opacity="0.4" />
+                </svg>
+              </div>
+
               {/* Features section - left side */}
-              <div className="md:w-3/5 mb-10 md:mb-0 relative">
-                <div className="text-white text-xl mb-10 text-left">
-                  <p>As a trusted name in the Riyadh veterinary community since 2013, we've helped more than 200,000,000 pets through:</p>
+              <div className="md:w-3/5 mb-10 md:mb-0 relative mx-auto md:mx-0" style={{ zIndex: 20 }}>
+                <div className="text-white text-xl mb-10 text-center md:text-left">
+                  <p>As a trusted name in the Riyadh veterinary community since 2013, we&apos;ve helped more than 200,000,000 pets through:</p>
                 </div>
                 
-                <div className="flex flex-col md:flex-row justify-between mb-8 space-y-8 md:space-y-0 md:space-x-4">
+                <div className="flex flex-col md:flex-row justify-center md:justify-between mb-8 space-y-8 md:space-y-0 md:space-x-4 px-2 sm:px-0" style={{ position: 'relative', zIndex: 30 }}>
                   {/* Feature 1 */}
-                  <div className="flex flex-col items-start text-start md:w-1/3">
-                    <div className="bg-[#E5E7F4] w-24 h-24 rounded-3xl flex items-center justify-center mb-4">
+                  <div className="flex flex-col items-center md:items-start text-center md:text-start md:w-1/3 w-full max-w-xs mx-auto md:mx-0">
+                    <div className="bg-[#E5E7F4] w-20 h-20 sm:w-24 sm:h-24 rounded-3xl flex items-center justify-center mb-4">
                       <svg width="45" height="45" viewBox="0 0 50 50" fill="none">
                         <path d="M25 12C28 12 30 14 30 17C30 20 28 22 25 22C22 22 20 20 20 17C20 14 22 12 25 12Z" fill="#9678D3"/>
                         <path d="M16 32C16 29 20 26 25 26C30 26 34 29 34 32C34 35 30 38 25 38C20 38 16 35 16 32Z" fill="#9678D3"/>
@@ -101,8 +108,8 @@ const WhyChooseUs = () => {
                   </div>
                   
                   {/* Feature 2 */}
-                  <div className="flex flex-col items-start text-start md:w-1/3">
-                    <div className="bg-[#E5E7F4] w-24 h-24 rounded-3xl flex items-center justify-center mb-4">
+                  <div className="flex flex-col items-center md:items-start text-center md:text-start md:w-1/3 w-full max-w-xs mx-auto md:mx-0">
+                    <div className="bg-[#E5E7F4] w-20 h-20 sm:w-24 sm:h-24 rounded-3xl flex items-center justify-center mb-4">
                       <svg width="45" height="45" viewBox="0 0 50 50" fill="none">
                         <path d="M35 15L15 35M15 15L35 35" stroke="#9678D3" strokeWidth="4" strokeLinecap="round"/>
                         <path d="M12 18C12 18 8 22 8 25C8 28 12 32 12 32" stroke="#9678D3" strokeWidth="4" strokeLinecap="round"/>
@@ -114,8 +121,8 @@ const WhyChooseUs = () => {
                   </div>
                   
                   {/* Feature 3 */}
-                  <div className="flex flex-col items-start text-start md:w-1/3">
-                    <div className="bg-[#E5E7F4] w-24 h-24 rounded-3xl flex items-center justify-center mb-4">
+                  <div className="flex flex-col items-center md:items-start text-center md:text-start md:w-1/3 w-full max-w-xs mx-auto md:mx-0">
+                    <div className="bg-[#E5E7F4] w-20 h-20 sm:w-24 sm:h-24 rounded-3xl flex items-center justify-center mb-4">
                       <Image 
                         src="/SVGs/why1.svg" 
                         alt="Compassionate Staff Icon" 
@@ -128,7 +135,7 @@ const WhyChooseUs = () => {
                   </div>
                 </div>
                 
-                <div className="flex justify-start mt-8">
+                <div className="flex justify-center md:justify-start mt-8">
                   <button className="bg-yellow-400 hover:bg-yellow-500 text-[#44396F] font-medium py-2.5 px-6 rounded-full flex items-center gap-2 transition-colors">
                     READ MORE
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -139,7 +146,7 @@ const WhyChooseUs = () => {
               </div>
               
               {/* Dog images section - right side */}
-              <div className="md:w-2/5 relative">
+              <div className="md:w-2/5 relative z-10">
                 {/* Main dog image */}
                 <div className="relative">
                   <div className="bg-white rounded-full overflow-hidden w-full aspect-square relative">
@@ -177,6 +184,71 @@ const WhyChooseUs = () => {
               </div>
             </div>
           </div>
+        </div>
+        
+        {/* Connected cloud system across the section - hidden on small screens */}
+        <div className="absolute inset-0 overflow-visible hidden md:block" style={{ zIndex: 5 }}>
+          {/* Left cloud */}
+          <div className="absolute left-0 top-80 w-3/5 h-96" style={{ top: '15rem' }}>
+            <svg 
+              className="w-full h-full" 
+              viewBox="0 0 400 300" 
+              preserveAspectRatio="none" 
+              xmlns="http://www.w3.org/2000/svg"
+              style={{
+                borderBottomRightRadius: '90px',
+                borderTopRightRadius: '150px'
+              }}
+            >
+              <path d="M400,80 C400,80 380,40 320,40 C300,0 250,0 200,20 
+                C150,0 80,20 50,60 C30,50 0,80 0,120 C0,120 0,300 0,300 L400,300 L400,80 Z" 
+                fill="white" />
+            </svg>
+          </div>
+          
+          {/* Right cloud behind Asset 22 */}
+          <div className="absolute bottom-0 w-[600px] h-[400px]" style={{ right: '20px' }}>
+            <svg 
+              className="w-full h-full" 
+              viewBox="0 0 600 400" 
+              preserveAspectRatio="none" 
+              xmlns="http://www.w3.org/2000/svg"
+              style={{
+                borderTopLeftRadius: '120px',
+                borderTopRightRadius: '270px'
+              }}
+            >
+              <path d="M0,120 C0,120 50,80 120,100 C150,40 250,20 300,60 
+                C400,30 500,40 550,100 C600,80 600,120 600,150 
+                C600,150 600,400 600,400 L0,400 L0,120 Z" 
+                fill="white" />
+            </svg>
+          </div>
+          
+          {/* Connecting cloud element */}
+          <div className="absolute left-1/3 bottom-0 w-2/5 h-24" style={{ left: '35%' }}>
+            <svg
+              className="w-full h-full"
+              viewBox="0 0 400 100"
+              preserveAspectRatio="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path d="M0,0 C100,30 300,20 400,0 L400,100 L0,100 Z"
+                fill="white" />
+            </svg>
+          </div>
+        </div>
+        
+        {/* Asset 22 image at bottom-right - very large and prominent, hidden on small screens */}
+        <div className="absolute right-0 -bottom-10 hidden md:block" style={{ zIndex: 50, width: 'min(500px, 40vw)', height: 'min(500px, 40vw)' }}>
+          <Image 
+            src="/WhyChooseUS/Asset 22-.png"
+            alt="Bottom right decoration"
+            width={600}
+            height={600}
+            className="w-full h-full object-contain"
+            priority
+          />
         </div>
       </div>
     </>

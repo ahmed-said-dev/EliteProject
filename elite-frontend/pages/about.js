@@ -1,5 +1,5 @@
 import { Section } from '@/components/ui/Section';
-import { Button } from '@/components/ui/Button';
+import { Button } from '@/components/ui/button';
 import PageBanner from '@/components/PageBanner/PageBanner';
 import AboutUsIntro from '@/components/AboutUsIntro/AboutUsIntro';
 import ImageGallerySlider from '@/components/ImageGallerySlider';
