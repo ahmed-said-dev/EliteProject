@@ -66,23 +66,15 @@ const Partners = () => {
           </p>
         </div>
 
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-2xl mx-auto">
           {/* Partner Cards */}
           <PartnerCard
             logo={<FontAwesomeIcon icon={faPaw} style={{ height: '2em', width: '2em' }} className="text-purple-600 transform rotate-45" />}
-            name="Partner 1"
+            name="Elite Falcons"
           />
           <PartnerCard
             logo={<FontAwesomeIcon icon={faDog} style={{ height: '2em', width: '2em' }} className="text-purple-600 transform -rotate-45" />}
-            name="Partner 2"
-          />
-          <PartnerCard
-            logo={<FontAwesomeIcon icon={faOtter} style={{ height: '2em', width: '2em' }} className="text-purple-600 transform rotate-90" />}
-            name="Partner 3"
-          />
-          <PartnerCard
-            logo={<FontAwesomeIcon icon={faHorse} style={{ height: '2em', width: '2em' }} className="text-purple-600 transform -rotate-12" />}
-            name="Partner 4"
+            name="Vest Van"
           />
         </div>
       </div>

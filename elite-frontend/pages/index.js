@@ -8,7 +8,7 @@ import Services from '@/components/Services';
 import WhyChooseUs from '@/components/WhyChooseUs';
 import Doctors from '@/components/Doctors';
 import Partners from '@/components/Partners';
-import Contact from '@/components/Contact';
+import ContactUs from '@/components/ContactUs';
 
 export default function Home() {
   return (
@@ -21,7 +21,7 @@ export default function Home() {
         <WhyChooseUs />
         <Doctors />
         <Partners />
-        <Contact />
+        <ContactUs />
       </main>
     </>
   );

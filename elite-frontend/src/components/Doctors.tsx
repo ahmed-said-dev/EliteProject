@@ -37,7 +37,7 @@ const DoctorCard: React.FC<DoctorCardProps> = ({ image, name, specialty }) => {
 
 const Doctors = () => {
   return (
-    <div className="w-full py-16 bg-gray-100 relative">
+    <div className="w-full py-16 pb-48 bg-gray-100 relative">
       {/* Background paw prints and animal icons */}
       <div className="absolute inset-0 overflow-hidden opacity-10">
         {/* Multiple paw prints scattered throughout the background */}
@@ -78,6 +78,32 @@ const Doctors = () => {
         </div>
       </div>
       
+      {/* Pet image at the extreme left bottom */}
+      <div className="absolute -bottom-4 left-0 w-40 h-40 sm:w-60 sm:h-60 md:w-80 md:h-80 z-10">
+        <div className="relative w-full h-full">
+          <Image 
+            src="/DoctorsSections/Asset 31-.png" 
+            alt="Pet image" 
+            fill
+            className="object-contain"
+            sizes="(max-width: 640px) 160px, (max-width: 768px) 240px, 320px"
+          />
+        </div>
+      </div>
+      
+      {/* Pet image at the extreme right bottom */}
+      <div className="absolute -bottom-4 -right-5 w-40 h-40 sm:w-60 sm:h-60 md:w-80 md:h-80 z-10">
+        <div className="relative w-full h-full">
+          <Image 
+            src="/DoctorsSections/Asset 32-.png" 
+            alt="Pet image" 
+            fill
+            className="object-contain object-right"
+            sizes="(max-width: 640px) 160px, (max-width: 768px) 240px, 320px"
+          />
+        </div>
+      </div>
+      
       <div className="container mx-auto px-4 text-center relative z-10">
         <h2 className="text-3xl font-bold text-[#44396F] mb-2">Meet our Doctors</h2>
         
@@ -93,41 +119,26 @@ const Doctors = () => {
           They&apos;re passionate about animal health &amp; dedicated to providing the best possible medical services.
         </p>
         
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12 relative">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-2 mb-12 relative">
           {/* Floating animal icons near the doctor cards */}
-
+          
 
           
           <DoctorCard 
-            image="/lovable-uploads/97eb65d8-dcec-46e0-b0f5-7121bb0d32f4.png" 
+            image="/DoctorsSections/Asset 28-.png" 
             name="Dr. Mohamed Farouk"
             specialty="Small Animal Specialist"
           />
           <DoctorCard 
-            image="/lovable-uploads/97eb65d8-dcec-46e0-b0f5-7121bb0d32f4.png" 
+            image="/DoctorsSections/Asset 29-.png" 
             name="Dr. Rico J Pangan"
             specialty="Veterinary Surgeon"
           />
           <DoctorCard 
-            image="/lovable-uploads/97eb65d8-dcec-46e0-b0f5-7121bb0d32f4.png" 
+            image="/DoctorsSections/Asset 30-.png" 
             name="Dr. Anas Saada"
             specialty="Exotic Pet Specialist"
           />
-        </div>
-        
-        {/* Pet images at bottom corners with animal icons */}
-        <div className="relative h-40">
-          <div className="absolute bottom-0 left-0 w-40 h-40 relative">
-            <Image 
-              src="/lovable-uploads/97eb65d8-dcec-46e0-b0f5-7121bb0d32f4.png" 
-              alt="Gray cat" 
-              fill
-              className="object-contain"
-              sizes="(max-width: 768px) 100vw, 160px"
-            />
-
-          </div>
-
         </div>
       </div>
     </div>
