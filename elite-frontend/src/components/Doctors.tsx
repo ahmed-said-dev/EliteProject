@@ -1,18 +1,36 @@
-
 import React from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { 
+  faPaw, faCat, faDog, faFish, faOtter, faDove, 
+  faHorse, faSpider, faCrow, faKiwiBird, faBone, faSyringe 
+} from "@fortawesome/free-solid-svg-icons";
+import Image from "next/image";
 
 interface DoctorCardProps {
   image: string;
   name: string;
+  specialty?: string;
 }
 
-const DoctorCard: React.FC<DoctorCardProps> = ({ image, name }) => {
+const DoctorCard: React.FC<DoctorCardProps> = ({ image, name, specialty }) => {
   return (
-    <div className="flex flex-col items-center">
-      <div className="w-32 h-32 rounded-full overflow-hidden border-4 border-white shadow-md mb-4">
-        <img src={image} alt={name} className="w-full h-full object-cover" />
+    <div className="flex flex-col items-center group relative hover:transform hover:scale-105 transition-all duration-300">
+      {/* Animal icon that appears on hover */}
+      <div className="absolute -top-5 -right-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+        <FontAwesomeIcon icon={faPaw} className="text-[#9b87f5] animate-bounce" size="lg" />
       </div>
-      <h3 className="text-[#44396F] font-medium text-base">{name}</h3>
+      
+      <div className="w-32 h-32 rounded-full overflow-hidden border-4 border-white shadow-md mb-4 relative">
+        <Image 
+          src={image} 
+          alt={name} 
+          className="object-cover" 
+          fill 
+          sizes="(max-width: 768px) 100vw, 128px"
+        />
+      </div>
+      <h3 className="text-[#44396F] font-medium text-xl mb-1">{name}</h3>
+      {specialty && <p className="text-gray-600 text-sm">{specialty}</p>}
     </div>
   );
 };
@@ -20,25 +38,43 @@ const DoctorCard: React.FC<DoctorCardProps> = ({ image, name }) => {
 const Doctors = () => {
   return (
     <div className="w-full py-16 bg-gray-100 relative">
-      {/* Background paw prints */}
+      {/* Background paw prints and animal icons */}
       <div className="absolute inset-0 overflow-hidden opacity-10">
+        {/* Multiple paw prints scattered throughout the background */}
         <div className="absolute top-10 left-10">
-          <svg width="60" height="60" viewBox="0 0 60 60" fill="#8B5CF6">
-            <circle cx="20" cy="10" r="8" />
-            <circle cx="40" cy="10" r="8" />
-            <circle cx="10" cy="30" r="8" />
-            <circle cx="30" cy="30" r="8" />
-            <circle cx="50" cy="30" r="8" />
-          </svg>
+          <FontAwesomeIcon icon={faPaw} style={{ height: '4em', width: '4em' }} className="text-purple-600 transform rotate-45" />
+        </div>
+        <div className="absolute top-20 right-20">
+          <FontAwesomeIcon icon={faPaw} style={{ height: '3em', width: '3em' }} className="text-purple-600 transform -rotate-12" />
         </div>
         <div className="absolute bottom-10 right-10">
-          <svg width="60" height="60" viewBox="0 0 60 60" fill="#8B5CF6">
-            <circle cx="20" cy="10" r="8" />
-            <circle cx="40" cy="10" r="8" />
-            <circle cx="10" cy="30" r="8" />
-            <circle cx="30" cy="30" r="8" />
-            <circle cx="50" cy="30" r="8" />
-          </svg>
+          <FontAwesomeIcon icon={faPaw} style={{ height: '4em', width: '4em' }} className="text-purple-600 transform rotate-90" />
+        </div>
+        <div className="absolute bottom-20 left-20">
+          <FontAwesomeIcon icon={faPaw} style={{ height: '3em', width: '3em' }} className="text-purple-600 transform rotate-180" />
+        </div>
+        <div className="absolute top-1/3 left-1/4">
+          <FontAwesomeIcon icon={faPaw} style={{ height: '3em', width: '3em' }} className="text-purple-600 transform -rotate-45" />
+        </div>
+        <div className="absolute top-1/4 right-1/3">
+          <FontAwesomeIcon icon={faPaw} style={{ height: '3.5em', width: '3.5em' }} className="text-purple-600 transform rotate-12" />
+        </div>
+        <div className="absolute bottom-1/3 left-1/2">
+          <FontAwesomeIcon icon={faPaw} style={{ height: '3em', width: '3em' }} className="text-purple-600 transform -rotate-30" />
+        </div>
+        
+        {/* Various animal icons */}
+        <div className="absolute top-1/4 left-1/3">
+          <FontAwesomeIcon icon={faCat} style={{ height: '4em', width: '4em' }} className="text-purple-600 transform rotate-12" />
+        </div>
+        <div className="absolute bottom-1/4 right-1/4">
+          <FontAwesomeIcon icon={faDog} style={{ height: '4.5em', width: '4.5em' }} className="text-purple-600 transform -rotate-12" />
+        </div>
+        <div className="absolute top-2/3 right-1/2">
+          <FontAwesomeIcon icon={faBone} style={{ height: '3.5em', width: '3.5em' }} className="text-purple-600 transform rotate-45" />
+        </div>
+        <div className="absolute bottom-1/2 left-1/4">
+          <FontAwesomeIcon icon={faFish} style={{ height: '3em', width: '3em' }} className="text-purple-600 transform rotate-90" />
         </div>
       </div>
       
@@ -54,40 +90,44 @@ const Doctors = () => {
         
         <p className="text-gray-700 mb-12 max-w-3xl mx-auto">
           Our team of highly skilled veterinarians is committed to providing top-notch care for your furry companions. 
-          They're passionate about animal health & dedicated to providing the best possible medical services.
+          They&apos;re passionate about animal health &amp; dedicated to providing the best possible medical services.
         </p>
         
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12 relative">
+          {/* Floating animal icons near the doctor cards */}
+
+
+          
           <DoctorCard 
             image="/lovable-uploads/97eb65d8-dcec-46e0-b0f5-7121bb0d32f4.png" 
             name="Dr. Mohamed Farouk"
+            specialty="Small Animal Specialist"
           />
           <DoctorCard 
             image="/lovable-uploads/97eb65d8-dcec-46e0-b0f5-7121bb0d32f4.png" 
             name="Dr. Rico J Pangan"
+            specialty="Veterinary Surgeon"
           />
           <DoctorCard 
             image="/lovable-uploads/97eb65d8-dcec-46e0-b0f5-7121bb0d32f4.png" 
             name="Dr. Anas Saada"
+            specialty="Exotic Pet Specialist"
           />
         </div>
         
-        {/* Pet images at bottom corners */}
+        {/* Pet images at bottom corners with animal icons */}
         <div className="relative h-40">
-          <div className="absolute bottom-0 left-0 w-40 h-40">
-            <img 
+          <div className="absolute bottom-0 left-0 w-40 h-40 relative">
+            <Image 
               src="/lovable-uploads/97eb65d8-dcec-46e0-b0f5-7121bb0d32f4.png" 
               alt="Gray cat" 
-              className="w-full h-full object-contain"
+              fill
+              className="object-contain"
+              sizes="(max-width: 768px) 100vw, 160px"
             />
+
           </div>
-          <div className="absolute bottom-0 right-0 w-40 h-40">
-            <img 
-              src="/lovable-uploads/97eb65d8-dcec-46e0-b0f5-7121bb0d32f4.png" 
-              alt="Dog" 
-              className="w-full h-full object-contain"
-            />
-          </div>
+
         </div>
       </div>
     </div>
