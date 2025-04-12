@@ -1,0 +1,179 @@
+/* Section Styles */
+.contentInner {
+  position: relative;
+  padding-top: 100px;
+  padding-bottom: 70px;
+  background-color: rgba(245, 240, 255, 1);
+}
+
+/* Container Styles */
+.container {
+  width: 100%;
+  padding-right: calc(20px * 0.5);
+  padding-left: calc(20px * 0.5);
+  margin-right: auto;
+  margin-left: auto;
+  max-width: 1330px;
+}
+
+/* Row Styles */
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: calc(-1 * 0);
+  margin-right: calc(-0.5 * 20px);
+  margin-left: calc(-0.5 * 20px);
+  align-items: center;
+}
+
+/* Column Styles */
+.colLeft {
+  max-width: 100%;
+  padding-right: calc(20px * 0.5);
+  padding-left: calc(20px * 0.5);
+  margin-top: 0;
+  flex: 0 0 auto;
+  flex-shrink: 0;
+  width: 33.3333%;
+}
+
+.colRight {
+  max-width: 100%;
+  padding-right: calc(20px * 0.5);
+  padding-left: calc(20px * 0.5);
+  margin-top: 0;
+  flex: 0 0 auto;
+  flex-shrink: 0;
+  width: 66.6667%;
+  margin-bottom: 30px;
+}
+
+/* Section Head Styles */
+.sectionHead {
+  margin-bottom: 30px;
+}
+
+.title {
+  margin-top: 0px;
+  font-family: 'Poppins', sans-serif;
+  color: #4a2d71;
+  margin-bottom: 0px;
+  line-height: 1.3;
+  font-size: 45px;
+  font-weight: 700;
+  text-transform: capitalize;
+  visibility: visible;
+  animation-duration: 0.8s;
+  animation-delay: 0.2s;
+  animation-name: fadeInUp;
+}
+
+.description {
+  margin-bottom: 1rem;
+  margin-top: 10px;
+  line-height: 1.6;
+  font-size: 18px;
+  font-weight: 300;
+  color: #4a2d71;
+}
+
+/* Swiper Styles */
+.swiper {
+  overflow: hidden;
+  list-style: none;
+  padding: 0px;
+  margin-left: auto;
+  margin-right: auto;
+  position: relative;
+  z-index: 1;
+  display: block;
+}
+
+.swiperWrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  display: flex;
+  transition-property: transform;
+  box-sizing: content-box;
+  transform: translate3d(0px, 0px, 0px);
+}
+
+.swiperSlide {
+  flex-shrink: 0;
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transition-property: transform;
+  display: block;
+  visibility: visible;
+  animation-duration: 0.8s;
+  animation-name: fadeInUp;
+}
+
+.swiperSlide:nth-child(1) {
+  animation-delay: 0.1s;
+}
+
+.swiperSlide:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.swiperSlide:nth-child(3) {
+  animation-delay: 0.3s;
+}
+
+.swiperSlide:nth-child(4) {
+  animation-delay: 0.4s;
+}
+
+.clientsLogo {
+  border-radius: 20px;
+  padding: 30px;
+  transition: 0.2s;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 110px;
+}
+
+.logoImage {
+  border-style: none;
+  height: auto;
+  max-width: 100%;
+  vertical-align: middle;
+}
+
+.swiperPagination {
+  transition: opacity 0.3s;
+  position: absolute;
+  text-align: center;
+  transform: translate3d(0px, 0px, 0px);
+  z-index: 10;
+}
+
+/* Animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 50px, 0);
+  }
+
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+/* Responsive Styles */
+@media (max-width: 1199px) {
+  .colLeft, .colRight {
+    width: 100%;
+  }
+  
+  .colLeft {
+    margin-bottom: 30px;
+  }
+}

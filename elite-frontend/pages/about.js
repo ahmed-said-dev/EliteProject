@@ -6,6 +6,8 @@ import ImageGallerySlider from '@/components/ImageGallerySlider';
 import EliteVetAboutSection from '@/components/EliteVetAboutSection/EliteVetAboutSection';
 import EliteVetBenefits from '@/components/EliteVetBenefits/EliteVetBenefits';
 import CorporateSocialResponsibility from '@/components/CorporateSocialResponsibility/CorporateSocialResponsibility';
+import OurPartners from '@/components/OurPartners';
+import TeamSection from '@/components/TeamSection';
 
 export default function About() {
   return (
@@ -23,8 +25,10 @@ export default function About() {
         <ImageGallerySlider />
       </Section>
       <EliteVetAboutSection/>
-      <CorporateSocialResponsibility/>
       <EliteVetBenefits/>
+      <CorporateSocialResponsibility/>
+      <TeamSection/>
+      <OurPartners/>
     </main>
   );
 }
