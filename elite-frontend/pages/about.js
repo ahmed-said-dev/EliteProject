@@ -27,8 +27,8 @@ export default function About() {
       <EliteVetAboutSection/>
       <EliteVetBenefits/>
       <CorporateSocialResponsibility/>
-      <TeamSection/>
       <OurPartners/>
+      <TeamSection/>
     </main>
   );
 }
