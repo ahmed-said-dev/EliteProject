@@ -8,6 +8,7 @@ import EliteVetBenefits from '@/components/EliteVetBenefits/EliteVetBenefits';
 import CorporateSocialResponsibility from '@/components/CorporateSocialResponsibility/CorporateSocialResponsibility';
 import OurPartners from '@/components/OurPartners';
 import TeamSection from '@/components/TeamSection';
+import JoinTeam from '@/components/JoinTeam';
 
 export default function About() {
   return (
@@ -29,6 +30,7 @@ export default function About() {
       <CorporateSocialResponsibility/>
       <OurPartners/>
       <TeamSection/>
+      <JoinTeam/>
     </main>
   );
 }
