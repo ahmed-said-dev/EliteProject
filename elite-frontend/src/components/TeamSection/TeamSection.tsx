@@ -1,7 +1,77 @@
 import React from "react";
 import styles from "./TeamSection.module.css";
-import Image from "next/image";
-import Link from "next/link";
+import TeamMember, { TeamMemberProps } from "./TeamMember";
+
+const teamMembers: TeamMemberProps[] = [
+  {
+    name: "Dr. Doctor Name",
+    position: "Chief Veterinarian",
+    imageSrc: "/images/team/img1.webp",
+    isActive: true,
+    animationDelay: "0.2s",
+    specialties: [
+      { icon: "fas fa-paw", text: "Pet Internal Medicine Specialist" },
+      { icon: "fas fa-heartbeat", text: "Advanced Pet Diagnostics" },
+      { icon: "fas fa-certificate", text: "Certified in Pet Nutrition" },
+    ],
+    socialLinks: [
+      { platform: "LinkedIn", url: "https://www.linkedin.com/", icon: "fa-brands fa-linkedin" },
+      { platform: "Instagram", url: "https://www.instagram.com/", icon: "fa-brands fa-instagram" },
+      { platform: "Facebook", url: "https://www.facebook.com/", icon: "fa-brands fa-facebook-f" },
+    ],
+  },
+  {
+    name: "Dr. Doctor Name",
+    position: "Pet Surgeon",
+    imageSrc: "/images/team/img2.webp",
+    isActive: false,
+    animationDelay: "0.4s",
+    specialties: [
+      { icon: "fas fa-bone", text: "Orthopedic Surgery Expert" },
+      { icon: "fas fa-microscope", text: "Advanced Pet Surgery" },
+      { icon: "fas fa-hospital", text: "Emergency Pet Care" },
+    ],
+    socialLinks: [
+      { platform: "LinkedIn", url: "https://www.linkedin.com/", icon: "fa-brands fa-linkedin" },
+      { platform: "Instagram", url: "https://www.instagram.com/", icon: "fa-brands fa-instagram" },
+      { platform: "Facebook", url: "https://www.facebook.com/", icon: "fa-brands fa-facebook-f" },
+    ],
+  },
+  {
+    name: "Dr. Doctor Name",
+    position: "Pet Dermatologist",
+    imageSrc: "/images/team/img3.webp",
+    isActive: false,
+    animationDelay: "0.6s",
+    specialties: [
+      { icon: "fas fa-allergies", text: "Pet Dermatology Expert" },
+      { icon: "fas fa-shield-alt", text: "Pet Allergy Treatment" },
+      { icon: "fas fa-pills", text: "Advanced Skin Therapy" },
+    ],
+    socialLinks: [
+      { platform: "LinkedIn", url: "https://www.linkedin.com/", icon: "fa-brands fa-linkedin" },
+      { platform: "Instagram", url: "https://www.instagram.com/", icon: "fa-brands fa-instagram" },
+      { platform: "Facebook", url: "https://www.facebook.com/", icon: "fa-brands fa-facebook-f" },
+    ],
+  },
+  {
+    name: "Dr. Doctor Name",
+    position: "Pet Nutritionist",
+    imageSrc: "/images/team/img4.webp",
+    isActive: false,
+    animationDelay: "0.8s",
+    specialties: [
+      { icon: "fas fa-utensils", text: "Pet Nutrition Expert" },
+      { icon: "fas fa-weight", text: "Pet Weight Management" },
+      { icon: "fas fa-carrot", text: "Special Diet Formulations" },
+    ],
+    socialLinks: [
+      { platform: "LinkedIn", url: "https://www.linkedin.com/", icon: "fa-brands fa-linkedin" },
+      { platform: "Instagram", url: "https://www.instagram.com/", icon: "fa-brands fa-instagram" },
+      { platform: "Facebook", url: "https://www.facebook.com/", icon: "fa-brands fa-facebook-f" },
+    ],
+  },
+];
 
 export default function TeamSection() {
   return (
@@ -42,257 +112,9 @@ export default function TeamSection() {
           </div>
         </div>
         <div className={styles.teamRow}>
-          {/* Team Member 1 */}
-          <div className={`${styles.teamCol} ${styles.fadeInUp}`} style={{ animationDelay: '0.2s' }}>
-            <div className={`${styles.teamCard} ${styles.active}`}>
-              <div className={styles.teamMedia}>
-                <Image
-                  src="/images/team/img1.webp"
-                  alt="Chief Veterinarian"
-                  width={500}
-                  height={650}
-                  className={styles.teamImage}
-                />
-                <Link href="/appointment" className={styles.appointmentButton}>
-                  <i className="feather icon-calendar mr-2" />
-                  Book Appointment
-                </Link>
-              </div>
-              <div className={styles.teamContent}>
-                <div className={styles.clearfix}>
-                  <h3 className={styles.teamName}>
-                    <Link href="/team-detail">Dr. Doctor Name</Link>
-                  </h3>
-                  <span className={styles.teamPosition}>Chief Veterinarian</span>
-                </div>
-                <Link href="/team-detail" className={styles.detailButton}>
-                  <i className="feather icon-arrow-right" />
-                </Link>
-              </div>
-              <ul className={styles.socialLinks}>
-                <li>
-                  <a href="https://www.linkedin.com/" target="_blank" rel="noopener noreferrer">
-                    <i className="fa-brands fa-linkedin" />
-                  </a>
-                </li>
-                <li>
-                  <a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer">
-                    <i className="fa-brands fa-instagram" />
-                  </a>
-                </li>
-                <li>
-                  <a href="https://www.facebook.com/" target="_blank" rel="noopener noreferrer">
-                    <i className="fa-brands fa-facebook-f" />
-                  </a>
-                </li>
-              </ul>
-              <div className={styles.teamInfo}>
-                <ul>
-                  <li>
-                    <i className="fas fa-paw" /> Pet Internal Medicine Specialist
-                  </li>
-                  <li>
-                    <i className="fas fa-heartbeat" /> Advanced Pet Diagnostics
-                  </li>
-                  <li>
-                    <i className="fas fa-certificate" /> Certified in Pet Nutrition
-                  </li>
-                </ul>
-                <Link href="/doctor-details" className={styles.readMoreButton}>
-                  Read More
-                </Link>
-              </div>
-            </div>
-          </div>
-
-          {/* Team Member 2 */}
-          <div className={`${styles.teamCol} ${styles.fadeInUp}`} style={{ animationDelay: '0.4s' }}>
-            <div className={styles.teamCard}>
-              <div className={styles.teamMedia}>
-                <Image
-                  src="/images/team/img2.webp"
-                  alt="Pet Surgeon"
-                  width={500}
-                  height={650}
-                  className={styles.teamImage}
-                />
-                <Link href="/appointment" className={styles.appointmentButton}>
-                  <i className="feather icon-calendar mr-2" />
-                  Book Appointment
-                </Link>
-              </div>
-              <div className={styles.teamContent}>
-                <div className={styles.clearfix}>
-                  <h3 className={styles.teamName}>
-                    <Link href="/team-detail">Dr. Doctor Name</Link>
-                  </h3>
-                  <span className={styles.teamPosition}>Pet Surgeon</span>
-                </div>
-                <Link href="/team-detail" className={styles.detailButton}>
-                  <i className="feather icon-arrow-right" />
-                </Link>
-              </div>
-              <ul className={styles.socialLinks}>
-                <li>
-                  <a href="https://www.linkedin.com/" target="_blank" rel="noopener noreferrer">
-                    <i className="fa-brands fa-linkedin" />
-                  </a>
-                </li>
-                <li>
-                  <a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer">
-                    <i className="fa-brands fa-instagram" />
-                  </a>
-                </li>
-                <li>
-                  <a href="https://www.facebook.com/" target="_blank" rel="noopener noreferrer">
-                    <i className="fa-brands fa-facebook-f" />
-                  </a>
-                </li>
-              </ul>
-              <div className={styles.teamInfo}>
-                <ul>
-                  <li>
-                    <i className="fas fa-bone" /> Orthopedic Surgery Expert
-                  </li>
-                  <li>
-                    <i className="fas fa-microscope" /> Advanced Pet Surgery
-                  </li>
-                  <li>
-                    <i className="fas fa-hospital" /> Emergency Pet Care
-                  </li>
-                </ul>
-                <Link href="/doctor-details" className={styles.readMoreButton}>
-                  Read More
-                </Link>
-              </div>
-            </div>
-          </div>
-
-          {/* Team Member 3 */}
-          <div className={`${styles.teamCol} ${styles.fadeInUp}`} style={{ animationDelay: '0.6s' }}>
-            <div className={styles.teamCard}>
-              <div className={styles.teamMedia}>
-                <Image
-                  src="/images/team/img3.webp"
-                  alt="Pet Dermatologist"
-                  width={500}
-                  height={650}
-                  className={styles.teamImage}
-                />
-                <Link href="/appointment" className={styles.appointmentButton}>
-                  <i className="feather icon-calendar mr-2" />
-                  Book Appointment
-                </Link>
-              </div>
-              <div className={styles.teamContent}>
-                <div className={styles.clearfix}>
-                  <h3 className={styles.teamName}>
-                    <Link href="/team-detail">Dr. Doctor Name</Link>
-                  </h3>
-                  <span className={styles.teamPosition}>Pet Dermatologist</span>
-                </div>
-                <Link href="/team-detail" className={styles.detailButton}>
-                  <i className="feather icon-arrow-right" />
-                </Link>
-              </div>
-              <ul className={styles.socialLinks}>
-                <li>
-                  <a href="https://www.linkedin.com/" target="_blank" rel="noopener noreferrer">
-                    <i className="fa-brands fa-linkedin" />
-                  </a>
-                </li>
-                <li>
-                  <a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer">
-                    <i className="fa-brands fa-instagram" />
-                  </a>
-                </li>
-                <li>
-                  <a href="https://www.facebook.com/" target="_blank" rel="noopener noreferrer">
-                    <i className="fa-brands fa-facebook-f" />
-                  </a>
-                </li>
-              </ul>
-              <div className={styles.teamInfo}>
-                <ul>
-                  <li>
-                    <i className="fas fa-allergies" /> Pet Dermatology Expert
-                  </li>
-                  <li>
-                    <i className="fas fa-shield-alt" /> Pet Allergy Treatment
-                  </li>
-                  <li>
-                    <i className="fas fa-pills" /> Advanced Skin Therapy
-                  </li>
-                </ul>
-                <Link href="/doctor-details" className={styles.readMoreButton}>
-                  Read More
-                </Link>
-              </div>
-            </div>
-          </div>
-
-          {/* Team Member 4 */}
-          <div className={`${styles.teamCol} ${styles.fadeInUp}`} style={{ animationDelay: '0.8s' }}>
-            <div className={styles.teamCard}>
-              <div className={styles.teamMedia}>
-                <Image
-                  src="/images/team/img4.webp"
-                  alt="Pet Nutritionist"
-                  width={500}
-                  height={650}
-                  className={styles.teamImage}
-                />
-                <Link href="/appointment" className={styles.appointmentButton}>
-                  <i className="feather icon-calendar mr-2" />
-                  Book Appointment
-                </Link>
-              </div>
-              <div className={styles.teamContent}>
-                <div className={styles.clearfix}>
-                  <h3 className={styles.teamName}>
-                    <Link href="/team-detail">Dr. Doctor Name</Link>
-                  </h3>
-                  <span className={styles.teamPosition}>Pet Nutritionist</span>
-                </div>
-                <Link href="/team-detail" className={styles.detailButton}>
-                  <i className="feather icon-arrow-right" />
-                </Link>
-              </div>
-              <ul className={styles.socialLinks}>
-                <li>
-                  <a href="https://www.linkedin.com/" target="_blank" rel="noopener noreferrer">
-                    <i className="fa-brands fa-linkedin" />
-                  </a>
-                </li>
-                <li>
-                  <a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer">
-                    <i className="fa-brands fa-instagram" />
-                  </a>
-                </li>
-                <li>
-                  <a href="https://www.facebook.com/" target="_blank" rel="noopener noreferrer">
-                    <i className="fa-brands fa-facebook-f" />
-                  </a>
-                </li>
-              </ul>
-              <div className={styles.teamInfo}>
-                <ul>
-                  <li>
-                    <i className="fas fa-utensils" /> Pet Nutrition Expert
-                  </li>
-                  <li>
-                    <i className="fas fa-weight" /> Pet Weight Management
-                  </li>
-                  <li>
-                    <i className="fas fa-carrot" /> Special Diet Formulations
-                  </li>
-                </ul>
-                <Link href="/doctor-details" className={styles.readMoreButton}>
-                  Read More
-                </Link>
-              </div>
-            </div>
-          </div>
+          {teamMembers.map((member, index) => (
+            <TeamMember key={index} {...member} />
+          ))}
         </div>
       </div>
     </section>
