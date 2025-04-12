@@ -12,7 +12,7 @@ const ContactUs = () => {
         {/* White wavy line at the top */}
         <div className="absolute left-0 top-0 w-full" style={{ zIndex: 1 }}>
           <Image
-            src="/WhyChooseUS/Asset 21-.png"
+            src="/ContactUs/Asset 33-.png"
             alt="Wavy line decoration"
             width={1440}
             height={10}
@@ -59,11 +59,11 @@ const ContactUs = () => {
             <div className="w-48 h-5 mb-4 relative mx-auto md:mx-0">
               <svg width="100%" height="100%" viewBox="0 0 200 20" xmlns="http://www.w3.org/2000/svg">
                 <path d="M0,10 C10,5 20,15 30,10 C40,5 50,15 60,10 C70,5 80,15 90,10 C100,5 110,15 120,10 C130,5 140,15 150,10 C160,5 170,15 180,10 C190,5 200,15 200,10" 
-                  stroke="white" strokeWidth="3" fill="none" />
+                  stroke="#FFD700" strokeWidth="3" fill="none" />
               </svg>
             </div>
             
-            <div className="flex flex-col md:flex-row md:space-x-8 pt-2 px-4 md:px-0">
+            <div className="flex flex-col md:flex-row md:space-x-8 pt-2 px-4 md:px-0 pr-[245px]"style={{ paddingRight: 245 }}>
               {/* Small decorative stars in the cloud */}
               <div className="absolute top-1/3 left-1/2 transform -translate-x-1/2 z-0">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -77,7 +77,7 @@ const ContactUs = () => {
               </div>
 
               {/* Contact Info and Map - added to left side */}
-              <div className="md:w-2/5 relative z-10 md:order-1 mb-10 md:mb-0">
+              <div className="md:w-1/3 relative z-10 md:order-1 mb-10 md:mb-0 md:mr-6">
                 <div className="bg-white bg-opacity-80 rounded-lg p-6 shadow-lg mb-6" style={{ zIndex: 25 }}>
                   <h3 className="text-[#44396F] font-bold text-xl mb-4">Contact Information</h3>
                   
@@ -116,58 +116,48 @@ const ContactUs = () => {
                 </div>
               </div>
 
-              {/* Contact Form section moved to right side */}
-              <div className="md:w-3/5 mb-10 md:mb-0 relative mx-auto md:mx-0 md:order-2" style={{ zIndex: 20 }}>
+              {/* Contact Form section moved to center */}
+              <div className="md:w-2/3 max-w-[600px] mx-auto mb-10 md:mb-0 relative md:order-2" style={{ zIndex: 20 }}>
                 <div className="text-xl mb-10 text-center md:text-left relative" style={{ zIndex: 25 }}>
                   <p className="text-[#44396F] font-bold bg-white bg-opacity-80 inline-block px-4 py-2 rounded-lg shadow-sm">Get in touch with our team and we&apos;ll get back to you as soon as possible.</p>
                 </div>
                 
                 <div className="bg-white rounded-lg p-6 shadow-lg relative" style={{ position: 'relative', zIndex: 25 }}>
+                  <div className="mb-4">
+                    <p className="text-[#44396F] font-bold text-lg mb-2">Have a question or concern?</p>
+                    <p className="text-[#44396F] text-sm mb-4">Contact us today! Our dedicated team is ready to assist you.</p>
+                  </div>
                   <form>
-                    <div className="mb-4">
-                      <label htmlFor="name" className="block text-[#44396F] font-medium mb-1">Your Name</label>
+                    <div className="mb-3">
                       <input 
                         type="text" 
                         id="name" 
-                        className="w-full px-4 py-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-purple-400"
-                        placeholder="Enter your full name"
+                        className="w-full px-4 py-2 bg-[#EFF1F5] rounded-md border-none focus:outline-none focus:ring-1 focus:ring-purple-300"
+                        placeholder="NAME"
                       />
                     </div>
                     
-                    <div className="mb-4">
-                      <label htmlFor="email" className="block text-[#44396F] font-medium mb-1">Email Address</label>
+                    <div className="mb-3">
                       <input 
                         type="email" 
                         id="email" 
-                        className="w-full px-4 py-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-purple-400"
-                        placeholder="Enter your email"
+                        className="w-full px-4 py-2 bg-[#EFF1F5] rounded-md border-none focus:outline-none focus:ring-1 focus:ring-purple-300"
+                        placeholder="EMAIL"
                       />
                     </div>
                     
                     <div className="mb-4">
-                      <label htmlFor="phone" className="block text-[#44396F] font-medium mb-1">Phone Number</label>
-                      <input 
-                        type="tel" 
-                        id="phone" 
-                        className="w-full px-4 py-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-purple-400"
-                        placeholder="Enter your phone number"
-                      />
-                    </div>
-                    
-                    <div className="mb-6">
-                      <label htmlFor="message" className="block text-[#44396F] font-medium mb-1">Your Message</label>
                       <textarea 
                         id="message" 
                         rows={4}
-                        className="w-full px-4 py-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-purple-400"
-                        placeholder="How can we help you?"
+                        className="w-full px-4 py-2 bg-[#EFF1F5] rounded-md border-none focus:outline-none focus:ring-1 focus:ring-purple-300"
+                        placeholder="MESSAGE"
                       ></textarea>
                     </div>
                     
-                    <div className="flex justify-center md:justify-start">
-                      <button type="submit" className="bg-yellow-400 hover:bg-yellow-500 text-[#44396F] font-medium py-2.5 px-6 rounded-full flex items-center gap-2 transition-colors">
-                        SEND MESSAGE
-                        <FontAwesomeIcon icon={faPaw} className="ml-1" />
+                    <div className="flex justify-center">
+                      <button type="submit" className="bg-yellow-400 hover:bg-yellow-500 text-[#44396F] font-medium py-2.5 px-6 rounded-md w-full transition-colors">
+                        Send
                       </button>
                     </div>
                   </form>
@@ -233,7 +223,7 @@ const ContactUs = () => {
         {/* Asset 22 image at bottom-right - very large and prominent, hidden on small screens */}
         <div className="absolute right-0 -bottom-10 hidden md:block" style={{ zIndex: 50, width: 'min(500px, 40vw)', height: 'min(500px, 40vw)' }}>
           <Image 
-            src="/WhyChooseUS/Asset 22-.png"
+            src="/ContactUs/Asset 35-.png"
             alt="Bottom right decoration"
             width={600}
             height={600}
