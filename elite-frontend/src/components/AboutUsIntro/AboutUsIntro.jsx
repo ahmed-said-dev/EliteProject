@@ -25,6 +25,7 @@ export default function AboutUsIntro() {
                   backgroundRepeat: 'no-repeat',
                   backgroundPosition: 'right bottom'
                 }}
+                dir="rtl"
       >
         <div className={`container ${styles.container}`}>
           <div className={`row ${styles.contentWrapper}`}>

@@ -5,7 +5,7 @@ import { BsCheckCircleFill } from 'react-icons/bs';
 
 export default function EliteVetAboutSection() {
   return (
-    <section className={styles.contentInner}>
+    <section className={styles.contentInner} dir="rtl">
       <div className={styles.container}>
         <div className={styles.row}>
           <div className={styles.colRight}>

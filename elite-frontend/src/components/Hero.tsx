@@ -1,12 +1,12 @@
 import React from "react";
-import { Button } from "@/components/ui/Button";
+import { Button } from "@/components/ui/button";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPaw, faCat, faDog, faFish, faOtter, faDove, faHorse, faSpider, faCrow } from "@fortawesome/free-solid-svg-icons";
 import { Plus } from "lucide-react";
 
 const Hero = () => {
   return (
-    <div className="relative w-full min-h-[600px] overflow-hidden">
+    <div className="relative w-full min-h-[600px] overflow-hidden" dir="rtl">
       <div className="grid grid-cols-1 md:grid-cols-2">
         {/* Right side - Content section */}
         <div className="h-[600px] bg-[#6B4E98] relative overflow-hidden order-2 md:order-1">

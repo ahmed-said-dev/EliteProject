@@ -30,7 +30,7 @@ function MyApp({ Component, pageProps }) {
         <meta name="description" content="عيادة إيليت البيطرية - شريكك الموثوق في رعاية حيوانك الأليف" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <div dir="rtl">
+      <div dir="ltr">
         <Layout>
           <Component {...pageProps} />
         </Layout>

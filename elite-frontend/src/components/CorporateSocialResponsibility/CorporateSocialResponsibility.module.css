@@ -1,0 +1,390 @@
+.sectionWrapper {
+  box-sizing: border-box;
+  outline: none;
+  padding: 0;
+  scrollbar-color: rgba(223, 223, 223, 0.9) rgba(255, 255, 255, 0);
+  scrollbar-width: thin;
+  padding-top: 50px;
+  background-attachment: fixed;
+  background-size: cover;
+  position: relative;
+  background-image: url('/AboutUs/bg1.webp');
+  color: #4a2d71;
+}
+
+.sectionWrapper::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #f5f0ff;
+  opacity: 0.8;
+  z-index: 0;
+}
+
+.container {
+  box-sizing: border-box;
+  outline: none;
+  padding: 0;
+  scrollbar-color: rgba(223, 223, 223, 0.9) rgba(255, 255, 255, 0);
+  scrollbar-width: thin;
+  width: 100%;
+  padding-right: calc(20px * 0.5);
+  padding-left: calc(20px * 0.5);
+  margin-right: auto;
+  margin-left: auto;
+  max-width: 1330px;
+  position: relative;
+  z-index: 1;
+}
+
+.contentWrapper {
+  box-sizing: border-box;
+  outline: none;
+  padding: 0;
+  scrollbar-color: rgba(223, 223, 223, 0.9) rgba(255, 255, 255, 0);
+  scrollbar-width: thin;
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: calc(-1 * 0);
+  margin-right: calc(-0.5 * 20px);
+  margin-left: calc(-0.5 * 20px);
+  align-items: flex-end;
+}
+
+.mediaColumn {
+  box-sizing: border-box;
+  outline: none;
+  padding: 0;
+  scrollbar-color: rgba(223, 223, 223, 0.9) rgba(255, 255, 255, 0);
+  scrollbar-width: thin;
+  max-width: 100%;
+  padding-right: calc(20px * 0.5);
+  padding-left: calc(20px * 0.5);
+  margin-top: 0;
+  flex: 0 0 auto;
+  flex-shrink: 0;
+  width: 50%;
+}
+
+.contentMedia {
+  box-sizing: border-box;
+  outline: none;
+  padding: 0;
+  scrollbar-color: rgba(223, 223, 223, 0.9) rgba(255, 255, 255, 0);
+  scrollbar-width: thin;
+  position: relative;
+  transform: translateX(-30px);
+}
+
+.dzMedia {
+  box-sizing: border-box;
+  outline: none;
+  padding: 0;
+  scrollbar-color: rgba(223, 223, 223, 0.9) rgba(255, 255, 255, 0);
+  scrollbar-width: thin;
+  overflow: hidden;
+  position: relative;
+}
+
+.mediaImage {
+  box-sizing: border-box;
+  outline: none;
+  padding: 0;
+  scrollbar-color: rgba(223, 223, 223, 0.9) rgba(255, 255, 255, 0);
+  scrollbar-width: thin;
+  border-style: none;
+  vertical-align: middle;
+  max-width: 100%;
+  height: auto;
+  width: 100%;
+}
+
+.item1 {
+  box-sizing: border-box;
+  outline: none;
+  padding: 0;
+  scrollbar-color: rgba(223, 223, 223, 0.9) rgba(255, 255, 255, 0);
+  scrollbar-width: thin;
+  position: absolute;
+  bottom: 150px;
+  left: 0px;
+}
+
+.infoWidget {
+  box-sizing: border-box;
+  outline: none;
+  scrollbar-color: rgba(223, 223, 223, 0.9) rgba(255, 255, 255, 0);
+  scrollbar-width: thin;
+  animation: move3 5s ease 0s infinite normal none running;
+  gap: 15px;
+  border-radius: 15px;
+  padding: 12px 20px;
+  display: inline-flex;
+  align-items: center;
+  background-color: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 20px 50px rgba(74, 45, 113, 0.1);
+  backdrop-filter: blur(5px);
+}
+
+.contentText {
+  box-sizing: border-box;
+  outline: none;
+  padding: 0;
+  scrollbar-color: rgba(223, 223, 223, 0.9) rgba(255, 255, 255, 0);
+  scrollbar-width: thin;
+  font-size: 55px;
+  font-weight: 700;
+  line-height: 1.2;
+  color: #4a2d71;
+}
+
+.counter {
+  box-sizing: border-box;
+  outline: none;
+  padding: 0;
+  scrollbar-color: rgba(223, 223, 223, 0.9) rgba(255, 255, 255, 0);
+  scrollbar-width: thin;
+  display: inline-block;
+}
+
+.title {
+  box-sizing: border-box;
+  outline: none;
+  padding: 0;
+  scrollbar-color: rgba(223, 223, 223, 0.9) rgba(255, 255, 255, 0);
+  scrollbar-width: thin;
+  margin-top: 0px;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+  color: #4a2d71;
+  line-height: 1.4;
+  margin-bottom: 0px;
+  font-size: 18px;
+}
+
+.textColumn {
+  box-sizing: border-box;
+  outline: none;
+  padding: 0;
+  scrollbar-color: rgba(223, 223, 223, 0.9) rgba(255, 255, 255, 0);
+  scrollbar-width: thin;
+  max-width: 100%;
+  padding-right: calc(20px * 0.5);
+  padding-left: calc(20px * 0.5);
+  margin-top: 0;
+  flex: 0 0 auto;
+  flex-shrink: 0;
+  width: 50%;
+  margin-bottom: 30px;
+  align-self: center;
+}
+
+.sectionHead {
+  box-sizing: border-box;
+  outline: none;
+  padding: 0;
+  scrollbar-color: rgba(223, 223, 223, 0.9) rgba(255, 255, 255, 0);
+  scrollbar-width: thin;
+  margin-bottom: 30px;
+}
+
+.mainTitle {
+  box-sizing: border-box;
+  outline: none;
+  padding: 0;
+  scrollbar-color: rgba(223, 223, 223, 0.9) rgba(255, 255, 255, 0);
+  scrollbar-width: thin;
+  margin-top: 0px;
+  margin-bottom: 0.5rem;
+  font-family: 'Poppins', sans-serif;
+  color: #4a2d71;
+  line-height: 1.3;
+  font-size: 45px;
+  font-weight: 700;
+  text-transform: capitalize;
+  visibility: visible;
+  animation-duration: 0.8s;
+  animation-delay: 0.2s;
+  animation-name: fadeInUp;
+}
+
+.description {
+  box-sizing: border-box;
+  outline: none;
+  padding: 0;
+  scrollbar-color: rgba(223, 223, 223, 0.9) rgba(255, 255, 255, 0);
+  scrollbar-width: thin;
+  margin-top: 0px;
+  margin-bottom: 1rem;
+  line-height: 1.6;
+  font-size: 18px;
+  visibility: visible;
+  animation-duration: 0.8s;
+  animation-delay: 0.4s;
+  animation-name: fadeInUp;
+  font-weight: 400;
+  color: #4a2d71;
+}
+
+.initiativesTitle {
+  box-sizing: border-box;
+  outline: none;
+  padding: 0;
+  scrollbar-color: rgba(223, 223, 223, 0.9) rgba(255, 255, 255, 0);
+  scrollbar-width: thin;
+  margin-top: 0px;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+  line-height: 1.4;
+  padding-bottom: 12px;
+  margin-bottom: 20px;
+  font-size: 20px;
+  position: relative;
+  visibility: visible;
+  animation-duration: 0.8s;
+  animation-delay: 0.6s;
+  animation-name: fadeInUp;
+  color: #4a2d71;
+}
+
+.initiativesTitle::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 50px;
+  height: 2px;
+  background-color: #4a2d71;
+}
+
+.listCheckCircle {
+  box-sizing: border-box;
+  outline: none;
+  scrollbar-color: rgba(223, 223, 223, 0.9) rgba(255, 255, 255, 0);
+  scrollbar-width: thin;
+  padding: 0;
+  margin: 0;
+  padding-left: 0;
+  margin-top: 0;
+  margin-bottom: 30px;
+  display: flex;
+  flex-wrap: wrap;
+  visibility: visible;
+  animation-duration: 0.8s;
+  animation-delay: 0.8s;
+  animation-name: fadeInUp;
+  font-weight: 500;
+  color: #4a2d71;
+}
+
+.listItem {
+  box-sizing: border-box;
+  outline: none;
+  scrollbar-color: rgba(223, 223, 223, 0.9) rgba(255, 255, 255, 0);
+  scrollbar-width: thin;
+  list-style: none;
+  position: relative;
+  font-family: 'Poppins', sans-serif;
+  font-size: 16px;
+  padding: 14px 5px 14px 50px;
+  width: 50%;
+  color: #4a2d71;
+}
+
+.listItem i {
+  box-sizing: border-box;
+  outline: none;
+  padding: 0;
+  scrollbar-color: rgba(223, 223, 223, 0.9) rgba(255, 255, 255, 0);
+  scrollbar-width: thin;
+  position: absolute;
+  left: 10px;
+  top: 16px;
+  background-color: #4a2d71;
+  color: #ffffff;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  line-height: 30px;
+  text-align: center;
+}
+
+.conclusion {
+  box-sizing: border-box;
+  outline: none;
+  padding: 0;
+  scrollbar-color: rgba(223, 223, 223, 0.9) rgba(255, 255, 255, 0);
+  scrollbar-width: thin;
+  margin-top: 0;
+  margin-bottom: 1rem;
+  visibility: visible;
+  animation-duration: 0.8s;
+  animation-delay: 1s;
+  animation-name: fadeInUp;
+  font-weight: 400;
+  color: #4a2d71;
+}
+
+/* Animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 50px, 0);
+  }
+
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes move3 {
+  0%, 100% {
+    transform: translate(0, 0);
+  }
+  50% {
+    transform: translate(8px, 5px);
+  }
+}
+
+.clearfix:after {
+  content: "";
+  display: block;
+  clear: both;
+}
+
+.wow {
+  visibility: visible;
+}
+
+@media (max-width: 1199px) {
+  .mediaColumn, .textColumn {
+    width: 100%;
+  }
+  
+  .contentMedia {
+    transform: translateX(0);
+    margin-bottom: 40px;
+  }
+  
+  .item1 {
+    bottom: 50px;
+  }
+  
+  .listItem {
+    width: 100%;
+  }
+}
+
+@media (max-width: 767px) {
+  .mainTitle {
+    font-size: 32px;
+  }
+  
+  .description {
+    font-size: 16px;
+  }
+}
