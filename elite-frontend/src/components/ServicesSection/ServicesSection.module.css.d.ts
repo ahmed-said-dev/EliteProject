@@ -1,0 +1,35 @@
+declare const styles: {
+  readonly "servicesSection": string;
+  readonly "container": string;
+  readonly "sectionHead": string;
+  readonly "subtitle": string;
+  readonly "title": string;
+  readonly "description": string;
+  readonly "servicesGrid": string;
+  readonly "serviceCard": string;
+  readonly "wowFadeInUp": string;
+  readonly "active": string;
+  readonly "iconBoxWrapper": string;
+  readonly "iconContent": string;
+  readonly "iconGroup": string;
+  readonly "iconCell": string;
+  readonly "cardImageWrapper": string;
+  readonly "cardImage": string;
+  readonly "cardImageOverlay": string;
+  readonly "cardTitle": string;
+  readonly "featuresList": string;
+  readonly "featureItem": string;
+  readonly "specialtyTags": string;
+  readonly "textBadge": string;
+  readonly "iconBxFooter": string;
+  readonly "readMoreBtn": string;
+  readonly "btnPrimary": string;
+  readonly "shapesWrapper": string;
+  readonly "shape": string;
+  readonly "shape1": string;
+  readonly "shape2": string;
+  readonly "shape3": string;
+  readonly "fadeInUp": string;
+};
+
+export default styles;

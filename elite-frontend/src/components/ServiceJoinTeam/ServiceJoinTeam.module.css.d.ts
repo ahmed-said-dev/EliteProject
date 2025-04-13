@@ -1,0 +1,34 @@
+declare const styles: {
+  readonly "sectionWrapper": string;
+  readonly "container": string;
+  readonly "row": string;
+  readonly "contentInner": string;
+  readonly "sectionHead": string;
+  readonly "circleAnimation": string;
+  readonly "circle1": string;
+  readonly "circle2": string;
+  readonly "subTitle": string;
+  readonly "titleBadge": string;
+  readonly "title": string;
+  readonly "descriptionWrapper": string;
+  readonly "subText": string;
+  readonly "sectionFull": string;
+  readonly "serviceCol": string;
+  readonly "iconBxWrapper": string;
+  readonly "active": string;
+  readonly "iconContent": string;
+  readonly "iconGroup": string;
+  readonly "iconCell": string;
+  readonly "cardImageWrapper": string;
+  readonly "cardImage": string;
+  readonly "cardImageOverlay": string;
+  readonly "dzTitle": string;
+  readonly "serviceList": string;
+  readonly "specialtyTags": string;
+  readonly "textBadge": string;
+  readonly "iconBxFooter": string;
+  readonly "readMoreBtn": string;
+  readonly "btnPrimary": string;
+};
+
+export default styles;

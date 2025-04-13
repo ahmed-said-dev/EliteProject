@@ -1,0 +1,468 @@
+/* Section Layout */
+.servicesSection {
+  padding: 80px 0;
+  background-color: #fff;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 15px;
+  position: relative;
+  z-index: 2;
+}
+
+/* Section Header */
+.sectionHead {
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+.subtitle {
+  font-size: 18px;
+  font-weight: 600;
+  color: #7c58d3;
+  display: block;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+}
+
+.title {
+  font-size: 36px;
+  font-weight: 700;
+  color: #4a2d71;
+  margin-bottom: 20px;
+}
+
+.description {
+  font-size: 16px;
+  color: #7a6e99;
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+/* Services Grid */
+.servicesGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+}
+
+@media (max-width: 1200px) {
+  .servicesGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .servicesGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Service Card Styling */
+.serviceCard {
+  margin-bottom: 30px;
+  transition: all 0.5s;
+  position: relative;
+  height: 100%; /* جعل الكارت يمتد ليملأ كامل ارتفاع المساحة المخصصة له */
+}
+
+.wowFadeInUp {
+  animation-name: fadeInUp;
+  animation-duration: 1s;
+  animation-fill-mode: both;
+}
+
+.iconBoxWrapper {
+  border-radius: 20px;
+  background: #fff;
+  box-shadow: var(--box-shadow);
+  transition: all 0.5s;
+  position: relative;
+  overflow: hidden;
+  height: 100%; /* جعل الكارت الداخلي يمتد ليملأ كامل ارتفاع الكارت الخارجي */
+  display: flex;
+  flex-direction: column;
+  clip-path: polygon(
+    0% 5%,
+    5% 0%,
+    95% 0%,
+    100% 5%,
+    100% 95%,
+    95% 100%,
+    5% 100%,
+    0% 95%
+  );
+}
+
+/* إضافة عناصر زخرفية للكارت */
+.iconBoxWrapper::before {
+  content: '';
+  position: absolute;
+  top: -60px;
+  right: -60px;
+  width: 120px;
+  height: 120px;
+  border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+  background: rgba(124, 88, 211, 0.1);
+  z-index: 0;
+}
+
+.iconBoxWrapper::after {
+  content: '';
+  position: absolute;
+  bottom: -50px;
+  left: -50px;
+  width: 100px;
+  height: 100px;
+  border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+  background: rgba(74, 45, 113, 0.08);
+  z-index: 0;
+}
+
+/* تغيير كيرفات البطاقات لتكون مختلفة عن بعضها */
+.serviceCard:nth-child(1) .iconBoxWrapper {
+  border-radius: 30px 10px 40px 10px;
+}
+
+.serviceCard:nth-child(2) .iconBoxWrapper {
+  border-radius: 10px 40px 10px 40px;
+}
+
+.serviceCard:nth-child(3) .iconBoxWrapper {
+  border-radius: 40px 10px 30px 20px;
+}
+
+/* تأثير hover للكارت يتحول للون البنفسجي المتدرج */
+.iconBoxWrapper:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 20px 50px rgba(74, 45, 113, 0.15);
+  background: linear-gradient(135deg, #7c58d3 0%, #4a2d71 100%);
+  color: white;
+  clip-path: polygon(
+    0% 0%,
+    100% 0%,
+    100% 95%,
+    95% 100%,
+    5% 100%,
+    0% 95%
+  );
+}
+
+.iconBoxWrapper:hover::before {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.iconBoxWrapper:hover::after {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.iconContent {
+  padding: 25px;
+  flex: 1; /* جعل محتوى الكارت يمتد ليملأ المساحة المتاحة */
+  display: flex;
+  flex-direction: column;
+}
+
+.iconGroup {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.iconCell {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px 20px 10px 20px;
+  background: #f5f0ff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--primary);
+  font-size: 18px;
+  transition: all 0.3s;
+  transform: rotate(-5deg);
+}
+
+.iconCell:nth-child(2n) {
+  transform: rotate(5deg);
+  border-radius: 20px 10px 20px 10px;
+}
+
+.iconBoxWrapper:hover .iconCell {
+  background: rgba(255, 255, 255, 0.2);
+  color: #fff;
+  transform: rotate(0);
+}
+
+.cardImageWrapper {
+  position: relative;
+  border-radius: 30px 10px 30px 10px;
+  overflow: hidden;
+  margin: 1rem 0;
+  height: 200px;
+  width: 100%;
+  transition: all 0.3s ease-in-out;
+  transform: perspective(1000px) rotateY(2deg);
+}
+
+.serviceCard:nth-child(2n) .cardImageWrapper {
+  border-radius: 10px 30px 10px 30px;
+  transform: perspective(1000px) rotateY(-2deg);
+}
+
+.iconBoxWrapper:hover .cardImageWrapper {
+  transform: perspective(1000px) rotateY(0);
+}
+
+.cardImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.cardImageOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(rgba(74, 45, 113, 0.5), rgba(124, 88, 211, 0.3));
+  transition: opacity 0.3s ease;
+}
+
+.serviceCard:hover .cardImageOverlay {
+  opacity: 0;
+}
+
+.serviceCard:hover .cardImage {
+  transform: scale(1.05);
+}
+
+.cardTitle {
+  font-size: 22px;
+  font-weight: 600;
+  color: #4a2d71;
+  margin-bottom: 20px;
+  line-height: 1.4;
+}
+
+.featuresList {
+  list-style: none;
+  padding: 0;
+  margin-bottom: 20px;
+}
+
+.featureItem {
+  margin-bottom: 10px;
+  display: flex;
+  align-items: baseline;
+  color: #7a6e99;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.featureItem i {
+  color: #7c58d3;
+  margin-right: 10px;
+  font-size: 14px;
+  flex-shrink: 0;
+}
+
+.specialtyTags {
+  margin-bottom: 15px;
+}
+
+.textBadge {
+  background-color: #f5f0ff;
+  border-radius: 20px 5px 20px 5px;
+  padding: 8px 15px;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--primary);
+  display: inline-block;
+  position: relative;
+  overflow: hidden;
+}
+
+.textBadge::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 20px;
+  height: 20px;
+  background: rgba(124, 88, 211, 0.1);
+  border-radius: 50%;
+  transform: translate(-10px, -10px);
+}
+
+.iconBoxWrapper:hover .textBadge {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 5px 20px 5px 20px;
+}
+
+.iconBxFooter {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 1.5rem;
+  padding: 15px 25px;
+  border-top: 1px solid rgba(124, 88, 211, 0.1);
+}
+
+/* أزرار الكارت */
+.readMoreBtn {
+  font-weight: 500;
+  color: white; /* نص أبيض */
+  background-color: #7c58d3; /* خلفية بنفسجية */
+  padding: 8px 16px;
+  border-radius: 20px 5px 20px 5px;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  display: inline-block;
+  box-shadow: 0 4px 10px rgba(124, 88, 211, 0.2);
+}
+
+/* عند التحويم: خلفية بيضاء ونص بنفسجي */
+.iconBoxWrapper:hover .readMoreBtn {
+  background-color: white;
+  color: #7c58d3;
+  box-shadow: 0 4px 15px rgba(124, 88, 211, 0.3);
+}
+
+.iconBoxWrapper:hover .cardTitle,
+.iconBoxWrapper:hover .featureItem,
+.iconBoxWrapper:hover .featureItem i,
+.iconBoxWrapper:hover .textBadge {
+  color: #fff;
+}
+
+.iconBoxWrapper:hover .textBadge {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.iconBoxWrapper:hover .iconBxFooter {
+  border-top-color: rgba(255, 255, 255, 0.2);
+}
+
+/* زر السهم */
+.btnPrimary {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 15px 5px 15px 5px;
+  background-color: #7c58d3; /* بنفسجي */
+  color: white; /* سهم أبيض في الحالة العادية */
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(124, 88, 211, 0.4);
+  border: none;
+  outline: none;
+  text-decoration: none;
+  z-index: 1;
+}
+
+.btnPrimary:before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to right, #7c58d3 0%, #af50d7 100%);
+  border-radius: inherit;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: -1;
+}
+
+.btnPrimary i {
+  font-size: 18px;
+  position: relative;
+  z-index: 2;
+  transition: all 0.3s ease;
+}
+
+/* تغيير تصميم الزر عند التحويم على الكارت */
+.serviceCard:hover .btnPrimary {
+  transform: translateY(-5px);
+  background-color: white; /* خلفية بيضاء عند التحويم */
+  color: #7c58d3; /* سهم بنفسجي عند التحويم */
+  box-shadow: 0 8px 20px rgba(124, 88, 211, 0.5);
+}
+
+.serviceCard:hover .btnPrimary:before {
+  opacity: 0; /* إلغاء تأثير التدرج عند التحويم */
+}
+
+.serviceCard:hover .btnPrimary i {
+  transform: translateX(3px);
+}
+
+/* Active Card Styles */
+.active .iconBoxWrapper {
+  border-top: 4px solid #7c58d3;
+}
+
+/* Background Decorations */
+.shapesWrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.shape {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(124, 88, 211, 0.05);
+}
+
+.shape1 {
+  top: -100px;
+  right: -100px;
+  width: 300px;
+  height: 300px;
+}
+
+.shape2 {
+  bottom: -50px;
+  left: -150px;
+  width: 400px;
+  height: 400px;
+  opacity: 0.7;
+}
+
+.shape3 {
+  top: 50%;
+  left: 50%;
+  width: 200px;
+  height: 200px;
+  opacity: 0.3;
+  transform: translate(-50%, -50%);
+}
+
+/* Animation */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 40px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
