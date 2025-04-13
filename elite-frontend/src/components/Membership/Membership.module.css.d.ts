@@ -1,0 +1,32 @@
+declare const styles: {
+  readonly "contentInner": string;
+  readonly "container": string;
+  readonly "row": string;
+  readonly "col": string;
+  readonly "sectionContent": string;
+  readonly "badge": string;
+  readonly "title": string;
+  readonly "textPrimary": string;
+  readonly "textDark": string;
+  readonly "subTitle": string;
+  readonly "featureList": string;
+  readonly "featureText": string;
+  readonly "listUnstyled": string;
+  readonly "listItem": string;
+  readonly "itemIcon": string;
+  readonly "itemText": string;
+  readonly "benefitsList": string;
+  readonly "benefitsTitle": string;
+  readonly "actionBox": string;
+  readonly "callToAction": string;
+  readonly "btnPrimary": string;
+  readonly "btnIcon": string;
+  readonly "introMedia": string;
+  readonly "imageWrapper": string;
+  readonly "mainImg": string;
+  readonly "shape1": string;
+  readonly "shape2": string;
+  readonly "float": string;
+};
+
+export default styles;
