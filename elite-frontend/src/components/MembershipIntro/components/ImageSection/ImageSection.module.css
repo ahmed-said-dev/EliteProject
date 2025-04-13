@@ -1,0 +1,57 @@
+.introMedia {
+  padding: 20px;
+  position: relative;
+}
+
+.imageWrapper {
+  padding: 20px;
+  position: relative;
+}
+
+.mainImg {
+  border-style: none;
+  max-width: 100%;
+  vertical-align: middle;
+  border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+  transition: all 0.5s ease;
+  position: relative;
+  z-index: 2;
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  height: auto;
+}
+
+.mainImg:hover {
+  transform: scale(1.05);
+}
+
+.shape1 {
+  border-radius: 28% 72% 50% 50% / 26% 20% 80% 74%;
+  position: absolute;
+  width: 200px;
+  height: 200px;
+  top: -30px;
+  right: -30px;
+  opacity: 0.1;
+  z-index: 1;
+  background-color: #7c58d3;
+}
+
+.shape2 {
+  border-radius: 72% 28% 50% 50% / 26% 80% 20% 74%;
+  position: absolute;
+  width: 150px;
+  height: 150px;
+  bottom: -20px;
+  left: -20px;
+  opacity: 0.1;
+  z-index: 1;
+  background-color: #4a2d71;
+}
+
+@media (max-width: 991px) {
+  .introMedia {
+    max-width: 500px;
+    margin: 0 auto;
+  }
+}
