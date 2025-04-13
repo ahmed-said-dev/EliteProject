@@ -1,28 +1,28 @@
 import React from 'react';
-import styles from './ServicesSection.module.css';
 import Link from 'next/link';
+import styles from './ServicesSection.module.css';
 
-interface ServiceIconProps {
+interface IconProps {
   icon: string;
 }
 
-interface ServiceFeature {
+interface FeatureProps {
   text: string;
 }
 
 interface ServiceProps {
   id: number;
   title: string;
-  description?: string;
   image: string;
-  icons: ServiceIconProps[];
-  features: ServiceFeature[];
-  badge: string;
-  isActive?: boolean;
+  icons: IconProps[];
+  features: FeatureProps[];
+  badge?: string;
   delay?: string;
+  isActive?: boolean;
+  description?: string;
 }
 
-const services: ServiceProps[] = [
+export const services: ServiceProps[] = [
   {
     id: 1,
     title: 'Our Medical Services',
