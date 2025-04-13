@@ -4,7 +4,7 @@
   padding: 0px;
   position: relative;
   background-image: url("/images/background/bg5.png");
-  padding-bottom: 60px;
+
   background-color: rgba(245, 240, 255, 1);
 }
 
@@ -42,8 +42,7 @@
   padding-right: calc(20px * .5);
   padding-left: calc(20px * .5);
   margin-top: 0;
-  padding-top: 100px;
-  padding-bottom: 70px;
+  padding-top: 50px;
   overflow: hidden;
 }
 

@@ -30,6 +30,8 @@ declare const styles: {
   readonly "shape2": string;
   readonly "shape3": string;
   readonly "fadeInUp": string;
+  readonly "textCenter": string;
+  readonly "btnPrimaryLg": string;
 };
 
 export default styles;

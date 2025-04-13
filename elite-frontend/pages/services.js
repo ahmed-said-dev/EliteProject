@@ -11,8 +11,8 @@ export default function Services() {
         title="Our Services"
         backgroundImage="/images/banner/bnr1.webp"
       />
-      <ServicesSection />
       <ServiceJoinTeam />
+      <ServicesSection />
     </main>
   );
 }
