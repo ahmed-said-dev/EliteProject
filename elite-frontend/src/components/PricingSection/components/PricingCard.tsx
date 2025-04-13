@@ -15,6 +15,7 @@ interface PricingCardProps {
   buttonLink: string;
   isPopular?: boolean;
   svgIconPath?: string;
+  onButtonClick?: () => void;
 }
 
 const PricingCard: React.FC<PricingCardProps> = ({
@@ -27,7 +28,15 @@ const PricingCard: React.FC<PricingCardProps> = ({
   buttonLink,
   isPopular = false,
   svgIconPath,
+  onButtonClick,
 }) => {
+  const handleClick = (e: React.MouseEvent) => {
+    if (onButtonClick) {
+      e.preventDefault();
+      onButtonClick();
+    }
+  };
+
   return (
     <div className={styles.pricingCard}>
       {svgIconPath && (
@@ -59,7 +68,11 @@ const PricingCard: React.FC<PricingCardProps> = ({
         </ul>
       </div>
       <div className={styles.pricingFooter}>
-        <a className={styles.pricingBtn} href={buttonLink}>
+        <a 
+          className={styles.pricingBtn} 
+          href={buttonLink}
+          onClick={handleClick}
+        >
           {buttonText}
         </a>
       </div>

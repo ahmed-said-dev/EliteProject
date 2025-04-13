@@ -1,0 +1,76 @@
+.imageColumn {
+  box-sizing: border-box;
+  outline: none;
+  padding: 0px;
+  scrollbar-color: rgba(223, 223, 223, 0.9) rgba(255, 255, 255, 0);
+  scrollbar-width: thin;
+  max-width: 100%;
+  padding-right: calc(20px * 0.5);
+  padding-left: calc(20px * 0.5);
+  margin-top: 0;
+  flex: 0 0 auto;
+  flex-shrink: 0;
+  width: 33.3333%;
+  text-align: center;
+  margin-bottom: 0px;
+}
+
+.membershipImage {
+  box-sizing: border-box;
+  outline: none;
+  scrollbar-color: rgba(223, 223, 223, 0.9) rgba(255, 255, 255, 0);
+  scrollbar-width: thin;
+  border-style: none;
+  max-width: 100%;
+  vertical-align: middle;
+  border: 3px solid rgb(122, 73, 163);
+  padding: 5px;
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
+  margin-bottom: 1rem;
+  border-radius: 50%;
+}
+
+.priceTag {
+  box-sizing: border-box;
+  outline: none;
+  scrollbar-color: rgba(223, 223, 223, 0.9) rgba(255, 255, 255, 0);
+  scrollbar-width: thin;
+  padding: 15px 25px;
+  border-radius: 15px;
+  border: 2px solid rgb(122, 73, 163);
+  color: rgb(122, 73, 163);
+  display: inline-block;
+}
+
+.priceAmount {
+  box-sizing: border-box;
+  outline: none;
+  padding: 0px;
+  scrollbar-color: rgba(223, 223, 223, 0.9) rgba(255, 255, 255, 0);
+  scrollbar-width: thin;
+  margin-top: 0px;
+  font-family: Poppins, sans-serif;
+  line-height: 1.4;
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: rgb(122, 73, 163);
+  margin-bottom: 0px;
+}
+
+.priceDuration {
+  box-sizing: border-box;
+  outline: none;
+  padding: 0px;
+  scrollbar-color: rgba(223, 223, 223, 0.9) rgba(255, 255, 255, 0);
+  scrollbar-width: thin;
+  color: rgba(86, 101, 147, 0.75);
+}
+
+@media (max-width: 768px) {
+  .imageColumn {
+    width: 100%;
+    margin-bottom: 1.5rem;
+  }
+}
