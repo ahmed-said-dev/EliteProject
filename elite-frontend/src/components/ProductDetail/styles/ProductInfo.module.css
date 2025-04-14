@@ -1,0 +1,418 @@
+.productInfo {
+  padding: 10px 0;
+}
+
+.productBadges {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.badge {
+  display: inline-block;
+  padding: 5px 10px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.badgeNew {
+  background-color: #4a2d71;
+  color: white;
+}
+
+.badgeBestseller {
+  background-color: #ff9800;
+  color: white;
+}
+
+.badgeSale {
+  background-color: #f44336;
+  color: white;
+}
+
+.productName {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #333;
+  margin: 0 0 15px 0;
+  line-height: 1.2;
+}
+
+.productRating {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.stars {
+  display: flex;
+  margin-right: 10px;
+}
+
+.starIcon {
+  color: #FFD700;
+  font-size: 14px;
+  margin-right: 2px;
+}
+
+.emptyStarIcon {
+  color: #ddd;
+  font-size: 14px;
+  margin-right: 2px;
+}
+
+.reviewsLink {
+  background: none;
+  border: none;
+  color: #4a2d71;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  text-decoration: underline;
+  padding: 0;
+}
+
+.productBrand {
+  margin-bottom: 20px;
+}
+
+.brandLabel {
+  font-weight: 500;
+  color: #555;
+  margin-right: 10px;
+}
+
+.brandName {
+  font-weight: 600;
+  color: #333;
+}
+
+.productPrice {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+
+.price {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #333;
+}
+
+.salePrice {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #f44336;
+  margin-right: 15px;
+}
+
+.regularPrice {
+  font-size: 1.2rem;
+  color: #999;
+  text-decoration: line-through;
+  margin-right: 15px;
+}
+
+.saveAmount {
+  font-size: 0.9rem;
+  color: #4CAF50;
+  font-weight: 500;
+}
+
+.productAvailability {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.availabilityLabel {
+  font-weight: 500;
+  color: #555;
+  margin-right: 10px;
+}
+
+.inStock {
+  color: #4CAF50;
+  display: flex;
+  align-items: center;
+  font-weight: 500;
+}
+
+.inStockIcon {
+  margin-right: 5px;
+}
+
+.outOfStock {
+  color: #f44336;
+  font-weight: 500;
+}
+
+.shortDescription {
+  color: #666;
+  line-height: 1.6;
+  margin-bottom: 20px;
+}
+
+.divider {
+  height: 1px;
+  background-color: #eee;
+  margin: 25px 0;
+}
+
+.productActions {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin-bottom: 25px;
+}
+
+.quantitySelector {
+  display: flex;
+  align-items: center;
+}
+
+.quantityLabel {
+  font-weight: 500;
+  color: #555;
+  margin-right: 15px;
+  width: 80px;
+}
+
+.quantityControls {
+  display: flex;
+  align-items: center;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.quantityBtn {
+  width: 40px;
+  height: 40px;
+  background-color: #f9f9f9;
+  border: none;
+  color: #555;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.quantityBtn:hover:not(:disabled) {
+  background-color: #eee;
+}
+
+.quantityBtn:disabled {
+  color: #bbb;
+  cursor: not-allowed;
+}
+
+.quantityInput {
+  width: 50px;
+  height: 40px;
+  border: none;
+  border-left: 1px solid #ddd;
+  border-right: 1px solid #ddd;
+  text-align: center;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.quantityInput:focus {
+  outline: none;
+}
+
+.actionButtons {
+  display: flex;
+  gap: 15px;
+}
+
+.addToCartBtn {
+  flex: 1;
+  height: 50px;
+  background-color: #4a2d71;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.addToCartBtn:hover:not(:disabled) {
+  background-color: #3a2255;
+}
+
+.addToCartBtn:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.addToCartBtn.added {
+  background-color: #4CAF50;
+}
+
+.favoriteBtn {
+  width: 50px;
+  height: 50px;
+  background-color: #f5f5f5;
+  color: #777;
+  border: none;
+  border-radius: 4px;
+  font-size: 18px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.favoriteBtn:hover {
+  background-color: #ebebeb;
+}
+
+.favoriteBtn.active {
+  background-color: #FFE0E0;
+  color: #F44336;
+}
+
+.buyNowBtn {
+  height: 50px;
+  background-color: #ff9800;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.buyNowBtn:hover:not(:disabled) {
+  background-color: #f57c00;
+}
+
+.buyNowBtn:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.shareProduct {
+  display: flex;
+  align-items: center;
+  margin-top: 5px;
+}
+
+.shareLabel {
+  font-weight: 500;
+  color: #555;
+  margin-right: 15px;
+}
+
+.socialButtons {
+  display: flex;
+  gap: 10px;
+}
+
+.socialBtn {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  border: none;
+  color: white;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.socialBtn:hover {
+  opacity: 0.9;
+}
+
+.facebook {
+  background-color: #3b5998;
+}
+
+.twitter {
+  background-color: #1da1f2;
+}
+
+.pinterest {
+  background-color: #bd081c;
+}
+
+.whatsapp {
+  background-color: #25d366;
+}
+
+.link {
+  background-color: #333;
+}
+
+.productCategories {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.categoryItem {
+  font-size: 14px;
+}
+
+.categoryLabel {
+  font-weight: 500;
+  color: #555;
+  margin-right: 5px;
+}
+
+.categoryValue {
+  color: #4a2d71;
+  font-weight: 500;
+}
+
+@media (max-width: 576px) {
+  .productName {
+    font-size: 1.6rem;
+  }
+  
+  .productPrice {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .saveAmount {
+    margin-top: 5px;
+  }
+  
+  .quantitySelector {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+  
+  .quantityLabel {
+    margin-right: 0;
+  }
+  
+  .actionButtons {
+    flex-direction: column;
+  }
+  
+  .favoriteBtn {
+    width: 100%;
+  }
+}
