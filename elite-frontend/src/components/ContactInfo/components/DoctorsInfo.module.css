@@ -1,0 +1,125 @@
+.clearfix {
+  margin-bottom: 60px;
+}
+
+.doctorsWrapper {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+  visibility: visible;
+  animation-duration: 0.5s;
+  animation-delay: 0.6s;
+  animation-name: fadeInUp;
+}
+
+.infoWidget {
+  margin-right: 10px;
+  border-radius: 60px;
+  padding: 10px 50px 10px 15px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 70px;
+  background-color: rgba(245, 240, 255, 1);
+}
+
+.avatarGroup {
+  display: flex;
+  border-right: 1px solid rgba(74, 45, 113, 0.1);
+  padding-right: 25px;
+  margin-right: 25px;
+}
+
+.avatar {
+  width: 48px;
+  aspect-ratio: 1 / 1;
+  border: 2px solid rgba(255, 255, 255, 1);
+  border-radius: 50%;
+}
+
+.avatar:not(:first-child) {
+  margin-left: -12px;
+}
+
+.infoContent {
+  overflow: hidden;
+}
+
+.infoText {
+  font-size: 16px;
+  line-height: 1.3;
+  display: block;
+  color: #4a2d71;
+}
+
+.btnLink {
+  border: 1px solid #f5f0ff;
+  font-weight: 400;
+  line-height: 1.25;
+  color: #000000;
+  text-align: center;
+  vertical-align: middle;
+  cursor: pointer;
+  user-select: none;
+  background-color: #f5f0ff;
+  overflow: hidden;
+  padding: 0;
+  transition: 0.5s;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  border-radius: 50px;
+  height: 70px;
+  width: 70px;
+  min-width: 70px;
+  text-decoration: none;
+}
+
+.widgetRating {
+  display: flex;
+  align-items: center;
+  color: #4a2d71;
+  font-size: 14px;
+  font-weight: 500;
+  visibility: visible;
+  animation-duration: 0.5s;
+  animation-delay: 0.8s;
+  animation-name: fadeInUp;
+  gap: 6px;
+}
+
+.starList {
+  padding: 0;
+  margin: 0;
+  display: flex;
+  gap: 3px;
+}
+
+.starItem {
+  list-style: none;
+  color: rgb(255, 205, 55);
+  line-height: 1.2;
+  font-size: 15px;
+}
+
+.rating {
+  font-weight: bold;
+}
+
+.text {
+  font-size: 14px;
+  font-weight: 500;
+  margin-bottom: 0;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 40px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}

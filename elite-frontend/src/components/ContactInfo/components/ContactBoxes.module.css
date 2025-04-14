@@ -1,0 +1,178 @@
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: calc(-1 * 0);
+  margin-right: calc(-0.5 * 20px);
+  margin-left: calc(-0.5 * 20px);
+}
+
+.boxColumn {
+  max-width: 100%;
+  padding-right: calc(20px * 0.5);
+  padding-left: calc(20px * 0.5);
+  margin-top: 0;
+  flex: 0 0 auto;
+  flex-shrink: 0;
+  width: 50%;
+  margin-bottom: 20px;
+  animation-duration: 0.5s;
+  animation-delay: 0.2s;
+  animation-name: fadeInUp;
+}
+
+.boxColumn:nth-child(2) {
+  animation-delay: 0.4s;
+}
+
+.boxColumn:nth-child(3) {
+  animation-delay: 0.6s;
+}
+
+.boxColumn:nth-child(4) {
+  animation-delay: 0.8s;
+}
+
+.boxColumn:nth-child(5) {
+  animation-delay: 1s;
+}
+
+.iconBox {
+  position: relative;
+  padding: 20px 25px;
+  border-radius: 15px;
+  gap: 15px;
+  background-color: #f5f0ff;
+  display: flex;
+  align-items: center;
+  height: 100%;
+  min-height: 120px;
+  transition: all 0.3s ease;
+}
+
+.iconBox:hover {
+  background-color: #4a2d71;
+}
+
+.iconContainer {
+  transition: 0.5s;
+  position: relative;
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  min-width: 60px;
+  background-color: rgb(255, 255, 255);
+  font-size: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #7c58d3;
+}
+
+.iconBox:hover .iconContainer {
+  background-color: #7c58d3;
+  color: white;
+}
+
+.iconCell {
+  display: inline-block;
+}
+
+.iconContent {
+  overflow: hidden;
+}
+
+.title {
+  font-family: Poppins, sans-serif;
+  font-weight: 600;
+  line-height: 1.4;
+  position: relative;
+  margin-top: 0px;
+  font-size: 18px;
+  color: #4a2d71;
+  margin-bottom: 5px;
+  transition: color 0.3s ease;
+}
+
+.iconBox:hover .title {
+  color: white;
+}
+
+.titleMt {
+  font-family: Poppins, sans-serif;
+  font-weight: 600;
+  line-height: 1.4;
+  position: relative;
+  font-size: 18px;
+  color: #4a2d71;
+  margin-bottom: 5px;
+  margin-top: 1rem;
+  transition: color 0.3s ease;
+}
+
+.iconBox:hover .titleMt {
+  color: white;
+}
+
+.text {
+  margin: 0px;
+  margin-top: 0px;
+  margin-bottom: 0px;
+  font-size: 15px;
+  transition: color 0.3s ease;
+}
+
+.iconBox:hover .text {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.link {
+  text-decoration: none;
+  outline: none;
+  transition: 0.5s;
+  color: rgba(86, 101, 147, 1);
+}
+
+.iconBox:hover .link {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.socialMedia {
+  display: flex;
+  gap: 15px;
+  margin-top: 15px;
+}
+
+.socialIcon {
+  text-decoration: none;
+  outline: none;
+  border-radius: 50%;
+  transition: 0.3s;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  background-color: rgb(123, 91, 158);
+  color: rgb(255, 255, 255);
+}
+
+.socialIcon i {
+  font-size: 18px;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 40px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@media (max-width: 768px) {
+  .boxColumn {
+    width: 100%;
+  }
+}
