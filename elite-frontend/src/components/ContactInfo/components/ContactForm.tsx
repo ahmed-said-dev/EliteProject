@@ -33,7 +33,7 @@ const ContactForm: React.FC = () => {
                   className={styles.formControl}
                   name="dzName"
                   type="text"
-                  placeholder="Name"
+                  // placeholder="Name"
                 />
                 <label htmlFor="inputName">Name</label>
               </div>
@@ -58,7 +58,7 @@ const ContactForm: React.FC = () => {
                   className={styles.formControl}
                   name="dzEmail"
                   type="email"
-                  placeholder="Email"
+                  // placeholder="Email"
                 />
                 <label htmlFor="inputEmail">Email</label>
               </div>
@@ -71,7 +71,7 @@ const ContactForm: React.FC = () => {
                   className={styles.formControl}
                   name="dzMessage"
                   rows={6}
-                  placeholder="Message"
+                  // placeholder="Message"
                 />
                 <label htmlFor="inputMessage">Message</label>
               </div>

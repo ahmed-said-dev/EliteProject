@@ -2,6 +2,7 @@ import { Section } from '@/components/ui/Section';
 import { SITE_CONFIG } from '@/utils/constants';
 import PageBanner from '@/components/PageBanner/PageBanner';
 import ContactInfo from '@/components/ContactInfo';
+import MapSection from '@/components/MapSection';
 
 export default function Contact() {
   return (
@@ -15,6 +16,11 @@ export default function Contact() {
           <ContactInfo />
         </div>
       </Section>
+      
+      {/* قسم الخريطة بعرض كامل */}
+      <div className="w-full">
+        <MapSection />
+      </div>
     </main>
   );
 }

@@ -1,0 +1,127 @@
+.mapSection {
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  position: relative;
+}
+
+.mapContainer {
+  position: relative;
+  width: 100%;
+  height: 500px;
+}
+
+.googleMap {
+  width: 100%;
+  height: 100%;
+  border: none;
+  margin: 0;
+  padding: 0;
+}
+
+.mapOverlay {
+  position: absolute;
+  top: 50%;
+  right: 40px;
+  transform: translateY(-50%);
+  z-index: 10;
+  background-color: #fff;
+  border-radius: 15px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  padding: 25px;
+  max-width: 400px;
+  animation: fadeInRight 0.5s ease;
+}
+
+.locationInfo {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.logoContainer {
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.logo {
+  height: 60px;
+  object-fit: contain;
+}
+
+.addressInfo {
+  width: 100%;
+}
+
+.addressInfo h3 {
+  color: #4a2d71;
+  font-family: 'Poppins', sans-serif;
+  font-size: 22px;
+  margin-bottom: 10px;
+  font-weight: 600;
+}
+
+.addressInfo p {
+  color: #666;
+  font-size: 16px;
+  line-height: 1.5;
+  margin-bottom: 15px;
+}
+
+.directionsLink {
+  display: inline-block;
+  background-color: #4a2d71;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 30px;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 14px;
+  transition: all 0.3s ease;
+  border: 2px solid #4a2d71;
+}
+
+.directionsLink:hover {
+  background-color: white;
+  color: #4a2d71;
+}
+
+@keyframes fadeInRight {
+  from {
+    opacity: 0;
+    transform: translate(30px, -50%);
+  }
+  to {
+    opacity: 1;
+    transform: translate(0, -50%);
+  }
+}
+
+@media (max-width: 768px) {
+  .mapOverlay {
+    right: auto;
+    left: 50%;
+    top: 20px;
+    transform: translateX(-50%);
+    width: 90%;
+    max-width: 90%;
+    animation: fadeInTop 0.5s ease;
+  }
+  
+  .mapContainer {
+    height: 550px;
+  }
+}
+
+@keyframes fadeInTop {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -20px);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+}
