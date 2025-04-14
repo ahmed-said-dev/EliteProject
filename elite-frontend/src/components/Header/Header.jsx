@@ -8,6 +8,7 @@ const Header = () => {
   const pathname = usePathname();
 
   const isActive = (path) => {
+    if (!pathname) return false; // Protección contra pathname null durante SSR
     if (path === '/' && pathname === '/') return true;
     if (path !== '/' && pathname.startsWith(path)) return true;
     return false;

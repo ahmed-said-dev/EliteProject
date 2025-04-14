@@ -8,6 +8,24 @@ import { blogPosts } from '@/components/BlogSection/BlogSection';
 export default function BlogDetailPage() {
   const router = useRouter();
   const { id } = router.query;
+
+  // Si el id aún no está disponible (durante SSR inicial o carga de la página)
+  // renderizamos un estado de carga
+  if (!id) {
+    return (
+      <main>
+        <PageBanner
+          title="Loading..."
+          backgroundImage="/images/banner/bnr1.webp"
+        />
+        <Section className="py-16">
+          <div className="container mx-auto text-center">
+            <h2 className="text-3xl font-semibold mb-4">Loading article...</h2>
+          </div>
+        </Section>
+      </main>
+    );
+  }
   
   const postId = parseInt(id);
   const post = blogPosts.find(post => post.id === postId);
@@ -18,7 +36,8 @@ export default function BlogDetailPage() {
     .sort(() => 0.5 - Math.random()) // Random sort
     .slice(0, 3);
   
-  if (!post && typeof window !== 'undefined') {
+  // Si el post no existe, mostramos página de error
+  if (!post) {
     return (
       <main>
         <PageBanner 
@@ -41,18 +60,15 @@ export default function BlogDetailPage() {
     );
   }
   
+  // Si el post existe, mostramos su contenido
   return (
     <main>
-      {post && (
-        <>
-          <PageBanner 
-            title={post.title}
-            backgroundImage="/images/banner/bnr1.webp"
-          />
-          <BlogDetail post={post} />
-          <RelatedPosts posts={relatedPosts} />
-        </>
-      )}
+      <PageBanner 
+        title={post.title}
+        backgroundImage="/images/banner/bnr1.webp"
+      />
+      <BlogDetail post={post} />
+      <RelatedPosts posts={relatedPosts} />
     </main>
   );
 }
