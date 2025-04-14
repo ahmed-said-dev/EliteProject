@@ -7,7 +7,7 @@ export default function Products() {
     <main>
       <PageBanner 
         title="Pet Care Products"
-        backgroundImage="/images/banner/bnr1.webp"
+        backgroundImage="https://images.pexels.com/photos/4587971/pexels-photo-4587971.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
       />
       <Section className="py-16">
         <div className="container mx-auto">

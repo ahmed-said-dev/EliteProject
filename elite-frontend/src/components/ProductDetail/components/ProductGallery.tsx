@@ -53,9 +53,9 @@ const ProductGallery: React.FC<ProductGalleryProps> = ({ images, productName }) 
     setActiveImage((prev) => (prev - 1 + images.length) % images.length);
   };
   
-  // Placeholder para imágenes que no cargan
+  // Placeholder para imágenes que no cargan - usando una imagen en línea en lugar de un archivo local
   const handleImageError = (e: React.SyntheticEvent<HTMLImageElement>) => {
-    e.currentTarget.src = '/images/products/placeholder.jpg';
+    e.currentTarget.src = 'https://images.pexels.com/photos/7516989/pexels-photo-7516989.jpeg?auto=compress&cs=tinysrgb&w=600';
   };
   
   return (
