@@ -1,10 +1,8 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
-import ProductGallery from './components/ProductGallery';
-import ProductInfo from './components/ProductInfo';
-import ProductTabs from './components/ProductTabs';
-import RelatedProducts from './components/RelatedProducts';
+import { useCart } from '@/context/CartContext';
+import { ProductGallery, ProductInfo, ProductTabs, RelatedProducts } from './components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { 
   faStar, 
@@ -44,6 +42,7 @@ export interface ProductDetailProps {
 }
 
 const ProductDetail: React.FC<ProductDetailProps> = ({ product }) => {
+  const { addToCart } = useCart();
   const [quantity, setQuantity] = useState(1);
   const [activeTab, setActiveTab] = useState('description');
   const [isFavorite, setIsFavorite] = useState(false);
@@ -98,12 +97,14 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ product }) => {
   
   // Manejar click en botón de agregar al carrito
   const handleAddToCart = () => {
-    setAddedToCart(true);
+    // Agregar producto al carrito usando el contexto
+    addToCart(product, quantity);
+    
     // Mostrar mensaje de éxito temporalmente
+    setAddedToCart(true);
     setTimeout(() => {
       setAddedToCart(false);
     }, 3000);
-    // Aquí iría la lógica para agregar al carrito
   };
   
   // Manejar compra directa

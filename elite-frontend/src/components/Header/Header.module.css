@@ -130,6 +130,48 @@
   align-items: center;
 }
 
+.cartButton {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: white;
+  color: #6B4E98;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  transition: all 0.25s ease;
+  margin-right: 5px;
+}
+
+.cartIcon {
+  position: relative;
+  font-size: 16px;
+}
+
+.cartCount {
+  position: absolute;
+  top: -8px;
+  right: -10px;
+  background-color: #f44336;
+  color: white;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  font-size: 11px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+}
+
+.cartButton:hover {
+  background-color: rgba(255, 255, 255, 0.97);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.12);
+  color: #6B4E98;
+}
+
 .btnPrimary {
   background-color: white;
   color: #6B4E98;

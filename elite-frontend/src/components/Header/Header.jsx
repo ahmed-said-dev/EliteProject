@@ -3,9 +3,11 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import styles from './Header.module.css';
+import { useCart } from '@/context/CartContext';
 
 const Header = () => {
   const pathname = usePathname();
+  const { cartCount } = useCart();
 
   const isActive = (path) => {
     if (!pathname) return false; // Protección contra pathname null durante SSR
@@ -62,6 +64,12 @@ const Header = () => {
             </ul>
           </nav>
           <div className={styles.actionButtons}>
+            <Link href="/cart" className={styles.cartButton}>
+              <div className={styles.cartIcon}>
+                <i className="fa-solid fa-shopping-cart"></i>
+                {cartCount > 0 && <span className={styles.cartCount}>{cartCount}</span>}
+              </div>
+            </Link>
             <Link href="/login" className={styles.btnPrimary}>
               <i className="fa-solid fa-user"></i>
               <span>Login</span>

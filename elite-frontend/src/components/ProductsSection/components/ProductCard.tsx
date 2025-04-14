@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
+import { useCart } from '@/context/CartContext';
 // @ts-ignore
 import styles from '../styles/ProductCard.module.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -35,9 +36,11 @@ interface ProductCardProps {
 }
 
 const ProductCard: React.FC<ProductCardProps> = ({ product, viewType }) => {
+  const { addToCart } = useCart();
   const [isHovered, setIsHovered] = useState(false);
   const [isFavorite, setIsFavorite] = useState(false);
   const [showQuickView, setShowQuickView] = useState(false);
+  const [addedToCart, setAddedToCart] = useState(false);
   
   // Calcular descuento si hay precio de oferta
   const discountPercentage = product.salePrice 
@@ -97,8 +100,15 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, viewType }) => {
   // Manejar click en botón de agregar al carrito
   const handleAddToCart = (e: React.MouseEvent) => {
     e.preventDefault();
-    // Aquí iría la lógica para agregar al carrito
-    alert(`${product.name} added to cart!`);
+    
+    // Agregar producto al carrito usando el contexto
+    addToCart(product, 1);
+    
+    // Mostrar feedback visual
+    setAddedToCart(true);
+    setTimeout(() => {
+      setAddedToCart(false);
+    }, 2000);
   };
 
   // Manejar vista rápida
@@ -213,12 +223,12 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, viewType }) => {
         
         <div className={styles.addToCartContainer}>
           <button 
-            className={`${styles.addToCartBtn} ${!product.inStock ? styles.disabled : ''}`}
+            className={`${styles.addToCartBtn} ${!product.inStock ? styles.disabled : ''} ${addedToCart ? styles.added : ''}`}
             onClick={handleAddToCart}
             disabled={!product.inStock}
           >
             <FontAwesomeIcon icon={faShoppingCart} />
-            <span>Add to Cart</span>
+            <span>{addedToCart ? 'Added!' : 'Add to Cart'}</span>
           </button>
         </div>
       </div>
@@ -285,12 +295,12 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, viewType }) => {
                 
                 <div className={styles.quickViewActions}>
                   <button 
-                    className={`${styles.quickViewAddToCart} ${!product.inStock ? styles.disabled : ''}`}
+                    className={`${styles.quickViewAddToCart} ${!product.inStock ? styles.disabled : ''} ${addedToCart ? styles.added : ''}`}
                     onClick={handleAddToCart}
                     disabled={!product.inStock}
                   >
                     <FontAwesomeIcon icon={faShoppingCart} />
-                    <span>Add to Cart</span>
+                    <span>{addedToCart ? 'Added!' : 'Add to Cart'}</span>
                   </button>
                   <button 
                     className={`${styles.quickViewFavorite} ${isFavorite ? styles.favoriteActive : ''}`}

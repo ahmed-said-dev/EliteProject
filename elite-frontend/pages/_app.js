@@ -12,6 +12,7 @@ import feather from 'feather-icons';
 import Head from 'next/head';
 import Layout from '@/components/Layout';
 import { useEffect } from 'react';
+import { CartProvider } from '@/context/CartContext';
 
 // Prevent Font Awesome from adding its CSS since we did it manually above
 config.autoAddCss = false;
@@ -30,11 +31,13 @@ function MyApp({ Component, pageProps }) {
         <meta name="description" content="عيادة إيليت البيطرية - شريكك الموثوق في رعاية حيوانك الأليف" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <div dir="ltr">
-        <Layout>
-          <Component {...pageProps} />
-        </Layout>
-      </div>
+      <CartProvider>
+        <div dir="ltr">
+          <Layout>
+            <Component {...pageProps} />
+          </Layout>
+        </div>
+      </CartProvider>
     </>
   );
 }
