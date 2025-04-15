@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
@@ -8,6 +8,8 @@ import { useCart } from '@/context/CartContext';
 const Header = () => {
   const pathname = usePathname();
   const { cartCount } = useCart();
+  const [showAccountMenu, setShowAccountMenu] = useState(false);
+  const accountMenuRef = useRef(null);
 
   const isActive = (path) => {
     if (!pathname) return false; // Protección contra pathname null durante SSR
@@ -15,6 +17,18 @@ const Header = () => {
     if (path !== '/' && pathname.startsWith(path)) return true;
     return false;
   };
+
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (accountMenuRef.current && !accountMenuRef.current.contains(event.target)) {
+        setShowAccountMenu(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
 
   return (
     <header className={styles.header_section}>
@@ -70,14 +84,30 @@ const Header = () => {
                 {cartCount > 0 && <span className={styles.cartCount}>{cartCount}</span>}
               </div>
             </Link>
-            <Link href="/login" className={styles.btnPrimary}>
-              <i className="fa-solid fa-user"></i>
-              <span>Login</span>
-            </Link>
-            <Link href="/register" className={styles.btnPrimary}>
-              <i className="fa-solid fa-user-plus"></i>
-              <span>Register</span>
-            </Link>
+            <div className={styles.accountContainer} ref={accountMenuRef}>
+              <button 
+                className={styles.btnPrimary} 
+                onClick={() => setShowAccountMenu(!showAccountMenu)}
+                aria-expanded={showAccountMenu}
+                aria-haspopup="true"
+              >
+                <i className="fa-solid fa-user"></i>
+                <span>Account</span>
+                <i className={`fa-solid fa-chevron-down ${showAccountMenu ? styles.rotateIcon : ''}`}></i>
+              </button>
+              {showAccountMenu && (
+                <div className={styles.accountDropdown}>
+                  <Link href="/login" className={styles.dropdownItem}>
+                    <i className="fa-solid fa-sign-in-alt"></i>
+                    <span>Login</span>
+                  </Link>
+                  <Link href="/register" className={styles.dropdownItem}>
+                    <i className="fa-solid fa-user-plus"></i>
+                    <span>Register</span>
+                  </Link>
+                </div>
+              )}
+            </div>
             <Link href="/appointment" className={styles.btnPrimary}>
               <i className="fa-solid fa-calendar-check"></i>
               <span>Book Appointment</span>

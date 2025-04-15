@@ -6,6 +6,9 @@ const nextConfig = {
     defaultLocale: 'ar',
     localeDetection: false,
   },
+  images: {
+    domains: ['images.pexels.com', 'www.svgrepo.com'],
+  },
   webpack: (config) => {
     config.resolve.alias = {
       ...config.resolve.alias,

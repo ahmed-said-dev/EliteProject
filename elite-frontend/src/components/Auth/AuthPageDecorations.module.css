@@ -1,0 +1,15 @@
+.floatingIcon {
+  position: absolute;
+  animation: float 6s ease-in-out infinite alternate;
+  opacity: 0.6;
+  z-index: 1;
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(0) rotate(0);
+  }
+  100% {
+    transform: translateY(20px) rotate(10deg);
+  }
+}
