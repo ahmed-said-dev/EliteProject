@@ -2,17 +2,21 @@ import React from "react";
 import styles from './EliteVetAboutSection.module.css';
 import { FaCircle, FaBriefcaseMedical } from 'react-icons/fa';
 import { BsCheckCircleFill } from 'react-icons/bs';
+import { useLanguage } from '@/context/LanguageContext';
 
 export default function EliteVetAboutSection() {
+  const { locale, isRTL, t } = useLanguage();
+  const dir = isRTL ? 'rtl' : 'ltr';
+
   return (
-    <section className={styles.contentInner} dir="rtl">
+    <section className={styles.contentInner} dir={dir}>
       <div className={styles.container}>
         <div className={styles.row}>
           <div className={styles.colRight}>
             <div className={styles.imageWrapper}>
               <img
                 src="/AboutUs/img8.webp"
-                alt="Elite Veterinary Care Facility"
+                alt={t('about.eliteVetSection.imageAlt')}
                 className={styles.image}
               />
             </div>
@@ -21,15 +25,15 @@ export default function EliteVetAboutSection() {
           <div className={styles.colLeft}>
             <div className={styles.sectionHead}>
               <h2 className={styles.title}>
-                Elite Veterinary Care
-                <br />
-                Setting New Standards in Pet Healthcare
+                {t('about.eliteVetSection.title').split('\n').map((line, i) => (
+                  <React.Fragment key={i}>
+                    {line}
+                    {i === 0 && <br />}
+                  </React.Fragment>
+                ))}
               </h2>
               <p className={styles.description}>
-                At Elite Vet, we understand that pets are family. Our state-of-the-art facility 
-                combines cutting-edge veterinary technology with compassionate care, ensuring 
-                your pets receive the highest quality medical attention in a warm and welcoming 
-                environment.
+                {t('about.eliteVetSection.description')}
               </p>
             </div>
             
@@ -38,12 +42,9 @@ export default function EliteVetAboutSection() {
                 <FaCircle className={styles.iconSvg} />
               </div>
               <div className={styles.iconContent}>
-                <h3 className={styles.iconTitle}>Our Vision</h3>
+                <h3 className={styles.iconTitle}>{t('about.eliteVetSection.vision.title')}</h3>
                 <p className={styles.iconText}>
-                  To be recognized as the leading veterinary care provider in Saudi Arabia 
-                  and the Gulf region, setting the gold standard in pet healthcare through 
-                  innovation, expertise, and compassionate service. We aspire to create a 
-                  future where every pet has access to world-class medical care.
+                  {t('about.eliteVetSection.vision.text')}
                 </p>
               </div>
             </div>
@@ -53,29 +54,17 @@ export default function EliteVetAboutSection() {
                 <FaBriefcaseMedical className={styles.iconSvg} />
               </div>
               <div className={styles.iconContent}>
-                <h3 className={styles.iconTitle}>Our Mission</h3>
+                <h3 className={styles.iconTitle}>{t('about.eliteVetSection.mission.title')}</h3>
                 <p className={styles.iconText}>
-                  To deliver exceptional veterinary care through our team of highly skilled 
-                  professionals, utilizing advanced medical technology and evidence-based 
-                  practices. We are committed to:
+                  {t('about.eliteVetSection.mission.text')}
                 </p>
                 <ul className={styles.list}>
-                  <li className={styles.listItem}>
-                    <BsCheckCircleFill className={styles.checkIcon} />
-                    <span>Providing comprehensive medical care for all types of pets</span>
-                  </li>
-                  <li className={styles.listItem}>
-                    <BsCheckCircleFill className={styles.checkIcon} />
-                    <span>Offering 24/7 emergency veterinary services</span>
-                  </li>
-                  <li className={styles.listItem}>
-                    <BsCheckCircleFill className={styles.checkIcon} />
-                    <span>Educating pet owners about preventive care</span>
-                  </li>
-                  <li className={styles.listItem}>
-                    <BsCheckCircleFill className={styles.checkIcon} />
-                    <span>Maintaining the highest standards of veterinary medicine</span>
-                  </li>
+                  {t('about.eliteVetSection.mission.commitments', { returnObjects: true }).map((commitment, index) => (
+                    <li key={index} className={styles.listItem}>
+                      <BsCheckCircleFill className={styles.checkIcon} />
+                      <span>{commitment}</span>
+                    </li>
+                  ))}
                 </ul>
               </div>
             </div>

@@ -114,5 +114,124 @@
       "hours": "09:00 AM - 10:00 PM",
       "emergency": "24/7 Emergency Services"
     }
+  },
+  "about": {
+    "csr": {
+      "imageAlt": "Corporate Social Responsibility",
+      "experience": {
+        "years": "20+",
+        "title": "Years\nExperienced"
+      },
+      "title": "Corporate Social Responsibility",
+      "description": "As a leading pet clinic specializing in veterinary medicine, we recognize our responsibility to the community. We actively contribute to the well-being of animals through various initiatives:",
+      "initiativesTitle": "Our Initiatives",
+      "initiatives": [
+        {
+          "icon": "bullhorn",
+          "text": "Awareness Campaigns: We use our social media platforms to educate pet owners about responsible pet care, health issues, and preventive measures."
+        },
+        {
+          "icon": "hand-holding-heart",
+          "text": "Pro Bono Services: We provide free veterinary care to animals in need, particularly those belonging to underprivileged families or abandoned animals. To date, we've successfully treated hundreds of cases."
+        },
+        {
+          "icon": "home",
+          "text": "Animal Adoption: We're committed to finding loving homes for abandoned animals. We provide necessary veterinary care and rehabilitation before placing them up for adoption."
+        }
+      ],
+      "conclusion": "By prioritizing these initiatives, we strive to make a positive impact on the lives of animals and their owners."
+    },
+    "benefits": {
+      "imageAlt": "Elite Vet Experience",
+      "experience": {
+        "years": "20+",
+        "title": "Years\nExperienced"
+      },
+      "title": "Why Choose Elite Vet?\nYour Pet's Well-being, Our Priority",
+      "items": [
+        {
+          "icon": "paw",
+          "title": "Personalized Care",
+          "description": "We develop tailored treatment plans that consider your pet's unique needs, health history, and lifestyle."
+        },
+        {
+          "icon": "microscope",
+          "title": "Latest Technology",
+          "description": "Our clinic is equipped with cutting-edge diagnostic and treatment equipment for accurate and efficient pet care."
+        },
+        {
+          "icon": "user-md",
+          "title": "Compassionate Staff",
+          "description": "Our dedicated team of veterinary professionals treats each pet with love, care, and respect."
+        },
+        {
+          "icon": "hospital-symbol",
+          "title": "Emergency Care",
+          "description": "Available 24/7 for your pet's urgent medical needs with quick response times and expert care."
+        }
+      ]
+    },
+    "eliteVetSection": {
+      "imageAlt": "Elite Veterinary Care Facility",
+      "title": "Elite Veterinary Care\nSetting New Standards in Pet Healthcare",
+      "description": "At Elite Vet, we understand that pets are family. Our state-of-the-art facility combines cutting-edge veterinary technology with compassionate care, ensuring your pets receive the highest quality medical attention in a warm and welcoming environment.",
+      "vision": {
+        "title": "Our Vision",
+        "text": "To be recognized as the leading veterinary care provider in Saudi Arabia and the Gulf region, setting the gold standard in pet healthcare through innovation, expertise, and compassionate service. We aspire to create a future where every pet has access to world-class medical care."
+      },
+      "mission": {
+        "title": "Our Mission",
+        "text": "To deliver exceptional veterinary care through our team of highly skilled professionals, utilizing advanced medical technology and evidence-based practices. We are committed to:",
+        "commitments": [
+          "Providing comprehensive medical care for all types of pets",
+          "Offering 24/7 emergency veterinary services",
+          "Educating pet owners about preventive care",
+          "Maintaining the highest standards of veterinary medicine"
+        ]
+      }
+    },
+    "pageBanner": {
+      "title": "About Us"
+    },
+    "portfolio": {
+      "title": "Our Portfolio",
+      "description": "Explore our state-of-the-art facilities and professional veterinary services"
+    },
+    "intro": {
+      "title": "Who We Are",
+      "description": "At Elite Clinic, we're passionate about providing state-of-the-art veterinary care for your beloved pets. Since the establishment of our pet clinic in 2013, we've been dedicated to delivering exceptional medical services and compassionate care, helping more than 200,000,000 pets through the years and earning the trust of pet owners across Saudi Arabia and the Gulf region.",
+      "services": {
+        "advancedPetCare": "Advanced Pet Care",
+        "emergencyServices": "Emergency Services",
+        "diagnosticImaging": "Diagnostic Imaging",
+        "expertVeterinarians": "Expert Veterinarians",
+        "pharmacyServices": "Pharmacy Services",
+        "surgeryCenter": "Surgery Center"
+      },
+      "actions": {
+        "bookAppointment": "Book an Appointment",
+        "emergencyHotline": "Emergency Hotline",
+        "phoneNumber": "+966 123 456 789"
+      }
+    },
+    "infoCollapse": {
+      "imageAlt": "Elite Veterinary Clinic",
+      "emergencyPets": "Emergency Pet Care",
+      "emergencyLabel": "24/7 Emergency Care",
+      "accessibilityLabels": {
+        "camera": "Camera",
+        "message": "Message",
+        "call": "Call",
+        "microphone": "Microphone",
+        "video": "Video"
+      },
+      "workingHours": {
+        "title": "Working Hours",
+        "weekdays": "Monday - Saturday",
+        "weekdayHours": "08:00 - 22:00",
+        "emergency": "Emergency Care",
+        "emergencyHours": "24/7"
+      }
+    }
   }
 }

@@ -1,37 +1,15 @@
 import React from "react";
-import styles from './EliteVetBenefits.module.css'; // Assuming the CSS file is named 'EliteVetBenefits.module.css'
-
-const benefits = [
-  {
-    icon: "paw",
-    title: "Personalized Care",
-    description: "We develop tailored treatment plans that consider your pet's unique needs, health history, and lifestyle.",
-    delay: "0.4s"
-  },
-  {
-    icon: "microscope",
-    title: "Latest Technology",
-    description: "Our clinic is equipped with cutting-edge diagnostic and treatment equipment for accurate and efficient pet care.",
-    delay: "0.6s"
-  },
-  {
-    icon: "user-md",
-    title: "Compassionate Staff",
-    description: "Our dedicated team of veterinary professionals treats each pet with love, care, and respect.",
-    delay: "0.8s"
-  },
-  {
-    icon: "hospital-symbol",
-    title: "Emergency Care",
-    description: "Available 24/7 for your pet's urgent medical needs with quick response times and expert care.",
-    delay: "1s"
-  }
-];
+import styles from './EliteVetBenefits.module.css';
+import { useLanguage } from '@/context/LanguageContext';
 
 export default function EliteVetBenefits() {
+  const { locale, isRTL, t } = useLanguage();
+  const dir = isRTL ? 'rtl' : 'ltr';
+  const benefits = t('about.benefits.items', { returnObjects: true });
+
   return (
     <>
-      <section className={styles.contentInner}> 
+      <section className={styles.contentInner} dir={dir}> 
         <div className={styles.overlay} />
         <div className={styles.container}>
           <div className={styles.contentWrapper}>
@@ -41,20 +19,23 @@ export default function EliteVetBenefits() {
                 <div className={styles.dzMedia}>
                   <img 
                     src="/images/About-us/img5.webp" 
-                    alt="Elite Vet Experience" 
+                    alt={t('about.benefits.imageAlt')} 
                     className={styles.image} 
                   />
                 </div>
                 <div className={styles.item1}>
                   <div className={styles.infoWidget}>
                     <span className={styles.contentText}>
-                      <span className="counter">20</span>
+                      <span className="counter">{t('about.benefits.experience.years').replace('+', '')}</span>
                       <span className={styles.counterSpan}>+</span>
                     </span>
                     <h3 className={styles.title}>
-                      Years
-                      <br />
-                      Experienced
+                      {t('about.benefits.experience.title').split('\n').map((line, i) => (
+                        <React.Fragment key={i}>
+                          {line}
+                          {i === 0 && <br />}
+                        </React.Fragment>
+                      ))}
                     </h3>
                   </div>
                 </div>
@@ -64,9 +45,12 @@ export default function EliteVetBenefits() {
             <div className={`${styles.column} ${styles.contentColumn} wow fadeInUp`}> 
               <div className={styles.sectionHead}>
                 <h2 className={styles.title}>
-                  Why Choose Elite Vet?
-                  <br />
-                  Your Pet's Well-being, Our Priority
+                  {t('about.benefits.title').split('\n').map((line, i) => (
+                    <React.Fragment key={i}>
+                      {line}
+                      {i === 0 && <br />}
+                    </React.Fragment>
+                  ))}
                 </h2>
               </div>
               <div className={styles.rowWrapper}> 
@@ -74,7 +58,7 @@ export default function EliteVetBenefits() {
                   <div key={index} className={styles.column}> 
                     <div 
                       className={styles.iconBxWrapper} 
-                      style={{ animationDelay: item.delay }}
+                      style={{ animationDelay: `${(index + 2) * 0.2}s` }}
                     > 
                       <div className={styles.iconBx}>
                         <span className="icon-cell">

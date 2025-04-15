@@ -1,10 +1,15 @@
 import React from "react";
 import styles from "./CorporateSocialResponsibility.module.css";
+import { useLanguage } from "@/context/LanguageContext";
 
 export default function CorporateSocialResponsibility() {
+  const { locale, isRTL, t } = useLanguage();
+  const dir = isRTL ? 'rtl' : 'ltr';
+  const initiatives = t('about.csr.initiatives', { returnObjects: true });
+
   return (
     <>
-      <section className={`${styles.sectionWrapper} ${styles.clearfix}`} dir="ltr">
+      <section className={`${styles.sectionWrapper} ${styles.clearfix}`} dir={dir}>
         <div className={styles.container}>
           <div className={`${styles.contentWrapper}`}>
             <div className={styles.mediaColumn}>
@@ -12,19 +17,22 @@ export default function CorporateSocialResponsibility() {
                 <div className={styles.dzMedia}>
                   <img
                     src="/AboutUs/img1.png"
-                    alt="Corporate Social Responsibility"
+                    alt={t('about.csr.imageAlt')}
                     className={styles.mediaImage}
                   />
                 </div>
                 <div className={styles.item1}>
                   <div className={styles.infoWidget}>
                     <span className={`${styles.contentText}`}>
-                      <span className={styles.counter}>20</span>+
+                      <span className={styles.counter}>{t('about.csr.experience.years').replace('+', '')}</span>+
                     </span>
                     <h3 className={styles.title}>
-                      Years
-                      <br />
-                      Experienced
+                      {t('about.csr.experience.title').split('\n').map((line, i) => (
+                        <React.Fragment key={i}>
+                          {line}
+                          {i === 0 && <br />}
+                        </React.Fragment>
+                      ))}
                     </h3>
                   </div>
                 </div>
@@ -33,28 +41,24 @@ export default function CorporateSocialResponsibility() {
             <div className={styles.textColumn}>
               <div className={styles.sectionHead}>
                 <h2 className={`${styles.mainTitle} ${styles.wow}`}>
-                  Corporate Social Responsibility
+                  {t('about.csr.title')}
                 </h2>
                 <p className={`${styles.description} ${styles.wow}`}>
-                  As a leading pet clinic specializing in veterinary medicine, we recognize our responsibility to the community. We actively contribute to the well-being of animals through various initiatives:
+                  {t('about.csr.description')}
                 </p>
               </div>
               <h3 className={`${styles.initiativesTitle} ${styles.wow}`}>
-                Our Initiatives
+                {t('about.csr.initiativesTitle')}
               </h3>
               <ul className={`${styles.listCheckCircle} ${styles.wow}`}>
-                <li className={styles.listItem}>
-                  <i className="fas fa-bullhorn" /> Awareness Campaigns: We use our social media platforms to educate pet owners about responsible pet care, health issues, and preventive measures.
-                </li>
-                <li className={styles.listItem}>
-                  <i className="fas fa-hand-holding-heart" /> Pro Bono Services: We provide free veterinary care to animals in need, particularly those belonging to underprivileged families or abandoned animals. To date, we've successfully treated hundreds of cases.
-                </li>
-                <li className={styles.listItem}>
-                  <i className="fas fa-home" /> Animal Adoption: We're committed to finding loving homes for abandoned animals. We provide necessary veterinary care and rehabilitation before placing them up for adoption.
-                </li>
+                {initiatives.map((initiative, index) => (
+                  <li key={index} className={styles.listItem}>
+                    <i className={`fas fa-${initiative.icon}`} /> {initiative.text}
+                  </li>
+                ))}
               </ul>
               <p className={`${styles.conclusion} ${styles.wow}`}>
-                By prioritizing these initiatives, we strive to make a positive impact on the lives of animals and their owners.
+                {t('about.csr.conclusion')}
               </p>
             </div>
           </div>

@@ -8,14 +8,18 @@ import {
   FaVideo,
   FaPaw
 } from 'react-icons/fa';
+import { useLanguage } from '@/context/LanguageContext';
 
 const AboutUsInfoCollapse = () => {
+  const { locale, isRTL, t } = useLanguage();
+  const dir = isRTL ? 'rtl' : 'ltr';
+  
   return (
-    <div className={styles.wrapper} dir="rtl">
+    <div className={styles.wrapper} dir={dir}>
       <div className={styles.imageWrapper}>
         <img 
           src="/images/img1.webp" 
-          alt="عيادة النخبة البيطرية" 
+          alt={t('about.infoCollapse.imageAlt')} 
           className={styles.clinicImage}
           loading="lazy"
         />
@@ -24,29 +28,29 @@ const AboutUsInfoCollapse = () => {
           <div className={styles.petImageContainer}>
             <img 
               src="/images/emergency-pets.webp" 
-              alt="رعاية طوارئ للحيوانات الأليفة" 
+              alt={t('about.infoCollapse.emergencyPets')} 
               className={styles.emergencyImage}
               loading="lazy"
             />
             <div className={styles.emergencyLabel}>
-              رعاية طوارئ 24/7
+              {t('about.infoCollapse.emergencyLabel')}
             </div>
           </div>
           <div className={styles.callActions}>
             <div className={styles.callIcons}>
-              <a href="/#" className={styles.iconLink} aria-label="كاميرا">
+              <a href="/#" className={styles.iconLink} aria-label={t('about.infoCollapse.accessibilityLabels.camera')}>
                 <FaCamera />
               </a>
-              <a href="/#" className={styles.iconLink} aria-label="رسالة">
+              <a href="/#" className={styles.iconLink} aria-label={t('about.infoCollapse.accessibilityLabels.message')}>
                 <FaComment />
               </a>
-              <a href="/#" className={`${styles.iconLink} ${styles.active}`} aria-label="اتصال">
+              <a href="/#" className={`${styles.iconLink} ${styles.active}`} aria-label={t('about.infoCollapse.accessibilityLabels.call')}>
                 <FaPhone />
               </a>
-              <a href="/#" className={styles.iconLink} aria-label="ميكروفون">
+              <a href="/#" className={styles.iconLink} aria-label={t('about.infoCollapse.accessibilityLabels.microphone')}>
                 <FaMicrophone />
               </a>
-              <a href="/#" className={styles.iconLink} aria-label="فيديو">
+              <a href="/#" className={styles.iconLink} aria-label={t('about.infoCollapse.accessibilityLabels.video')}>
                 <FaVideo />
               </a>
             </div>
@@ -58,15 +62,15 @@ const AboutUsInfoCollapse = () => {
             <FaPaw />
           </div>
           <div className={styles.hoursContent}>
-            <h3>ساعات العمل</h3>
+            <h3>{t('about.infoCollapse.workingHours.title')}</h3>
             <div className={styles.schedule}>
               <div className={styles.scheduleRow}>
-                <span>الإثنين - السبت</span>
-                <strong>08:00 - 22:00</strong>
+                <span>{t('about.infoCollapse.workingHours.weekdays')}</span>
+                <strong>{t('about.infoCollapse.workingHours.weekdayHours')}</strong>
               </div>
               <div className={styles.scheduleRow}>
-                <span>رعاية الطوارئ</span>
-                <strong>24/7</strong>
+                <span>{t('about.infoCollapse.workingHours.emergency')}</span>
+                <strong>{t('about.infoCollapse.workingHours.emergencyHours')}</strong>
               </div>
             </div>
           </div>

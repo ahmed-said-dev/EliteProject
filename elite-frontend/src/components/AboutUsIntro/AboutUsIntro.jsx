@@ -15,8 +15,12 @@ import {
   FaComment
 } from "react-icons/fa";
 import AboutUsInfoCollapse from "./AboutUsInfoCollapse/AboutUsInfoCollapse";
+import { useLanguage } from "@/context/LanguageContext";
 
 export default function AboutUsIntro() {
+  const { locale, isRTL, t } = useLanguage();
+  const dir = isRTL ? 'rtl' : 'ltr';
+  
   return (
     <>
       <section className={`content-inner ${styles.contentInner}`}
@@ -25,50 +29,45 @@ export default function AboutUsIntro() {
                   backgroundRepeat: 'no-repeat',
                   backgroundPosition: 'right bottom'
                 }}
-                dir="rtl"
+                dir={dir}
       >
         <div className={`container ${styles.container}`}>
           <div className={`row ${styles.contentWrapper}`}>
             <div className={`col-xl-6 ${styles.colXl6}`}>
               <div className={styles.contentSection}>
-                <h2 className={styles.title} style={{ textAlign: 'left' }}>Who We Are</h2>
-                <p className={styles.description} style={{ textAlign: 'left' }}>
-                  At Elite Clinic, we're passionate about providing state-of-the-art
-                  veterinary care for your beloved pets. Since the establishment of our pet
-                  clinic in 2013, we've been dedicated to delivering exceptional medical
-                  services and compassionate care, helping more than 200,000,000 pets
-                  through the years and earning the trust of pet owners across Saudi
-                  Arabia and the Gulf region.
+                <h2 className={styles.title} style={{ textAlign: isRTL ? 'right' : 'left' }}>{t('about.intro.title')}</h2>
+                <p className={styles.description} style={{ textAlign: isRTL ? 'right' : 'left' }}>
+                  {t('about.intro.description')}
                 </p>
                 <div className={styles.services}>
                   <div className={styles.serviceItem}>
                     <FaPaw className={styles.icon} />
-                    <span>Advanced Pet Care</span>
+                    <span>{t('about.intro.services.advancedPetCare')}</span>
                   </div>
                   <div className={styles.serviceItem}>
                     <FaStethoscope className={styles.icon} />
-                    <span>Emergency Services</span>
+                    <span>{t('about.intro.services.emergencyServices')}</span>
                   </div>
                   <div className={styles.serviceItem}>
                     <FaXRay className={styles.icon} />
-                    <span>Diagnostic Imaging</span>
+                    <span>{t('about.intro.services.diagnosticImaging')}</span>
                   </div>
                   <div className={styles.serviceItem}>
                     <FaUserMd className={styles.icon} />
-                    <span>Expert Veterinarians</span>
+                    <span>{t('about.intro.services.expertVeterinarians')}</span>
                   </div>
                   <div className={styles.serviceItem}>
                     <FaCapsules className={styles.icon} />
-                    <span>Pharmacy Services</span>
+                    <span>{t('about.intro.services.pharmacyServices')}</span>
                   </div>
                   <div className={styles.serviceItem}>
                     <FaClinicMedical className={styles.icon} />
-                    <span>Surgery Center</span>
+                    <span>{t('about.intro.services.surgeryCenter')}</span>
                   </div>
                 </div>
                 <div className={styles.actionArea}>
                   <a href="/appointment" className={styles.appointmentButton}>
-                    Book an Appointment
+                    {t('about.intro.actions.bookAppointment')}
                     <span className={styles.rightIcon}>
                       <FaArrowRight />
                     </span>
@@ -78,8 +77,8 @@ export default function AboutUsIntro() {
                       <FaPhoneAlt />
                     </div>
                     <div className={styles.hotlineContent}>
-                      <span>Emergency Hotline</span>
-                      <strong>+966 123 456 789</strong>
+                      <span>{t('about.intro.actions.emergencyHotline')}</span>
+                      <strong>{t('about.intro.actions.phoneNumber')}</strong>
                     </div>
                   </div>
                 </div>
