@@ -4,11 +4,16 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPaw } from "@fortawesome/free-solid-svg-icons";
 import { MapPin, Mail, PhoneCall } from "lucide-react";
 import Image from "next/image";
+import { translate } from "../../i18n";
+import { useLanguage } from "@/context/LanguageContext";
 
 const ContactUs = () => {
+  const { locale, isRTL } = useLanguage();
+  const dir = isRTL ? 'rtl' : 'ltr';
+  
   return (
     <>
-      <div className="w-full bg-[#9b87f5] relative overflow-hidden py-8 sm:py-10 md:py-16" dir="ltr">
+      <div className="w-full bg-[#9b87f5] relative overflow-hidden py-8 sm:py-10 md:py-16" dir={dir}>
         {/* White wavy line at the top */}
         <div className="absolute left-0 top-0 w-full" style={{ zIndex: 1 }}>
           <Image
@@ -53,7 +58,7 @@ const ContactUs = () => {
           
           {/* Content */}
           <div className="relative z-10">
-            <h2 className="text-yellow-400 text-4xl font-bold mb-2 text-center md:text-left">CONTACT US</h2>
+            <h2 className="text-yellow-400 text-4xl font-bold mb-2 text-center md:text-left">{translate('contactUs.title', locale)}</h2>
             
             {/* Wavy line decoration below heading */}
             <div className="w-48 h-5 mb-4 relative mx-auto md:mx-0">
@@ -79,24 +84,24 @@ const ContactUs = () => {
               {/* Contact Info and Map - added to left side */}
               <div className="md:w-1/3 relative z-10 md:order-1 mb-10 md:mb-0 md:mr-6">
                 <div className="bg-white bg-opacity-80 rounded-lg p-6 shadow-lg mb-6" style={{ zIndex: 25 }}>
-                  <h3 className="text-[#44396F] font-bold text-xl mb-4">Contact Information</h3>
+                  <h3 className="text-[#44396F] font-bold text-xl mb-4">{translate('contactUs.contactInfo.title', locale)}</h3>
                   
                   <div className="flex items-start mb-4">
-                    <MapPin className="h-5 w-5 mr-3 mt-1 text-[#9b87f5]" />
+                    <MapPin className={`h-5 w-5 ${dir === 'rtl' ? 'ml-3' : 'mr-3'} mt-1 text-[#9b87f5]`} />
                     <div>
-                      <p className="text-[#44396F] font-medium">Qurtubah gate, Al Thoumamah Rd,</p>
-                      <p className="text-[#44396F] font-medium">Qurtubah, Riyadh 13248</p>
+                      <p className="text-[#44396F] font-medium">{translate('contactUs.contactInfo.address1', locale)}</p>
+                      <p className="text-[#44396F] font-medium">{translate('contactUs.contactInfo.address2', locale)}</p>
                     </div>
                   </div>
                   
                   <div className="flex items-center mb-4">
-                    <Mail className="h-5 w-5 mr-3 text-[#9b87f5]" />
-                    <p className="text-[#44396F] font-medium">info@elitevetsa.com</p>
+                    <Mail className={`h-5 w-5 ${dir === 'rtl' ? 'ml-3' : 'mr-3'} text-[#9b87f5]`} />
+                    <p className="text-[#44396F] font-medium">{translate('contactUs.contactInfo.email', locale)}</p>
                   </div>
                   
                   <div className="flex items-center mb-2">
-                    <PhoneCall className="h-5 w-5 mr-3 text-[#9b87f5]" />
-                    <p className="text-[#44396F] font-medium">+966 12 345 6789</p>
+                    <PhoneCall className={`h-5 w-5 ${dir === 'rtl' ? 'ml-3' : 'mr-3'} text-[#9b87f5]`} />
+                    <p className="text-[#44396F] font-medium">{translate('contactUs.contactInfo.phone', locale)}</p>
                   </div>
                 </div>
                 
@@ -119,13 +124,13 @@ const ContactUs = () => {
               {/* Contact Form section moved to center */}
               <div className="md:w-2/3 max-w-[600px] mx-auto mb-10 md:mb-0 relative md:order-2" style={{ zIndex: 20 }}>
                 <div className="text-xl mb-10 text-center md:text-left relative" style={{ zIndex: 25 }}>
-                  <p className="text-[#44396F] font-bold bg-white bg-opacity-80 inline-block px-4 py-2 rounded-lg shadow-sm">Get in touch with our team and we&apos;ll get back to you as soon as possible.</p>
+                  <p className="text-[#44396F] font-bold bg-white bg-opacity-80 inline-block px-4 py-2 rounded-lg shadow-sm">{translate('contactUs.intro', locale)}</p>
                 </div>
                 
                 <div className="bg-white rounded-lg p-6 shadow-lg relative" style={{ position: 'relative', zIndex: 25 }}>
                   <div className="mb-4">
-                    <p className="text-[#44396F] font-bold text-lg mb-2">Have a question or concern?</p>
-                    <p className="text-[#44396F] text-sm mb-4">Contact us today! Our dedicated team is ready to assist you.</p>
+                    <p className="text-[#44396F] font-bold text-lg mb-2">{translate('contactUs.form.heading', locale)}</p>
+                    <p className="text-[#44396F] text-sm mb-4">{translate('contactUs.form.subHeading', locale)}</p>
                   </div>
                   <form>
                     <div className="mb-3">
@@ -133,7 +138,7 @@ const ContactUs = () => {
                         type="text" 
                         id="name" 
                         className="w-full px-4 py-2 bg-[#EFF1F5] rounded-md border-none focus:outline-none focus:ring-1 focus:ring-purple-300"
-                        placeholder="NAME"
+                        placeholder={translate('contactUs.form.namePlaceholder', locale)}
                       />
                     </div>
                     
@@ -142,7 +147,7 @@ const ContactUs = () => {
                         type="email" 
                         id="email" 
                         className="w-full px-4 py-2 bg-[#EFF1F5] rounded-md border-none focus:outline-none focus:ring-1 focus:ring-purple-300"
-                        placeholder="EMAIL"
+                        placeholder={translate('contactUs.form.emailPlaceholder', locale)}
                       />
                     </div>
                     
@@ -151,13 +156,13 @@ const ContactUs = () => {
                         id="message" 
                         rows={4}
                         className="w-full px-4 py-2 bg-[#EFF1F5] rounded-md border-none focus:outline-none focus:ring-1 focus:ring-purple-300"
-                        placeholder="MESSAGE"
+                        placeholder={translate('contactUs.form.messagePlaceholder', locale)}
                       ></textarea>
                     </div>
                     
                     <div className="flex justify-center">
                       <button type="submit" className="bg-yellow-400 hover:bg-yellow-500 text-[#44396F] font-medium py-2.5 px-6 rounded-md w-full transition-colors">
-                        Send
+                        {translate('contactUs.form.sendButton', locale)}
                       </button>
                     </div>
                   </form>

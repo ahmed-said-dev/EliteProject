@@ -3,10 +3,15 @@ import { Button } from "@/components/ui/button";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPaw, faCat, faDog, faFish, faOtter, faDove, faHorse, faSpider, faCrow } from "@fortawesome/free-solid-svg-icons";
 import { Plus } from "lucide-react";
+import { translate } from "../../i18n";
+import { useLanguage } from "@/context/LanguageContext";
 
 const Hero = () => {
+  const { locale, isRTL } = useLanguage();
+  const dir = isRTL ? 'rtl' : 'ltr';
+
   return (
-    <div className="relative w-full min-h-[600px] overflow-hidden" dir="rtl">
+    <div className="relative w-full min-h-[600px] overflow-hidden" dir={dir}>
       <div className="grid grid-cols-1 md:grid-cols-2">
         {/* Right side - Content section */}
         <div className="h-[600px] bg-[#6B4E98] relative overflow-hidden order-2 md:order-1">
@@ -25,19 +30,17 @@ const Hero = () => {
 
             {/* Content wrapper with higher z-index */}
             <div className="absolute inset-0 z-10">
-              <div className="max-w-lg absolute left-6 md:left-12 top-12" dir="ltr">
-                <h1 className="text-4xl font-bold text-yellow-300 mb-4 leading-tight text-left">
-                  EXPERT VETERINARY CARE,<br/>
-                  TAILORED TO YOUR PET'S NEEDS
+              <div className="max-w-lg absolute left-6 md:left-12 top-12" dir={dir === 'rtl' ? 'rtl' : 'ltr'}>
+                <h1 className={`text-4xl font-bold text-yellow-300 mb-4 leading-tight ${dir === 'rtl' ? 'text-right' : 'text-left'}`}>
+                  {translate('hero.title', locale)}
                 </h1>
                 
-                <p className="text-white text-lg mb-8 text-left">
-                  A Pioneering Veterinary Clinic, Providing Exceptional Care<br/>
-                  Every Step of the Way.
+                <p className={`text-white text-lg mb-8 ${dir === 'rtl' ? 'text-right' : 'text-left'}`}>
+                  {translate('hero.subtitle', locale)}
                 </p>
                 
                 <Button className="bg-yellow-400 hover:bg-yellow-500 text-[#6B4E98] font-bold text-lg rounded-full w-fit px-8 py-2 flex items-center gap-2">
-                  BOOK AN APPOINTMENT NOW
+                  {translate('hero.bookButton', locale)}
                   <Plus className="h-5 w-5" />
                 </Button>
               </div>
@@ -65,10 +68,10 @@ const Hero = () => {
               />
               <div className="text-center mt-4">
                 <div className="text-2xl text-purple-600 font-arabic">
-                  النخبة البيطرية
+                  {translate('hero.arabicName', locale)}
                 </div>
                 <div className="text-sm tracking-wider text-gray-500">
-                  ELITE VET
+                  {translate('hero.englishName', locale)}
                 </div>
               </div>
             </div>

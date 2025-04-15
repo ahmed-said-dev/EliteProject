@@ -13,6 +13,7 @@ import Head from 'next/head';
 import Layout from '@/components/Layout';
 import { useEffect } from 'react';
 import { CartProvider } from '@/context/CartContext';
+import { LanguageProvider } from '@/context/LanguageContext';
 
 // Prevent Font Awesome from adding its CSS since we did it manually above
 config.autoAddCss = false;
@@ -32,11 +33,11 @@ function MyApp({ Component, pageProps }) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <CartProvider>
-        <div dir="ltr">
+        <LanguageProvider>
           <Layout>
             <Component {...pageProps} />
           </Layout>
-        </div>
+        </LanguageProvider>
       </CartProvider>
     </>
   );

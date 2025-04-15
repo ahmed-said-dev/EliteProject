@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPaw, faCat, faDog, faFish, faOtter, faDove, faHorse, faSpider, faCrow, faKiwiBird, faSyringe, faTooth, faEye, faBone, faScalpelPath, faPlus, faStar } from "@fortawesome/free-solid-svg-icons";
+import { translate } from "../../i18n";
+import { useLanguage } from "@/context/LanguageContext";
 
 const ServiceCard = ({ title, icon }: { 
   title: string;
@@ -20,8 +22,11 @@ const ServiceCard = ({ title, icon }: {
 };
 
 const Services = () => {
+  const { locale, isRTL } = useLanguage();
+  const dir = isRTL ? 'rtl' : 'ltr';
+  
   return (
-    <div className="w-full py-16 bg-[#F5F5F7] relative overflow-hidden">
+    <div className="w-full py-16 bg-[#F5F5F7] relative overflow-hidden" dir={dir}>
       {/* Background animal icons */}
       <div className="absolute inset-0 overflow-hidden opacity-10">
         <div className="absolute top-10 left-10">
@@ -56,9 +61,9 @@ const Services = () => {
         </div>
       </div>
 
-      <div className="container mx-auto px-4" dir="ltr">
+      <div className="container mx-auto px-4">
         <div className="text-center mb-12">
-          <h2 className="text-3xl font-bold text-[#44396F] mb-4">What we offer?</h2>
+          <h2 className="text-3xl font-bold text-[#44396F] mb-4">{translate('services.title', locale)}</h2>
           {/* Wavy divider */}
           <div className="w-32 h-6 mx-auto relative mb-6">
             <svg viewBox="0 0 200 30" className="w-full">
@@ -66,42 +71,42 @@ const Services = () => {
             </svg>
           </div>
           <p className="text-gray-600 max-w-2xl mx-auto">
-            As a leading Riyadh veterinary clinic, we offer a comprehensive range of veterinary services to keep your furry companions happy and healthy.
+            {translate('services.description', locale)}
           </p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {/* Service Cards */}
           <ServiceCard
-            title="General Wellness & Preventative Care Exams"
+            title={translate('services.service1', locale)}
             icon={<FontAwesomeIcon icon={faPaw} style={{ height: '2em', width: '2em' }} className="text-purple-600 opacity-20 transform rotate-45" />}
           />
           <ServiceCard
-            title="Vaccinations, Antibody Tests, Microchipping"
+            title={translate('services.service2', locale)}
             icon={<FontAwesomeIcon icon={faSyringe} style={{ height: '2em', width: '2em' }} className="text-purple-600 opacity-20 transform rotate-45" />}
           />
           <ServiceCard
-            title="Routine Dental Procedures"
+            title={translate('services.service3', locale)}
             icon={<FontAwesomeIcon icon={faTooth} style={{ height: '2em', width: '2em' }} className="text-purple-600 opacity-20 transform rotate-45" />}
           />
           <ServiceCard
-            title="Ophthalmology Exam"
+            title={translate('services.service4', locale)}
             icon={<FontAwesomeIcon icon={faEye} style={{ height: '2em', width: '2em' }} className="text-purple-600 opacity-20 transform rotate-45" />}
           />
           <ServiceCard
-            title="Internal Medicine"
+            title={translate('services.service5', locale)}
             icon={<FontAwesomeIcon icon={faBone} style={{ height: '2em', width: '2em' }} className="text-purple-600 opacity-20 transform rotate-45" />}
           />
           <ServiceCard
-            title="Routine Surgeries"
+            title={translate('services.service6', locale)}
             icon={<FontAwesomeIcon icon={faScalpelPath} style={{ height: '2em', width: '2em' }} className="text-purple-600 opacity-20 transform rotate-45" />}
           />
         </div>
 
         <div className="text-center mt-8">
           <Button className="bg-yellow-500 hover:bg-yellow-600 text-white">
-            VIEW ALL
-            <FontAwesomeIcon icon={faPlus} className="ml-2" />
+            {translate('services.viewAllButton', locale)}
+            <FontAwesomeIcon icon={faPlus} className={`${dir === 'rtl' ? 'mr-2' : 'ml-2'}`} />
           </Button>
         </div>
       </div>

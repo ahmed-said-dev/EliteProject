@@ -1,6 +1,8 @@
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPaw, faCat, faDog, faFish, faOtter, faDove, faHorse, faSpider } from "@fortawesome/free-solid-svg-icons";
+import { translate } from "../../i18n";
+import { useLanguage } from "@/context/LanguageContext";
 
 interface PartnerCardProps {
   logo: React.ReactNode;
@@ -22,8 +24,11 @@ const PartnerCard: React.FC<PartnerCardProps> = ({ logo, name }) => {
 };
 
 const Partners = () => {
+  const { locale, isRTL } = useLanguage();
+  const dir = isRTL ? 'rtl' : 'ltr';
+  
   return (
-    <div className="w-full py-16 bg-white relative overflow-hidden">
+    <div className="w-full py-16 bg-white relative overflow-hidden" dir={dir}>
       {/* Background animal icons */}
       <div className="absolute inset-0 overflow-hidden opacity-10">
         <div className="absolute top-10 left-10">
@@ -54,7 +59,7 @@ const Partners = () => {
 
       <div className="container mx-auto px-4">
         <div className="text-center mb-12">
-          <h2 className="text-3xl font-bold text-[#44396F] mb-4">Our Partners</h2>
+          <h2 className="text-3xl font-bold text-[#44396F] mb-4">{translate('partners.title', locale)}</h2>
           {/* Wavy divider */}
           <div className="w-32 h-6 mx-auto relative mb-6">
             <svg viewBox="0 0 200 30" className="w-full">
@@ -62,7 +67,7 @@ const Partners = () => {
             </svg>
           </div>
           <p className="text-gray-600 max-w-2xl mx-auto">
-            We collaborate with leading brands and organizations to provide the best care for your pets.
+            {translate('partners.description', locale)}
           </p>
         </div>
 
@@ -70,11 +75,11 @@ const Partners = () => {
           {/* Partner Cards */}
           <PartnerCard
             logo={<FontAwesomeIcon icon={faPaw} style={{ height: '2em', width: '2em' }} className="text-purple-600 transform rotate-45" />}
-            name="Elite Falcons"
+            name={translate('partners.partner1', locale)}
           />
           <PartnerCard
             logo={<FontAwesomeIcon icon={faDog} style={{ height: '2em', width: '2em' }} className="text-purple-600 transform -rotate-45" />}
-            name="Vest Van"
+            name={translate('partners.partner2', locale)}
           />
         </div>
       </div>

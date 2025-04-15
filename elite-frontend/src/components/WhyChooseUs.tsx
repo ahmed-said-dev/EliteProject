@@ -4,8 +4,13 @@ import { Plus } from "lucide-react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPaw } from "@fortawesome/free-solid-svg-icons";
 import Image from "next/image";
+import { translate } from "../../i18n";
+import { useLanguage } from "@/context/LanguageContext";
 
 const WhyChooseUs = () => {
+  const { locale, isRTL } = useLanguage();
+  // تم تثبيت اتجاه هذا المكون على ltr كما طلب المستخدم سابقاً
+  
   return (
     <>
       <div className="w-full bg-[#9b87f5] relative overflow-hidden py-8 sm:py-10 md:py-16" dir="ltr">
@@ -53,7 +58,7 @@ const WhyChooseUs = () => {
           
           {/* Content */}
           <div className="relative z-10">
-            <h2 className="text-yellow-400 text-4xl font-bold mb-2 text-center md:text-left">WHY CHOOSE US?</h2>
+            <h2 className="text-yellow-400 text-4xl font-bold mb-2 text-center md:text-left">{translate('whyChooseUs.title', locale)}</h2>
             
             {/* Wavy line decoration below heading */}
             <div className="w-48 h-5 mb-4 relative mx-auto md:mx-0">
@@ -89,7 +94,7 @@ const WhyChooseUs = () => {
               {/* Features section - left side */}
               <div className="md:w-3/5 mb-10 md:mb-0 relative mx-auto md:mx-0" style={{ zIndex: 20 }}>
                 <div className="text-white text-xl mb-10 text-center md:text-left">
-                  <p>As a trusted name in the Riyadh veterinary community since 2013, we&apos;ve helped more than 200,000,000 pets through:</p>
+                  <p>{translate('whyChooseUs.description', locale)}</p>
                 </div>
                 
                 <div className="flex flex-col md:flex-row justify-center md:justify-between mb-8 space-y-8 md:space-y-0 md:space-x-4 px-2 sm:px-0" style={{ position: 'relative', zIndex: 30 }}>
@@ -103,8 +108,8 @@ const WhyChooseUs = () => {
                         <path d="M15 14C12 14 10 16 10 19C10 22 12 24 15 24C18 24 20 22 20 19C20 16 18 14 15 14Z" fill="#9678D3"/>
                       </svg>
                     </div>
-                    <h3 className="text-[#44396F] font-bold text-xl mb-2">Latest Technology</h3>
-                    <p className="text-[#44396F] text-sm px-1">Cutting-edge equipment for accurate diagnosis.</p>
+                    <h3 className="text-[#44396F] font-bold text-xl mb-2">{translate('whyChooseUs.feature1.title', locale)}</h3>
+                    <p className="text-[#44396F] text-sm px-1">{translate('whyChooseUs.feature1.description', locale)}</p>
                   </div>
                   
                   {/* Feature 2 */}
@@ -116,8 +121,8 @@ const WhyChooseUs = () => {
                         <path d="M38 18C38 18 42 22 42 25C42 28 38 32 38 32" stroke="#9678D3" strokeWidth="4" strokeLinecap="round"/>
                       </svg>
                     </div>
-                    <h3 className="text-[#44396F] font-bold text-xl mb-2">Personalized Care</h3>
-                    <p className="text-[#44396F] text-sm px-1">Tailored treatment plans for each pet.</p>
+                    <h3 className="text-[#44396F] font-bold text-xl mb-2">{translate('whyChooseUs.feature2.title', locale)}</h3>
+                    <p className="text-[#44396F] text-sm px-1">{translate('whyChooseUs.feature2.description', locale)}</p>
                   </div>
                   
                   {/* Feature 3 */}
@@ -130,14 +135,14 @@ const WhyChooseUs = () => {
                         height={65}
                       />
                     </div>
-                    <h3 className="text-[#44396F] font-bold text-xl mb-2">Compassionate Staff</h3>
-                    <p className="text-[#44396F] text-sm px-1">A dedicated team that loves animals.</p>
+                    <h3 className="text-[#44396F] font-bold text-xl mb-2">{translate('whyChooseUs.feature3.title', locale)}</h3>
+                    <p className="text-[#44396F] text-sm px-1">{translate('whyChooseUs.feature3.description', locale)}</p>
                   </div>
                 </div>
                 
                 <div className="flex justify-center md:justify-start mt-8">
                   <button className="bg-yellow-400 hover:bg-yellow-500 text-[#44396F] font-medium py-2.5 px-6 rounded-full flex items-center gap-2 transition-colors">
-                    READ MORE
+                    {translate('whyChooseUs.readMoreButton', locale)}
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                       <path d="M12 5v14M5 12h14" />
                     </svg>

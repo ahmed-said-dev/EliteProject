@@ -2,9 +2,9 @@
 const nextConfig = {
   reactStrictMode: true,
   i18n: {
-    locales: ['ar'],
-    defaultLocale: 'ar',
-    localeDetection: false,
+    locales: ['en', 'ar'],
+    defaultLocale: 'en',
+    localeDetection: true,
   },
   images: {
     domains: ['images.pexels.com', 'www.svgrepo.com'],

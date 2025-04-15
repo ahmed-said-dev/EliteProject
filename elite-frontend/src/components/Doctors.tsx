@@ -5,6 +5,8 @@ import {
   faHorse, faSpider, faCrow, faKiwiBird, faBone, faSyringe 
 } from "@fortawesome/free-solid-svg-icons";
 import Image from "next/image";
+import { translate } from "../../i18n";
+import { useLanguage } from "@/context/LanguageContext";
 
 interface DoctorCardProps {
   image: string;
@@ -36,8 +38,11 @@ const DoctorCard: React.FC<DoctorCardProps> = ({ image, name, specialty }) => {
 };
 
 const Doctors = () => {
+  const { locale, isRTL } = useLanguage();
+  const dir = isRTL ? 'rtl' : 'ltr';
+  
   return (
-    <div className="w-full py-16 pb-48 bg-gray-100 relative">
+    <div className="w-full py-16 pb-48 bg-gray-100 relative" dir={dir}>
       {/* Background paw prints and animal icons */}
       <div className="absolute inset-0 overflow-hidden opacity-10">
         {/* Multiple paw prints scattered throughout the background */}
@@ -105,7 +110,7 @@ const Doctors = () => {
       </div>
       
       <div className="container mx-auto px-4 text-center relative z-10">
-        <h2 className="text-3xl font-bold text-[#44396F] mb-2">Meet our Doctors</h2>
+        <h2 className="text-3xl font-bold text-[#44396F] mb-2">{translate('doctors.title', locale)}</h2>
         
         {/* Wavy line */}
         <div className="w-40 h-6 mx-auto relative my-4">
@@ -115,8 +120,7 @@ const Doctors = () => {
         </div>
         
         <p className="text-gray-700 mb-12 max-w-3xl mx-auto">
-          Our team of highly skilled veterinarians is committed to providing top-notch care for your furry companions. 
-          They&apos;re passionate about animal health &amp; dedicated to providing the best possible medical services.
+          {translate('doctors.description', locale)}
         </p>
         
         <div className="grid grid-cols-1 md:grid-cols-3 gap-2 mb-12 relative">
@@ -126,18 +130,18 @@ const Doctors = () => {
           
           <DoctorCard 
             image="/DoctorsSections/Asset 28-.png" 
-            name="Dr. Mohamed Farouk"
-            specialty="Small Animal Specialist"
+            name={translate('doctors.doctor1.name', locale)}
+            specialty={translate('doctors.doctor1.specialty', locale)}
           />
           <DoctorCard 
             image="/DoctorsSections/Asset 29-.png" 
-            name="Dr. Rico J Pangan"
-            specialty="Veterinary Surgeon"
+            name={translate('doctors.doctor2.name', locale)}
+            specialty={translate('doctors.doctor2.specialty', locale)}
           />
           <DoctorCard 
             image="/DoctorsSections/Asset 30-.png" 
-            name="Dr. Anas Saada"
-            specialty="Exotic Pet Specialist"
+            name={translate('doctors.doctor3.name', locale)}
+            specialty={translate('doctors.doctor3.specialty', locale)}
           />
         </div>
       </div>

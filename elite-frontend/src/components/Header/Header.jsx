@@ -4,10 +4,13 @@ import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import styles from './Header.module.css';
 import { useCart } from '@/context/CartContext';
+import { useLanguage } from '@/context/LanguageContext';
+import LanguageSwitcher from '@/components/LanguageSwitcher';
 
 const Header = () => {
   const pathname = usePathname();
   const { cartCount } = useCart();
+  const { t, isRTL } = useLanguage();
   const [showAccountMenu, setShowAccountMenu] = useState(false);
   const accountMenuRef = useRef(null);
 
@@ -58,9 +61,6 @@ const Header = () => {
             <Link href="https://tiktok.com" aria-label="TikTok" className={styles.socialIcon}>
               <i className="fa-brands fa-tiktok"></i>
             </Link>
-            <Link href="#" aria-label="Globe" className={styles.socialIcon}>
-              <i className="fa-solid fa-globe"></i>
-            </Link>
           </div>
         </div>
       </div>
@@ -68,16 +68,17 @@ const Header = () => {
         <div className={`${styles.bottomContainer} container`}>
           <nav className={styles.mainNav}>
             <ul className={styles.nav}>
-              <li><Link href="/" className={isActive('/') ? styles.active : ''}>Home</Link></li>
-              <li><Link href="/about" className={isActive('/about') ? styles.active : ''}>About Us</Link></li>
-              <li><Link href="/services" className={isActive('/services') ? styles.active : ''}>Services</Link></li>
-              <li><Link href="/products" className={isActive('/products') ? styles.active : ''}>Products</Link></li>
-              <li><Link href="/media" className={isActive('/media') ? styles.active : ''}>Media</Link></li>
-              <li><Link href="/memberships" className={isActive('/memberships') ? styles.active : ''}>Memberships</Link></li>
-              <li><Link href="/contact" className={isActive('/contact') ? styles.active : ''}>Contact</Link></li>
+              <li><Link href="/" className={isActive('/') ? styles.active : ''}>{t('header.home')}</Link></li>
+              <li><Link href="/about" className={isActive('/about') ? styles.active : ''}>{t('header.aboutUs')}</Link></li>
+              <li><Link href="/services" className={isActive('/services') ? styles.active : ''}>{t('header.services')}</Link></li>
+              <li><Link href="/products" className={isActive('/products') ? styles.active : ''}>{t('header.products')}</Link></li>
+              <li><Link href="/media" className={isActive('/media') ? styles.active : ''}>{t('header.media')}</Link></li>
+              <li><Link href="/memberships" className={isActive('/memberships') ? styles.active : ''}>{t('header.memberships')}</Link></li>
+              <li><Link href="/contact" className={isActive('/contact') ? styles.active : ''}>{t('header.contact')}</Link></li>
             </ul>
           </nav>
           <div className={styles.actionButtons}>
+            <LanguageSwitcher />
             <Link href="/cart" className={styles.cartButton}>
               <div className={styles.cartIcon}>
                 <i className="fa-solid fa-shopping-cart"></i>
@@ -92,25 +93,25 @@ const Header = () => {
                 aria-haspopup="true"
               >
                 <i className="fa-solid fa-user"></i>
-                <span>Account</span>
+                <span>{t('header.account')}</span>
                 <i className={`fa-solid fa-chevron-down ${showAccountMenu ? styles.rotateIcon : ''}`}></i>
               </button>
               {showAccountMenu && (
                 <div className={styles.accountDropdown}>
                   <Link href="/login" className={styles.dropdownItem}>
                     <i className="fa-solid fa-sign-in-alt"></i>
-                    <span>Login</span>
+                    <span>{t('header.login')}</span>
                   </Link>
                   <Link href="/register" className={styles.dropdownItem}>
                     <i className="fa-solid fa-user-plus"></i>
-                    <span>Register</span>
+                    <span>{t('header.register')}</span>
                   </Link>
                 </div>
               )}
             </div>
             <Link href="/appointment" className={styles.btnPrimary}>
               <i className="fa-solid fa-calendar-check"></i>
-              <span>Book Appointment</span>
+              <span>{t('header.bookAppointment')}</span>
             </Link>
           </div>
         </div>

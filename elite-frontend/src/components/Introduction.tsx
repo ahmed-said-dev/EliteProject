@@ -4,10 +4,15 @@ import { Plus } from "lucide-react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPaw, faCat, faDog, faFish, faOtter, faDove, faHorse, faSpider, faCrow, faKiwiBird, faFrog, faDragon } from "@fortawesome/free-solid-svg-icons";
 import Image from "next/image";
+import { translate } from "../../i18n";
+import { useLanguage } from "@/context/LanguageContext";
 
 const Introduction = () => {
+  const { locale, isRTL } = useLanguage();
+  const dir = isRTL ? 'rtl' : 'ltr';
+  
   return (
-    <div className="w-full relative overflow-hidden">
+    <div className="w-full relative overflow-hidden" dir={dir}>
       {/* Background animal icons */}
       <div className="absolute inset-0 overflow-hidden opacity-10">
         <div className="absolute top-10 left-10">
@@ -52,7 +57,7 @@ const Introduction = () => {
       <div className="bg-gradient-to-b from-[#FFFFFF] via-[#FFFFFF] to-[#F5F5F7] py-16 min-h-screen">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-[#44396F] mb-4">Welcome to Elite Veterinary Clinic</h2>
+            <h2 className="text-3xl font-bold text-[#44396F] mb-4">{translate('introduction.title', locale)}</h2>
             {/* Wavy divider */}
             <div className="w-32 h-6 mx-auto relative mb-6">
               <svg viewBox="0 0 200 30" className="w-full">
@@ -60,11 +65,11 @@ const Introduction = () => {
               </svg>
             </div>
             <p className="text-gray-600 mt-4 max-w-4xl mx-auto mb-12">
-              We are committed to providing top-quality care for your pets. Our veterinary clinic offers a wide range of services, including routine check-ups, vaccinations, surgeries, & dental care, using the latest technology & under the care & expertise of the best veterinarians in KSA.
+              {translate('introduction.description', locale)}
             </p>
             <Button className="bg-yellow-500 hover:bg-yellow-600 text-white">
-              Learn More About Us
-              <FontAwesomeIcon icon={faPaw} className="ml-6 h-4 w-4 transform -rotate-45" />
+              {translate('introduction.learnMoreButton', locale)}
+              <FontAwesomeIcon icon={faPaw} className={`${dir === 'rtl' ? 'mr-6' : 'ml-6'} h-4 w-4 transform -rotate-45`} />
             </Button>
           </div>
           

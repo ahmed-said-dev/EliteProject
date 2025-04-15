@@ -1,10 +1,14 @@
 import React from 'react';
 import Image from 'next/image';
 import styles from './Footer.module.css';
+import { useLanguage } from '@/context/LanguageContext';
+import { translate } from '../../../i18n';
 
 const Footer = () => {
+  const { locale, isRTL } = useLanguage();
+  const dir = isRTL ? 'rtl' : 'ltr';
   return (
-    <footer className={styles.elite_footer}>
+    <footer className={styles.elite_footer} dir={dir}>
       <div className={styles.container}>
         <div className={styles.footer_grid}>
           {/* Logo and Description Column */}
@@ -21,11 +25,10 @@ const Footer = () => {
                 />
               </div>
             </div>
-            <h3 className={styles.footer_title}>Elite Veterinary Clinic:</h3>
-            <h4 className={styles.footer_subtitle}>Your Trusted Partner in Pet Care.</h4>
+            <h3 className={styles.footer_title}>{translate('footer.title', locale)}</h3>
+            <h4 className={styles.footer_subtitle}>{translate('footer.subtitle', locale)}</h4>
             <p className={styles.footer_description}>
-              Discover a new level of veterinary care. From routine check-ups to complex surgeries, 
-              our team is dedicated to providing exceptional service & ensuring your pet's well-being.
+              {translate('footer.description', locale)}
             </p>
             <div className={styles.footer_wave_decoration}>
               <svg width="100" height="20" viewBox="0 0 100 20" fill="none">
@@ -36,14 +39,14 @@ const Footer = () => {
 
           {/* Contact Information Column */}
           <div className={styles.footer_contact_section}>
-            <h3 className={styles.section_title}>Contact us:</h3>
+            <h3 className={styles.section_title}>{translate('footer.contact.title', locale)}</h3>
             <ul className={styles.contact_list}>
               <li>
                 <div className={styles.icon_wrapper}>
                   <i className="fas fa-phone-alt"></i>
                 </div>
                 <div className={styles.contact_info}>
-                  <span className={styles.label}>Call:</span>
+                  <span className={styles.label}>{translate('footer.contact.call', locale)}</span>
                   <a href="tel:+96592011626" className={styles.contact_link}>+965 920 011 626</a>
                 </div>
               </li>
@@ -52,7 +55,7 @@ const Footer = () => {
                   <i className="fas fa-ambulance"></i>
                 </div>
                 <div className={styles.contact_info}>
-                  <span className={styles.label}>Emergency:</span>
+                  <span className={styles.label}>{translate('footer.contact.emergency', locale)}</span>
                   <a href="tel:+96592011626" className={styles.contact_link}>+965 920 011 626</a>
                   <a href="tel:+966504045640" className={styles.contact_link}>+966 50 404 5640</a>
                 </div>
@@ -62,7 +65,7 @@ const Footer = () => {
                   <i className="fas fa-envelope"></i>
                 </div>
                 <div className={styles.contact_info}>
-                  <span className={styles.label}>Email:</span>
+                  <span className={styles.label}>{translate('footer.contact.email', locale)}</span>
                   <a href="mailto:info@elitevevetksa.com" className={styles.contact_link}>info@elitevevetksa.com</a>
                 </div>
               </li>
@@ -71,7 +74,7 @@ const Footer = () => {
                   <i className="fas fa-map-marker-alt"></i>
                 </div>
                 <div className={styles.contact_info}>
-                  <span className={styles.label}>Address:</span>
+                  <span className={styles.label}>{translate('footer.contact.address', locale)}</span>
                   <span className={styles.address}>Qurtubah gate, Al Thoumamah Rd, Qurtubah, Riyadh 13248</span>
                 </div>
               </li>
@@ -80,7 +83,7 @@ const Footer = () => {
 
           {/* Working Hours and Social Media Column */}
           <div className={styles.footer_social_section}>
-            <h3 className={styles.section_title}>Follow us:</h3>
+            <h3 className={styles.section_title}>{translate('footer.social.title', locale)}</h3>
             <div className={styles.social_icons}>
               <a href="https://facebook.com" className={styles.social_icon} aria-label="Facebook" target="_blank" rel="noopener noreferrer">
                 <i className="fab fa-facebook-f"></i>
@@ -104,9 +107,9 @@ const Footer = () => {
               </svg>
             </div>
             <div className={styles.working_hours}>
-              <h3 className={styles.section_title}>Working hours</h3>
-              <p className={styles.hours}>09:00 AM - 10:00 PM</p>
-              <p className={styles.emergency_service}>24/7 Emergency Services</p>
+              <h3 className={styles.section_title}>{translate('footer.workingHours.title', locale)}</h3>
+              <p className={styles.hours}>{translate('footer.workingHours.hours', locale)}</p>
+              <p className={styles.emergency_service}>{translate('footer.workingHours.emergency', locale)}</p>
             </div>
           </div>
         </div>

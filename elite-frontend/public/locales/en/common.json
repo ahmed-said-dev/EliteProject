@@ -1,0 +1,118 @@
+{
+  "header": {
+    "home": "Home",
+    "aboutUs": "About Us",
+    "services": "Services",
+    "products": "Products",
+    "media": "Media",
+    "memberships": "Memberships",
+    "contact": "Contact",
+    "account": "Account",
+    "login": "Login",
+    "register": "Register",
+    "bookAppointment": "Book Appointment",
+    "language": "Language"
+  },
+  "direction": "ltr",
+  "hero": {
+    "title": "EXPERT VETERINARY CARE, TAILORED TO YOUR PET'S NEEDS",
+    "subtitle": "A Pioneering Veterinary Clinic, Providing Exceptional Care Every Step of the Way.",
+    "bookButton": "BOOK AN APPOINTMENT NOW",
+    "arabicName": "النخبة البيطرية",
+    "englishName": "ELITE VET"
+  },
+  "introduction": {
+    "title": "Welcome to Elite Veterinary Clinic",
+    "description": "We are committed to providing top-quality care for your pets. Our veterinary clinic offers a wide range of services, including routine check-ups, vaccinations, surgeries, & dental care, using the latest technology & under the care & expertise of the best veterinarians in KSA.",
+    "learnMoreButton": "Learn More About Us"
+  },
+  "services": {
+    "title": "What we offer?",
+    "description": "As a leading Riyadh veterinary clinic, we offer a comprehensive range of veterinary services to keep your furry companions happy and healthy.",
+    "service1": "General Wellness & Preventative Care Exams",
+    "service2": "Vaccinations, Antibody Tests, Microchipping",
+    "service3": "Routine Dental Procedures",
+    "service4": "Ophthalmology Exam",
+    "service5": "Internal Medicine",
+    "service6": "Routine Surgeries",
+    "viewAllButton": "VIEW ALL"
+  },
+  "whyChooseUs": {
+    "title": "WHY CHOOSE US?",
+    "description": "As a trusted name in the Riyadh veterinary community since 2013, we've helped more than 200,000,000 pets through:",
+    "feature1": {
+      "title": "Latest Technology",
+      "description": "Cutting-edge equipment for accurate diagnosis."
+    },
+    "feature2": {
+      "title": "Personalized Care",
+      "description": "Tailored treatment plans for each pet."
+    },
+    "feature3": {
+      "title": "Compassionate Staff",
+      "description": "A dedicated team that loves animals."
+    },
+    "readMoreButton": "READ MORE"
+  },
+  "doctors": {
+    "title": "Meet our Doctors",
+    "description": "Our team of highly skilled veterinarians is committed to providing top-notch care for your furry companions. They're passionate about animal health & dedicated to providing the best possible medical services.",
+    "doctor1": {
+      "name": "Dr. Mohamed Farouk",
+      "specialty": "Small Animal Specialist"
+    },
+    "doctor2": {
+      "name": "Dr. Rico J Pangan",
+      "specialty": "Veterinary Surgeon"
+    },
+    "doctor3": {
+      "name": "Dr. Anas Saada",
+      "specialty": "Exotic Pet Specialist"
+    }
+  },
+  "partners": {
+    "title": "Our Partners",
+    "description": "We collaborate with leading brands and organizations to provide the best care for your pets.",
+    "partner1": "Elite Falcons",
+    "partner2": "Vest Van"
+  },
+  "contactUs": {
+    "title": "CONTACT US",
+    "intro": "Get in touch with our team and we'll get back to you as soon as possible.",
+    "contactInfo": {
+      "title": "Contact Information",
+      "address1": "Qurtubah gate, Al Thoumamah Rd,",
+      "address2": "Qurtubah, Riyadh 13248",
+      "email": "info@elitevetsa.com",
+      "phone": "+966 12 345 6789"
+    },
+    "form": {
+      "heading": "Have a question or concern?",
+      "subHeading": "Contact us today! Our dedicated team is ready to assist you.",
+      "namePlaceholder": "NAME",
+      "emailPlaceholder": "EMAIL",
+      "messagePlaceholder": "MESSAGE",
+      "sendButton": "Send"
+    }
+  },
+  "footer": {
+    "title": "Elite Veterinary Clinic:",
+    "subtitle": "Your Trusted Partner in Pet Care.",
+    "description": "Discover a new level of veterinary care. From routine check-ups to complex surgeries, our team is dedicated to providing exceptional service & ensuring your pet's well-being.",
+    "contact": {
+      "title": "Contact us:",
+      "call": "Call:",
+      "emergency": "Emergency:",
+      "email": "Email:",
+      "address": "Address:"
+    },
+    "social": {
+      "title": "Follow us:"
+    },
+    "workingHours": {
+      "title": "Working hours",
+      "hours": "09:00 AM - 10:00 PM",
+      "emergency": "24/7 Emergency Services"
+    }
+  }
+}
