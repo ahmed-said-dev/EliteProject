@@ -116,6 +116,11 @@
   animation: pulse 2s infinite ease-in-out 1s; /* Offset animation for right paw */
 }
 
+/* Transparent background version */
+.transparentBg {
+  background: transparent;
+}
+
 /* Responsive styles */
 @media screen and (max-width: 576px) {
   .customDivider {

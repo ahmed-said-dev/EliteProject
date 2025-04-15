@@ -7,6 +7,7 @@ declare const styles: {
   readonly "pawIcon": string;
   readonly "gradientLine": string;
   readonly "pulse": string;
+  readonly "transparentBg": string;
 };
 
 export default styles;
