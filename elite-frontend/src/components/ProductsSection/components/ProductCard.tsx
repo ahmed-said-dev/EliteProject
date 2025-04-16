@@ -8,6 +8,7 @@ import {
   faHeart, faShoppingCart, faStar, faStarHalfAlt, 
   faEye, faCheck
 } from '@fortawesome/free-solid-svg-icons';
+import { useLanguage } from '@/context/LanguageContext';
 // Usamos solo iconos de solid sin necesidad de importar free-regular
 
 interface ProductProps {
@@ -37,6 +38,8 @@ interface ProductCardProps {
 
 const ProductCard: React.FC<ProductCardProps> = ({ product, viewType }) => {
   const { addToCart } = useCart();
+  const { isRTL, t } = useLanguage();
+  const dir = isRTL ? 'rtl' : 'ltr';
   const [isHovered, setIsHovered] = useState(false);
   const [isFavorite, setIsFavorite] = useState(false);
   const [showQuickView, setShowQuickView] = useState(false);
@@ -131,17 +134,17 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, viewType }) => {
           <div className={styles.imageContainer}>
             <img 
               src={product.image} 
-              alt={product.name} 
+              alt={t(`products.${product.id}.name`)}
               className={styles.productImage}
             />
             
             {/* Badges */}
             <div className={styles.badgesContainer}>
               {product.isNew && (
-                <span className={`${styles.badge} ${styles.badgeNew}`}>New</span>
+                <span className={`${styles.badge} ${styles.badgeNew}`}>{t('products.badges.new')}</span>
               )}
               {product.isBestSeller && (
-                <span className={`${styles.badge} ${styles.badgeBestseller}`}>Best Seller</span>
+                <span className={`${styles.badge} ${styles.badgeBestseller}`}>{t('products.badges.bestSeller')}</span>
               )}
               {product.isSale && (
                 <span className={`${styles.badge} ${styles.badgeSale}`}>
@@ -155,28 +158,28 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, viewType }) => {
               <button 
                 className={styles.actionButton}
                 onClick={toggleQuickView}
-                title="Quick View"
+                title={t('products.actions.quickView')}
               >
                 <FontAwesomeIcon icon={faEye} />
               </button>
               <button 
                 className={`${styles.actionButton} ${isFavorite ? styles.favoriteActive : ''}`}
                 onClick={handleFavoriteClick}
-                title={isFavorite ? "Remove from Favorites" : "Add to Favorites"}
+                title={isFavorite ? t('products.actions.removeFromFavorites') : t('products.actions.addToFavorites')}
               >
                 <FontAwesomeIcon icon={faHeart} className={isFavorite ? '' : styles.outlineIcon} />
               </button>
             </div>
           </div>
           
-          <div className={styles.productInfo}>
+          <div className={styles.productInfo} dir={dir}>
             <div className={styles.productMeta}>
-              <span className={styles.productCategory}>{product.petType}</span>
+              <span className={styles.productCategory}>{t(`products.petTypes.${product.petType.toLowerCase()}`)}</span>
               <span className={styles.productDivider}>•</span>
-              <span className={styles.productCategory}>{product.productType}</span>
+              <span className={styles.productCategory}>{t(`products.productTypes.${product.productType.toLowerCase()}`)}</span>
             </div>
             
-            <h3 className={styles.productName}>{product.name}</h3>
+            <h3 className={styles.productName}>{t(`products.${product.id}.name`)}</h3>
             
             <div className={styles.productRating}>
               <div className={styles.stars}>
@@ -187,11 +190,13 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, viewType }) => {
             
             <div className={styles.productDescription}>
               {isListView ? (
-                <p>{product.description}</p>
+                <p>{t(`products.${product.id}.description`)}</p>
               ) : (
-                <p>{product.description.length > 80 
-                  ? `${product.description.substring(0, 80)}...` 
-                  : product.description}
+                <p>
+                  {(() => {
+                    const desc = t(`products.${product.id}.description`);
+                    return desc.length > 80 ? `${desc.substring(0, 80)}...` : desc;
+                  })()}
                 </p>
               )}
             </div>
@@ -294,14 +299,27 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, viewType }) => {
                 </div>
                 
                 <div className={styles.quickViewActions}>
-                  <button 
-                    className={`${styles.quickViewAddToCart} ${!product.inStock ? styles.disabled : ''} ${addedToCart ? styles.added : ''}`}
-                    onClick={handleAddToCart}
-                    disabled={!product.inStock}
-                  >
-                    <FontAwesomeIcon icon={faShoppingCart} />
-                    <span>{addedToCart ? 'Added!' : 'Add to Cart'}</span>
-                  </button>
+                  <div className={styles.actionButtonWrapper}>
+                    <button 
+                      className={`${styles.quickViewAddToCart} ${addedToCart ? styles.added : ''}`}
+                      onClick={handleAddToCart}
+                      disabled={!product.inStock}
+                    >
+                      {!product.inStock ? (
+                        <span>{t('products.status.outOfStock')}</span>
+                      ) : addedToCart ? (
+                        <>
+                          <FontAwesomeIcon icon={faCheck} className={styles.checkIcon} />
+                          <span>{t('products.actions.addedToCart')}</span>
+                        </>
+                      ) : (
+                        <>
+                          <FontAwesomeIcon icon={faShoppingCart} className={styles.cartIcon} />
+                          <span>{t('products.actions.addToCart')}</span>
+                        </>
+                      )}
+                    </button>
+                  </div>
                   <button 
                     className={`${styles.quickViewFavorite} ${isFavorite ? styles.favoriteActive : ''}`}
                     onClick={handleFavoriteClick}

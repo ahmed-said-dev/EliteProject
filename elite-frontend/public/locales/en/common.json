@@ -625,6 +625,208 @@
     "home": "Home",
     "services": {
       "title": "Our Services"
+    },
+    "products": {
+      "title": "Pet Care Products"
+    }
+  },
+  "productsSection": {
+    "title": "Pet Care Products",
+    "description": "Browse our wide selection of high-quality products for your beloved pets. From premium food to fun toys and essential grooming tools, we have everything you need.",
+    "searchPlaceholder": "Search for products...",
+    "filterButton": "Filter",
+    "resultsCount": "%count% products found",
+    "resultsCountZero": "No products found",
+    "resultsCountOne": "1 product found",
+    "sortBy": "Sort by:",
+    "sortOptions": {
+      "popularity": "Popularity",
+      "priceLow": "Price: Low to High",
+      "priceHigh": "Price: High to Low",
+      "newest": "Newest Arrivals",
+      "topRated": "Top Rated"
+    },
+    "noResults": {
+      "title": "No Products Found",
+      "message": "We couldn't find any products matching your criteria."
+    },
+    "resetFilters": "Reset Filters",
+    "pagination": {
+      "previous": "Previous",
+      "next": "Next"
+    },
+    "petTypes": [
+      "Dogs",
+      "Cats",
+      "Birds",
+      "Small Pets",
+      "Fish",
+      "Reptiles"
+    ],
+    "productTypes": [
+      "Food",
+      "Toys",
+      "Medicine",
+      "Accessories",
+      "Grooming",
+      "Beds",
+      "Carriers"
+    ],
+    "brands": [
+      "Royal Canin",
+      "Purina",
+      "Hills",
+      "Pedigree",
+      "Whiskas",
+      "Kong",
+      "FURminator"
+    ]
+  },
+  "products": {
+    "badges": {
+      "new": "New",
+      "bestSeller": "Best Seller",
+      "sale": "Sale"
+    },
+    "actions": {
+      "quickView": "Quick View",
+      "addToFavorites": "Add to Favorites",
+      "removeFromFavorites": "Remove from Favorites",
+      "addToCart": "Add to Cart",
+      "addedToCart": "Added to Cart"
+    },
+    "status": {
+      "inStock": "In Stock",
+      "outOfStock": "Out of Stock"
+    },
+    "petTypes": {
+      "dogs": "Dogs",
+      "cats": "Cats",
+      "birds": "Birds",
+      "small pets": "Small Pets",
+      "fish": "Fish",
+      "reptiles": "Reptiles"
+    },
+    "productTypes": {
+      "food": "Food",
+      "toys": "Toys",
+      "medicine": "Medicine",
+      "accessories": "Accessories",
+      "grooming": "Grooming",
+      "beds": "Beds",
+      "carriers": "Carriers"
+    },
+    "1": {
+      "name": "Premium Dog Food - Grain Free Chicken",
+      "description": "High-quality grain-free dog food made with real chicken as the first ingredient. Perfect for adult dogs of all breeds. Rich in protein and essential nutrients."
+    },
+    "2": {
+      "name": "Interactive Dog Toy - Treat Dispenser",
+      "description": "Engaging treat-dispensing toy that stimulates your dog mentally and physically. Adjustable difficulty levels for dogs of all ages and sizes."
+    },
+    "3": {
+      "name": "Calming Cat Bed - Donut Shape",
+      "description": "Soft, comfortable donut-shaped bed designed to provide security and comfort for cats. Self-warming fabric helps keep your cat cozy."
+    },
+    "4": {
+      "name": "Premium Cat Food - Indoor Formula",
+      "description": "Specially formulated for indoor cats to help maintain a healthy weight and reduce hairballs. Made with high-quality protein sources."
+    },
+    "5": {
+      "name": "Bird Cage - Large Parrot Home",
+      "description": "Spacious bird cage for medium to large parrots. Features multiple perches, food dishes, and easy-clean removable bottom tray."
+    },
+    "6": {
+      "name": "Fish Tank Filter System - Advanced",
+      "description": "Three-stage filtration system for fish tanks up to 55 gallons. Provides mechanical, chemical, and biological filtration for crystal clear water."
+    },
+    "7": {
+      "name": "Small Animal Habitat - Deluxe Edition",
+      "description": "Spacious habitat for small pets like hamsters, gerbils, or mice. Multiple levels with ramps, exercise wheel, and hiding spots."
+    },
+    "8": {
+      "name": "Reptile Heat Lamp & UVB Combo",
+      "description": "Essential heating and UVB lighting combo for reptiles. Helps maintain proper temperature gradient and provides necessary UV exposure."
+    },
+    "9": {
+      "name": "Dog Grooming Kit - Professional",
+      "description": "Complete professional-grade grooming kit for all dog breeds. Includes clippers, various guide combs, scissors, nail trimmer, and carrying case."
+    },
+    "10": {
+      "name": "Cat Scratching Post - Multi-Level",
+      "description": "Tall multi-level cat scratching post with platforms and toys. Helps satisfy natural scratching instincts and provides exercise."
+    },
+    "11": {
+      "name": "Bird Food - Premium Seed Mix",
+      "description": "High-quality seed mix for small to medium birds. Contains a balanced blend of seeds, grains, fruits, and vegetables."
+    },
+    "12": {
+      "name": "Fish Tank Decorations - Natural Set",
+      "description": "Natural-looking aquarium decoration set with rocks, plants, and hiding spots. Creates a stress-reducing environment for fish."
+    },
+    "13": {
+      "name": "Hamster Exercise Ball - Transparent",
+      "description": "Clear exercise ball allows hamsters and other small pets to explore safely outside their cage. Ventilation holes ensure proper airflow."
+    },
+    "14": {
+      "name": "Reptile Habitat Substrate - Natural",
+      "description": "Natural substrate for reptile habitats that helps maintain humidity and allows for natural burrowing behavior."
+    },
+    "15": {
+      "name": "Dog Dental Chews - Fresh Breath",
+      "description": "Specially formulated dental chews that help reduce plaque and tartar while freshening breath. Great for daily dental care."
+    },
+    "16": {
+      "name": "Cat Litter Box - Self-Cleaning",
+      "description": "Automatic self-cleaning litter box that separates waste from clean litter. Reduces odor and maintenance time."
+    },
+    "17": {
+      "name": "Bird Vitamin Supplement - Complete",
+      "description": "Complete vitamin and mineral supplement for all types of pet birds. Supports immune system, feather quality, and overall health."
+    },
+    "18": {
+      "name": "Aquarium Plants - Live Bundle",
+      "description": "Bundle of live aquarium plants suitable for freshwater tanks. Includes a variety of species to create a natural underwater ecosystem."
+    },
+    "19": {
+      "name": "Small Pet Bedding - Extra Absorbent",
+      "description": "Highly absorbent, dust-free bedding for small pets. Controls odor and provides a comfortable nesting material."
+    },
+    "20": {
+      "name": "Reptile Thermometer & Hygrometer",
+      "description": "Digital thermometer and hygrometer for monitoring temperature and humidity in reptile habitats. Essential for proper habitat maintenance."
+    },
+    "21": {
+      "name": "Dog Training Leash - Professional",
+      "description": "Professional-grade training leash with multiple length options. Perfect for obedience training and recall exercises."
+    },
+    "22": {
+      "name": "Cat Water Fountain - Ultra Quiet",
+      "description": "Ultra-quiet water fountain that encourages cats to drink more water. Multiple filtration stages for clean, fresh water."
+    },
+    "23": {
+      "name": "Bird Cage Toys - Activity Set",
+      "description": "Set of colorful, interactive toys for bird cages. Helps prevent boredom and encourages natural behaviors."
+    },
+    "24": {
+      "name": "Fish Food - Tropical Blend",
+      "description": "Nutritionally complete food for tropical fish. Contains a balanced mix of proteins, vitamins, and minerals for vibrant colors and health."
+    },
+    "25": {
+      "name": "Small Pet Carrier - Travel Safe",
+      "description": "Secure, well-ventilated carrier for small pets. Perfect for vet visits or travel. Features comfortable bedding and secure latches."
+    },
+    "26": {
+      "name": "Reptile Calcium Supplement - Powder",
+      "description": "Essential calcium supplement for reptiles. Helps prevent metabolic bone disease and supports healthy shell or skeleton development."
+    },
+    "27": {
+      "name": "Dog Shampoo - Sensitive Skin",
+      "description": "Gentle, hypoallergenic shampoo for dogs with sensitive skin. Free from harsh chemicals and fragrances, with soothing aloe vera."
+    },
+    "28": {
+      "name": "Cat Toy Set - Interactive Variety",
+      "description": "Set of 10 different interactive cat toys including feathers, mice, balls, and catnip toys. Great for keeping cats mentally and physically active."
     }
   }
 }

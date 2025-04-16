@@ -10,6 +10,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { FilterSidebar, ProductCard, MobileFilters } from './components';
 import { productData } from './data/productData';
+import { useLanguage } from '@/context/LanguageContext';
 
 // Interfaces
 interface PriceRange {
@@ -26,7 +27,27 @@ interface FilterState {
   availability: string[];
 }
 
+// دالة للحصول على النص المناسب لعدد المنتجات
+const getResultsCountText = (count: number, t: any, isRTL: boolean): string => {
+  // استخدام صيغ مختلفة للعربية حسب العدد
+  if (isRTL) {
+    let key = 'productsSection.resultsCountMany';
+    if (count === 0) key = 'productsSection.resultsCountZero';
+    else if (count === 1) key = 'productsSection.resultsCountOne';
+    else if (count === 2) key = 'productsSection.resultsCountTwo';
+    else if (count >= 3 && count <= 10) key = 'productsSection.resultsCountFew';
+    
+    return t(key).replace('%count%', count.toString());
+  } else {
+    // للغة الإنجليزية
+    return t('productsSection.resultsCount', { count }).replace('%count%', count.toString());
+  }
+};
+
 const ProductsSection: React.FC = () => {
+  const { isRTL, t } = useLanguage();
+  const dir = isRTL ? 'rtl' : 'ltr';
+  
   // Estados para los productos y filtros
   const [products, setProducts] = useState(productData);
   const [filteredProducts, setFilteredProducts] = useState(productData);
@@ -46,9 +67,9 @@ const ProductsSection: React.FC = () => {
   const [searchQuery, setSearchQuery] = useState('');
 
   // Categorías disponibles
-  const petTypes = ['Dogs', 'Cats', 'Birds', 'Small Pets', 'Fish', 'Reptiles'];
-  const productTypes = ['Food', 'Toys', 'Medicine', 'Accessories', 'Grooming', 'Beds', 'Carriers'];
-  const brands = ['Royal Canin', 'Purina', 'Hills', 'Pedigree', 'Whiskas', 'Kong', 'FURminator'];
+  const petTypes = t('productsSection.petTypes', { returnObjects: true });
+  const productTypes = t('productsSection.productTypes', { returnObjects: true });
+  const brands = t('productsSection.brands', { returnObjects: true });
   
   // Aplicar filtros a los productos
   useEffect(() => {
@@ -167,12 +188,11 @@ const ProductsSection: React.FC = () => {
   };
 
   return (
-    <section className={styles.productsSection}>
+    <section className={styles.productsSection} dir={dir}>
       <div className={styles.productsSectionHeader}>
-        <h2 className={styles.sectionTitle}>Pet Care Products</h2>
+        <h2 className={styles.sectionTitle}>{t('productsSection.title')}</h2>
         <p className={styles.sectionDescription}>
-          Browse our wide selection of high-quality products for your beloved pets.
-          From premium food to fun toys and essential grooming tools, we have everything you need.
+          {t('productsSection.description')}
         </p>
       </div>
       
@@ -181,7 +201,7 @@ const ProductsSection: React.FC = () => {
           <FontAwesomeIcon icon={faSearch} className={styles.searchIcon} />
           <input 
             type="text" 
-            placeholder="Search for products..." 
+            placeholder={t('productsSection.searchPlaceholder')} 
             className={styles.searchInput}
             value={searchQuery}
             onChange={handleSearchChange}
@@ -201,7 +221,7 @@ const ProductsSection: React.FC = () => {
           onClick={() => setIsMobileFilterOpen(true)}
         >
           <FontAwesomeIcon icon={faFilter} />
-          <span>Filter</span>
+          <span>{t('productsSection.filterButton')}</span>
         </button>
       </div>
       
@@ -218,7 +238,9 @@ const ProductsSection: React.FC = () => {
         <div className={styles.productsWrapper}>
           <div className={styles.productsToolbar}>
             <div className={styles.resultsCount}>
-              <span>{filteredProducts.length} products found</span>
+              <span>{
+                getResultsCountText(filteredProducts.length, t, isRTL)
+              }</span>
             </div>
             
             <div className={styles.sortAndView}>
@@ -238,17 +260,17 @@ const ProductsSection: React.FC = () => {
               </div>
               
               <div className={styles.sortContainer}>
-                <span className={styles.sortLabel}>Sort by: </span>
+                <span className={styles.sortLabel}>{t('productsSection.sortBy')} </span>
                 <select 
                   className={styles.sortSelect}
                   value={sortOption}
                   onChange={handleSortChange}
                 >
-                  <option value="popularity">Popularity</option>
-                  <option value="price-low">Price: Low to High</option>
-                  <option value="price-high">Price: High to Low</option>
-                  <option value="newest">Newest Arrivals</option>
-                  <option value="rating">Top Rated</option>
+                  <option value="popularity">{t('productsSection.sortOptions.popularity')}</option>
+                  <option value="price-low">{t('productsSection.sortOptions.priceLow')}</option>
+                  <option value="price-high">{t('productsSection.sortOptions.priceHigh')}</option>
+                  <option value="newest">{t('productsSection.sortOptions.newest')}</option>
+                  <option value="rating">{t('productsSection.sortOptions.topRated')}</option>
                 </select>
               </div>
             </div>
@@ -257,10 +279,10 @@ const ProductsSection: React.FC = () => {
           {filteredProducts.length === 0 ? (
             <div className={styles.noResults}>
               <FontAwesomeIcon icon={faSearch} className={styles.noResultsIcon} />
-              <h3>No Products Found</h3>
-              <p>We couldn't find any products matching your criteria.</p>
+              <h3>{t('productsSection.noResults.title')}</h3>
+              <p>{t('productsSection.noResults.message')}</p>
               <button className={styles.resetBtn} onClick={resetFilters}>
-                Reset Filters
+                {t('productsSection.resetFilters')}
               </button>
             </div>
           ) : (
@@ -282,7 +304,7 @@ const ProductsSection: React.FC = () => {
                 onClick={() => paginate(currentPage - 1)}
                 disabled={currentPage === 1}
               >
-                Previous
+                {t('productsSection.pagination.previous')}
               </button>
               
               <div className={styles.pageNumbers}>
@@ -302,7 +324,7 @@ const ProductsSection: React.FC = () => {
                 onClick={() => paginate(currentPage + 1)}
                 disabled={currentPage === totalPages}
               >
-                Next
+                {t('productsSection.pagination.next')}
               </button>
             </div>
           )}
