@@ -24,6 +24,9 @@ module.exports = {
       },
       fontFamily: {
         sans: ['Cairo', 'sans-serif'],
+        tajawal: ['Tajawal', 'sans-serif'],
+        ibm: ['IBM Plex Sans Arabic', 'sans-serif'],
+        arabic: ['Tajawal', 'IBM Plex Sans Arabic', 'Cairo', 'sans-serif'],
       },
     },
   },
