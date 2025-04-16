@@ -1,6 +1,7 @@
 import React from 'react';
 import styles from './MembershipBenefits.module.css';
 import BenefitItem from './BenefitItem';
+import { useLanguage } from '@/context/LanguageContext';
 
 interface Benefit {
   icon: string;
@@ -19,11 +20,12 @@ const MembershipBenefits: React.FC<MembershipBenefitsProps> = ({
   description,
   benefits
 }) => {
+  const { t } = useLanguage();
   return (
     <div className={styles.detailsColumn}>
       <h2 className={styles.modalTitle}>{title}</h2>
       <p className={styles.leadText}>{description}</p>
-      <h4 className={styles.benefitsTitle}>Membership Includes:</h4>
+      <h4 className={styles.benefitsTitle}>{t('membershipModal.benefitsList')}:</h4>
       <div className={styles.benefitsContainer}>
         {benefits.map((benefit, index) => (
           <BenefitItem

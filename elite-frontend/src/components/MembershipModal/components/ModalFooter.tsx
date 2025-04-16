@@ -1,5 +1,6 @@
 import React from 'react';
 import styles from './ModalFooter.module.css';
+import { useLanguage } from '@/context/LanguageContext';
 
 interface ModalFooterProps {
   onClose: () => void;
@@ -7,6 +8,7 @@ interface ModalFooterProps {
 }
 
 const ModalFooter: React.FC<ModalFooterProps> = ({ onClose, applyLink }) => {
+  const { t } = useLanguage();
   return (
     <div className={styles.modalFooter}>
       <button 
@@ -14,13 +16,13 @@ const ModalFooter: React.FC<ModalFooterProps> = ({ onClose, applyLink }) => {
         type="button" 
         onClick={onClose}
       >
-        Close
+        {t('membershipModal.buttons.close')}
       </button>
       <a 
         className={styles.applyButton}
         href={applyLink}
       >
-        Apply Now
+        {t('membershipModal.buttons.apply')}
       </a>
     </div>
   );

@@ -1,7 +1,9 @@
 import React, { useEffect, useRef } from 'react';
 import styles from '../Membership.module.css';
+import { useLanguage } from '@/context/LanguageContext';
 
 const ImageContent: React.FC = () => {
+  const { t } = useLanguage();
   const imageRef = useRef<HTMLDivElement>(null);
   
   useEffect(() => {
@@ -17,7 +19,7 @@ const ImageContent: React.FC = () => {
       <div className={styles.imageWrapper} ref={imageRef}>
         <img
           className={styles.mainImg}
-          alt="Pet Care"
+          alt={t('membership.image.alt')}
           src="https://i.pinimg.com/736x/7c/33/25/7c3325721e270f7f4792acd017492178.jpg"
         />
         {/* Decorative shapes */}

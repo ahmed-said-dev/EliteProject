@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import styles from './PricingToggle.module.css';
+import { useLanguage } from '@/context/LanguageContext';
 
 interface PricingToggleProps {
   onToggle: (isMonthly: boolean) => void;
 }
 
 const PricingToggle: React.FC<PricingToggleProps> = ({ onToggle }) => {
+  const { t } = useLanguage();
   const [isMonthly, setIsMonthly] = useState(true);
 
   const handleToggle = (monthly: boolean) => {
@@ -20,13 +22,13 @@ const PricingToggle: React.FC<PricingToggleProps> = ({ onToggle }) => {
           className={`${styles.toggleBtn} ${isMonthly ? styles.toggleBtnActive : ''}`}
           onClick={() => handleToggle(true)}
         >
-          Monthly
+          {t('pricing.toggle.monthly')}
         </button>
         <button
           className={`${styles.toggleBtn} ${!isMonthly ? styles.toggleBtnActive : ''}`}
           onClick={() => handleToggle(false)}
         >
-          Annual (save 10%)
+          {t('pricing.toggle.annual')}
         </button>
       </div>
     </div>

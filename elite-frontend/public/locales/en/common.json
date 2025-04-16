@@ -631,6 +631,9 @@
     },
     "media": {
       "title": "Elite Veterinary Blog"
+    },
+    "memberships": {
+      "title": "Memberships"
     }
   },
   "productsSection": {
@@ -851,6 +854,177 @@
     "description": "Explore insightful articles written by our experienced veterinarians to help you provide the best care for your beloved pets.",
     "readMore": "Read Full Article",
     "viewAllArticles": "View All Articles"
+  },
+  "membership": {
+    "badge": "Premium Pet Care",
+    "title": {
+      "primary": "Invest in Your Pet's",
+      "secondary": "Health with Elite Vet"
+    },
+    "subtitle": "Comprehensive Care, Simplified",
+    "intro": "At Elite Vet, we believe in providing comprehensive and affordable healthcare for your furry friend.",
+    "features": {
+      "discounted": "Discounted veterinary services",
+      "perks": "Exclusive member perks",
+      "priority": "Priority appointments"
+    },
+    "benefitsTitle": "Membership Benefits",
+    "benefits": {
+      "microchip": "Free Microchip: Every membership includes a complimentary microchip for your pet.",
+      "coverage": "Multiple Pet Coverage: Your membership covers up to 3 pets.",
+      "enrollment": "Additional Pet Enrollment: Add more pets to your membership for a fee of 650 SAR for cats and 750 SAR for dogs, per pet."
+    },
+    "cta": {
+      "title": "Ready to Elevate Your Pet's Healthcare?",
+      "button": "Join Elite Vet Today"
+    },
+    "image": {
+      "alt": "Pet Care Membership"
+    }
+  },
+  "dogMembership": {
+    "title": "Dog Membership",
+    "description": "Our Premium Dog Membership offers unparalleled benefits to ensure your canine companion receives the highest quality care.",
+    "image": {
+      "alt": "Dog Membership"
+    },
+    "price": "5,999 SAR",
+    "duration": "/month",
+    "benefits": {
+      "checkups": {
+        "title": "Monthly Check-ups",
+        "description": "Keep your dog in optimal health with a free monthly examination."
+      },
+      "therapeutic": {
+        "title": "Therapeutic Services",
+        "description": "Receive up to 400 SAR per month in complementary therapeutic services. Additional costs discounted by 30%."
+      },
+      "diagnostic": {
+        "title": "Diagnostic & Veterinary Services",
+        "description": "30% discount on a wide range of diagnostic tests and veterinary services."
+      },
+      "boarding": {
+        "title": "Boarding Services",
+        "description": "30% discount on regular and therapeutic boarding services."
+      },
+      "dental": {
+        "title": "Dental & Surgical Care",
+        "description": "30% discount on surgical procedures and dental care."
+      },
+      "grooming": {
+        "title": "Grooming Services",
+        "description": "30% discount on grooming services with priority access."
+      },
+      "food": {
+        "title": "Food & Accessories",
+        "description": "10% discount on all food and accessories purchases."
+      },
+      "luxury": {
+        "title": "Luxury Benefits",
+        "description": "VIP treatment with exclusive waiting areas and complimentary treats."
+      }
+    }
+  },
+  "catMembership": {
+    "title": "Cat Membership",
+    "description": "Our Premium Cat Membership offers comprehensive care and benefits to ensure your feline friend stays healthy and happy.",
+    "image": {
+      "alt": "Cat Membership"
+    },
+    "price": "4,999 SAR",
+    "duration": "/month",
+    "benefits": {
+      "checkups": {
+        "title": "Monthly Check-ups",
+        "description": "Keep your cat in optimal health with a free monthly examination."
+      },
+      "therapeutic": {
+        "title": "Therapeutic Services",
+        "description": "Receive up to 300 SAR per month in complementary therapeutic services. Additional costs discounted by 30%."
+      },
+      "diagnostic": {
+        "title": "Diagnostic Tests",
+        "description": "30% discount on all diagnostic tests for your feline companion."
+      },
+      "priority": {
+        "title": "Priority Appointments",
+        "description": "Get priority scheduling for all appointments and services."
+      },
+      "dental": {
+        "title": "Dental Care",
+        "description": "30% discount on dental procedures and cleaning services."
+      },
+      "grooming": {
+        "title": "Grooming Services",
+        "description": "30% discount on grooming services with priority access."
+      },
+      "cafe": {
+        "title": "Exclusive Café Perks",
+        "description": "Complimentary treats and beverages at our pet-friendly café."
+      }
+    }
+  },
+  "membershipModal": {
+    "benefitsList": "Membership Includes",
+    "buttons": {
+      "close": "Close",
+      "apply": "Apply Now"
+    }
+  },
+  "pricing": {
+    "title": "Choose your right plan!",
+    "subtitle1": "Select from best plans, ensuring a perfect match. Need more or less?",
+    "subtitle2": "Customize your subscription for a seamless fit!",
+    "toggle": {
+      "monthly": "Monthly",
+      "annual": "Annual (save 10%)"
+    },
+    "catPlan": {
+      "name": "Cat Plan",
+      "title": "Ideal for those who want comprehensive care for their feline friend",
+      "monthlyPrice": "4,999",
+      "annualPrice": "4,499",
+      "features": {
+        "checkups": "Monthly health check-ups",
+        "therapeutic": "Therapeutic services (300 SAR value)",
+        "diagnostic": "30% off on diagnostic tests",
+        "priority": "Priority appointments",
+        "perks": "Exclusive café perks"
+      }
+    },
+    "dogPlan": {
+      "name": "Dog Plan",
+      "title": "Premium care package for your canine companion",
+      "monthlyPrice": "5,999",
+      "annualPrice": "5,399",
+      "features": {
+        "checkups": "Monthly health check-ups",
+        "therapeutic": "Therapeutic services (400 SAR value)",
+        "services": "30% off on all services",
+        "vip": "VIP appointments",
+        "luxury": "Luxury waiting area access"
+      }
+    },
+    "customPlan": {
+      "name": "Custom",
+      "title": "If these plans don't fit, let's create one that suits your needs!",
+      "price": "Let's Talk!",
+      "features": {
+        "care": "Customized care plans",
+        "scheduling": "Flexible scheduling",
+        "support": "Priority support",
+        "benefits": "Tailored benefits",
+        "perks": "Custom perks"
+      }
+    },
+    "duration": {
+      "monthly": "/month",
+      "annual": "/month (annual)"
+    },
+    "button": {
+      "getStarted": "Get started",
+      "bookCall": "Book a Call"
+    }
   },
   "blogPosts": {
     "1": {
