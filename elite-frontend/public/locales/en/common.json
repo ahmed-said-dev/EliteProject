@@ -628,6 +628,9 @@
     },
     "products": {
       "title": "Pet Care Products"
+    },
+    "media": {
+      "title": "Elite Veterinary Blog"
     }
   },
   "productsSection": {
@@ -827,6 +830,145 @@
     "28": {
       "name": "Cat Toy Set - Interactive Variety",
       "description": "Set of 10 different interactive cat toys including feathers, mice, balls, and catnip toys. Great for keeping cats mentally and physically active."
+    }
+  },
+  "mediaHero": {
+    "title": {
+      "start": "Stay Informed with Expert",
+      "highlight": "Veterinary Insights"
+    },
+    "description": "Explore our collection of professional articles, tips, and stories from Elite Veterinary experts. Get the latest information on pet health, nutrition, behavior, and preventative care to help your furry family members live their best lives.",
+    "buttons": {
+      "consultation": "Schedule a Consultation",
+      "services": "Our Services"
+    },
+    "image": {
+      "alt": "Veterinarian writing blog post"
+    }
+  },
+  "blogSection": {
+    "title": "Our Latest Articles",
+    "description": "Explore insightful articles written by our experienced veterinarians to help you provide the best care for your beloved pets.",
+    "readMore": "Read Full Article",
+    "viewAllArticles": "View All Articles"
+  },
+  "blogPosts": {
+    "1": {
+      "title": "Pet Nutrition: What You Need to Know About Feeding Your Furry Friend",
+      "excerpt": "Discover the essential nutrients your pet needs for optimal health and learn how to choose the right diet for their specific requirements.",
+      "date": "April 10, 2025",
+      "author": "Dr. Sarah Johnson",
+      "readTime": "5 min read",
+      "category": "Nutrition",
+      "tags": {
+        "tag1": "Pet Diet",
+        "tag2": "Health",
+        "tag3": "Nutrition"
+      }
+    },
+    "2": {
+      "title": "Common Signs Your Pet Needs Immediate Veterinary Attention",
+      "excerpt": "Learn to recognize the warning signs that indicate your pet requires emergency medical care and what to do in these critical situations.",
+      "date": "April 5, 2025",
+      "author": "Dr. Michael Chen",
+      "readTime": "7 min read",
+      "category": "Emergency Care",
+      "tags": {
+        "tag1": "Emergency",
+        "tag2": "Pet Health",
+        "tag3": "Warning Signs"
+      }
+    },
+    "3": {
+      "title": "Preventative Care: Keeping Your Pet Healthy Year-Round",
+      "excerpt": "Prevention is better than cure. Explore the essential preventative care practices that will help your pet live a longer, healthier life.",
+      "date": "March 28, 2025",
+      "author": "Dr. Aisha Rahman",
+      "readTime": "6 min read",
+      "category": "Preventative Care",
+      "tags": {
+        "tag1": "Wellness",
+        "tag2": "Pet Care",
+        "tag3": "Prevention"
+      }
+    },
+    "4": {
+      "title": "Understanding Pet Behavior: What Your Pet is Trying to Tell You",
+      "excerpt": "Decode your pet's behavior patterns and learn how to respond appropriately to their needs and emotions.",
+      "date": "March 20, 2025",
+      "author": "Dr. James Wilson",
+      "readTime": "8 min read",
+      "category": "Behavior",
+      "tags": {
+        "tag1": "Pet Behavior",
+        "tag2": "Communication",
+        "tag3": "Pet Psychology"
+      }
+    },
+    "5": {
+      "title": "Adopting a New Pet: Everything You Need to Know",
+      "excerpt": "Thinking about adding a new furry member to your family? Here's a comprehensive guide to the adoption process and initial care.",
+      "date": "March 15, 2025",
+      "author": "Dr. Emma Thompson",
+      "readTime": "10 min read",
+      "category": "Adoption",
+      "tags": {
+        "tag1": "Pet Adoption",
+        "tag2": "New Pet",
+        "tag3": "First-time Owners"
+      }
+    },
+    "6": {
+      "title": "The Importance of Regular Dental Care for Your Pet",
+      "excerpt": "Dental health is vital for your pet's overall wellbeing. Learn about proper dental care routines and common dental issues in pets.",
+      "date": "March 8, 2025",
+      "author": "Dr. Carlos Rodriguez",
+      "readTime": "5 min read",
+      "category": "Dental Health",
+      "tags": {
+        "tag1": "Dental Care",
+        "tag2": "Oral Health",
+        "tag3": "Pet Hygiene"
+      }
+    },
+    "7": {
+      "title": "Seasonal Pet Care: Protecting Your Pet Throughout the Year",
+      "excerpt": "Different seasons bring different challenges for pet care. Get tips on how to keep your pet safe and comfortable in every season.",
+      "date": "March 1, 2025",
+      "author": "Dr. Olivia Parker",
+      "readTime": "7 min read",
+      "category": "Seasonal Care",
+      "tags": {
+        "tag1": "Weather",
+        "tag2": "Seasonal Tips",
+        "tag3": "Pet Safety"
+      }
+    },
+    "8": {
+      "title": "Aging Pets: Providing Proper Care for Your Senior Companion",
+      "excerpt": "As pets age, they require special care. Learn about the needs of senior pets and how to ensure their golden years are comfortable.",
+      "date": "February 22, 2025",
+      "author": "Dr. Robert Kim",
+      "readTime": "9 min read",
+      "category": "Senior Pet Care",
+      "tags": {
+        "tag1": "Aging Pets",
+        "tag2": "Senior Care",
+        "tag3": "Geriatric Pets"
+      }
+    },
+    "9": {
+      "title": "The Benefits of Regular Exercise for Your Pet",
+      "excerpt": "Physical activity is crucial for pets. Discover the many benefits of regular exercise and fun ways to keep your pet active.",
+      "date": "February 15, 2025",
+      "author": "Dr. Patricia Morgan",
+      "readTime": "6 min read",
+      "category": "Exercise",
+      "tags": {
+        "tag1": "Fitness",
+        "tag2": "Activity",
+        "tag3": "Pet Health"
+      }
     }
   }
 }
