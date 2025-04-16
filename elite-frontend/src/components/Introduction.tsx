@@ -91,18 +91,14 @@ const Introduction = () => {
 
             {/* Second Split Section */}
             <div className="bg-white rounded-lg overflow-hidden shadow-lg">
-              <div className="relative h-[400px]">
+              <div className="relative h-full aspect-square">
                 <Image
-                  src="/images/clinic-interior.webp"
+                  src="/Home/pic6.webp"
                   alt="Elite Veterinary Clinic Interior"
                   fill
                   style={{ objectFit: 'cover' }}
                   className="transition-transform duration-300 hover:scale-105"
                 />
-              </div>
-              <div className="p-6">
-                <h3 className="text-[#44396F] font-bold text-xl mb-3"></h3>
-                <p className="text-gray-600"></p>
               </div>
             </div>
           </div>

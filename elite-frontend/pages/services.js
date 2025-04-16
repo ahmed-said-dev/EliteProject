@@ -11,7 +11,7 @@ export default function Services() {
     <main>
       <PageBanner 
         title={t('pageBanner.services.title')}
-        backgroundImage="/images/banner/bnr1.webp"
+        backgroundImage="https://images.unsplash.com/photo-1551730459-92db2a308d6a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1920&q=80"
       />
       <ServiceJoinTeam />
       <ServicesSection />

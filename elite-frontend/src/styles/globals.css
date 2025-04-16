@@ -1,6 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -36,7 +39,7 @@ html[lang="ar"] body {
 }
 
 html[lang="en"] body {
-  font-family: 'Cairo', sans-serif;
+  font-family: 'Quicksand', 'Montserrat', sans-serif;
   direction: ltr;
 }
 
@@ -47,6 +50,23 @@ html[lang="ar"] h3,
 html[lang="ar"] h4 {
   font-family: 'IBM Plex Sans Arabic', 'Tajawal', sans-serif;
   font-weight: 700;
+}
+
+/* تنسيق خاص للعناوين باللغة الإنجليزية */
+html[lang="en"] h1,
+html[lang="en"] h2,
+html[lang="en"] h3,
+html[lang="en"] h4 {
+  font-family: 'Poppins', 'Montserrat', sans-serif;
+  font-weight: 600;
+}
+
+/* تنسيق للأزرار وعناصر الواجهة باللغة الإنجليزية */
+html[lang="en"] button,
+html[lang="en"] .btn,
+html[lang="en"] nav {
+  font-family: 'Montserrat', 'Quicksand', sans-serif;
+  font-weight: 500;
 }
 
 a {
