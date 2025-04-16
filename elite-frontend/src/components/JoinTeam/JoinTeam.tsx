@@ -2,32 +2,36 @@ import React from "react";
 import styles from "./JoinTeam.module.css";
 import CareerForm from "./CareerForm";
 import FeatureBox, { FeatureBoxProps } from "./FeatureBox";
+import { useLanguage } from "@/context/LanguageContext";
 
 export default function JoinTeam() {
+  const { locale, isRTL, t } = useLanguage();
+  const dir = isRTL ? 'rtl' : 'ltr';
+
   // Feature boxes data
   const features: FeatureBoxProps[] = [
     {
       icon: "fa-heartbeat",
-      title: "Passionate Care",
-      description: "Join a team that puts pet care first",
+      title: t('about.joinTeam.features.passionateCare.title'),
+      description: t('about.joinTeam.features.passionateCare.description'),
       delay: "0.2s"
     },
     {
       icon: "fa-graduation-cap",
-      title: "Growth Opportunities",
-      description: "Continuous learning & development",
+      title: t('about.joinTeam.features.growthOpportunities.title'),
+      description: t('about.joinTeam.features.growthOpportunities.description'),
       delay: "0.4s"
     },
     {
       icon: "fa-users",
-      title: "Supportive Team",
-      description: "Work with experienced professionals",
+      title: t('about.joinTeam.features.supportiveTeam.title'),
+      description: t('about.joinTeam.features.supportiveTeam.description'),
       delay: "0.6s"
     },
     {
       icon: "fa-medal",
-      title: "Excellence",
-      description: "State-of-the-art facilities & equipment",
+      title: t('about.joinTeam.features.excellence.title'),
+      description: t('about.joinTeam.features.excellence.description'),
       delay: "0.8s"
     }
   ];
@@ -83,14 +87,8 @@ export default function JoinTeam() {
         <div className={styles.row}>
           <div className={styles.leftColumn}>
             <div className={styles.sectionHead}>
-              <h2 className={styles.title}>
-                Join Our Veterinary Team
-                <br />
-                <span className={styles.textPrimary}>Make a Difference</span>
-              </h2>
-              <p className={styles.small}>
-                As a leading pet clinic, we're always seeking compassionate and skilled individuals to join our dedicated team of veterinary professionals.
-              </p>
+              <h2 className={styles.title}>{t('about.joinTeam.title')}</h2>
+              <p className={styles.description}>{t('about.joinTeam.description')}</p>
             </div>
             <div className={styles.featuresRow}>
               {features.map((feature, index) => (

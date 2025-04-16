@@ -116,6 +116,150 @@
     }
   },
   "about": {
+    "joinTeam": {
+      "title": "Join Our Elite Veterinary Team",
+      "description": "We're always looking for passionate veterinary professionals who share our commitment to providing exceptional pet care.",
+      "benefits": {
+        "title": "Why Join Us?",
+        "items": [
+          {
+            "icon": "fas fa-graduation-cap",
+            "title": "Professional Growth",
+            "description": "Continuous learning opportunities and career development programs"
+          },
+          {
+            "icon": "fas fa-users",
+            "title": "Collaborative Environment",
+            "description": "Work with a supportive team of experienced veterinary professionals"
+          },
+          {
+            "icon": "fas fa-medal",
+            "title": "State-of-the-Art Facilities",
+            "description": "Access to modern equipment and advanced veterinary technology"
+          },
+          {
+            "icon": "fas fa-heart",
+            "title": "Work-Life Balance",
+            "description": "Flexible schedules and comprehensive benefits package"
+          }
+        ]
+      },
+      "positions": {
+        "title": "Current Openings",
+        "items": [
+          {
+            "title": "Veterinarian",
+            "type": "Full-time",
+            "location": "Dubai",
+            "requirements": [
+              "DVM or equivalent degree",
+              "Minimum 3 years of clinical experience",
+              "Strong communication skills",
+              "UAE veterinary license (preferred)"
+            ]
+          },
+          {
+            "title": "Veterinary Technician",
+            "type": "Full-time",
+            "location": "Dubai",
+            "requirements": [
+              "Veterinary nursing degree",
+              "2+ years experience in a clinical setting",
+              "Strong patient care skills",
+              "Emergency care experience"
+            ]
+          },
+          {
+            "title": "Pet Groomer",
+            "type": "Part-time",
+            "location": "Dubai",
+            "requirements": [
+              "Professional grooming certification",
+              "1+ year experience",
+              "Knowledge of breed standards",
+              "Patient and detail-oriented"
+            ]
+          }
+        ]
+      },
+      "contact": {
+        "title": "Apply Now",
+        "description": "Send your resume and cover letter to",
+        "email": "careers@elitevet.ae"
+      }
+    },
+    "team": {
+      "title": "Meet Our Expert Veterinary Team",
+      "intro": {
+        "text1": "Our pet clinic has a team of highly skilled veterinarians committed to providing top-notch care for your furry companions. Our consultants hold advanced degrees from renowned international universities and bring years of experience to the table.",
+        "text2": "They're passionate about animal health and dedicated to providing the best possible medical services.",
+        "expertise": "Our expert surgeons are skilled in handling a wide range of cases, ensuring that your pet receives the highest quality care."
+      },
+      "members": [
+        {
+          "name": "Dr. Doctor Name",
+          "position": "Chief Veterinarian",
+          "imageSrc": "/images/team/img1.webp",
+          "specialties": [
+            { "icon": "fas fa-paw", "text": "Pet Internal Medicine Specialist" },
+            { "icon": "fas fa-heartbeat", "text": "Advanced Pet Diagnostics" },
+            { "icon": "fas fa-certificate", "text": "Certified in Pet Nutrition" }
+          ]
+        },
+        {
+          "name": "Dr. Doctor Name",
+          "position": "Pet Surgeon",
+          "imageSrc": "/images/team/img2.webp",
+          "specialties": [
+            { "icon": "fas fa-bone", "text": "Orthopedic Surgery Expert" },
+            { "icon": "fas fa-microscope", "text": "Advanced Pet Surgery" },
+            { "icon": "fas fa-hospital", "text": "Emergency Pet Care" }
+          ]
+        },
+        {
+          "name": "Dr. Doctor Name",
+          "position": "Pet Dermatologist",
+          "imageSrc": "/images/team/img3.webp",
+          "specialties": [
+            { "icon": "fas fa-allergies", "text": "Pet Dermatology Expert" },
+            { "icon": "fas fa-shield-alt", "text": "Pet Allergy Treatment" },
+            { "icon": "fas fa-pills", "text": "Advanced Skin Therapy" }
+          ]
+        },
+        {
+          "name": "Dr. Doctor Name",
+          "position": "Pet Nutritionist",
+          "imageSrc": "/images/team/img4.webp",
+          "specialties": [
+            { "icon": "fas fa-utensils", "text": "Pet Nutrition Expert" },
+            { "icon": "fas fa-weight", "text": "Pet Weight Management" },
+            { "icon": "fas fa-carrot", "text": "Special Diet Formulations" }
+          ]
+        }
+      ]
+    },
+    "partners": {
+      "title": "Our Partners",
+      "description": "Trusted by leading veterinary institutions and organizations",
+      "logos": [
+        {
+          "alt": "Partner Logo 1",
+          "src": "/images/logo/logo_placeholder.png"
+        },
+        {
+          "alt": "Partner Logo 2",
+          "src": "/images/logo/logo_placeholder.png"
+        },
+        {
+          "alt": "Partner Logo 3",
+          "src": "/images/logo/logo_placeholder.png"
+        },
+        {
+          "alt": "Partner Logo 4",
+          "src": "/images/logo/logo_placeholder.png"
+        }
+      ]
+    },
     "csr": {
       "imageAlt": "Corporate Social Responsibility",
       "experience": {

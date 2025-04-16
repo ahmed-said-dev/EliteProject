@@ -1,81 +1,36 @@
 import React from "react";
 import styles from "./TeamSection.module.css";
 import TeamMember, { TeamMemberProps } from "./TeamMember";
+import { useLanguage } from "@/context/LanguageContext";
 
-const teamMembers: TeamMemberProps[] = [
-  {
-    name: "Dr. Doctor Name",
-    position: "Chief Veterinarian",
-    imageSrc: "/images/team/img1.webp",
-    isActive: true,
-    animationDelay: "0.2s",
-    specialties: [
-      { icon: "fas fa-paw", text: "Pet Internal Medicine Specialist" },
-      { icon: "fas fa-heartbeat", text: "Advanced Pet Diagnostics" },
-      { icon: "fas fa-certificate", text: "Certified in Pet Nutrition" },
-    ],
-    socialLinks: [
-      { platform: "LinkedIn", url: "https://www.linkedin.com/", icon: "fa-brands fa-linkedin" },
-      { platform: "Instagram", url: "https://www.instagram.com/", icon: "fa-brands fa-instagram" },
-      { platform: "Facebook", url: "https://www.facebook.com/", icon: "fa-brands fa-facebook-f" },
-    ],
-  },
-  {
-    name: "Dr. Doctor Name",
-    position: "Pet Surgeon",
-    imageSrc: "/images/team/img2.webp",
-    isActive: false,
-    animationDelay: "0.4s",
-    specialties: [
-      { icon: "fas fa-bone", text: "Orthopedic Surgery Expert" },
-      { icon: "fas fa-microscope", text: "Advanced Pet Surgery" },
-      { icon: "fas fa-hospital", text: "Emergency Pet Care" },
-    ],
-    socialLinks: [
-      { platform: "LinkedIn", url: "https://www.linkedin.com/", icon: "fa-brands fa-linkedin" },
-      { platform: "Instagram", url: "https://www.instagram.com/", icon: "fa-brands fa-instagram" },
-      { platform: "Facebook", url: "https://www.facebook.com/", icon: "fa-brands fa-facebook-f" },
-    ],
-  },
-  {
-    name: "Dr. Doctor Name",
-    position: "Pet Dermatologist",
-    imageSrc: "/images/team/img3.webp",
-    isActive: false,
-    animationDelay: "0.6s",
-    specialties: [
-      { icon: "fas fa-allergies", text: "Pet Dermatology Expert" },
-      { icon: "fas fa-shield-alt", text: "Pet Allergy Treatment" },
-      { icon: "fas fa-pills", text: "Advanced Skin Therapy" },
-    ],
-    socialLinks: [
-      { platform: "LinkedIn", url: "https://www.linkedin.com/", icon: "fa-brands fa-linkedin" },
-      { platform: "Instagram", url: "https://www.instagram.com/", icon: "fa-brands fa-instagram" },
-      { platform: "Facebook", url: "https://www.facebook.com/", icon: "fa-brands fa-facebook-f" },
-    ],
-  },
-  {
-    name: "Dr. Doctor Name",
-    position: "Pet Nutritionist",
-    imageSrc: "/images/team/img4.webp",
-    isActive: false,
-    animationDelay: "0.8s",
-    specialties: [
-      { icon: "fas fa-utensils", text: "Pet Nutrition Expert" },
-      { icon: "fas fa-weight", text: "Pet Weight Management" },
-      { icon: "fas fa-carrot", text: "Special Diet Formulations" },
-    ],
-    socialLinks: [
-      { platform: "LinkedIn", url: "https://www.linkedin.com/", icon: "fa-brands fa-linkedin" },
-      { platform: "Instagram", url: "https://www.instagram.com/", icon: "fa-brands fa-instagram" },
-      { platform: "Facebook", url: "https://www.facebook.com/", icon: "fa-brands fa-facebook-f" },
-    ],
-  },
-];
+interface TeamMemberData extends TeamMemberProps {
+  name: string;
+  position: string;
+  imageSrc: string;
+  specialties: Array<{ icon: string; text: string }>;
+  socialLinks: Array<{ platform: string; url: string; icon: string }>;
+  isActive: boolean;
+  animationDelay: string;
+}
 
 export default function TeamSection() {
+  const { locale, isRTL, t } = useLanguage();
+  const dir = isRTL ? 'rtl' : 'ltr';
+  const teamMembers = t('about.team.members', { returnObjects: true }) as TeamMemberData[];
+
+  const membersWithDefaults = teamMembers.map((member, index) => ({
+    ...member,
+    isActive: true,
+    animationDelay: `${index * 0.2}s`,
+    socialLinks: [
+      { platform: 'facebook', icon: 'fab fa-facebook-f', url: '#' },
+      { platform: 'twitter', icon: 'fab fa-twitter', url: '#' },
+      { platform: 'linkedin', icon: 'fab fa-linkedin-in', url: '#' }
+    ]
+  }));
+
   return (
-    <section className={styles.sectionTeam}>
+    <section className={styles.sectionTeam} dir={dir}>
       <div className={styles.backgroundShapes}>
         <i className={`fas fa-paw ${styles.petShape} ${styles.pawPrint1}`} />
         <i className={`fas fa-paw ${styles.petShape} ${styles.pawPrint2}`} />
@@ -86,33 +41,26 @@ export default function TeamSection() {
       <div className={styles.container}>
         <div className={styles.sectionHead}>
           <div className={`${styles.col12} ${styles.fadeInUp}`}>
-            <h2 className={styles.title}>Meet Our Expert Veterinary Team</h2>
+            <h2 className={styles.title}>{t('about.team.title')}</h2>
             <div className={styles.teamIntro}>
               <i className={`fas fa-paw ${styles.introIcon}`} />
               <p className={styles.introText}>
-                Our pet clinic has a team of highly skilled veterinarians
-                committed to providing top-notch care for your furry
-                companions. Our consultants hold advanced degrees from
-                renowned international universities and bring years of
-                experience to the table.
+                {t('about.team.intro.text1')}
               </p>
               <p className={styles.introText2}>
-                They're passionate about animal health and dedicated to
-                providing the best possible medical services.
+                {t('about.team.intro.text2')}
               </p>
               <div className={styles.expertiseHighlight}>
                 <i className={`fas fa-medal ${styles.medalIcon}`} />
                 <span>
-                  Our expert surgeons are skilled in handling a wide range of
-                  cases, ensuring that your pet receives the highest quality
-                  care.
+                  {t('about.team.intro.expertise')}
                 </span>
               </div>
             </div>
           </div>
         </div>
         <div className={styles.teamRow}>
-          {teamMembers.map((member, index) => (
+          {membersWithDefaults.map((member, index) => (
             <TeamMember key={index} {...member} />
           ))}
         </div>
