@@ -37,7 +37,7 @@ export default function JoinTeam() {
   ];
 
   return (
-    <section id="join-veterinary-team" className={styles.sectionWrapper}>
+    <section id="join-veterinary-team" className={styles.sectionWrapper} dir={dir}>
       <div className={styles.sectionShapes}>
         <div className={`${styles.shape} ${styles.shape1}`}>
           <i className={`fas fa-paw ${styles.floatingPaw}`} />

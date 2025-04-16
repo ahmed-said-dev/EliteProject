@@ -115,8 +115,212 @@
       "emergency": "24/7 Emergency Services"
     }
   },
+  "serviceSection": {
+    "title": "Our Services",
+    "intro": {
+      "badge": "Elite Care",
+      "description": "At Elite Vet, your pet's health is our top priority. As a leading Riyadh veterinary clinic, we offer a comprehensive range of veterinary services to keep your furry companions happy and healthy. From routine check-ups to advanced surgical procedures, our experienced team is dedicated to providing the highest quality care."
+    },
+    "categories": [
+      {
+        "id": 1,
+        "title": "Our Medical Services",
+        "badge": "Elite Care",
+        "features": [
+          "Internal Medicine: Expert diagnosis and treatment of internal diseases",
+          "Skin & Immune Care: Advanced treatments for skin and immune disorders",
+          "Heart Disease: State-of-the-art cardiac care and procedures",
+          "Isolation Care: Safe environment for infectious disease treatment",
+          "Bird Care: Specialized avian healthcare services",
+          "Respiratory Care: Treatment for breathing conditions",
+          "Kidney & Liver: Management of chronic organ diseases",
+          "Eye Care: Advanced treatment for vision problems",
+          "Neurology: Brain and spinal injury treatment"
+        ]
+      },
+      {
+        "id": 2,
+        "title": "Hygiene & Appearance Care",
+        "badge": "Premium Care",
+        "features": [
+          "Teeth Cleaning: Professional dental care for optimal oral health",
+          "Nail Clipping: Safe and precise nail trimming services",
+          "Ear Cleaning: Thorough cleaning to prevent infections",
+          "Bathing & Drying: Premium grooming with quality products",
+          "Hair Combing: Professional detangling and mat removal",
+          "Hair Cutting: Breed-specific and custom styling options",
+          "Expert Groomers: Experienced in all breeds and sizes",
+          "Modern Facilities: State-of-the-art grooming equipment",
+          "Stress-Free Environment: Gentle handling techniques"
+        ]
+      },
+      {
+        "id": 3,
+        "title": "Diagnostic Tests",
+        "badge": "Advanced Diagnostics",
+        "features": [
+          "Blood Tests: Complete blood count, chemistry profile, and thyroid tests",
+          "PCW Tests: Comprehensive health assessment and early detection",
+          "Urine & Fecal Tests: Infection and parasite detection",
+          "X-rays: Bone, joint, and internal organ examination",
+          "Ultrasound: Detailed organ imaging and pregnancy checks",
+          "Endoscopy: Minimally invasive internal examination",
+          "CT Scan: Advanced cross-sectional imaging",
+          "In-house Laboratory: Quick and accurate results",
+          "Expert Analysis: Skilled veterinary diagnosticians"
+        ]
+      },
+      {
+        "id": 4,
+        "title": "Medical Surgeries",
+        "badge": "Surgical Excellence",
+        "features": [
+          "General Surgery: Spaying, neutering, and mass removal",
+          "Orthopedic Surgery: Fracture repair and joint replacements",
+          "Neurosurgery: IVDD and brain tumor procedures",
+          "Soft Tissue Surgery: Advanced procedures with minimal invasion",
+          "Gastrointestinal Surgery: Treatment for bloat and obstructions",
+          "Advanced Pain Management: Comprehensive care protocols",
+          "State-of-the-Art Facilities: Modern surgical suites",
+          "Expert Surgical Team: Highly skilled veterinary surgeons",
+          "Post-Operative Care: Dedicated recovery monitoring"
+        ]
+      },
+      {
+        "id": 5,
+        "title": "Dental Services",
+        "badge": "Dental Excellence",
+        "features": [
+          "Dental Cleaning: Professional scaling and polishing",
+          "Dental X-rays: Comprehensive oral examination",
+          "Extractions: Surgical removal when necessary",
+          "Oral Surgery: Advanced treatment for dental issues",
+          "Periodontal Treatments: Gum disease prevention and care",
+          "Preventive Care: Education on at-home dental hygiene",
+          "Pain Management: Comfort before, during, and after procedures",
+          "Digital Imaging: State-of-the-art diagnostic equipment",
+          "Specialized Training: Dentistry-focused veterinary staff"
+        ]
+      },
+      {
+        "id": 6,
+        "title": "Periodic Vaccinations",
+        "badge": "Preventive Care",
+        "features": [
+          "Rabies Vaccine: Essential protection for all pets",
+          "FVRCP Vaccine: Complete protection for cats",
+          "FeLV Vaccine: Feline leukemia prevention",
+          "DHPP Vaccine: Core protection for dogs",
+          "Regular Health Check-ups: Comprehensive exams",
+          "Customized Vaccination Schedules",
+          "Preventive Healthcare Plans",
+          "Expert Veterinary Guidance",
+          "Digital Vaccination Records"
+        ]
+      },
+      {
+        "id": 7,
+        "title": "Pet Travel Procedures",
+        "badge": "Travel Ready",
+        "features": [
+          "Pre-Travel Health Check: Comprehensive examination",
+          "Veterinary Health Certificate: Official documentation",
+          "Travel Vaccinations: Destination-specific requirements",
+          "Parasiticide Treatment: Complete protection",
+          "Electronic ID Chip: International standard microchipping",
+          "Travel Consultation: Expert guidance and advice",
+          "Documentation Processing: Streamlined paperwork",
+          "International Regulations: Up-to-date compliance",
+          "Travel Kit Preparation: Essential supplies guidance"
+        ]
+      },
+      {
+        "id": 8,
+        "title": "Boarding Services",
+        "badge": "Pet Hotel",
+        "features": [
+          "Daily Stay: Cozy accommodations & care",
+          "Long-Term Stay: Comprehensive care packages",
+          "Daily Nutrition: Premium pet food options",
+          "Medical Follow-up: Regular health monitoring",
+          "Walking & Personal Care: Daily exercise",
+          "Playtime & Socialization: Supervised activities",
+          "Veterinary Supervision: On-site medical care",
+          "Luxurious Facilities: Clean, spacious kennels",
+          "24/7 Staff Monitoring: Constant attention"
+        ]
+      },
+      {
+        "id": 9,
+        "title": "Intensive Care",
+        "badge": "ICU",
+        "features": [
+          "Post-Operative Care: 24/7 monitoring",
+          "Vital Signs Monitoring: Advanced equipment",
+          "Critical Care: Emergency treatments",
+          "24-Hour Care: Round-the-clock staffing",
+          "Pain Management: Personalized plans",
+          "Advanced Medical Equipment: State-of-the-art",
+          "Expert Veterinary Team: Experienced staff",
+          "Emergency Response: Immediate action",
+          "Continuous Monitoring: Real-time tracking"
+        ]
+      },
+      {
+        "id": 10,
+        "title": "Emergency Services",
+        "badge": "Emergency",
+        "features": [
+          "24/7 Emergency Response: Always available",
+          "Urgent Injury Treatment: Immediate care",
+          "Poisoning Cases: Swift intervention",
+          "Immediate First Aid: Quick response",
+          "Emergency Surgery: When needed",
+          "Trauma Care: Expert handling",
+          "Critical Stabilization: Life-saving care",
+          "Advanced Equipment: Latest technology",
+          "Experienced Team: 24/7 staffing"
+        ]
+      },
+      {
+        "id": 11,
+        "title": "Home Care Service",
+        "badge": "Home Visit",
+        "features": [
+          "Home Veterinary Visits: Comprehensive care",
+          "Medication Administration: At-home service",
+          "Home Examinations: Thorough check-ups",
+          "Post-Surgery Care: Recovery support",
+          "Daily Care Services: Regular attention",
+          "Geriatric Care: Senior pet support",
+          "Behavioral Support: Expert guidance",
+          "Health Monitoring: Regular checks",
+          "Personalized Care Plans: Custom service"
+        ]
+      }
+
+    ]
+  },
   "about": {
     "joinTeam": {
+      "features": {
+        "passionateCare": {
+          "title": "Passionate Care",
+          "description": "Join a team that puts pet care first"
+        },
+        "growthOpportunities": {
+          "title": "Growth Opportunities",
+          "description": "Continuous learning & development"
+        },
+        "supportiveTeam": {
+          "title": "Supportive Team",
+          "description": "Work with experienced professionals"
+        },
+        "excellence": {
+          "title": "Excellence",
+          "description": "State-of-the-art facilities & equipment"
+        }
+      },
       "title": "Join Our Elite Veterinary Team",
       "description": "We're always looking for passionate veterinary professionals who share our commitment to providing exceptional pet care.",
       "benefits": {
@@ -181,6 +385,45 @@
             ]
           }
         ]
+      },
+      "careerForm": {
+        "title": "Career Application",
+        "personal": {
+          "title": "Personal Information",
+          "fullName": "Full Name",
+          "email": "Email Address",
+          "phone": "Phone Number"
+        },
+        "professional": {
+          "title": "Professional Information",
+          "position": {
+            "label": "Desired Position",
+            "placeholder": "Select Position",
+            "options": {
+              "veterinarian": "Veterinarian",
+              "vetTechnician": "Veterinary Technician",
+              "vetAssistant": "Veterinary Assistant",
+              "receptionist": "Receptionist"
+            }
+          },
+          "startDate": "Available Start Date",
+          "education": {
+            "label": "Education Level",
+            "placeholder": "Select Education Level",
+            "options": {
+              "highSchool": "High School Diploma",
+              "associate": "Associate Degree",
+              "bachelor": "Bachelor's Degree",
+              "master": "Master's Degree",
+              "doctorate": "Doctorate/PhD"
+            }
+          },
+          "experience": "Years of Experience",
+          "experience_placeholder": "Briefly describe your experience and why you'd like to join our team",
+          "resume": "Upload Resume/CV",
+          "coverLetter": "Cover Letter"
+        },
+        "submit": "Submit Application"
       },
       "contact": {
         "title": "Apply Now",
@@ -376,6 +619,12 @@
         "emergency": "Emergency Care",
         "emergencyHours": "24/7"
       }
+    }
+  },
+  "pageBanner": {
+    "home": "Home",
+    "services": {
+      "title": "Our Services"
     }
   }
 }

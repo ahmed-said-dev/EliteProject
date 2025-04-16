@@ -1,13 +1,15 @@
 import React from "react";
 import styles from "./JoinTeam.module.css";
+import { useLanguage } from "@/context/LanguageContext";
 
 export default function CareerForm() {
+  const { locale, isRTL, t } = useLanguage();
   return (
     <div className={styles.formWrapper}>
       <div className={styles.formBody}>
         <div className={styles.titleHead}>
           <h2 className={styles.formTitle}>
-            Career <span className={styles.highlightText}>Application</span>
+            {t('about.joinTeam.careerForm.title')} <span className={styles.highlightText}></span>
           </h2>
         </div>
         <form className={styles.applicationForm}>
@@ -16,7 +18,7 @@ export default function CareerForm() {
             <div className={styles.colFull}>
               <h4 className={styles.formSectionTitle}>
                 <i className="fas fa-user me-2" />
-                Personal Information
+                {t('about.joinTeam.careerForm.personal.title')}
               </h4>
             </div>
             <div className={styles.colFull}>
@@ -26,9 +28,9 @@ export default function CareerForm() {
                   className={styles.formControl}
                   name="fullName"
                   type="text"
-                  placeholder="Full Name"
+                  placeholder={t('about.joinTeam.careerForm.personal.fullName')}
                 />
-                <label htmlFor="inputFullName">Full Name</label>
+                <label htmlFor="inputFullName">{t('about.joinTeam.careerForm.personal.fullName')}</label>
               </div>
             </div>
             <div className={styles.colHalf}>
@@ -38,9 +40,9 @@ export default function CareerForm() {
                   className={styles.formControl}
                   name="email"
                   type="email"
-                  placeholder="Email Address"
+                  placeholder={t('about.joinTeam.careerForm.personal.email')}
                 />
-                <label htmlFor="inputEmail">Email Address</label>
+                <label htmlFor="inputEmail">{t('about.joinTeam.careerForm.personal.email')}</label>
               </div>
             </div>
             <div className={styles.colHalf}>
@@ -50,15 +52,15 @@ export default function CareerForm() {
                   className={styles.formControl}
                   name="phone"
                   type="tel"
-                  placeholder="Phone Number"
+                  placeholder={t('about.joinTeam.careerForm.personal.phone')}
                 />
-                <label htmlFor="inputPhone">Phone Number</label>
+                <label htmlFor="inputPhone">{t('about.joinTeam.careerForm.personal.phone')}</label>
               </div>
             </div>
             <div className={styles.colFull}>
               <h4 className={styles.formSectionTitle}>
                 <i className="fas fa-briefcase me-2" />
-                Professional Information
+                {t('about.joinTeam.careerForm.professional.title')}
               </h4>
             </div>
             <div className={styles.colHalf}>
@@ -68,13 +70,13 @@ export default function CareerForm() {
                   className={styles.formControl}
                   name="position"
                 >
-                  <option>Select Position</option>
-                  <option value="Veterinarian">Veterinarian</option>
-                  <option value="Vet Technician">Veterinary Technician</option>
-                  <option value="Vet Assistant">Veterinary Assistant</option>
-                  <option value="Receptionist">Receptionist</option>
+                  <option>{t('about.joinTeam.careerForm.professional.position.placeholder')}</option>
+                  <option value="Veterinarian">{t('about.joinTeam.careerForm.professional.position.options.veterinarian')}</option>
+                  <option value="Vet Technician">{t('about.joinTeam.careerForm.professional.position.options.vetTechnician')}</option>
+                  <option value="Vet Assistant">{t('about.joinTeam.careerForm.professional.position.options.vetAssistant')}</option>
+                  <option value="Receptionist">{t('about.joinTeam.careerForm.professional.position.options.receptionist')}</option>
                 </select>
-                <label htmlFor="inputPosition" className={styles.active}>Desired Position</label>
+                <label htmlFor="inputPosition" className={styles.active}>{t('about.joinTeam.careerForm.professional.position.label')}</label>
               </div>
             </div>
             <div className={styles.colHalf}>
@@ -85,7 +87,7 @@ export default function CareerForm() {
                   name="startDate"
                   type="date"
                 />
-                <label htmlFor="inputStartDate" className={styles.active}>Available Start Date</label>
+                <label htmlFor="inputStartDate" className={styles.active}>{t('about.joinTeam.careerForm.professional.startDate')}</label>
               </div>
             </div>
             <div className={styles.colFull}>
@@ -95,14 +97,14 @@ export default function CareerForm() {
                   className={styles.formControl}
                   name="education"
                 >
-                  <option>Select Education Level</option>
-                  <option value="High School">High School Diploma</option>
-                  <option value="Associate">Associate Degree</option>
-                  <option value="Bachelor">Bachelor's Degree</option>
-                  <option value="DVM">Doctor of Veterinary Medicine</option>
-                  <option value="Other">Other Certification</option>
+                  <option>{t('about.joinTeam.careerForm.professional.education.placeholder')}</option>
+                  <option value="High School">{t('about.joinTeam.careerForm.professional.education.options.highSchool')}</option>
+                  <option value="Associate">{t('about.joinTeam.careerForm.professional.education.options.associate')}</option>
+                  <option value="Bachelor">{t('about.joinTeam.careerForm.professional.education.options.bachelor')}</option>
+                  <option value="Master">{t('about.joinTeam.careerForm.professional.education.options.master')}</option>
+                  <option value="Doctorate">{t('about.joinTeam.careerForm.professional.education.options.doctorate')}</option>
                 </select>
-                <label htmlFor="inputEducation" className={styles.active}>Education Level</label>
+                <label htmlFor="inputEducation" className={styles.active}>{t('about.joinTeam.careerForm.professional.education.label')}</label>
               </div>
             </div>
             <div className={styles.colFull}>
@@ -112,16 +114,16 @@ export default function CareerForm() {
                   className={styles.formControl}
                   name="experience"
                   rows={3}
-                  placeholder="Briefly describe your experience and why you'd like to join our team"
+                  placeholder={t('about.joinTeam.careerForm.professional.experience_placeholder')}
                 ></textarea>
-                <label htmlFor="inputExperience">Experience & Motivation</label>
+                <label htmlFor="inputExperience">{t('about.joinTeam.careerForm.professional.experience')}</label>
               </div>
             </div>
             <div className={styles.colFull}>
               <div className={styles.resumeUpload}>
                 <label htmlFor="resumeUpload" className={styles.uploadLabel}>
                   <i className="fas fa-file-upload me-2" />
-                  Upload Resume (PDF/DOC)
+                  {t('about.joinTeam.careerForm.professional.resume')} (PDF/DOC)
                 </label>
                 <input
                   type="file"
@@ -135,7 +137,7 @@ export default function CareerForm() {
             <div className={styles.colFull}>
               <button type="submit" className={styles.btnSubmit}>
                 <i className="fas fa-paper-plane me-2" />
-                Submit Application
+                {t('about.joinTeam.careerForm.submit')}
               </button>
             </div>
           </div>

@@ -1,8 +1,11 @@
 import { useEffect } from 'react';
 import Link from 'next/link';
 import styles from '@/styles/PageBanner.module.css';
+import { useLanguage } from '@/context/LanguageContext';
 
 const PageBanner = ({ title, backgroundImage }) => {
+  const { isRTL, t } = useLanguage();
+  const dir = isRTL ? 'rtl' : 'ltr';
   useEffect(() => {
     if (typeof window !== 'undefined') {
       const WOW = require('wowjs');
@@ -21,6 +24,7 @@ const PageBanner = ({ title, backgroundImage }) => {
     <div
       className={`${styles.bannerContainer} ${styles.overlay}`}
       style={{ backgroundImage: `url(${backgroundImage})` }}
+      dir={dir}
     >
       <div className={styles.container}>
         <div className={styles.entry}>
@@ -40,7 +44,7 @@ const PageBanner = ({ title, backgroundImage }) => {
             <ul className={styles.breadcrumb}>
               <li className={styles.breadcrumbItem}>
                 <Link href="/" style={{ color: '#ffffff', textDecoration: 'none' }}>
-                  Home
+                  {t('pageBanner.home')}
                 </Link>
               </li>
               <li className={styles.breadcrumbItem}>{title}</li>
