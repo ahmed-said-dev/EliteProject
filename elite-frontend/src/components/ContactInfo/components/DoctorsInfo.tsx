@@ -9,23 +9,28 @@ const DoctorsInfo: React.FC = () => {
           <div className={styles.avatarGroup}>
             <img
               className={styles.avatar}
-              src="/images/avatar/small/avatar1.webp"
-              alt="Doctor"
+              src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=300&q=80"
+              alt="Dr. Sarah Johnson"
             />
             <img
               className={styles.avatar}
-              src="/images/avatar/small/avatar2.webp"
-              alt="Doctor"
+              src="https://images.unsplash.com/photo-1622253692010-333f2da6031d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=300&q=80"
+              alt="Dr. Michael Rodriguez"
             />
             <img
               className={styles.avatar}
-              src="/images/avatar/small/avatar3.webp"
-              alt="Doctor"
+              src="https://images.unsplash.com/photo-1594824476967-48c8b964273f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=300&q=80"
+              alt="Dr. Emily Chen"
             />
             <img
               className={styles.avatar}
-              src="/images/avatar/small/avatar4.webp"
-              alt="Doctor"
+              src="https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=300&q=80"
+              alt="Dr. James Wilson"
+            />
+            <img
+              className={styles.avatar}
+              src="https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=300&q=80"
+              alt="Dr. Olivia Carter"
             />
           </div>
           <div className={styles.infoContent}>
