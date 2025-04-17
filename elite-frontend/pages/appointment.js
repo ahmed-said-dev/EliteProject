@@ -3,6 +3,7 @@ import { AppointmentForm } from '@/features/appointments/AppointmentForm';
 import PageBanner from '@/components/PageBanner/PageBanner';
 import { AppointmentIntro } from '@/components/AppointmentIntro';
 import { AppointmentBookingForm } from '@/components/AppointmentBookingForm';
+import { EmergencyCare } from '@/components/EmergencyCare';
 
 export default function Appointment() {
   return (
@@ -13,6 +14,7 @@ export default function Appointment() {
       />
       <AppointmentIntro />
       <AppointmentBookingForm />
+      <EmergencyCare />
 
     </main>
   );
