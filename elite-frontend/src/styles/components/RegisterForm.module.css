@@ -1,0 +1,5 @@
+.formCard {
+    position: relative;
+    isolation: isolate;
+    backdrop-filter: blur(10px);
+}
