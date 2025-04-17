@@ -8,7 +8,7 @@ import { useLanguage } from "@/context/LanguageContext";
 
 const Hero = () => {
   const { locale, isRTL } = useLanguage();
-  const dir = isRTL ? 'rtl' : 'ltr';
+  const dir = 'rtl' ;
 
   return (
     <div className="relative w-full min-h-[600px] overflow-hidden" dir={dir}>
