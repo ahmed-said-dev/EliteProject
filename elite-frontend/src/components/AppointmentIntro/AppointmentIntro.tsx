@@ -55,7 +55,7 @@ export const AppointmentIntro = () => {
               <img
                 className={styles.image}
                 alt="Veterinary Care"
-                src="/images/about/img5.webp"
+                src="https://images.unsplash.com/photo-1606098216818-40939b7c98ad?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
               />
               <div className={styles.experienceCard}>
                 <div className={styles.expContent}>

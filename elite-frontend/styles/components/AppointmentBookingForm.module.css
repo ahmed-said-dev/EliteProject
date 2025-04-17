@@ -2,7 +2,7 @@
   position: relative;
   padding-top: 100px;
   padding-bottom: 0;
-  background-image: url('/images/background/bg5.png');
+  background-image: url('/appointment/bg5.png');
   background-color: rgba(245, 240, 255, 1);
   z-index: 2;
 }
