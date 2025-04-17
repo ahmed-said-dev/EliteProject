@@ -4,6 +4,8 @@ import PageBanner from '@/components/PageBanner/PageBanner';
 import { AppointmentIntro } from '@/components/AppointmentIntro';
 import { AppointmentBookingForm } from '@/components/AppointmentBookingForm';
 import { EmergencyCare } from '@/components/EmergencyCare';
+import { SectionDivider } from '@/components/SectionDivider';
+import { EmergencyOutro } from '@/components/EmergencyOutro';
 
 export default function Appointment() {
   return (
@@ -13,8 +15,15 @@ export default function Appointment() {
         backgroundImage="/images/banner/bnr1.webp"
       />
       <AppointmentIntro />
+      {/* <SectionDivider icon="fas fa-calendar-check" color="#7c58d3" /> */}
       <AppointmentBookingForm />
       <EmergencyCare />
+      <SectionDivider 
+        icon="fas fa-heart-pulse" 
+        topColor="#6242A1" 
+        bottomColor="#430D4E" 
+      />
+      <EmergencyOutro />
 
     </main>
   );
