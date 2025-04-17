@@ -634,6 +634,54 @@
     },
     "memberships": {
       "title": "Memberships"
+    },
+    "contact": {
+      "title": "Contact Us"
+    }
+  },
+  "contact": {
+    "heading": {
+      "title": "Connect with Us for Your Pet's Healthcare Needs",
+      "description": "Have a question or concern? Need to schedule an appointment? Contact us today! Our dedicated team is ready to assist you."
+    },
+    "form": {
+      "title": "Contact Form",
+      "name": "Name",
+      "phone": "Phone Number",
+      "email": "Email",
+      "message": "Message",
+      "submit": "Submit"
+    },
+    "doctors": {
+      "title": "Meet Our Doctors",
+      "subtitle": "Schedule Your Consultation",
+      "count": "Talk to over 215 doctors",
+      "meetTeam": "Meet Our Team",
+      "ratings": "ratings on google",
+      "onGoogle": "on Google"
+    },
+    "boxes": {
+      "address": {
+        "title": "Address",
+        "text": "Qurtubah gate, Al Thoumamah Rd, Qurtubah, Riyadh 13248"
+      },
+      "phone": {
+        "title": "Call Us"
+      },
+      "emergency": {
+        "title": "Emergency"
+      },
+      "email": {
+        "title": "Send us a Mail"
+      },
+      "hours": {
+        "title": "Working Hours",
+        "weekdays": "Weekdays",
+        "weekdaysTime": "9:00 - 21:00",
+        "weekends": "Weekends",
+        "weekendsTime": "9:00 - 18:00",
+        "emergencyServices": "24/7 Emergency Services"
+      }
     }
   },
   "productsSection": {

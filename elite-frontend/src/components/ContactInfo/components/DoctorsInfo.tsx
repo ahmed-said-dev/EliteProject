@@ -1,9 +1,13 @@
 import React from 'react';
 import styles from '../styles/DoctorsInfo.module.css';
+import { useLanguage } from '@/context/LanguageContext';
 
 const DoctorsInfo: React.FC = () => {
+  const { t, isRTL } = useLanguage();
+  const dir = isRTL ? 'rtl' : 'ltr';
+  
   return (
-    <div className={styles.clearfix}>
+    <div className={styles.clearfix} dir={dir}>
       <div className={styles.doctorsWrapper}>
         <div className={styles.infoWidget}>
           <div className={styles.avatarGroup}>
@@ -34,10 +38,10 @@ const DoctorsInfo: React.FC = () => {
             />
           </div>
           <div className={styles.infoContent}>
-            <span className={styles.infoText}>Talk to over 215 doctor</span>
+            <span className={styles.infoText}>{t('contact.doctors.count')}</span>
           </div>
         </div>
-        <a className={styles.btnLink} href="/team">
+        <a className={styles.btnLink} href="/team" aria-label={t('contact.doctors.meetTeam')}>
           <svg
             height="24"
             width="24"
@@ -72,7 +76,7 @@ const DoctorsInfo: React.FC = () => {
           ))}
         </ul>
         <span className={styles.rating}>(4.8)</span>
-        <span className={styles.text}>12k+ ratings on google</span>
+        <span className={styles.text}>{t('contact.doctors.ratings')} 12k+ {t('contact.doctors.onGoogle')}</span>
       </div>
     </div>
   );

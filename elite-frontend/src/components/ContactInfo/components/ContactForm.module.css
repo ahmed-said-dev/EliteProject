@@ -3,16 +3,33 @@
 }
 
 .formBody {
-  background-blend-mode: color-burn;
   padding: 50px 40px;
   border-radius: 30px;
-  background-image: url("/images/background/bg2.png");
+  background-image: url("/ContactUs/bg2.png");
   background-size: cover;
-  background-color: rgb(124, 88, 211);
+  background-position: center;
+  background-repeat: no-repeat;
+  position: relative;
+}
+
+/* طبقة شفافة فوق الصورة */
+.formBody::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(124, 88, 211, 0.2);
+  border-radius: 30px;
+  z-index: 0;
+  pointer-events: none;
 }
 
 .sectionHead {
   margin-bottom: 30px;
+  position: relative;
+  z-index: 1;
 }
 
 .title {
@@ -28,6 +45,8 @@
 
 .dzForm {
   width: 100%;
+  position: relative;
+  z-index: 1;
 }
 
 .formControl {
@@ -164,6 +183,25 @@
   min-width: 44px;
   transform: translateY(0);
   margin: -11px -18px -11px 12px;
+}
+
+.leftIcon {
+  border-radius: 10px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-color: #4a2d71;
+  background-color: #4a2d71;
+  color: rgb(255, 255, 255);
+  height: 44px;
+  width: 44px;
+  min-width: 44px;
+  transform: translateY(0);
+  margin: -11px 12px -11px -18px;
+}
+
+.rtlButton {
+  flex-direction: row-reverse;
 }
 
 .rightIcon i {

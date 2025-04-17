@@ -52,6 +52,19 @@ html[lang="ar"] h4 {
   font-weight: 700;
 }
 
+/* تعريف الرسوم المتحركة للتدرج البنفسجي */
+@keyframes gradientAnimation {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
 /* تنسيق خاص للعناوين باللغة الإنجليزية */
 html[lang="en"] h1,
 html[lang="en"] h2,

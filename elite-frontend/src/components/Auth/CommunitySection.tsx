@@ -41,19 +41,19 @@ export default function CommunitySection({ isLogin, onToggleMode }: CommunitySec
         
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
           <FeatureCard 
-            iconUrl="https://www.svgrepo.com/show/424621/pet-dog-animal.svg"
+            iconUrl="https://img.icons8.com/color/96/000000/pet.png"
             title="Manage Multiple Pets"
             description="Keep track of each pet's health records, appointments, and medications in one place"
           />
           
           <FeatureCard 
-            iconUrl="https://www.svgrepo.com/show/424614/pet-cat-animal.svg"
+            iconUrl="https://img.icons8.com/fluency/96/000000/appointment-scheduling.png"
             title="Appointment Reminders"
             description="Receive timely notifications for upcoming vet visits and medication schedules"
           />
           
           <FeatureCard 
-            iconUrl="https://www.svgrepo.com/show/424624/pet-paw-animal.svg"
+            iconUrl="https://img.icons8.com/fluency/96/000000/literature.png"
             title="Pet Owner Resources"
             description="Access expert advice, articles, and forums on pet health and care"
           />

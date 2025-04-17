@@ -2,10 +2,14 @@ import React from 'react';
 import styles from '../styles/ContactBoxes.module.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMapMarker, faPhone, faEnvelope, faClock, faUsers, faShare, faHashtag, faCamera, faGhost, faMusic } from '@fortawesome/free-solid-svg-icons';
+import { useLanguage } from '@/context/LanguageContext';
 
 const ContactBoxes: React.FC = () => {
+  const { t, isRTL } = useLanguage();
+  const dir = isRTL ? 'rtl' : 'ltr';
+  
   return (
-    <div className={styles.row}>
+    <div className={styles.row} dir={dir}>
       <div className={styles.boxColumn}>
         <div className={styles.iconBox}>
           <div className={styles.iconContainer}>
@@ -14,9 +18,9 @@ const ContactBoxes: React.FC = () => {
             </span>
           </div>
           <div className={styles.iconContent}>
-            <h4 className={styles.title}>Address</h4>
+            <h4 className={styles.title}>{t('contact.boxes.address.title')}</h4>
             <p className={styles.text}>
-              Qurtubah gate, Al Thoumamah Rd, Qurtubah, Riyadh 13248
+              {t('contact.boxes.address.text')}
             </p>
           </div>
         </div>
@@ -30,7 +34,7 @@ const ContactBoxes: React.FC = () => {
             </span>
           </div>
           <div className={styles.iconContent}>
-            <h4 className={styles.title}>Call Us</h4>
+            <h4 className={styles.title}>{t('contact.boxes.phone.title')}</h4>
             <p className={styles.text}>
               <a className={styles.link} href="tel:+966112030123">
                 +966 011 203 0123
@@ -40,7 +44,7 @@ const ContactBoxes: React.FC = () => {
                 920011626
               </a>
             </p>
-            <h4 className={styles.titleMt}>Emergency</h4>
+            <h4 className={styles.titleMt}>{t('contact.boxes.emergency.title')}</h4>
             <p className={styles.text}>
               <a className={styles.link} href="tel:920011626">
                 920011626
@@ -62,7 +66,7 @@ const ContactBoxes: React.FC = () => {
             </span>
           </div>
           <div className={styles.iconContent}>
-            <h4 className={styles.title}>Send us a Mail</h4>
+            <h4 className={styles.title}>{t('contact.boxes.email.title')}</h4>
             <p className={styles.text}>
               <a className={styles.link} href="mailto:info@ellitevetksa.com">
                 info@ellitevetksa.com
@@ -80,11 +84,11 @@ const ContactBoxes: React.FC = () => {
             </span>
           </div>
           <div className={styles.iconContent}>
-            <h4 className={styles.title}>Opening Time</h4>
+            <h4 className={styles.title}>{t('contact.boxes.hours.title')}</h4>
             <p className={styles.text}>
-              09:00 AM to 10:00 PM
+              <span className={styles.text}><strong>{t('contact.boxes.hours.weekdays')}:</strong> {t('contact.boxes.hours.weekdaysTime')}</span>
               <br />
-              24/7 Emergency Services
+              {t('contact.boxes.hours.emergencyServices')}
             </p>
           </div>
         </div>

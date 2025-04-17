@@ -1,15 +1,18 @@
 import React from 'react';
 import styles from '../styles/ContactHeading.module.css';
+import { useLanguage } from '@/context/LanguageContext';
 
 const ContactHeading: React.FC = () => {
+  const { t, isRTL } = useLanguage();
+  const dir = isRTL ? 'rtl' : 'ltr';
+  
   return (
-    <div className={styles.sectionHead}>
+    <div className={styles.sectionHead} dir={dir}>
       <h2 className={styles.title}>
-        Connect with Us for<br />
-        Your Pet's Healthcare Needs
+        {t('contact.heading.title')}
       </h2>
       <p className={styles.description}>
-        Have a question or concern? Need to schedule an appointment? Contact us today! Our dedicated team is ready to assist you.
+        {t('contact.heading.description')}
       </p>
     </div>
   );
