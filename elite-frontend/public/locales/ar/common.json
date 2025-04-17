@@ -1284,5 +1284,66 @@
         "tag3": "صحة الحيوان"
       }
     }
+  },
+  "appointment": {
+    "title": {
+      "schedule": "احجز",
+      "petsVisit": "زيارة حيوانك الأليف",
+      "book": "حجز موعد"
+    },
+    "form": {
+      "ownerName": {
+        "label": "اسم صاحب الحيوان الأليف",
+        "placeholder": "اسم صاحب الحيوان الأليف"
+      },
+      "petName": {
+        "label": "اسم الحيوان الأليف",
+        "placeholder": "اسم الحيوان الأليف"
+      },
+      "petType": {
+        "label": "نوع الحيوان الأليف",
+        "placeholder": "اختر نوع الحيوان الأليف",
+        "options": {
+          "dog": "كلب",
+          "cat": "قط",
+          "bird": "طائر",
+          "rabbit": "أرنب",
+          "hamster": "هامستر",
+          "other": "آخر"
+        }
+      },
+      "petAge": {
+        "label": "عمر الحيوان الأليف",
+        "placeholder": "عمر الحيوان الأليف"
+      },
+      "serviceType": {
+        "label": "نوع الخدمة",
+        "placeholder": "اختر الخدمة",
+        "options": {
+          "checkup": "فحص روتيني",
+          "vaccination": "تطعيم",
+          "dental": "رعاية الأسنان",
+          "grooming": "تنظيف وتجميل",
+          "surgery": "جراحة",
+          "emergency": "رعاية طارئة"
+        }
+      },
+      "contact": {
+        "label": "رقم الاتصال",
+        "placeholder": "رقم الاتصال"
+      },
+      "date": {
+        "label": "التاريخ المفضل"
+      },
+      "time": {
+        "label": "الوقت المفضل"
+      },
+      "symptoms": {
+        "label": "الأعراض أو سبب الزيارة",
+        "placeholder": "الأعراض أو سبب الزيارة"
+      },
+      "submit": "جدولة الموعد"
+    },
+    "sideText": "احجز موعدك الآن"
   }
 }

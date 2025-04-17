@@ -1282,5 +1282,66 @@
         "tag3": "Pet Health"
       }
     }
+  },
+  "appointment": {
+    "title": {
+      "schedule": "Schedule Your",
+      "petsVisit": "Pet's Visit",
+      "book": "Book an Appointment"
+    },
+    "form": {
+      "ownerName": {
+        "label": "Pet Owner's Name",
+        "placeholder": "Pet Owner's Name"
+      },
+      "petName": {
+        "label": "Pet's Name",
+        "placeholder": "Pet's Name"
+      },
+      "petType": {
+        "label": "Pet Type",
+        "placeholder": "Select Pet Type",
+        "options": {
+          "dog": "Dog",
+          "cat": "Cat",
+          "bird": "Bird",
+          "rabbit": "Rabbit",
+          "hamster": "Hamster",
+          "other": "Other"
+        }
+      },
+      "petAge": {
+        "label": "Pet's Age",
+        "placeholder": "Pet's Age"
+      },
+      "serviceType": {
+        "label": "Service Type",
+        "placeholder": "Select Service",
+        "options": {
+          "checkup": "Regular Checkup",
+          "vaccination": "Vaccination",
+          "dental": "Dental Care",
+          "grooming": "Grooming",
+          "surgery": "Surgery",
+          "emergency": "Emergency Care"
+        }
+      },
+      "contact": {
+        "label": "Contact Number",
+        "placeholder": "Contact Number"
+      },
+      "date": {
+        "label": "Preferred Date"
+      },
+      "time": {
+        "label": "Preferred Time"
+      },
+      "symptoms": {
+        "label": "Symptoms or Reason for Visit",
+        "placeholder": "Symptoms or Reason for Visit"
+      },
+      "submit": "Schedule Appointment"
+    },
+    "sideText": "Appointment Now"
   }
 }
