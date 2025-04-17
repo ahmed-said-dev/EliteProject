@@ -735,6 +735,7 @@
     },
     "benefits": {
       "eliteVet": "Elite Vet",
+      "premium": "Premium",
       "title": "Your Account Benefits",
       "items": {
         "healthRecords": {

@@ -735,6 +735,7 @@
     },
     "benefits": {
       "eliteVet": "النخبة البيطرية",
+      "premium": "مميز",
       "title": "مزايا حسابك",
       "items": {
         "healthRecords": {
