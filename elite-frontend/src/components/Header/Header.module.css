@@ -262,3 +262,175 @@
   margin: 0 auto;
   padding: 0 15px;
 }
+
+/* Burger Menu Button */
+.burgerMenuBtn {
+  display: none;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 30px;
+  height: 20px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  z-index: 10;
+}
+
+.burgerMenuBtn span {
+  width: 100%;
+  height: 3px;
+  background: white;
+  border-radius: 2px;
+  transition: all 0.3s ease;
+}
+
+/* Mobile Menu Close Button */
+.mobileMenuClose {
+  display: none;
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: transparent;
+  border: none;
+  color: #6B4E98;
+  font-size: 24px;
+  cursor: pointer;
+  z-index: 1001;
+}
+
+/* Mobile Menu Overlay */
+.mobileMenuOverlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 997;
+}
+
+.mobileAppointmentBtn {
+  display: none;
+}
+
+.accountText {
+  display: inline-block;
+}
+
+/* Responsive Styles */
+@media (max-width: 991px) {
+  .burgerMenuBtn {
+    display: flex;
+    order: 1;
+  }
+  
+  .mainNav {
+    position: fixed;
+    top: 0;
+    left: -280px;
+    width: 280px;
+    height: 100vh;
+    background-color: white;
+    z-index: 999;
+    transition: all 0.3s ease;
+    padding: 70px 20px 20px;
+    box-shadow: none;
+    display: block;
+    overflow-y: auto;
+  }
+  
+  .mobileNavActive {
+    left: 0;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+  }
+  
+  .mobileMenuOverlay {
+    display: block;
+  }
+  
+  .nav {
+    flex-direction: column;
+    gap: 5px;
+    width: 100%;
+  }
+  
+  .nav li {
+    width: 100%;
+  }
+  
+  .nav a {
+    padding: 12px 15px;
+    color: #4a2d71;
+    font-size: 16px;
+    width: 100%;
+    border-radius: 5px;
+  }
+  
+  .nav a:hover, 
+  .nav a.active {
+    background-color: rgba(107, 78, 152, 0.1);
+    color: #6B4E98;
+  }
+  
+  .nav a:after {
+    display: none;
+  }
+  
+  .mobileMenuClose {
+    display: block;
+  }
+  
+  .mobileAppointmentBtn {
+    display: block;
+    margin-top: 15px;
+  }
+  
+  .mobileAppointmentBtn a {
+    width: 100%;
+    justify-content: center;
+  }
+  
+  .desktopAppointmentBtn {
+    display: none;
+  }
+
+  .bottomContainer {
+    justify-content: space-between;
+    padding: 0 15px;
+  }
+  
+  /* Keep these elements visible and organized */
+  .actionButtons {
+    order: 2;
+    margin-left: auto;
+  }
+  
+  .accountText {
+    display: none;
+  }
+  
+  .actionButtons .btnPrimary i {
+    margin: 0;
+  }
+  
+  .actionButtons .btnPrimary {
+    padding: 6px 10px;
+  }
+}
+
+@media (max-width: 575px) {
+  .actionButtons {
+    gap: 5px;
+  }
+  
+  .actionButtons .btnPrimary {
+    padding: 6px 8px;
+  }
+  
+  .cartButton {
+    width: 35px;
+    height: 35px;
+  }
+}

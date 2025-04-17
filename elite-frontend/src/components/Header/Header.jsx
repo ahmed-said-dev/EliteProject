@@ -12,7 +12,9 @@ const Header = () => {
   const { cartCount } = useCart();
   const { t, isRTL } = useLanguage();
   const [showAccountMenu, setShowAccountMenu] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const accountMenuRef = useRef(null);
+  const mobileMenuRef = useRef(null);
 
   const isActive = (path) => {
     if (!pathname) return false; // Protección contra pathname null durante SSR
@@ -27,11 +29,32 @@ const Header = () => {
       if (accountMenuRef.current && !accountMenuRef.current.contains(event.target)) {
         setShowAccountMenu(false);
       }
+      
+      if (mobileMenuRef.current && !mobileMenuRef.current.contains(event.target) && 
+          !event.target.closest(`.${styles.burgerMenuBtn}`)) {
+        setMobileMenuOpen(false);
+      }
     };
 
     document.addEventListener('mousedown', handleClickOutside);
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
+
+  // Close mobile menu when window resizes to desktop size
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth > 991) {
+        setMobileMenuOpen(false);
+      }
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  const toggleMobileMenu = () => {
+    setMobileMenuOpen(!mobileMenuOpen);
+  };
 
   return (
     <header className={styles.header_section}>
@@ -66,17 +89,42 @@ const Header = () => {
       </div>
       <div className={styles.header_bottom}>
         <div className={`${styles.bottomContainer} container`}>
-          <nav className={styles.mainNav}>
+          {/* Burger Menu Button (Mobile Only) */}
+          <button 
+            className={styles.burgerMenuBtn} 
+            onClick={toggleMobileMenu}
+            aria-expanded={mobileMenuOpen}
+            aria-label={mobileMenuOpen ? t('header.closeMenu') : t('header.openMenu')}
+          >
+            <span></span>
+            <span></span>
+            <span></span>
+          </button>
+          
+          {/* Desktop Nav & Mobile Nav */}
+          <nav className={`${styles.mainNav} ${mobileMenuOpen ? styles.mobileNavActive : ''}`} ref={mobileMenuRef}>
             <ul className={styles.nav}>
-              <li><Link href="/" className={isActive('/') ? styles.active : ''}>{t('header.home')}</Link></li>
-              <li><Link href="/about" className={isActive('/about') ? styles.active : ''}>{t('header.aboutUs')}</Link></li>
-              <li><Link href="/services" className={isActive('/services') ? styles.active : ''}>{t('header.services')}</Link></li>
-              <li><Link href="/products" className={isActive('/products') ? styles.active : ''}>{t('header.products')}</Link></li>
-              <li><Link href="/media" className={isActive('/media') ? styles.active : ''}>{t('header.media')}</Link></li>
-              <li><Link href="/memberships" className={isActive('/memberships') ? styles.active : ''}>{t('header.memberships')}</Link></li>
-              <li><Link href="/contact" className={isActive('/contact') ? styles.active : ''}>{t('header.contact')}</Link></li>
+              <li><Link href="/" className={isActive('/') ? styles.active : ''} onClick={() => setMobileMenuOpen(false)}>{t('header.home')}</Link></li>
+              <li><Link href="/about" className={isActive('/about') ? styles.active : ''} onClick={() => setMobileMenuOpen(false)}>{t('header.aboutUs')}</Link></li>
+              <li><Link href="/services" className={isActive('/services') ? styles.active : ''} onClick={() => setMobileMenuOpen(false)}>{t('header.services')}</Link></li>
+              <li><Link href="/products" className={isActive('/products') ? styles.active : ''} onClick={() => setMobileMenuOpen(false)}>{t('header.products')}</Link></li>
+              <li><Link href="/media" className={isActive('/media') ? styles.active : ''} onClick={() => setMobileMenuOpen(false)}>{t('header.media')}</Link></li>
+              <li><Link href="/memberships" className={isActive('/memberships') ? styles.active : ''} onClick={() => setMobileMenuOpen(false)}>{t('header.memberships')}</Link></li>
+              <li><Link href="/contact" className={isActive('/contact') ? styles.active : ''} onClick={() => setMobileMenuOpen(false)}>{t('header.contact')}</Link></li>
+              <li className={styles.mobileAppointmentBtn}>
+                <Link href="/appointment" className={styles.btnPrimary} onClick={() => setMobileMenuOpen(false)}>
+                  <i className="fa-solid fa-calendar-check"></i>
+                  <span>{t('header.bookAppointment')}</span>
+                </Link>
+              </li>
             </ul>
+            {/* Close button for mobile menu */}
+            <button className={styles.mobileMenuClose} onClick={() => setMobileMenuOpen(false)}>
+              <i className="fa-solid fa-times"></i>
+            </button>
           </nav>
+          
+          {/* Always visible action buttons */}
           <div className={styles.actionButtons}>
             <LanguageSwitcher />
             <Link href="/cart" className={styles.cartButton}>
@@ -93,7 +141,7 @@ const Header = () => {
                 aria-haspopup="true"
               >
                 <i className="fa-solid fa-user"></i>
-                <span>{t('header.account')}</span>
+                <span className={styles.accountText}>{t('header.account')}</span>
                 <i className={`fa-solid fa-chevron-down ${showAccountMenu ? styles.rotateIcon : ''}`}></i>
               </button>
               {showAccountMenu && (
@@ -109,13 +157,15 @@ const Header = () => {
                 </div>
               )}
             </div>
-            <Link href="/appointment" className={styles.btnPrimary}>
+            <Link href="/appointment" className={`${styles.btnPrimary} ${styles.desktopAppointmentBtn}`}>
               <i className="fa-solid fa-calendar-check"></i>
               <span>{t('header.bookAppointment')}</span>
             </Link>
           </div>
         </div>
       </div>
+      {/* Overlay for mobile menu */}
+      {mobileMenuOpen && <div className={styles.mobileMenuOverlay} onClick={() => setMobileMenuOpen(false)}></div>}
     </header>
   );
 };
