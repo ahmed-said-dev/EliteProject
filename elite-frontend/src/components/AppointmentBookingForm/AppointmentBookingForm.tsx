@@ -28,7 +28,8 @@ const AppointmentFormContent = () => {
         <div className={styles.dzFormMsg} />
         <div className={styles.formRow}>
           <div className={styles.colHalf}>
-            <div className={styles.formFloating}>
+            <div className={styles.inputGroup}>
+              <label htmlFor="inputOwnerName">Pet Owner's Name</label>
               <input
                 id="inputOwnerName"
                 className={styles.formControl}
@@ -37,11 +38,11 @@ const AppointmentFormContent = () => {
                 required
                 placeholder="Pet Owner's Name"
               />
-              <label htmlFor="inputOwnerName">Pet Owner's Name</label>
             </div>
           </div>
           <div className={styles.colHalf}>
-            <div className={styles.formFloating}>
+            <div className={styles.inputGroup}>
+              <label htmlFor="inputPetName">Pet's Name</label>
               <input
                 id="inputPetName"
                 className={styles.formControl}
@@ -50,32 +51,30 @@ const AppointmentFormContent = () => {
                 required
                 placeholder="Pet's Name"
               />
-              <label htmlFor="inputPetName">Pet's Name</label>
             </div>
           </div>
           <div className={styles.colHalf}>
-            <div className={styles.formFloating}>
-              <div className={styles.selectWrapper}>
-                <select
-                  className={styles.formSelect}
-                  name="petType"
-                  required
-                  title="Pet Type"
-                >
-                  <option value="Dog">Dog</option>
-                  <option value="Cat">Cat</option>
-                  <option value="Bird">Bird</option>
-                  <option value="Rabbit">Rabbit</option>
-                  <option value="Hamster">Hamster</option>
-                  <option value="Other">Other</option>
-                </select>
-                <div className={styles.selectPlaceholder}>Pet Type</div>
-              </div>
-              <label>Pet Type</label>
+            <div className={styles.inputGroup}>
+              <label htmlFor="petType">Pet Type</label>
+              <select
+                id="petType"
+                className={styles.formSelect}
+                name="petType"
+                required
+              >
+                <option value="">Select Pet Type</option>
+                <option value="Dog">Dog</option>
+                <option value="Cat">Cat</option>
+                <option value="Bird">Bird</option>
+                <option value="Rabbit">Rabbit</option>
+                <option value="Hamster">Hamster</option>
+                <option value="Other">Other</option>
+              </select>
             </div>
           </div>
           <div className={styles.colHalf}>
-            <div className={styles.formFloating}>
+            <div className={styles.inputGroup}>
+              <label htmlFor="inputPetAge">Pet's Age</label>
               <input
                 id="inputPetAge"
                 className={styles.formControl}
@@ -83,32 +82,30 @@ const AppointmentFormContent = () => {
                 type="text"
                 placeholder="Pet's Age"
               />
-              <label htmlFor="inputPetAge">Pet's Age</label>
             </div>
           </div>
           <div className={styles.colHalf}>
-            <div className={styles.formFloating}>
-              <div className={styles.selectWrapper}>
-                <select
-                  className={styles.formSelect}
-                  name="serviceType"
-                  required
-                  title="Service Type"
-                >
-                  <option value="Regular Checkup">Regular Checkup</option>
-                  <option value="Vaccination">Vaccination</option>
-                  <option value="Dental Care">Dental Care</option>
-                  <option value="Grooming">Grooming</option>
-                  <option value="Surgery">Surgery</option>
-                  <option value="Emergency">Emergency Care</option>
-                </select>
-                <div className={styles.selectPlaceholder}>Service Type</div>
-              </div>
-              <label>Service Type</label>
+            <div className={styles.inputGroup}>
+              <label htmlFor="serviceType">Service Type</label>
+              <select
+                id="serviceType"
+                className={styles.formSelect}
+                name="serviceType"
+                required
+              >
+                <option value="">Select Service</option>
+                <option value="Regular Checkup">Regular Checkup</option>
+                <option value="Vaccination">Vaccination</option>
+                <option value="Dental Care">Dental Care</option>
+                <option value="Grooming">Grooming</option>
+                <option value="Surgery">Surgery</option>
+                <option value="Emergency">Emergency Care</option>
+              </select>
             </div>
           </div>
           <div className={styles.colHalf}>
-            <div className={styles.formFloating}>
+            <div className={styles.inputGroup}>
+              <label htmlFor="inputPhoneNumber">Contact Number</label>
               <input
                 id="inputPhoneNumber"
                 className={styles.formControl}
@@ -117,35 +114,35 @@ const AppointmentFormContent = () => {
                 required
                 placeholder="Contact Number"
               />
-              <label htmlFor="inputPhoneNumber">Contact Number</label>
             </div>
           </div>
           <div className={styles.colHalf}>
-            <div className={styles.formFloating}>
+            <div className={styles.inputGroup}>
+              <label htmlFor="inputDate">Preferred Date</label>
               <input
                 id="inputDate"
-                className={`${styles.formControl} ${styles.activeInput}`}
+                className={styles.formControl}
                 name="appointmentDate"
                 type="date"
                 required
               />
-              <label className={styles.activeLabel} htmlFor="inputDate">Preferred Date</label>
             </div>
           </div>
           <div className={styles.colHalf}>
-            <div className={styles.formFloating}>
+            <div className={styles.inputGroup}>
+              <label htmlFor="inputTime">Preferred Time</label>
               <input
                 id="inputTime"
-                className={`${styles.formControl} ${styles.activeInput}`}
+                className={styles.formControl}
                 name="appointmentTime"
                 type="time"
                 required
               />
-              <label className={styles.activeLabel} htmlFor="inputTime">Preferred Time</label>
             </div>
           </div>
           <div className={styles.colFull}>
-            <div className={styles.formFloating}>
+            <div className={styles.inputGroup}>
+              <label htmlFor="inputSymptoms">Symptoms or Reason for Visit</label>
               <textarea
                 id="inputSymptoms"
                 className={styles.formControl}
@@ -153,14 +150,13 @@ const AppointmentFormContent = () => {
                 rows={4}
                 placeholder="Symptoms or Reason for Visit"
               />
-              <label htmlFor="inputSymptoms">Symptoms or Reason for Visit</label>
             </div>
           </div>
           <div className={styles.colFull}>
             <button className={styles.submitButton} name="submit" type="submit" value="submit">
               {"Schedule Appointment"}
               <span className={styles.rightIcon}>
-                <i className="feather icon-arrow-right" />
+                <i className="fas fa-arrow-right" />
               </span>
             </button>
           </div>

@@ -25,6 +25,7 @@ declare const styles: {
   readonly 'selectPlaceholder': string;
   readonly 'submitButton': string;
   readonly 'rightIcon': string;
+  readonly 'inputGroup': string;
 };
 
 export default styles;
