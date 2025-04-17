@@ -88,7 +88,7 @@ export default function JoinTeam() {
           <div className={styles.leftColumn}>
             <div className={styles.sectionHead}>
               <h2 className={styles.title}>{t('about.joinTeam.title')}</h2>
-              <p className={styles.description}>{t('about.joinTeam.description')}</p>
+              <p className={styles.small}>{t('about.joinTeam.description')}</p>
             </div>
             <div className={styles.featuresRow}>
               {features.map((feature, index) => (

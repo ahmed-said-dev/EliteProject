@@ -28,7 +28,7 @@ const getServiceImage = (id: number): string => {
   const imageUrls = [
     'https://i.pinimg.com/736x/25/27/a6/2527a62d7918216e5e81b37c7c280fa3.jpg', // u0627u0644u062eu062fu0645u0627u062a u0627u0644u0637u0628u064au0629
     'https://i.pinimg.com/736x/47/4c/e3/474ce366e734558eeb16343879554f44.jpg', // u0631u0639u0627u064au0629 u0627u0644u0646u0638u0627u0641u0629 u0648u0627u0644u0645u0638u0647u0631
-    'https://i.pinimg.com/736x/9c/d5/2b/9cd52b4ce0a7902864145dab137576f1.jpg', // u0627u0644u0627u062eu062au0628u0627u0631u0627u062a u0627u0644u062au0634u062eu064au0635u064au0629
+    'https://i.pinimg.com/736x/9c/d5/2b/9cd52b4ce0a7902864145dab137576f1.jpg', // u0627u0644u0627u062eu062au0628u0627u0631u0627u062a u0627u0644u062au0634u062eu0645u0648u0644
     'https://i.pinimg.com/736x/26/f1/f1/26f1f1f7b4c6f5fc1dfe51bb0447e8b9.jpg', // u0627u0644u062cu0631u0627u062du0627u062a u0627u0644u0637u0628u064au0629
     'https://i.pinimg.com/736x/79/8b/42/798b42f30b063925bb2b2e7524a41abb.jpg', // u062eu062fu0645u0627u062a u0627u0644u0623u0633u0646u0627u0646
     'https://www.petprofessional.com.au/wp-content/uploads/2019/06/Pet-anti-vaxxers-metro-co-uk.jpg', // u0627u0644u062au0637u0639u064au0645u0627u062a u0627u0644u062fu0648u0631u064au0629
@@ -44,12 +44,9 @@ const getServiceImage = (id: number): string => {
   return imageUrls[index];
 };
 
-const ServicesSection: React.FC = () => {
-  const { locale, isRTL, t } = useLanguage();
-  const dir = isRTL ? 'rtl' : 'ltr';
-
-  // Get services from translation files
-  const services: ServiceProps[] = t('serviceSection.categories', { returnObjects: true }).map((category, index) => {
+// Exportar función para obtener servicios
+export const getServices = (t: any): ServiceProps[] => {
+  return t('serviceSection.categories', { returnObjects: true }).map((category, index) => {
     return {
       id: category.id,
       title: category.title,
@@ -66,6 +63,14 @@ const ServicesSection: React.FC = () => {
       isActive: index === 2 // Make the third item active by default
     };
   });
+};
+
+const ServicesSection: React.FC = () => {
+  const { locale, isRTL, t } = useLanguage();
+  const dir = isRTL ? 'rtl' : 'ltr';
+
+  // Get services from translation files
+  const services: ServiceProps[] = getServices(t);
 
   return (
     <section className={styles.servicesSection} dir={dir}>

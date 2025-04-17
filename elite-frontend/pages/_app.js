@@ -8,6 +8,7 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import '@/styles/swiper-custom.css';
+import '../styles/serviceDetail.css'; // Added service detail styles globally
 import feather from 'feather-icons';
 import Head from 'next/head';
 import Layout from '@/components/Layout';

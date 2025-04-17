@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import styles from './ServiceDetail.module.css';
+import { useLanguage } from '@/context/LanguageContext';
 
 // Dynamic imports to prevent issues during initial render
 const ServiceHero = React.lazy(() => import('./components/ServiceHero'));
@@ -14,12 +15,15 @@ export interface ServiceDetailProps {
 
 const ServiceDetail: React.FC<ServiceDetailProps> = ({ serviceId }) => {
   const [service, setService] = useState<any>(null);
+  const { t } = useLanguage();
   
   useEffect(() => {
     if (serviceId) {
       // Import the services data dynamically to avoid circular imports
       import('../ServicesSection/ServicesSection').then((module) => {
-        const { services } = module;
+        const { getServices } = module;
+        // Get the services using the exported function
+        const services = getServices(t);
         const foundService = services.find(s => s.id === Number(serviceId));
         if (foundService) {
           setService(foundService);
@@ -28,7 +32,7 @@ const ServiceDetail: React.FC<ServiceDetailProps> = ({ serviceId }) => {
         console.error('Error loading services:', error);
       });
     }
-  }, [serviceId]);
+  }, [serviceId, t]);
 
   if (!service) {
     return <div className={styles.loadingContainer}>Loading service details...</div>;

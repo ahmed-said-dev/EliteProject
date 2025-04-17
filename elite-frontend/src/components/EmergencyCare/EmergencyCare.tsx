@@ -1,8 +1,8 @@
 import React from 'react';
 import { useLanguage } from '@/context/LanguageContext';
 import styles from '../../../styles/components/EmergencyCare.module.css';
-import { EmergencyFeature } from './EmergencyFeature.tsx';
-import { ServiceBox } from './ServiceBox.tsx';
+import { EmergencyFeature } from './EmergencyFeature';
+import { ServiceBox } from './ServiceBox';
 
 export const EmergencyCare: React.FC = () => {
   const { t } = useLanguage();

@@ -1,3 +1,3 @@
-import Divider from './Divider.tsx';
+import Divider from './Divider';
 
 export default Divider;

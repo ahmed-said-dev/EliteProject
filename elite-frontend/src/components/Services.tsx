@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPaw, faCat, faDog, faFish, faOtter, faDove, faHorse, faSpider, faCrow, faKiwiBird, faSyringe, faTooth, faEye, faBone, faScalpelPath, faPlus, faStar } from "@fortawesome/free-solid-svg-icons";
+import { faPaw, faCat, faDog, faFish, faOtter, faDove, faHorse, faSpider, faCrow, faKiwiBird, faSyringe, faTooth, faEye, faBone, faScissors, faPlus, faStar } from "@fortawesome/free-solid-svg-icons";
 import { translate } from "../../i18n";
 import { useLanguage } from "@/context/LanguageContext";
 
@@ -99,7 +99,7 @@ const Services = () => {
           />
           <ServiceCard
             title={translate('services.service6', locale)}
-            icon={<FontAwesomeIcon icon={faScalpelPath} style={{ height: '2em', width: '2em' }} className="text-purple-600 opacity-20 transform rotate-45" />}
+            icon={<FontAwesomeIcon icon={faScissors} style={{ height: '2em', width: '2em' }} className="text-purple-600 opacity-20 transform rotate-45" />}
           />
         </div>
 

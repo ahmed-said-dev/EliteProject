@@ -2,7 +2,8 @@ import React from 'react';
 import Link from 'next/link';
 // @ts-ignore
 import styles from './BlogDetail.module.css';
-import { blogPosts } from '@/components/BlogSection/BlogSection';
+import { getBlogPosts } from '@/components/BlogSection/BlogSection';
+import { useLanguage } from '@/context/LanguageContext';
 
 // تعريف واجهة Tag لوسوم المقالة
 interface TagProps {
@@ -54,6 +55,9 @@ const BlogDetail: React.FC<BlogDetailProps> = ({ post }) => {
     day: 'numeric'
   });
   
+  const { t } = useLanguage();
+  const blogPosts = getBlogPosts(t);
+  
   return (
     <section className={styles.blogDetailSection}>
       <div className={styles.container}>
@@ -61,9 +65,9 @@ const BlogDetail: React.FC<BlogDetailProps> = ({ post }) => {
           <div className={styles.metadata}>
             <div className={styles.category}>{post.category}</div>
             <div className={styles.dateTime}>
-              <span className={styles.date}>{formattedDate}</span>
-              <span className={styles.dot}>•</span>
-              <span className={styles.readTime}>{post.readTime}</span>
+              <span>{formattedDate}</span>
+              <span className={styles.dot}>•</span>       
+              <span>{post.readTime}</span>
             </div>
           </div>
           
@@ -113,7 +117,7 @@ const BlogDetail: React.FC<BlogDetailProps> = ({ post }) => {
               <p>{post.excerpt}</p>
             </div>
             
-            <div className={styles.mainContent}>
+            <div>
               {contentParagraphs.map((paragraph, index) => (
                 <p key={index} className={styles.paragraph}>{paragraph}</p>
               ))}

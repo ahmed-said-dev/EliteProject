@@ -4,7 +4,6 @@ import Head from 'next/head';
 import Link from 'next/link';
 import PageBanner from '../../src/components/PageBanner/PageBanner';
 import Footer from '../../src/components/Footer/Footer';
-import '../../styles/serviceDetail.css';
 
 // Import services data directly from ServicesSection
 const getServices = async () => {

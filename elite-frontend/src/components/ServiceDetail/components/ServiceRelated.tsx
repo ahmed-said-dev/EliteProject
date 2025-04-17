@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import styles from '../components/ServiceComponents.module.css';
+import { useLanguage } from '@/context/LanguageContext';
 
 interface ServiceRelatedProps {
   currentServiceId: number;
@@ -8,11 +9,14 @@ interface ServiceRelatedProps {
 
 const ServiceRelated: React.FC<ServiceRelatedProps> = ({ currentServiceId }) => {
   const [relatedServices, setRelatedServices] = useState<any[]>([]);
+  const { t } = useLanguage();
   
   useEffect(() => {
     // Import services dynamically to avoid circular dependencies
     import('../../ServicesSection/ServicesSection').then((module) => {
-      const { services } = module;
+      const { getServices } = module;
+      // Get the services using the exported function
+      const services = getServices(t);
       // Get 3 related services (excluding the current one)
       const filteredServices = services
         .filter(service => service.id !== currentServiceId)
@@ -21,12 +25,12 @@ const ServiceRelated: React.FC<ServiceRelatedProps> = ({ currentServiceId }) => 
     }).catch(error => {
       console.error('Error loading services:', error);
     });
-  }, [currentServiceId]);
+  }, [currentServiceId, t]);
 
   return (
     <div className={styles.serviceRelated}>
       <div className={styles.container}>
-        <h2 className={styles.sectionTitle}>Related Services</h2>
+        <h2 className={styles.sectionTitle}>{t('Related Services')}</h2>
         
         <div className={styles.relatedGrid}>
           {relatedServices.map((service) => (
@@ -54,7 +58,7 @@ const ServiceRelated: React.FC<ServiceRelatedProps> = ({ currentServiceId }) => 
                 
                 <Link href={`/service/${service.id}`} passHref>
                   <a className={styles.relatedBtn}>
-                    View Service
+                    {t('View Service')}
                   </a>
                 </Link>
               </div>
