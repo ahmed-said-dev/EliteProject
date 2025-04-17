@@ -1409,5 +1409,46 @@
       },
       "badge": "24/7 Emergency Care"
     }
+  },
+  "cart": {
+    "title": "Your Shopping Cart",
+    "emptyCart": {
+      "message": "Your cart is empty",
+      "description": "You haven't added any products to your cart yet.",
+      "browseButton": "Browse Products"
+    },
+    "cartItems": {
+      "product": "Product",
+      "price": "Price",
+      "quantity": "Quantity",
+      "total": "Total",
+      "remove": "Remove"
+    },
+    "cartSummary": {
+      "title": "Cart Summary",
+      "subtotal": "Subtotal",
+      "shipping": "Shipping",
+      "shippingOptions": {
+        "standard": "Standard Delivery (3-5 business days)",
+        "express": "Express Delivery (1-2 business days)",
+        "free": "Free Shipping"
+      },
+      "tax": "Tax",
+      "total": "Total",
+      "proceedToCheckout": "Proceed to Checkout"
+    },
+    "coupon": {
+      "title": "Apply Coupon",
+      "placeholder": "Enter coupon code",
+      "apply": "Apply",
+      "success": "Coupon applied successfully!",
+      "error": "Invalid coupon code"
+    },
+    "continueShopping": "Continue Shopping",
+    "updateCart": "Update Cart",
+    "productCount": {
+      "singular": "1 product in your cart",
+      "plural": "%count% products in your cart"
+    }
   }
 }

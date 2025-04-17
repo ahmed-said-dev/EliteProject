@@ -1,0 +1,176 @@
+.cartItems {
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+}
+
+.tableContainer {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.cartTable {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.cartTable th {
+  text-align: start;
+  padding: 15px;
+  background-color: #f9f9f9;
+  color: #4a2d71;
+  font-weight: 600;
+  border-bottom: 1px solid #eee;
+}
+
+.cartTable td {
+  padding: 15px;
+  border-bottom: 1px solid #eee;
+  vertical-align: middle;
+}
+
+.productCell {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.productImage {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+.productInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.productName {
+  font-weight: 600;
+  color: #333;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.productName:hover {
+  color: #4a2d71;
+}
+
+.priceCell {
+  font-weight: 600;
+  color: #333;
+}
+
+.salePriceOriginal {
+  text-decoration: line-through;
+  font-size: 14px;
+  color: #999;
+  margin-right: 5px;
+}
+
+.salePrice {
+  color: #e94560;
+}
+
+.quantityCell {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.quantityButton {
+  width: 30px;
+  height: 30px;
+  border: 1px solid #eee;
+  border-radius: 4px;
+  background-color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.quantityButton:hover {
+  background-color: #f9f9f9;
+}
+
+.quantityButton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.quantityInput {
+  width: 40px;
+  height: 30px;
+  border: 1px solid #eee;
+  border-radius: 4px;
+  text-align: center;
+  font-size: 14px;
+}
+
+.totalCell {
+  font-weight: 700;
+  color: #4a2d71;
+}
+
+.removeButton {
+  background: none;
+  border: none;
+  color: #e94560;
+  cursor: pointer;
+  transition: color 0.3s;
+}
+
+.removeButton:hover {
+  color: #c21e40;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .cartTable thead {
+    display: none;
+  }
+
+  .cartTable, 
+  .cartTable tbody, 
+  .cartTable tr, 
+  .cartTable td {
+    display: block;
+    width: 100%;
+  }
+
+  .cartTable tr {
+    margin-bottom: 15px;
+    border-bottom: 2px solid #eee;
+    padding-bottom: 15px;
+  }
+
+  .cartTable td {
+    text-align: right;
+    padding: 10px 15px;
+    border-bottom: none;
+    position: relative;
+  }
+
+  .cartTable td::before {
+    content: attr(data-label);
+    float: left;
+    font-weight: 600;
+    color: #4a2d71;
+  }
+
+  .productCell {
+    display: flex;
+    text-align: left;
+    padding-left: 15px;
+  }
+
+  .quantityCell {
+    justify-content: flex-end;
+  }
+}

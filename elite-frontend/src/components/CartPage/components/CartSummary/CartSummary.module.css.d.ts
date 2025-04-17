@@ -1,0 +1,29 @@
+declare const styles: {
+  readonly cartSummary: string;
+  readonly summaryTitle: string;
+  readonly summaryRow: string;
+  readonly summaryLabel: string;
+  readonly summaryValue: string;
+  readonly summaryTotal: string;
+  readonly summaryTotalLabel: string;
+  readonly summaryTotalValue: string;
+  readonly shippingOptions: string;
+  readonly shippingOptionTitle: string;
+  readonly shippingOption: string;
+  readonly shippingOptionSelected: string;
+  readonly shippingOptionRadio: string;
+  readonly shippingOptionInfo: string;
+  readonly shippingOptionName: string;
+  readonly shippingOptionPrice: string;
+  readonly checkoutButton: string;
+  readonly couponSection: string;
+  readonly couponTitle: string;
+  readonly couponForm: string;
+  readonly couponInput: string;
+  readonly couponButton: string;
+  readonly couponMessage: string;
+  readonly couponSuccess: string;
+  readonly couponError: string;
+};
+
+export default styles;
