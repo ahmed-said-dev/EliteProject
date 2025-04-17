@@ -1,0 +1,29 @@
+declare const styles: {
+  readonly 'bookingSection': string;
+  readonly 'container': string;
+  readonly 'row': string;
+  readonly 'colImage': string;
+  readonly 'petsImage': string;
+  readonly 'colForm': string;
+  readonly 'formWrapper': string;
+  readonly 'textVertical': string;
+  readonly 'formBody': string;
+  readonly 'titleHead': string;
+  readonly 'formTitle': string;
+  readonly 'highlight': string;
+  readonly 'dzForm': string;
+  readonly 'formControl': string;
+  readonly 'activeInput': string;
+  readonly 'formRow': string;
+  readonly 'colHalf': string;
+  readonly 'colFull': string;
+  readonly 'formFloating': string;
+  readonly 'activeLabel': string;
+  readonly 'selectWrapper': string;
+  readonly 'formSelect': string;
+  readonly 'selectPlaceholder': string;
+  readonly 'submitButton': string;
+  readonly 'rightIcon': string;
+};
+
+export default styles;

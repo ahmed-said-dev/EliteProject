@@ -1,0 +1,30 @@
+declare const styles: {
+  readonly 'introSection': string;
+  readonly 'container': string;
+  readonly 'row': string;
+  readonly 'colLeft': string;
+  readonly 'colRight': string;
+  readonly 'sectionHead': string;
+  readonly 'subTitle': string;
+  readonly 'textPrimary': string;
+  readonly 'title': string;
+  readonly 'text': string;
+  readonly 'featureContainer': string;
+  readonly 'featureRow': string;
+  readonly 'featureCol': string;
+  readonly 'featureBox': string;
+  readonly 'featureIcon': string;
+  readonly 'icon': string;
+  readonly 'featureTitle': string;
+  readonly 'mb0': string;
+  readonly 'cta': string;
+  readonly 'btnPrimary': string;
+  readonly 'ctaText': string;
+  readonly 'introMedia': string;
+  readonly 'image': string;
+  readonly 'experienceCard': string;
+  readonly 'expContent': string;
+  readonly 'expNumber': string;
+};
+
+export default styles;
