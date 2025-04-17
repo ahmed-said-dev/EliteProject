@@ -1,9 +1,12 @@
 import React from 'react';
+import { useLanguage } from '@/context/LanguageContext';
 import styles from '../../../styles/components/EmergencyOutro.module.css';
 import { PhoneLink } from './PhoneLink';
 import { EmergencyBadge } from './EmergencyBadge';
 
 export const EmergencyOutro: React.FC = () => {
+  const { t } = useLanguage();
+  
   return (
     <section className={styles.outroSection}>
       <div className={styles.container}>
@@ -12,17 +15,15 @@ export const EmergencyOutro: React.FC = () => {
             <div className={styles.colLeft}>
               <div className={styles.outroContent}>
                 <div className={styles.outroHeader}>
-                  <span className={styles.subtitle}>EMERGENCY VET CARE</span>
-                  <h2 className={styles.title}>We're Here When You Need Us</h2>
+                  <span className={styles.subtitle}>{t('appointment.emergencyOutro.subtitle')}</span>
+                  <h2 className={styles.title}>{t('appointment.emergencyOutro.title')}</h2>
                 </div>
                 <div className={styles.outroText}>
                   <p>
-                    At Elite Vet, we understand that emergencies can happen at any time. 
-                    That's why we offer 24/7 emergency veterinary services to ensure your 
-                    pet receives immediate care when they need it most.
+                    {t('appointment.emergencyOutro.text1')}
                   </p>
                   <p className={styles.emergencyNote}>
-                    If your pet is experiencing a veterinary emergency, please contact us immediately.
+                    {t('appointment.emergencyOutro.text2')}
                   </p>
                 </div>
               </div>
@@ -32,15 +33,15 @@ export const EmergencyOutro: React.FC = () => {
               <div className={styles.contactBox}>
                 <div className={styles.phoneNumbers}>
                   <PhoneLink 
-                    phoneNumber="920011626" 
+                    phoneNumber={t('appointment.emergencyOutro.phones.landline')}
                     icon="fas fa-phone-alt" 
                   />
                   <PhoneLink 
-                    phoneNumber="0540456405" 
+                    phoneNumber={t('appointment.emergencyOutro.phones.mobile')}
                     icon="fas fa-mobile-alt" 
                   />
                 </div>
-                <EmergencyBadge text="24/7 Emergency Care" />
+                <EmergencyBadge text={t('appointment.emergencyOutro.badge')} />
               </div>
             </div>
           </div>
