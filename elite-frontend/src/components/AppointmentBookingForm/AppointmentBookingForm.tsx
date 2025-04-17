@@ -179,7 +179,7 @@ export const AppointmentBookingForm = () => {
             <img
               className={styles.petsImage}
               alt="Veterinary Pets"
-              src="/images/about/img3.png"
+              src="/appointment/img3.png"
             />
           </div>
           <div className={styles.colForm}>
