@@ -3,15 +3,17 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { 
   faUser, 
   faLock, 
-  faPaw, 
+  faEnvelope, 
   faEye, 
   faEyeSlash, 
-  faEnvelope,
-  faCheckCircle,
-  faExclamationCircle
+  faExclamationCircle,
+  faCheck,
+  faPaw,
+  faChevronRight
 } from '@fortawesome/free-solid-svg-icons';
 import { faGoogle, faFacebook, faApple } from '@fortawesome/free-brands-svg-icons';
 import styles from '@/styles/components/LoginForm.module.css';
+import { useLanguage } from '@/context/LanguageContext';
 
 interface LoginFormProps {
   onToggleMode: () => void;
@@ -19,6 +21,8 @@ interface LoginFormProps {
 }
 
 export default function LoginForm({ onToggleMode, isLogin }: LoginFormProps) {
+  const { t, isRTL } = useLanguage();
+  const dir = isRTL ? 'rtl' : 'ltr';
   const [showPassword, setShowPassword] = useState(false);
   const [rememberMe, setRememberMe] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -46,26 +50,26 @@ export default function LoginForm({ onToggleMode, isLogin }: LoginFormProps) {
     
     // Email validation
     if (!formData.email) {
-      errors.email = 'Email is required';
+      errors.email = t('auth.errors.emailRequired');
     } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
-      errors.email = 'Invalid email format';
+      errors.email = t('auth.errors.invalidEmail');
     }
     
     // Password validation
     if (!formData.password) {
-      errors.password = 'Password is required';
-    } else if (formData.password.length < 6) {
-      errors.password = 'Password must be at least 6 characters';
+      errors.password = t('auth.errors.passwordRequired');
+    } else if (formData.password.length < 8) {
+      errors.password = t('auth.errors.passwordLength');
     }
     
     // Name validation (only for registration)
     if (!isLogin && !formData.name) {
-      errors.name = 'Name is required';
+      errors.name = t('auth.errors.nameRequired');
     }
     
     // Confirm password validation (only for registration)
     if (!isLogin && formData.password !== formData.confirmPassword) {
-      errors.confirmPassword = 'Passwords do not match';
+      errors.confirmPassword = t('auth.errors.passwordsMustMatch');
     }
     
     return errors;
@@ -100,7 +104,7 @@ export default function LoginForm({ onToggleMode, isLogin }: LoginFormProps) {
       
     } catch (error) {
       console.error('Authentication error:', error);
-      setFormErrors({ general: 'An error occurred during login. Please try again.' });
+      setFormErrors({ general: t('auth.errors.loginError') });
     } finally {
       setLoading(false);
     }
@@ -130,13 +134,13 @@ export default function LoginForm({ onToggleMode, isLogin }: LoginFormProps) {
       {showSuccess && (
         <div className="absolute inset-0 bg-white bg-opacity-95 flex flex-col items-center justify-center z-10 animate-fadeIn">
           <div className="w-20 h-20 rounded-full bg-green-100 flex items-center justify-center mb-6">
-            <FontAwesomeIcon icon={faCheckCircle} className="text-green-500 text-4xl" />
+            <FontAwesomeIcon icon={faCheck} className="text-green-500 text-4xl" />
           </div>
           <h3 className="text-2xl font-bold text-gray-800 mb-2">
-            {isLogin ? "Successfully Logged In!" : "Account Created Successfully!"}
+            {isLogin ? t('auth.login.successMessage') : t('auth.register.successMessage')}
           </h3>
           <p className="text-gray-600 mb-4 text-center">
-            {isLogin ? "Redirecting you to the dashboard..." : "Redirecting you now..."}
+            {isLogin ? t('auth.login.redirectMessage') : t('auth.register.redirectMessage')}
           </p>
           
           {/* Walking paw prints animation */}
@@ -159,12 +163,12 @@ export default function LoginForm({ onToggleMode, isLogin }: LoginFormProps) {
             </div>
           </div>
           <h2 className="text-3xl font-bold text-gray-800 mb-3">
-            {isLogin ? 'Welcome Back!' : 'Join Our Pet Care Community'}
+            {isLogin ? t('auth.login.welcomeBack') : t('auth.register.joinCommunity')}
           </h2>
           <p className="text-gray-600">
             {isLogin 
-              ? 'Sign in to access your pet care account' 
-              : 'Create an account to manage your pet\'s healthcare'}
+              ? t('auth.login.signInAccess')
+              : t('auth.register.createAccount')}
           </p>
         </div>
 
@@ -181,7 +185,7 @@ export default function LoginForm({ onToggleMode, isLogin }: LoginFormProps) {
           
           {!isLogin && (
             <div className="relative group">
-              <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">Full Name</label>
+              <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">{t('auth.register.nameLabel')}</label>
               <div className="relative">
                 <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
                   <FontAwesomeIcon icon={faUser} className="text-purple-400 group-hover:text-purple-600 transition-colors duration-200" />
@@ -193,7 +197,7 @@ export default function LoginForm({ onToggleMode, isLogin }: LoginFormProps) {
                   value={formData.name}
                   onChange={handleChange}
                   className={`w-full pl-10 pr-4 py-3 border ${formErrors.name ? 'border-red-300 bg-red-50' : 'border-gray-300 group-hover:border-purple-400'} rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-200`}
-                  placeholder="Enter your full name"
+                  placeholder={t('auth.register.namePlaceholder')}
                 />
               </div>
               {formErrors.name && (
@@ -206,7 +210,7 @@ export default function LoginForm({ onToggleMode, isLogin }: LoginFormProps) {
           )}
           
           <div className="relative group">
-            <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">Email Address</label>
+            <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">{isLogin ? t('auth.login.emailLabel') : t('auth.register.emailLabel')}</label>
             <div className="relative">
               <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
                 <FontAwesomeIcon icon={faEnvelope} className="text-purple-400 group-hover:text-purple-600 transition-colors duration-200" />
@@ -218,7 +222,7 @@ export default function LoginForm({ onToggleMode, isLogin }: LoginFormProps) {
                 value={formData.email}
                 onChange={handleChange}
                 className={`w-full pl-10 pr-4 py-3 border ${formErrors.email ? 'border-red-300 bg-red-50' : 'border-gray-300 group-hover:border-purple-400'} rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-200`}
-                placeholder="Enter your email address"
+                placeholder={isLogin ? t('auth.login.emailPlaceholder') : t('auth.register.emailPlaceholder')}
               />
             </div>
             {formErrors.email && (
@@ -230,7 +234,7 @@ export default function LoginForm({ onToggleMode, isLogin }: LoginFormProps) {
           </div>
           
           <div className="relative group">
-            <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-1">Password</label>
+            <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-1">{isLogin ? t('auth.login.passwordLabel') : t('auth.register.passwordLabel')}</label>
             <div className="relative">
               <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
                 <FontAwesomeIcon icon={faLock} className="text-purple-400 group-hover:text-purple-600 transition-colors duration-200" />
@@ -242,7 +246,7 @@ export default function LoginForm({ onToggleMode, isLogin }: LoginFormProps) {
                 value={formData.password}
                 onChange={handleChange}
                 className={`w-full pl-10 pr-10 py-3 border ${formErrors.password ? 'border-red-300 bg-red-50' : 'border-gray-300 group-hover:border-purple-400'} rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-200`}
-                placeholder="Enter your password"
+                placeholder={isLogin ? t('auth.login.passwordPlaceholder') : t('auth.register.passwordPlaceholder')}
               />
               <button 
                 type="button"
@@ -265,7 +269,7 @@ export default function LoginForm({ onToggleMode, isLogin }: LoginFormProps) {
           
           {!isLogin && (
             <div className="relative group">
-              <label htmlFor="confirmPassword" className="block text-sm font-medium text-gray-700 mb-1">Confirm Password</label>
+              <label htmlFor="confirmPassword" className="block text-sm font-medium text-gray-700 mb-1">{t('auth.register.confirmPasswordLabel')}</label>
               <div className="relative">
                 <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
                   <FontAwesomeIcon icon={faLock} className="text-purple-400 group-hover:text-purple-600 transition-colors duration-200" />
@@ -277,7 +281,7 @@ export default function LoginForm({ onToggleMode, isLogin }: LoginFormProps) {
                   value={formData.confirmPassword}
                   onChange={handleChange}
                   className={`w-full pl-10 pr-4 py-3 border ${formErrors.confirmPassword ? 'border-red-300 bg-red-50' : 'border-gray-300 group-hover:border-purple-400'} rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-200`}
-                  placeholder="Confirm your password"
+                  placeholder={t('auth.register.confirmPasswordPlaceholder')}
                 />
               </div>
               {formErrors.confirmPassword && (
@@ -301,13 +305,11 @@ export default function LoginForm({ onToggleMode, isLogin }: LoginFormProps) {
                   className="h-4 w-4 text-purple-600 border-gray-300 rounded focus:ring-purple-500"
                 />
                 <label htmlFor="remember-me" className="ml-2 block text-sm text-gray-700">
-                  Remember me
+                  {t('auth.login.rememberMe')}
                 </label>
               </div>
               
-              <a href="#" className="font-medium text-purple-700 hover:text-purple-900 transition-colors text-sm hover:underline">
-                Forgot password?
-              </a>
+              <a href="#" className="text-purple-600 hover:text-purple-800 transition-colors duration-300">{t('auth.login.forgotPassword')}</a>
             </div>
           )}
           
@@ -322,12 +324,12 @@ export default function LoginForm({ onToggleMode, isLogin }: LoginFormProps) {
                   <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
                   <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                 </svg>
-                {isLogin ? 'Signing in...' : 'Creating account...'}
+                {isLogin ? t('auth.login.signingIn') : t('auth.register.creatingAccount')}
               </>
             ) : (
               <>
                 <FontAwesomeIcon icon={faPaw} className="mr-2" />
-                {isLogin ? 'Sign In' : 'Create Account'}
+                {isLogin ? t('auth.login.signInButton') : t('auth.register.createButton')}
               </>
             )}
           </button>
@@ -339,7 +341,7 @@ export default function LoginForm({ onToggleMode, isLogin }: LoginFormProps) {
               <div className="w-full border-t border-gray-300"></div>
             </div>
             <div className="relative flex justify-center text-sm">
-              <span className="px-2 bg-white text-gray-500">Or continue with</span>
+              <span className="px-2 bg-white text-gray-500">{t('auth.register.orContinueWith')}</span>
             </div>
           </div>
           
@@ -367,13 +369,13 @@ export default function LoginForm({ onToggleMode, isLogin }: LoginFormProps) {
         
         <div className="mt-8 text-center">
           <p className="text-gray-600">
-            {isLogin ? "Don't have an account yet?" : "Already have an account?"}
+            {isLogin ? t('auth.login.noAccount') : t('auth.register.haveAccount')}
             <button 
               type="button"
               onClick={onToggleMode}
               className="ml-1 font-semibold text-purple-700 hover:text-purple-900 transition-colors hover:underline"
             >
-              {isLogin ? 'Create a new account' : 'Sign in'}
+              {isLogin ? t('auth.login.createAccount') : t('auth.register.signIn')}
             </button>
           </p>
         </div>

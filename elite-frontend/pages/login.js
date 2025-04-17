@@ -9,10 +9,14 @@ import {
   CommunitySection
 } from '@/components/Auth';
 import Divider from '@/components/Divider';
+import { useLanguage } from '@/context/LanguageContext';
 
 
 export default function Login() {
   const router = useRouter();
+  const { t, isRTL } = useLanguage();
+  const dir = isRTL ? 'rtl' : 'ltr';
+  
   const [isLogin, setIsLogin] = useState(true);
   const [showPassword, setShowPassword] = useState(false);
   const [rememberMe, setRememberMe] = useState(false);
@@ -115,12 +119,12 @@ export default function Login() {
   };
 
   return (
-    <main className="bg-gradient-to-b from-purple-50 to-white min-h-screen relative overflow-hidden">
+    <main className="bg-gradient-to-b from-purple-50 to-white min-h-screen relative overflow-hidden" dir={dir}>
       {/* Decorative background elements */}
       <AuthPageDecorations />
       
       <PageBanner 
-        title={isLogin ? "Login to Your Account" : "Create a New Account"}
+        title={isLogin ? t('auth.login.title') : t('auth.register.title')}
         backgroundImage="https://images.pexels.com/photos/7788657/pexels-photo-7788657.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
         overlayOpacity={0.7}
       />

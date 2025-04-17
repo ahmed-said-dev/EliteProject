@@ -1,3 +1,4 @@
+import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { 
   faPaw, 
@@ -5,6 +6,7 @@ import {
   faChevronRight,
   faMedkit
 } from '@fortawesome/free-solid-svg-icons';
+import { useLanguage } from '@/context/LanguageContext';
 import { Section } from '@/components/ui/Section';
 import styles from './CommunitySection.module.css';
 
@@ -14,6 +16,8 @@ interface CommunitySectionProps {
 }
 
 export default function CommunitySection({ isLogin, onToggleMode }: CommunitySectionProps) {
+  const { t, isRTL } = useLanguage();
+  const dir = isRTL ? 'rtl' : 'ltr';
   return (
     <Section className="py-16 bg-white relative overflow-hidden">
       {/* Background pattern */}
@@ -31,31 +35,31 @@ export default function CommunitySection({ isLogin, onToggleMode }: CommunitySec
         <FontAwesomeIcon icon={faMedkit} className="text-purple-300 text-3xl opacity-20" />
       </div>
       
-      <div className="container mx-auto px-4 relative z-10">
+      <div className="container mx-auto px-4 relative z-10" dir={dir}>
         <div className="text-center mb-12">
-          <h2 className="text-3xl font-bold text-gray-800 mb-3">Join Our Pet Care Community</h2>
+          <h2 className="text-3xl font-bold text-gray-800 mb-3">{t('auth.community.joinTitle')}</h2>
           <p className="text-gray-600 max-w-2xl mx-auto">
-            Sign up today and become part of our growing community of pet lovers and care providers
+            {t('auth.community.joinDescription')}
           </p>
         </div>
         
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
           <FeatureCard 
             iconUrl="https://img.icons8.com/color/96/000000/pet.png"
-            title="Manage Multiple Pets"
-            description="Keep track of each pet's health records, appointments, and medications in one place"
+            title={t('auth.community.features.managePets.title')}
+            description={t('auth.community.features.managePets.description')}
           />
           
           <FeatureCard 
             iconUrl="https://img.icons8.com/fluency/96/000000/appointment-scheduling.png"
-            title="Appointment Reminders"
-            description="Receive timely notifications for upcoming vet visits and medication schedules"
+            title={t('auth.community.features.reminders.title')}
+            description={t('auth.community.features.reminders.description')}
           />
           
           <FeatureCard 
             iconUrl="https://img.icons8.com/fluency/96/000000/literature.png"
-            title="Pet Owner Resources"
-            description="Access expert advice, articles, and forums on pet health and care"
+            title={t('auth.community.features.resources.title')}
+            description={t('auth.community.features.resources.description')}
           />
         </div>
         
@@ -64,8 +68,8 @@ export default function CommunitySection({ isLogin, onToggleMode }: CommunitySec
             onClick={onToggleMode}
             className="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-purple-700 hover:bg-purple-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500"
           >
-            {isLogin ? 'Start creating an account now' : 'Sign in to your account'}
-            <FontAwesomeIcon icon={isLogin ? faChevronRight : faChevronLeft} className="ml-2" />
+            {isLogin ? t('auth.community.startCreating') : t('auth.community.signInAccount')}
+            <FontAwesomeIcon icon={isLogin ? faChevronRight : faChevronLeft} className={isRTL ? 'mr-2' : 'ml-2'} />
           </button>
         </div>
       </div>

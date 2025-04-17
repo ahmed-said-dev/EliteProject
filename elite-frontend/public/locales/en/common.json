@@ -684,6 +684,95 @@
       }
     }
   },
+  "auth": {
+    "login": {
+      "title": "Login to Your Account",
+      "welcomeBack": "Welcome Back!",
+      "signInAccess": "Sign in to access your pet care account",
+      "emailLabel": "Email Address",
+      "emailPlaceholder": "Enter your email address",
+      "passwordLabel": "Password",
+      "passwordPlaceholder": "Enter your password",
+      "forgotPassword": "Forgot Password?",
+      "rememberMe": "Remember me",
+      "signInButton": "Sign In",
+      "signingIn": "Signing in...",
+      "noAccount": "Don't have an account yet?",
+      "createAccount": "Create a new account",
+      "successMessage": "Successfully Logged In!",
+      "redirectMessage": "Redirecting you to the dashboard..."
+    },
+    "register": {
+      "title": "Create a New Account",
+      "joinCommunity": "Join Our Pet Care Community",
+      "createAccount": "Create an account to manage your pet's healthcare",
+      "nameLabel": "Full Name",
+      "namePlaceholder": "Enter your full name",
+      "emailLabel": "Email Address",
+      "emailPlaceholder": "Enter your email address",
+      "passwordLabel": "Password",
+      "passwordPlaceholder": "Create a strong password",
+      "confirmPasswordLabel": "Confirm Password",
+      "confirmPasswordPlaceholder": "Confirm your password",
+      "agreeTerms": "I agree to the Terms of Service and Privacy Policy",
+      "createButton": "Create Account",
+      "creatingAccount": "Creating account...",
+      "haveAccount": "Already have an account?",
+      "signIn": "Sign in",
+      "successMessage": "Account Created Successfully!",
+      "redirectMessage": "Redirecting you now..."
+    },
+    "errors": {
+      "required": "This field is required",
+      "emailRequired": "Email is required",
+      "invalidEmail": "Invalid email format",
+      "passwordRequired": "Password is required",
+      "passwordLength": "Password must be at least 8 characters",
+      "nameRequired": "Full name is required",
+      "passwordsMustMatch": "Passwords must match",
+      "termsRequired": "You must agree to the terms",
+      "loginError": "An error occurred during login. Please try again."
+    },
+    "benefits": {
+      "eliteVet": "Elite Vet",
+      "title": "Your Account Benefits",
+      "items": {
+        "healthRecords": {
+          "title": "Complete Health Records",
+          "description": "Track vaccination schedules, medications, and medical history for your pets"
+        },
+        "appointments": {
+          "title": "Online Appointments",
+          "description": "Book appointments with our veterinarians at your convenience"
+        },
+        "discounts": {
+          "title": "Exclusive Discounts",
+          "description": "Access special offers and discounts on products and services"
+        }
+      },
+      "trustMessage": "Join over 10,000 pet owners who trust us with their furry friends"
+    },
+    "community": {
+      "joinTitle": "Join Our Pet Care Community",
+      "joinDescription": "Sign up today and become part of our growing community of pet lovers and care providers",
+      "features": {
+        "managePets": {
+          "title": "Manage Multiple Pets",
+          "description": "Keep track of each pet's health records, appointments, and medications in one place"
+        },
+        "reminders": {
+          "title": "Appointment Reminders",
+          "description": "Receive timely notifications for upcoming vet visits and medication schedules"
+        },
+        "resources": {
+          "title": "Pet Owner Resources",
+          "description": "Access expert advice, articles, and forums on pet health and care"
+        }
+      },
+      "startCreating": "Start creating an account now",
+      "signInAccount": "Sign in to your account"
+    }
+  },
   "productsSection": {
     "title": "Pet Care Products",
     "description": "Browse our wide selection of high-quality products for your beloved pets. From premium food to fun toys and essential grooming tools, we have everything you need.",
