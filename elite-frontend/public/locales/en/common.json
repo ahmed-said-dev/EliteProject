@@ -14,6 +14,9 @@
     "language": "Language"
   },
   "direction": "ltr",
+  "loading": {
+    "text": "Loading..."
+  },
   "hero": {
     "title": "EXPERT VETERINARY CARE, TAILORED TO YOUR PET'S NEEDS",
     "subtitle": "A Pioneering Veterinary Clinic, Providing Exceptional Care Every Step of the Way.",

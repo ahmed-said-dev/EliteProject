@@ -12,19 +12,40 @@ import '../styles/serviceDetail.css'; // Added service detail styles globally
 import feather from 'feather-icons';
 import Head from 'next/head';
 import Layout from '@/components/Layout';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { CartProvider } from '@/context/CartContext';
 import { LanguageProvider } from '@/context/LanguageContext';
+import LoadingSpinner from '@/components/LoadingSpinner';
+import { useRouter } from 'next/router';
 
 // Prevent Font Awesome from adding its CSS since we did it manually above
 config.autoAddCss = false;
 
 function MyApp({ Component, pageProps }) {
+  const router = useRouter();
+  const [loading, setLoading] = useState(false);
+
   useEffect(() => {
     if (typeof window !== 'undefined') {
       feather.replace();
     }
   }, []);
+
+  useEffect(() => {
+    // إضافة مستمعي أحداث التنقل لعرض وإخفاء الـ Spinner
+    const handleStart = () => setLoading(true);
+    const handleComplete = () => setLoading(false);
+
+    router.events.on('routeChangeStart', handleStart);
+    router.events.on('routeChangeComplete', handleComplete);
+    router.events.on('routeChangeError', handleComplete);
+
+    return () => {
+      router.events.off('routeChangeStart', handleStart);
+      router.events.off('routeChangeComplete', handleComplete);
+      router.events.off('routeChangeError', handleComplete);
+    };
+  }, [router]);
 
   return (
     <>
@@ -35,6 +56,7 @@ function MyApp({ Component, pageProps }) {
       </Head>
       <CartProvider>
         <LanguageProvider>
+          <LoadingSpinner isLoading={loading} />
           <Layout>
             <Component {...pageProps} />
           </Layout>
