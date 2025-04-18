@@ -97,13 +97,13 @@ const Doctors = () => {
       </div>
       
       {/* Pet image at the extreme right bottom */}
-      <div className="absolute -bottom-4 -right-5 w-40 h-40 sm:w-60 sm:h-60 md:w-80 md:h-80 z-10">
+      <div className="absolute -bottom-4 -right-2 w-40 h-40 sm:w-60 sm:h-60 md:w-80 md:h-80 z-10">
         <div className="relative w-full h-full">
           <Image 
             src="/DoctorsSections/Asset 32-.png" 
             alt="Pet image" 
             fill
-            className="object-contain object-right"
+            className="object-contain object-center"
             sizes="(max-width: 640px) 160px, (max-width: 768px) 240px, 320px"
           />
         </div>

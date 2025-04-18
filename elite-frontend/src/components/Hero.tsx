@@ -13,8 +13,8 @@ const Hero = () => {
   return (
     <div className="relative w-full min-h-[600px] overflow-hidden" dir={dir}>
       <div className="grid grid-cols-1 md:grid-cols-2">
-        {/* Right side - Content section */}
-        <div className="h-[600px] bg-[#6B4E98] relative overflow-hidden order-2 md:order-1">
+        {/* Content section - Full width on mobile */}
+        <div className="h-[600px] bg-[#6B4E98] relative overflow-hidden order-1 w-full">
           <div className="absolute inset-0">
             {/* Curved background shape */}
             <div className="absolute right-0 bottom-0 w-[500px] h-[500px] bg-purple-500 rounded-tl-[80%] z-0">
@@ -57,8 +57,8 @@ const Hero = () => {
           </div>
         </div>
 
-        {/* Left side - Logo section */}
-        <div className="h-[600px] bg-white relative order-1 md:order-2">
+        {/* Logo section - Hidden on mobile, visible on desktop */}
+        <div className="hidden md:block h-[600px] bg-white relative order-2">
           <div className="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2">
             <div className="w-[300px] h-[300px] relative">
               <img 

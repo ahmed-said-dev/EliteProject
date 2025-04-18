@@ -116,12 +116,12 @@
 
 @media (max-width: 991px) {
   .contentColumn {
-    order: 1;
+    order: 2;
     margin-bottom: 40px;
   }
 
   .imageColumn {
-    order: 2;
+    order: 1;
     right: 0;
     margin-bottom: 20px;
   }
