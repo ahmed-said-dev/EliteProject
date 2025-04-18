@@ -276,11 +276,14 @@
   }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 991px) {
   .services {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
   }
-  
+}
+
+@media (max-width: 768px) {
   .actionArea {
     flex-direction: column;
     align-items: flex-start;
@@ -299,5 +302,31 @@
   
   [dir="rtl"] .contentInner {
     background-position: center bottom;
+  }
+  
+  .services {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+  
+  .serviceItem {
+    font-size: 14px;
+    gap: 0.5rem;
+  }
+  
+  .serviceItem .icon {
+    font-size: 1.2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .services {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.75rem;
+  }
+  
+  .serviceItem {
+    font-size: 13px;
+    gap: 0.4rem;
   }
 }

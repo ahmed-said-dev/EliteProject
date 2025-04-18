@@ -68,7 +68,7 @@ const ContactUs = () => {
               </svg>
             </div>
             
-            <div className="flex flex-col md:flex-row md:space-x-8 pt-2 px-4 md:px-0 pr-[245px]"style={{ paddingRight: 245 }}>
+            <div className="flex flex-col md:flex-row md:space-x-8 pt-2 px-0 w-full">
               {/* Small decorative stars in the cloud */}
               <div className="absolute top-1/3 left-1/2 transform -translate-x-1/2 z-0">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -81,9 +81,9 @@ const ContactUs = () => {
                 </svg>
               </div>
 
-              {/* Contact Info and Map - added to left side */}
-              <div className="md:w-1/3 relative z-10 md:order-1 mb-10 md:mb-0 md:mr-6">
-                <div className="bg-white bg-opacity-80 rounded-lg p-6 shadow-lg mb-6" style={{ zIndex: 25 }}>
+              {/* Contact Info and Map - full width on mobile */}
+              <div className="w-full md:w-1/3 relative z-10 mb-10 md:mb-0 md:mr-6">
+                <div className="bg-white bg-opacity-80 rounded-lg p-6 shadow-lg mb-6 w-full" style={{ zIndex: 25 }}>
                   <h3 className="text-[#44396F] font-bold text-xl mb-4">{translate('contactUs.contactInfo.title', locale)}</h3>
                   
                   <div className="flex items-start mb-4">
@@ -105,9 +105,8 @@ const ContactUs = () => {
                   </div>
                 </div>
                 
-                {/* Map component (temporarily using an image) */}
-                <div className="h-[250px] bg-white rounded-lg overflow-hidden shadow-lg" style={{ zIndex: 25 }}>
-                  {/* This will be replaced with an actual interactive map */}
+                {/* Map component - full width on mobile */}
+                <div className="h-[250px] bg-white rounded-lg overflow-hidden shadow-lg w-full" style={{ zIndex: 25 }}>
                   <div className="relative w-full h-full">
                     <iframe
                       src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3623.0958453215124!2d46.72261737605582!3d24.77267667809022!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e2f0394856b43d3%3A0x7a3af779599a56c3!2sQurtubah%2C%20Riyadh%20Saudi%20Arabia!5e0!3m2!1sen!2sus!4v1712870620175!5m2!1sen!2sus"
@@ -121,13 +120,13 @@ const ContactUs = () => {
                 </div>
               </div>
 
-              {/* Contact Form section moved to center */}
-              <div className="md:w-2/3 max-w-[600px] mx-auto mb-10 md:mb-0 relative md:order-2" style={{ zIndex: 20 }}>
-                <div className="text-xl mb-10 text-center md:text-left relative" style={{ zIndex: 25 }}>
+              {/* Contact Form section - full width on mobile */}
+              <div className="w-full md:w-2/3 mx-auto mb-10 md:mb-0 relative" style={{ zIndex: 20 }}>
+                <div className="text-xl mb-10 text-center md:text-left relative w-full" style={{ zIndex: 25 }}>
                   <p className="text-[#44396F] font-bold bg-white bg-opacity-80 inline-block px-4 py-2 rounded-lg shadow-sm">{translate('contactUs.intro', locale)}</p>
                 </div>
                 
-                <div className="bg-white rounded-lg p-6 shadow-lg relative" style={{ position: 'relative', zIndex: 25 }}>
+                <div className="bg-white rounded-lg p-6 shadow-lg relative w-full" style={{ position: 'relative', zIndex: 25 }}>
                   <div className="mb-4">
                     <p className="text-[#44396F] font-bold text-lg mb-2">{translate('contactUs.form.heading', locale)}</p>
                     <p className="text-[#44396F] text-sm mb-4">{translate('contactUs.form.subHeading', locale)}</p>

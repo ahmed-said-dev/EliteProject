@@ -315,6 +315,18 @@
   display: none;
 }
 
+.mobileAppointmentBtn a.btnPrimary {
+  background-color: #6B4E98;
+  color: white;
+  gap: 15px;
+}
+
+.mobileAppointmentBtn a.btnPrimary:hover {
+  background-color: #4a2d71;
+  color: white;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
 .accountText {
   display: inline-block;
 }

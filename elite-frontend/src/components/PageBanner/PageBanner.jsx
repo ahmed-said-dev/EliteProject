@@ -60,7 +60,7 @@ const PageBanner = ({ title, backgroundImage }) => {
           <span className={styles.phoneIcon}>
             <i className="fa-solid fa-phone"></i>
           </span>
-          7890 456 123 1+
+          +965 920 011 626
         </a>
       </div>
       <span 
