@@ -17,9 +17,22 @@ import { CartProvider } from '@/context/CartContext';
 import { LanguageProvider } from '@/context/LanguageContext';
 import LoadingSpinner from '@/components/LoadingSpinner';
 import { useRouter } from 'next/router';
+import { QueryClient, QueryClientProvider } from 'react-query';
+import { ReactQueryDevtools } from 'react-query/devtools';
 
 // Prevent Font Awesome from adding its CSS since we did it manually above
 config.autoAddCss = false;
+
+// إنشاء كائن QueryClient لإدارة التخزين المؤقت للاستعلامات
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      refetchOnWindowFocus: false,
+      retry: 1,
+      staleTime: 5 * 60 * 1000, // 5 دقائق
+    },
+  },
+});
 
 function MyApp({ Component, pageProps }) {
   const router = useRouter();
@@ -54,14 +67,17 @@ function MyApp({ Component, pageProps }) {
         <meta name="description" content="عيادة إيليت البيطرية - شريكك الموثوق في رعاية حيوانك الأليف" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <CartProvider>
-        <LanguageProvider>
-          <LoadingSpinner isLoading={loading} />
-          <Layout>
-            <Component {...pageProps} />
-          </Layout>
-        </LanguageProvider>
-      </CartProvider>
+      <QueryClientProvider client={queryClient}>
+        <CartProvider>
+          <LanguageProvider>
+            <LoadingSpinner isLoading={loading} />
+            <Layout>
+              <Component {...pageProps} />
+            </Layout>
+          </LanguageProvider>
+        </CartProvider>
+        {process.env.NODE_ENV === 'development' && <ReactQueryDevtools initialIsOpen={false} />}
+      </QueryClientProvider>
     </>
   );
 }

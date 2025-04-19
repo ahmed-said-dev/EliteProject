@@ -1,0 +1,30 @@
+{
+  "kind": "collectionType",
+  "collectionName": "doctor_homes",
+  "info": {
+    "singularName": "doctor-home",
+    "pluralName": "doctor-homes",
+    "displayName": "DoctorHome"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "name": {
+      "type": "string"
+    },
+    "specialty": {
+      "type": "string"
+    },
+    "image": {
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ],
+      "type": "media",
+      "multiple": false
+    }
+  }
+}
