@@ -48,8 +48,7 @@ export const useDoctors = () => {
     ['doctors', locale], // مفتاح التخزين المؤقت (يتغير مع تغير اللغة)
     async () => {
       // إضافة معلمات اللغة إلى عنوان URL للحصول على البيانات بلغة المستخدم الحالية
-      const url = `${process.env.NEXT_PUBLIC_API_URL}/api/doctor-homes?populate=*&locale=${locale}`;
-      
+      const url = `${process.env.NEXT_PUBLIC_API_URL}/api/doctor-homes?populate=image&locale=${locale}`;      
       const response = await fetch(url);
       
       if (!response.ok) {
