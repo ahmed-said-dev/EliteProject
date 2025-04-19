@@ -7,7 +7,7 @@ import {
 import Image from "next/image";
 import { translate } from "../../i18n";
 import { useLanguage } from "@/context/LanguageContext";
-import useDoctors from "./useDoctors";
+import useDoctors from "@/hooks/useDoctors";
 
 interface DoctorCardProps {
   id?: number;
