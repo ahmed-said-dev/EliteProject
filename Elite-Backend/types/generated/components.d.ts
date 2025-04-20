@@ -62,6 +62,33 @@ export interface SharedSlider extends Struct.ComponentSchema {
   };
 }
 
+export interface SharedSocialLinks extends Struct.ComponentSchema {
+  collectionName: 'components_shared_social_links';
+  info: {
+    description: '\u0631\u0648\u0627\u0628\u0637 \u0627\u0644\u062A\u0648\u0627\u0635\u0644 \u0627\u0644\u0627\u062C\u062A\u0645\u0627\u0639\u064A';
+    displayName: 'socialLinks';
+    icon: 'bulletList';
+  };
+  attributes: {
+    icon: Schema.Attribute.String & Schema.Attribute.Required;
+    platform: Schema.Attribute.String & Schema.Attribute.Required;
+    url: Schema.Attribute.String & Schema.Attribute.Required;
+  };
+}
+
+export interface SharedSpecialties extends Struct.ComponentSchema {
+  collectionName: 'components_shared_specialties';
+  info: {
+    description: '\u0645\u0643\u0648\u0646 \u0627\u0644\u062A\u062E\u0635\u0635\u0627\u062A \u0644\u0623\u0639\u0636\u0627\u0621 \u0627\u0644\u0641\u0631\u064A\u0642';
+    displayName: 'specialties';
+    icon: 'dashboard';
+  };
+  attributes: {
+    icon: Schema.Attribute.String & Schema.Attribute.Required;
+    text: Schema.Attribute.String & Schema.Attribute.Required;
+  };
+}
+
 declare module '@strapi/strapi' {
   export module Public {
     export interface ComponentSchemas {
@@ -70,6 +97,8 @@ declare module '@strapi/strapi' {
       'shared.rich-text': SharedRichText;
       'shared.seo': SharedSeo;
       'shared.slider': SharedSlider;
+      'shared.social-links': SharedSocialLinks;
+      'shared.specialties': SharedSpecialties;
     }
   }
 }

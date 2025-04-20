@@ -616,6 +616,32 @@
   background-color: #3a2257;
 }
 
+/* حاويات الحالات المختلفة */
+.loadingContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 200px;
+  width: 100%;
+}
+
+.errorContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 200px;
+  width: 100%;
+  background-color: rgba(255, 0, 0, 0.1);
+  border-radius: 8px;
+  padding: 20px;
+}
+
+.errorMessage {
+  color: #d32f2f;
+  font-size: 18px;
+  text-align: center;
+}
+
 /* Animations */
 @keyframes float {
   0% {

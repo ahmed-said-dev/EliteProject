@@ -12,7 +12,7 @@ export interface TeamMemberProps {
   specialties: {
     icon: string;
     text: string;
-  }[];
+  }[] | any; 
   socialLinks: {
     platform: string;
     url: string;
@@ -26,9 +26,11 @@ const TeamMember: React.FC<TeamMemberProps> = ({
   imageSrc,
   isActive = false,
   animationDelay = "0.2s",
-  specialties,
+  specialties = [], 
   socialLinks,
 }) => {
+  const specialtiesArray = Array.isArray(specialties) ? specialties : [];
+  
   return (
     <div 
       className={`${styles.teamCol} ${styles.fadeInUp}`} 
@@ -60,21 +62,34 @@ const TeamMember: React.FC<TeamMemberProps> = ({
           </Link>
         </div>
         <ul className={styles.socialLinks}>
-          {socialLinks.map((link, index) => (
-            <li key={index}>
-              <a href={link.url} target="_blank" rel="noopener noreferrer">
-                <i className={link.icon} />
-              </a>
-            </li>
-          ))}
+          {socialLinks.map((link, index) => {
+            // إزالة http://localhost:3000/ من بداية الرابط إذا كان موجودًا
+            const cleanUrl = link.url && link.url.startsWith('http://localhost:3000/') 
+              ? link.url.replace('http://localhost:3000/', '') 
+              : link.url;
+              
+            return (
+              <li key={index}>
+                <a href={cleanUrl} target="_blank" rel="noopener noreferrer">
+                  <i className={link.icon} />
+                </a>
+              </li>
+            );
+          })}
         </ul>
         <div className={styles.teamInfo}>
           <ul>
-            {specialties.map((specialty, index) => (
-              <li key={index}>
-                <i className={specialty.icon} /> {specialty.text}
+            {specialtiesArray.length > 0 ? (
+              specialtiesArray.map((specialty, index) => (
+                <li key={index}>
+                  <i className={specialty.icon} /> {specialty.text}
+                </li>
+              ))
+            ) : (
+              <li>
+                <i className="fas fa-check" /> General Veterinary Care
               </li>
-            ))}
+            )}
           </ul>
           <Link href="/doctor-details" className={styles.readMoreButton}>
             Read More
