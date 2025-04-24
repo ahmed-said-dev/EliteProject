@@ -1,0 +1,15 @@
+{
+  "collectionName": "components_shared_service_features",
+  "info": {
+    "displayName": "Service Feature",
+    "icon": "list",
+    "description": "ميزات وتفاصيل الخدمة"
+  },
+  "options": {},
+  "attributes": {
+    "text": {
+      "type": "string",
+      "required": true
+    }
+  }
+}

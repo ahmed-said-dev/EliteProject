@@ -1,0 +1,16 @@
+{
+  "collectionName": "components_shared_service_icons",
+  "info": {
+    "displayName": "Service Icon",
+    "icon": "brush",
+    "description": "أيقونات الخدمة في صفحة الخدمات"
+  },
+  "options": {},
+  "attributes": {
+    "icon": {
+      "type": "string",
+      "required": true,
+      "description": "رمز الأيقونة من Font Awesome مثل fa-microscope"
+    }
+  }
+}
