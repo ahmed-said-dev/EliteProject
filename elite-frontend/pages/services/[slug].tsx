@@ -5,80 +5,149 @@ import axios from 'axios';
 import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
+import { FaCheckCircle, FaPaw, FaStethoscope, FaMicroscope, FaHeartbeat, FaShieldVirus, FaChevronRight, FaArrowRight, FaChevronLeft } from 'react-icons/fa';
 
-// Layout وأدوات مشتركة
+// Layout and shared tools
 import { useLanguage } from '@/context/LanguageContext';
 import useServicePages, { ServicePage, FormattedServicePage } from '@/hooks/useServicePages';
 
-// بيانات مؤقتة لصفحة التفاصيل
-// سنستخدم هذه المكونات المؤقتة لتجنب أخطاء الاستيراد
-const PageLayout = ({ children }: { children: React.ReactNode }) => (
-  <div className="page-layout">{children}</div>
-);
+// Enhanced detail page styles
+import styles from '@/styles/pages/ServiceDetail.module.css';
 
-const PageBanner = ({ title, breadcrumbs }: { title: string, breadcrumbs: any[] }) => (
-  <div className="page-banner">
-    <h1>{title}</h1>
-    <div className="breadcrumbs">
-      {breadcrumbs.map((item, index) => (
-        <span key={index}>
-          {index > 0 && ' > '}
-          {item.active ? item.name : <Link href={item.url}>{item.name}</Link>}
-        </span>
-      ))}
+// Page layout component
+const PageLayout = ({ children, dir }: { children: React.ReactNode, dir?: string }) => (
+  <div className={`${styles.serviceDetailPage} ${dir === 'rtl' ? styles.rtl : ''}`} dir={dir}>
+    <div className={styles.bgPattern}></div>
+    <div className={styles.serviceDetailContainer}>
+      {children}
     </div>
   </div>
 );
 
+// Breadcrumb and title component
+const PageBanner = ({ title, breadcrumbs, dir }: { title: string, breadcrumbs: any[], dir?: string }) => (
+  <header className={styles.pageHeader}>
+    <div className={styles.breadcrumb}>
+      {breadcrumbs.map((item, index) => (
+        <React.Fragment key={index}>
+          {index > 0 && (
+            <span className={styles.breadcrumbSeparator}>
+              {dir === 'rtl' ? <FaChevronLeft className={styles.breadcrumbIcon} /> : <FaChevronRight className={styles.breadcrumbIcon} />}
+            </span>
+          )}
+          <span className={styles.breadcrumbItem}>
+            {item.active ? 
+              <span className={styles.activeBreadcrumb}>{item.name}</span> : 
+              <Link href={item.url} className={styles.breadcrumbLink}>{item.name}</Link>
+            }
+          </span>
+        </React.Fragment>
+      ))}
+    </div>
+    <h1 className={styles.pageTitle}>{title}</h1>
+  </header>
+);
+
+// Features section component
 const ServiceFeatures = ({ features, title }: { features: any[], title: string }) => (
-  <div className="service-features">
-    <h2>{title}</h2>
-    <div className="features-list">
+  <section className={styles.featuresSection}>
+    <h2 className={styles.sectionTitle}>{title}</h2>
+    <div className={styles.featuresList}>
       {features.map((feature, index) => (        
-        <div key={index} className="feature-item">
-          <i className="fas fa-check-circle"></i>
-          <span>{feature.text}</span>
+        <div key={index} className={styles.featureItem}>
+          <div className={styles.featureIcon}>
+            <FaCheckCircle />
+          </div>
+          <div className={styles.featureText}>{feature.text}</div>
         </div>
       ))}
     </div>
-  </div>
+  </section>
 );
 
+// Detailed description component
 const ServiceDescription = ({ service, title }: { service: any, title: string }) => (
-  <div className="service-description">
-    <h2>{title}</h2>
-    <p>{service.description}</p>
-  </div>
-);
-
-const ServiceRelated = ({ currentServiceId, currentServiceSlug }: { currentServiceId: number, currentServiceSlug: string }) => (
-  <div className="related-services">
-    <h2>خدمات ذات صلة</h2>
-    <div className="services-grid">
-      {/* ستضاف الخدمات ذات الصلة هنا */}
+  <section className={styles.descriptionSection}>
+    <h2 className={styles.sectionTitle}>{title}</h2>
+    <div className={styles.descriptionContent}>
+      <p>{service.description}</p>
     </div>
-  </div>
+  </section>
 );
 
-const SectionDivider = ({ icon }: { icon: string }) => (
-  <div className="section-divider">
-    <div className="divider-line"></div>
-    <div className="divider-icon"><i className={`fas ${icon}`}></i></div>
-    <div className="divider-line"></div>
-  </div>
-);
+// Related services component
+const ServiceRelated = ({ currentServiceId, currentServiceSlug }: { currentServiceId: number, currentServiceSlug: string }) => {
+  const { locale } = useLanguage();
+  const { formattedServicePages } = useServicePages({ locale });
+  
+  // Exclude current service and take only 3 services
+  const relatedServices = formattedServicePages
+    .filter(service => service.id !== currentServiceId)
+    .slice(0, 3);
+  
+  return (
+    <section className={styles.relatedSection}>
+      <h2 className={styles.sectionTitle}>Related Services</h2>
+      <div className={styles.relatedServices}>
+        {relatedServices.map((service, index) => (
+          <div key={index} className={styles.relatedServiceCard}>
+            <div className={styles.relatedImageContainer}>
+              <img 
+                src={service.image}
+                alt={service.title}
+                className={styles.relatedImage}
+              />
+            </div>
+            <div className={styles.relatedContent}>
+              <h3 className={styles.relatedTitle}>{service.title}</h3>
+              <p className={styles.relatedDescription}>
+                {service.description?.substring(0, 120)}
+                {service.description && service.description.length > 120 ? '...' : ''}
+              </p>
+              <Link href={`/services/${service.slug}`}>
+                <button className={styles.viewButton}>
+                  Details <FaArrowRight style={{ marginRight: '5px', fontSize: '12px' }} />
+                </button>
+              </Link>
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
+  );
+};
 
-const EmergencyCare = () => (
-  <div className="emergency-care">
-    <h2>الرعاية الطارئة</h2>
-    <p>متوفرون على مدار 24 ساعة للحالات الطارئة. اتصل بنا على الرقم: 123-456-7890</p>
-  </div>
-);
+// Section divider component
+const SectionDivider = ({ icon }: { icon: string }) => {
+  // Determine icon from react-icons based on name
+  const getIcon = () => {
+    switch (icon) {
+      case 'fa-paw':
+        return <FaPaw />;
+      case 'fa-stethoscope':
+        return <FaStethoscope />;
+      case 'fa-microscope':
+        return <FaMicroscope />;
+      case 'fa-heartbeat':
+        return <FaHeartbeat />;
+      case 'fa-shield-virus':
+        return <FaShieldVirus />;
+      default:
+        return <FaPaw />;
+    }
+  };
+  
+  return (
+    <div className={styles.sectionDivider}>
+      <div className={styles.dividerLine}></div>
+      <div className={styles.dividerIcon}>
+        {getIcon()}
+      </div>
+    </div>
+  );
+};
 
-// أنماط
-import styles from '@/styles/pages/ServiceDetail.module.css';
-
-// واجهة الخصائص للصفحة
+// Page props interface
 interface ServiceDetailPageProps {
   initialService: ServicePage | null;
   error?: string;
@@ -88,11 +157,11 @@ const ServiceDetailPage: React.FC<ServiceDetailPageProps> = ({ initialService, e
   const router = useRouter();
   const { locale, dir } = useLanguage();
   
-  // الحصول على معرف الخدمة من الـ slug
+  // Get service ID from slug
   const { slug } = router.query;
   const [serviceId, setServiceId] = useState<number | undefined>(undefined);
   
-  // استخدام hook لجلب تفاصيل الخدمة بواسطة الـ ID
+  // Use hook to fetch service details by ID
   const { 
     formattedServiceDetail,
     serviceDetail,
@@ -104,42 +173,42 @@ const ServiceDetailPage: React.FC<ServiceDetailPageProps> = ({ initialService, e
     locale 
   });
 
-  // استخراج معرف الخدمة من الـ slug وتعيينه
+  // Extract service ID from slug and set it
   useEffect(() => {
     if (slug && typeof slug === 'string') {
-      // تحقق إذا كان slug يحتوي على معرف رقمي
+      // Check if slug contains numeric ID
       const match = slug.match(/(\d+)$/);
       if (match && match[1]) {
         const id = parseInt(match[1], 10);
-        console.log('تم العثور على معرف الخدمة:', id);
+        console.log('Service ID found:', id);
         setServiceId(id);
       } else {
-        // إذا لم يكن هناك معرف رقمي، يمكن البحث عن الخدمة بواسطة الـ slug
-        console.log('لم يتم العثور على معرف رقمي في slug:', slug);
+        // If no numeric ID, can search for service by slug
+        console.log('No numeric ID found in slug:', slug);
       }
     }
   }, [slug]);
 
-  // طباعة بيانات الخدمة في console
+  // Print service data in console
   useEffect(() => {
     if (serviceId) {
-      console.log('معرف الخدمة المطلوبة:', serviceId);
+      console.log('Requested service ID:', serviceId);
     }
     
     if (formattedServiceDetail) {
-      console.log('تفاصيل الخدمة المنسقة:', formattedServiceDetail);
+      console.log('Formatted service details:', formattedServiceDetail);
     }
     
     if (serviceDetail) {
-      console.log('بيانات الخدمة الأصلية:', serviceDetail);
+      console.log('Original service data:', serviceDetail);
     }
     
     if (rawData) {
-      console.log('البيانات الخام من API:', rawData);
+      console.log('Raw API data:', rawData);
     }
   }, [serviceId, formattedServiceDetail, serviceDetail, rawData]);
   
-  // استخدام ترجمات مخصصة بدلاً من useTranslation
+  // Use custom translations instead of useTranslation
   const t = (key: string) => {
     const translations: {[key: string]: {[key: string]: string}} = {
       en: {
@@ -156,33 +225,33 @@ const ServiceDetailPage: React.FC<ServiceDetailPageProps> = ({ initialService, e
         'nav.services': 'Services'
       },
       ar: {
-        'siteName': 'عيادة النخبة البيطرية',
-        'loading': 'جاري التحميل...',
-        'serviceDetail.notFound': 'الخدمة غير موجودة',
-        'serviceDetail.notFoundDesc': 'عذراً، الخدمة التي تبحث عنها غير موجودة.',
-        'serviceDetail.backToServices': 'العودة إلى الخدمات',
-        'serviceDetail.defaultDesc': 'تقدم عيادة النخبة البيطرية خدمات عالية الجودة لحيواناتك الأليفة.',
-        'serviceDetail.featuresTitle': 'مميزات الخدمة',
-        'serviceDetail.aboutService': 'عن هذه الخدمة',
-        'serviceDetail.relatedServices': 'خدمات ذات صلة',
-        'nav.home': 'الرئيسية',
-        'nav.services': 'الخدمات'
+        'siteName': 'Elite Veterinary Clinic',
+        'loading': 'Loading...',
+        'serviceDetail.notFound': 'Service Not Found',
+        'serviceDetail.notFoundDesc': 'Sorry, the service you are looking for could not be found.',
+        'serviceDetail.backToServices': 'Back to Services',
+        'serviceDetail.defaultDesc': 'Elite Veterinary Clinic offers high quality services for your beloved pets.',
+        'serviceDetail.featuresTitle': 'Service Features',
+        'serviceDetail.aboutService': 'About This Service',
+        'serviceDetail.relatedServices': 'Related Services',
+        'nav.home': 'Home',
+        'nav.services': 'Services'
       }
     };
     
     return translations[locale || 'en'][key] || key;
   };
 
-  // استخدام متغير loading من الـ hook بدلاً من إعادة تعريفه
-  // إضافة تأخير اختياري لتحسين تجربة المستخدم
+  // Use the loading variable from hook instead of redefining it
+  // Add optional delay to improve user experience
   const [uiReady, setUiReady] = useState<boolean>(false);
 
   useEffect(() => {
-    // تأثير للتحكم بحالة جاهزية واجهة المستخدم
+    // Effect to control UI ready state
     if (isLoading) {
       setUiReady(false);
     } else {
-      // تأخير صغير لتحسين تجربة المستخدم
+      // Small delay to improve user experience
       const timer = setTimeout(() => {
         setUiReady(true);
       }, 600);
@@ -190,25 +259,25 @@ const ServiceDetailPage: React.FC<ServiceDetailPageProps> = ({ initialService, e
     }
   }, [isLoading]);
 
-  // تحديد الخدمة المعروضة: إما من الـ hook أو من البيانات الأولية
+  // Determine displayed service: either from hook or initial data
   const serviceToDisplay = formattedServiceDetail || null;
 
-  // إذا كانت الصفحة قيد التحميل أو في حالة الخطأ الباهت
+  // If page is loading or in fallback state
   if (isLoading || router.isFallback) {
     return (
-      <PageLayout>
+      <PageLayout dir={dir}>
         <div className={styles.loadingContainer}>
           <div className={styles.loadingSpinner}></div>
-          <p>{t('loading')}</p>
+          <div className={styles.loadingText}>{t('loading')}</div>
         </div>
       </PageLayout>
     );
   }
 
-  // في حالة عدم وجود بيانات للخدمة
+  // If no service data available
   if (!serviceToDisplay && !initialService) {
     return (
-      <PageLayout>
+      <PageLayout dir={dir}>
         <div className={styles.errorContainer}>
           <h1>{t('serviceDetail.notFound')}</h1>
           <p>{initialError || t('serviceDetail.notFoundDesc')}</p>
@@ -224,190 +293,173 @@ const ServiceDetailPage: React.FC<ServiceDetailPageProps> = ({ initialService, e
 
   const getImageUrl = () => {
     if (formattedServiceDetail) {
-      // استخدام الـ URL من البيانات المنسقة
+      // Use URL from formatted data
       return formattedServiceDetail.image || '/images/default-service.jpg';
     }
     
-    // استخدام قيمة افتراضية
+    // Use default value
     return '/images/default-service.jpg';
   };
 
-  // استخدام البيانات المنسقة من الـ hook بدلاً من الوصول إلى attributes
+  // Use formatted data from hook instead of accessing attributes
   const service = serviceToDisplay || initialService;
   
   return (
-    <PageLayout>
+    <PageLayout dir={dir}>
       <Head>
-        <title>{`${service?.title || 'خدمة'} | ${t('siteName')}`}</title>
+        <title>{`${service?.title || 'Service'} | ${t('siteName')}`}</title>
         <meta name="description" content={service?.description || t('serviceDetail.defaultDesc')} />
-        <meta property="og:title" content={service?.title || 'خدمة'} />
+        <meta property="og:title" content={service?.title || 'Service'} />
         <meta property="og:description" content={service?.description || t('serviceDetail.defaultDesc')} />
         <meta property="og:image" content={getImageUrl()} />
       </Head>
 
-      {/* شريط عنوان الصفحة مع التنقل الفتات */}
+      {/* Page header with breadcrumbs */}
       <PageBanner 
-        title={service?.title || 'خدمة'}
+        title={service?.title || 'Service'}
         breadcrumbs={[
           { name: t('nav.home'), url: '/' },
           { name: t('nav.services'), url: '/services' },
-          { name: service?.title || 'خدمة', url: `/services/${service?.slug || ''}`, active: true }
+          { name: service?.title || 'Service', url: `/services/${service?.slug || ''}`, active: true }
         ]}
+        dir={dir}
       />
 
-      <div className={`${styles.serviceDetailContainer} ${dir === 'rtl' ? styles.rtl : ''}`}>
-        {/* قسم الصورة الرئيسية والعنوان */}
-        <section className={styles.heroSection}>
-          <div className={styles.imageContainer}>
-            <img 
-              src={getImageUrl()} 
-              alt={service?.title || 'خدمة'} 
-              className={styles.mainImage}
-            />
-            {service?.badge && (
-              <div className={styles.badge}>
-                {service.badge}
-              </div>
-            )}
-          </div>
-          <div className={styles.serviceInfo}>
-            <h1 className={styles.serviceTitle}>{service?.title || 'خدمة'}</h1>
-            
-            {/* أيقونات الخدمة */}
-            {service?.icons && Array.isArray(service.icons) && service.icons.length > 0 && (
-              <div className={styles.iconsContainer}>
-                {service.icons.map((icon, index) => (
-                  <div key={index} className={styles.iconCircle}>
-                    <i className={`fas ${icon.icon || 'fa-paw'}`}></i>
-                  </div>
-                ))}
-              </div>
-            )}
-            
-            {/* وصف موجز */}
-            {service?.description && (
-              <div className={styles.shortDescription}>
-                <p>{service.description}</p>
-              </div>
-            )}
-          </div>
-        </section>
+      {/* Main display section */}
+      <section className={styles.heroSection}>
+        <div className={styles.imageContainer}>
+          <img 
+            src={getImageUrl()} 
+            alt={service?.title || 'Service'} 
+            className={styles.mainImage}
+          />
+          <div className={styles.imageOverlay}></div>
+          {service?.badge && (
+            <div className={styles.badge}>
+              {service.badge}
+            </div>
+          )}
+        </div>
+        
+        <div className={styles.serviceInfo}>
+          <h1 className={styles.serviceTitle}>{service?.title || 'Service'}</h1>
+          
+          {/* Service icons */}
+          {service?.icons && Array.isArray(service.icons) && service.icons.length > 0 && (
+            <div className={styles.iconsContainer}>
+              {service.icons.map((icon, index) => (
+                <div key={index} className={styles.iconCircle}>
+                  <i className={`fas ${icon.icon || 'fa-paw'}`}></i>
+                </div>
+              ))}
+            </div>
+          )}
+          
+          {/* Brief description */}
+          {service?.description && (
+            <div className={styles.shortDescription}>
+              <p>{service.description}</p>
+            </div>
+          )}
+        </div>
+      </section>
 
-        <SectionDivider icon="fa-paw" />
+      <SectionDivider icon="fa-paw" />
 
-        {/* قسم مميزات الخدمة */}
-        <ServiceFeatures 
-          features={(service?.features || []).map(item => ({ 
-            id: item.id, 
-            text: item.text || '' 
-          }))} 
-          title={t('serviceDetail.featuresTitle')} 
-        />
+      {/* Service features section */}
+      <ServiceFeatures 
+        features={(service?.features || []).map(item => ({ 
+          id: item.id, 
+          text: item.text || '' 
+        }))} 
+        title={t('serviceDetail.featuresTitle')} 
+      />
 
-        <SectionDivider icon="fa-stethoscope" />
+      <SectionDivider icon="fa-stethoscope" />
 
-        {/* قسم الوصف التفصيلي */}
-        <ServiceDescription 
-          service={{ 
-            description: service?.description || '',
-            title: service?.title || '' 
-          }}
-          title={t('serviceDetail.aboutService')}
-        />
+      {/* Detailed description section */}
+      <ServiceDescription 
+        service={{ 
+          description: service?.description || '',
+          title: service?.title || '' 
+        }}
+        title={t('serviceDetail.aboutService')}
+      />
 
-        {/* قسم الرعاية الطارئة */}
-        <EmergencyCare />
+      <SectionDivider icon="fa-notes-medical" />
 
-        <SectionDivider icon="fa-heart" />
-
-        {/* خدمات ذات صلة */}
-        <ServiceRelated 
-          currentServiceId={service?.id || 0}
-          currentServiceSlug={service?.slug || ''}
-        />
-      </div>
+      {/* Related services */}
+      <ServiceRelated 
+        currentServiceId={service?.id || 0}
+        currentServiceSlug={service?.slug || ''}
+      />
     </PageLayout>
   );
 };
 
+// Import initial data from server
 export const getServerSideProps: GetServerSideProps = async ({ params, locale }) => {
-  const slug = params?.slug;
-  
-  if (!slug) {
+  // Execute at page build time on server, not in browser
+  try {
+    if (!params?.slug) {
+      return { 
+        props: { 
+          service: null, 
+          error: 'Service slug is required' 
+        } 
+      };
+    }
+    
+    // Extract service ID number from slug if it exists
+    const slug = params.slug as string;
+    const match = slug.match(/(\d+)$/);
+    let serviceId: number | null = null;
+    
+    if (match && match[1]) {
+      serviceId = parseInt(match[1], 10);
+    }
+    
+    const localeToUse = locale || 'ar';
+    
+    // If ID found, use it in API request
+    if (serviceId) {
+      const url = `${process.env.NEXT_PUBLIC_API_URL}/api/service-pages/${serviceId}?locale=${localeToUse}`;
+      
+      try {
+        const response = await axios.get(url);
+        
+        return {
+          props: {
+            service: response.data || null,
+            error: null
+          }
+        };
+      } catch (error) {
+        console.error(`Error fetching service with ID ${serviceId}:`, error);
+        
+        return {
+          props: {
+            service: null,
+            error: `Error fetching service details: ${error}`
+          }
+        };
+      }
+    }
+    
+    // If no ID found, search using slug
     return {
       props: {
         service: null,
-        error: 'Service slug is missing'
+        error: 'Service not found'
       }
-    };
-  }
-
-  try {
-    // استدعاء API لجلب Service ID بناءً على slug أولاً
-    const baseUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:1337';
-    
-    // Step 1: الحصول على ID الخدمة باستخدام slug
-    const servicesResponse = await axios.get(`${baseUrl}/api/services`, {
-      params: {
-        filters: {
-          slug: {
-            $eq: slug
-          }
-        },
-        fields: ['id'],
-        locale: locale
-      }
-    });
-    
-    if (!servicesResponse.data?.data || servicesResponse.data.data.length === 0) {
-      console.error('Could not find service with slug:', slug);
-      return {
-        props: {
-          service: null,
-          error: 'Service not found'
-        }
-      };
-    }
-    
-    // استخراج ID الخدمة من النتيجة
-    const serviceId = servicesResponse.data.data[0].id;
-    console.log('Found service ID:', serviceId);
-    
-    // Step 2: استخدام findOne API للحصول على تفاصيل الخدمة بناءً على ID
-    const serviceDetailResponse = await axios.get(`${baseUrl}/api/services/${serviceId}`, {
-      params: {
-        populate: ['image', 'features', 'icons'],
-        locale: locale
-      }
-    });
-    
-    console.log('Service API response:', serviceDetailResponse.data);
-    
-    if (!serviceDetailResponse.data?.data) {
-      console.error('Could not fetch details for service ID:', serviceId);
-      return {
-        props: {
-          service: null,
-          error: 'Service details not found'
-        }
-      };
-    }
-    
-    // التأكد من أن البيانات بالتنسيق الصحيح
-    const serviceData = serviceDetailResponse.data.data;
-    console.log('Service data:', serviceData);
-    
-    return {
-      props: {
-        service: serviceData
-      },
     };
   } catch (error) {
-    console.error('Error fetching service details:', error);
+    console.error('Error in getServerSideProps:', error);
+    
     return {
       props: {
         service: null,
-        error: 'Failed to fetch service details: ' + (error instanceof Error ? error.message : String(error))
+        error: `Server error: ${error}`
       }
     };
   }
