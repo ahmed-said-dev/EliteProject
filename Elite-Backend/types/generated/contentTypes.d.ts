@@ -618,12 +618,6 @@ export interface ApiServicePageServicePage extends Struct.CollectionTypeSchema {
       }> &
       Schema.Attribute.DefaultTo<0>;
     publishedAt: Schema.Attribute.DateTime;
-    slug: Schema.Attribute.UID<'title'> &
-      Schema.Attribute.SetPluginOptions<{
-        i18n: {
-          localized: true;
-        };
-      }>;
     title: Schema.Attribute.String &
       Schema.Attribute.Required &
       Schema.Attribute.SetPluginOptions<{
@@ -675,6 +669,36 @@ export interface ApiTeamMemberTeamMember extends Struct.CollectionTypeSchema {
         number
       >;
     specialties: Schema.Attribute.Component<'shared.specialties', true>;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiTestoneTestone extends Struct.CollectionTypeSchema {
+  collectionName: 'testones';
+  info: {
+    displayName: 'testone';
+    pluralName: 'testones';
+    singularName: 'testone';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    des: Schema.Attribute.String;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::testone.testone'
+    > &
+      Schema.Attribute.Private;
+    num: Schema.Attribute.Integer;
+    publishedAt: Schema.Attribute.DateTime;
+    title: Schema.Attribute.String;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -1197,6 +1221,7 @@ declare module '@strapi/strapi' {
       'api::home-service.home-service': ApiHomeServiceHomeService;
       'api::service-page.service-page': ApiServicePageServicePage;
       'api::team-member.team-member': ApiTeamMemberTeamMember;
+      'api::testone.testone': ApiTestoneTestone;
       'plugin::content-releases.release': PluginContentReleasesRelease;
       'plugin::content-releases.release-action': PluginContentReleasesReleaseAction;
       'plugin::i18n.locale': PluginI18NLocale;

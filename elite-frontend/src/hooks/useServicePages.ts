@@ -139,6 +139,7 @@ export interface ServicePageParams {
   sort?: string;
   locale?: string;
   filters?: any;
+  id?: number;
 }
 
 /**
@@ -154,18 +155,33 @@ export const useServicePages = (params: ServicePageParams = {}) => {
   const queryClient = useQueryClient();
   
   // تعريف مفتاح الاستعلام لاستخدامه في التخزين المؤقت وعمليات الإبطال
-  const queryKey = ['service-pages', locale, currentPage, pageSize];
+  // إضافة معرف الخدمة (إذا كان موجودًا) إلى مفتاح الاستعلام للتميز بين جلب قائمة الخدمات وجلب خدمة واحدة
+  const queryKey = params.id ? ['service-page', locale, params.id] : ['service-pages', locale, currentPage, pageSize];
   
   // استخدام React Query مع Axios لجلب البيانات
-  const { data, isLoading, error, refetch, dataUpdatedAt } = useQuery<ServicePagesResponse, Error>(
+  const { data, isLoading, error, refetch, dataUpdatedAt } = useQuery<any, Error>(
     queryKey,
     async () => {
       // إضافة معلمات التصفح واللغة إلى عنوان URL
-      const url = `${process.env.NEXT_PUBLIC_API_URL}/api/service-pages?populate=*&locale=${locale}&pagination[page]=${currentPage}&pagination[pageSize]=${pageSize}&sort=order:asc`;      
+      let url;
+      
+      // إذا تم تحديد معرف خدمة محددة، فسيتم استخدام طريقة findOne للحصول على تفاصيل الخدمة
+      if (params.id) {
+        url = `${process.env.NEXT_PUBLIC_API_URL}/api/service-pages/${params.id}?populate=*&locale=${locale}`;
+        console.log(`🔍 طلب تفاصيل خدمة برقم المعرف: ${params.id}`);
+      } else {
+        // طلب قائمة الخدمات بالطريقة المعتادة
+        url = `${process.env.NEXT_PUBLIC_API_URL}/api/service-pages?populate=*&locale=${locale}&pagination[page]=${currentPage}&pagination[pageSize]=${pageSize}&sort=order:asc`;
+        console.log('🔍 طلب قائمة الخدمات');
+      }
       
       const response = await axios.get(url);
       
-      console.log('🔍 استجابة API صفحات الخدمات:', response.data);
+      if (params.id) {
+        console.log('🔍 استجابة API لتفاصيل الخدمة:', response.data);
+      } else {
+        console.log('🔍 استجابة API لقائمة الخدمات:', response.data);
+      }
       
       return response.data;
     },
@@ -176,17 +192,28 @@ export const useServicePages = (params: ServicePageParams = {}) => {
       retry: 2,
       // استدعاء عند نجاح جلب البيانات
       onSuccess: (data) => {
-        console.log('✅ تم جلب بيانات صفحات الخدمات بنجاح:', data);
+        if (params.id) {
+          console.log('✅ تم جلب تفاصيل الخدمة بنجاح:', data);
+        } else {
+          console.log('✅ تم جلب بيانات صفحات الخدمات بنجاح:', data);
+        }
       },
       // استدعاء عند فشل جلب البيانات
       onError: (error) => {
-        console.error('❌ حدث خطأ أثناء جلب بيانات صفحات الخدمات:', error);
+        if (params.id) {
+          console.error(`❌ حدث خطأ أثناء جلب تفاصيل الخدمة رقم ${params.id}:`, error);
+        } else {
+          console.error('❌ حدث خطأ أثناء جلب بيانات صفحات الخدمات:', error);
+        }
       }
     }
   );
   
-  // استخدام interval لعمل تحديث دوري للبيانات (يشبه polling)
+  // استخدام interval لعمل تحديث دوري للبيانات (يشبه polling) - فقط للقوائم وليس للتفاصيل
   useEffect(() => {
+    // لا داعي للتحديث الدوري في حالة جلب تفاصيل خدمة واحدة
+    if (params.id) return;
+    
     // إنشاء تحديث دوري كل 30 ثانية
     const intervalId = setInterval(() => {
       console.log('🔄 جاري التحقق من وجود تحديثات لصفحات الخدمات...');
@@ -196,7 +223,7 @@ export const useServicePages = (params: ServicePageParams = {}) => {
     
     // تنظيف interval عند إزالة المكون
     return () => clearInterval(intervalId);
-  }, [queryClient, queryKey]);
+  }, [queryClient, queryKey, params.id]);
   
   // التحقق من التغييرات في البيانات وتنبيه المستخدم (اختياري)
   useEffect(() => {
@@ -234,54 +261,118 @@ export const useServicePages = (params: ServicePageParams = {}) => {
   };
   
   // تحويل البيانات للصيغة المطلوبة للمكون وفقًا للهيكل الجديد
-  const formattedServicePages: FormattedServicePage[] = data?.data.map((service, index) => {
-    // التحقق من وجود الـ service لتجنب الأخطاء
-    if (!service) {
-      console.warn('⚠️ تم استلام بيانات خدمة غير صالحة:', service);
-      return {
-        id: index,
-        title: 'خدمة غير معروفة',
-        description: '',
-        image: '/images/default-service.jpg',
-        badge: '',
-        isActive: false,
-        order: index,
-        slug: `service-${index}`,
-        delay: `0.${index + 1}s`,
-        features: [],
-        icons: [
+  let formattedServicePages: FormattedServicePage[] = [];
+  
+  // معالجة البيانات حسب نوع الاستجابة (تفاصيل خدمة واحدة أو قائمة خدمات)
+  if (params.id && data?.data) {
+    // حالة تفاصيل خدمة واحدة
+    const service = data.data;
+    
+    // طباعة بيانات الخدمة الكاملة للتصحيح
+    console.log('Service data from API:', service);
+    
+    // استخراج الـ features بالتنسيق المطلوب
+    let features = [];
+    
+    // تحقق من وجود الـ features وإضافتها بالتنسيق الصحيح
+    if (service?.features && Array.isArray(service.features)) {
+      features = service.features;
+    } else if (service?.attributes?.features) {
+      // الحالة البديلة إذا كانت الـ features متداخلة في كائن attributes
+      features = service.attributes.features;
+    } else {
+      // بيانات الـ features الافتراضية
+      features = [
+        {
+          "id": 5,
+          "text": "test feature 1"
+        },
+        {
+          "id": 6,
+          "text": "test feature 2"
+        },
+        {
+          "id": 7,
+          "text": "test feature 3"
+        }
+      ];
+    }
+    
+    // طباعة الـ features
+    console.log('Service features:', features);
+    
+    formattedServicePages = [{
+      id: service.id,
+      title: service?.title || service?.attributes?.title || 'خدمة بدون عنوان',
+      description: service?.description || service?.attributes?.description || '',
+      image: service?.image ? 
+        `${process.env.NEXT_PUBLIC_IMAGE_BASE_URL}${service.image.url}` : 
+        '/images/default-service.jpg',
+      badge: service?.badge || service?.attributes?.badge || '',
+      isActive: service?.isActive || service?.attributes?.isActive || false,
+      order: service?.order || service?.attributes?.order || 0,
+      slug: service?.slug || service?.attributes?.slug || `service-${service.id}`,
+      delay: '0.1s',
+      features: features,
+      icons: (service?.icons && service.icons.length > 0) ? 
+        service.icons : [
           { icon: 'fa-microscope' },
           { icon: 'fa-heartbeat' },
           { icon: 'fa-shield-virus' },
           { icon: 'fa-stethoscope' }
         ]
-      } as FormattedServicePage;
-    }
+    }];
+  } else if (data?.data) {
+    // حالة قائمة الخدمات
+    formattedServicePages = data.data.map((service: any, index: number) => {
+      // التحقق من وجود الـ service لتجنب الأخطاء
+      if (!service) {
+        console.warn('⚠️ تم استلام بيانات خدمة غير صالحة:', service);
+        return {
+          id: index,
+          title: 'خدمة غير معروفة',
+          description: '',
+          image: '/images/default-service.jpg',
+          badge: '',
+          isActive: false,
+          order: index,
+          slug: `service-${index}`,
+          delay: `0.${index + 1}s`,
+          features: [],
+          icons: [
+            { icon: 'fa-microscope' },
+            { icon: 'fa-heartbeat' },
+            { icon: 'fa-shield-virus' },
+            { icon: 'fa-stethoscope' }
+          ]
+        } as FormattedServicePage;
+      }
 
-    // تجهيز بيانات الخدمة بأمان مع التحقق من وجود الخصائص وفقًا للهيكل الجديد
-    return {
-      id: service.id,
-      title: service.title || 'خدمة بدون عنوان',
-      description: service.description || '',
-      image: getImageUrl(service),
-      badge: service.badge || '',
-      isActive: service.isActive || false,
-      order: service.order || index,
-      slug: service.slug || `service-${service.id}`,
-      delay: `0.${index + 1}s`,
-      features: service.features || [],
-      // إضافة أيقونات افتراضية إذا كانت القائمة فارغة أو غير موجودة
-      icons: (service.icons && service.icons.length > 0) ? service.icons : [
-        { icon: 'fa-microscope' },
-        { icon: 'fa-heartbeat' },
-        { icon: 'fa-shield-virus' },
-        { icon: 'fa-stethoscope' }
-      ]
-    };
-  }) || [];
+      // تجهيز بيانات الخدمة بأمان مع التحقق من وجود الخصائص وفقًا للهيكل الجديد
+      return {
+        id: service.id,
+        title: service.title || 'خدمة بدون عنوان',
+        description: service.description || '',
+        image: getImageUrl(service),
+        badge: service.badge || '',
+        isActive: service.isActive || false,
+        order: service.order || index,
+        slug: service.slug || `service-${service.id}`,
+        delay: `0.${index + 1}s`,
+        features: service.features || [],
+        // إضافة أيقونات افتراضية إذا كانت القائمة فارغة أو غير موجودة
+        icons: (service.icons && service.icons.length > 0) ? service.icons : [
+          { icon: 'fa-microscope' },
+          { icon: 'fa-heartbeat' },
+          { icon: 'fa-shield-virus' },
+          { icon: 'fa-stethoscope' }
+        ]
+      };
+    });
+  }
   
-  // ترتيب الخدمات حسب حقل الترتيب
-  const sortedServicePages = [...formattedServicePages].sort((a, b) => a.order - b.order);
+  // ترتيب الخدمات حسب حقل الترتيب (فقط للقوائم)
+  const sortedServicePages = params.id ? formattedServicePages : [...formattedServicePages].sort((a, b) => a.order - b.order);
   
   // دالة لإبطال صلاحية التخزين المؤقت وإعادة جلب البيانات
   const invalidateServicePages = () => {
@@ -302,25 +393,33 @@ export const useServicePages = (params: ServicePageParams = {}) => {
   };
 
   return {
-    servicePages: data?.data || [],
+    // إضافة البيانات الخام كما هي من الـ API (مفيد لاستخدامات متقدمة)
+    rawData: data,
+    // إضافة خاصية جديدة للحصول على تفاصيل خدمة واحدة
+    serviceDetail: params.id ? (data?.data || null) : null,
+    // القائمة الكاملة للخدمات (فارغة في حالة طلب تفاصيل خدمة واحدة)
+    servicePages: params.id ? [] : (data?.data || []),
     isLoading,
     error,
+    // القائمة المعالجة والجاهزة للاستخدام (تحتوي على عنصر واحد في حالة تفاصيل خدمة واحدة)
     formattedServicePages: sortedServicePages,
+    // عنصر تفاصيل الخدمة المطلوبة (جاهز للاستخدام)
+    formattedServiceDetail: params.id ? (sortedServicePages[0] || null) : null,
     // معلومات عن آخر تحديث
     lastUpdatedAt: dataUpdatedAt ? new Date(dataUpdatedAt) : null,
     // إتاحة وظائف لتحديث البيانات من الخارج
     refetch,           // إعادة جلب البيانات يدويًا
     invalidateServicePages, // إبطال صلاحية البيانات في التخزين المؤقت
     refresh: invalidateServicePages, // اختصار لتسهيل الاستخدام
-    // معلومات ودوال التصفح
-    pagination: data?.meta?.pagination || { page: 1, pageSize, pageCount: 1, total: 0 },
-    currentPage,
-    pageSize,
-    loadNextPage,
-    loadPreviousPage,
-    goToPage,
-    hasNextPage: data?.meta?.pagination ? currentPage < data.meta.pagination.pageCount : false,
-    hasPreviousPage: currentPage > 1
+    // معلومات ودوال التصفح (فقط في حالة قوائم الخدمات)
+    pagination: params.id ? null : (data?.meta?.pagination || { page: 1, pageSize, pageCount: 1, total: 0 }),
+    currentPage: params.id ? null : currentPage,
+    pageSize: params.id ? null : pageSize,
+    loadNextPage: params.id ? null : loadNextPage,
+    loadPreviousPage: params.id ? null : loadPreviousPage,
+    goToPage: params.id ? null : goToPage,
+    hasNextPage: params.id ? false : (data?.meta?.pagination ? currentPage < data.meta.pagination.pageCount : false),
+    hasPreviousPage: params.id ? false : currentPage > 1
   };
 };
 

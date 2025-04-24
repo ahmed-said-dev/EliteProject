@@ -21,6 +21,46 @@
   color: #4a2d71;
 }
 
+/* Error container styles */
+.errorContainer {
+  min-height: 400px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 0 20px;
+}
+
+.errorContainer h3 {
+  color: #4a2d71;
+  font-size: 24px;
+  margin-bottom: 16px;
+}
+
+.errorContainer p {
+  color: #666;
+  margin-bottom: 24px;
+  max-width: 600px;
+}
+
+.retryButton {
+  background-color: #4a2d71;
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.retryButton:hover {
+  background-color: #6242A1;
+  transform: translateY(-3px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
 /* Background shapes */
 .shapesWrapper {
   position: absolute;

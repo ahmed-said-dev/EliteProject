@@ -92,15 +92,6 @@
           "localized": false
         }
       }
-    },
-    "slug": {
-      "type": "uid",
-      "targetField": "title",
-      "pluginOptions": {
-        "i18n": {
-          "localized": true
-        }
-      }
     }
   }
 }
