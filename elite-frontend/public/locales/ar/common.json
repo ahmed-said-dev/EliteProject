@@ -1460,5 +1460,26 @@
       "many": "%count% منتجًا في سلتك",
       "other": "%count% منتج في سلتك"
     }
+  },
+  "article": {
+    "blogDetail": "تفاصيل المقال",
+    "readOurLatestArticles": "اقرأ أحدث مقالاتنا من خبراء الطب البيطري",
+    "backToBlog": "العودة إلى المدونة",
+    "viewAllArticles": "عرض جميع المقالات",
+    "by": "بواسطة",
+    "readTime": "وقت القراءة",
+    "views": "المشاهدات",
+    "publishedOn": "نُشر بتاريخ",
+    "excerpt": "مقتطف المقال",
+    "relatedArticles": "مقالات ذات صلة",
+    "share": "مشاركة",
+    "tags": "الوسوم",
+    "category": "التصنيف",
+    "author": "الكاتب",
+    "authorBio": "نبذة عن الكاتب",
+    "readMore": "اقرأ المزيد",
+    "noRelatedArticles": "لا توجد مقالات ذات صلة",
+    "minutes": "دقائق",
+    "shareOn": "مشاركة على"
   }
 }

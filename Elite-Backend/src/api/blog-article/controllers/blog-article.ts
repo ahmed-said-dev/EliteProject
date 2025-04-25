@@ -4,84 +4,76 @@
 
 import { factories } from '@strapi/strapi';
 
+// إعداد المصفوفة الافتراضية للpopulate
+const defaultPopulate = {
+  category: true,
+  tags: true,
+  author: {
+    populate: ['avatar', 'socialLinks']
+  },
+  featuredImage: true
+};
+
 export default factories.createCoreController('api::blog-article.blog-article', ({ strapi }) => ({
-  /**
-   * تعديل منطق findOne للسماح بالبحث بواسطة slug أو id
-   * مع تحسين الاستعلامات ودعم populate كامل
-   */
+  async find(ctx) {
+    // تطبيق نفس منطق الاستعلام الافتراضي
+    const { query } = ctx;
+    return await super.find(ctx);
+  },
+
   async findOne(ctx) {
     const { id } = ctx.params;
-    const { query } = ctx;
-    
-    // تحضير خيارات الـ populate الافتراضية
-    const defaultPopulate = {
-      featuredImage: true,
-      category: {
-        populate: ['icon']
-      },
-      tags: true,
-      author: {
-        populate: ['avatar', 'socialLinks']
-      }
-    };
     
     try {
-      // معالجة البحث بواسطة slug
+      let entity;
+      
+      // البحث عن مقالة باستخدام الslug أو المعرف
       if (isNaN(parseInt(id))) {
-        // إذا كان المعرف ليس رقمًا، نفترض أنه slug
-        const entity = await strapi.db.query('api::blog-article.blog-article').findOne({
+        // بحث باستخدام الslug
+        entity = await strapi.db.query('api::blog-article.blog-article').findOne({
           where: { slug: id },
-          populate: query.populate || defaultPopulate
+          populate: defaultPopulate
         });
-        
-        if (!entity) {
-          return ctx.notFound('المقالة غير موجودة');
-        }
-        
-        const sanitizedEntity = await this.sanitizeOutput(entity, ctx);
-        return this.transformResponse(sanitizedEntity);
+      } else {
+        // بحث باستخدام المعرف
+        entity = await strapi.db.query('api::blog-article.blog-article').findOne({
+          where: { id: parseInt(id) },
+          populate: defaultPopulate
+        });
       }
       
-      // تحديد خيارات الـ populate
-      if (!query.populate) {
-        query.populate = defaultPopulate;
+      if (!entity) {
+        return ctx.notFound(`No blog article found with id/slug: ${id}`);
       }
       
-      // استدعاء المنطق الافتراضي مع التخصيصات
-      const response = await super.findOne(ctx);
-      
-      // زيادة عدد المشاهدات (يمكن تعليقها إذا لم تكن مطلوبة)
-      if (response.data) {
-        const articleId = parseInt(id);
-        await strapi.service('api::blog-article.blog-article').incrementViewCount(articleId);
+      // زيادة عدد المشاهدات
+      try {
+        await strapi.service('api::blog-article.blog-article').incrementViewCount(entity.id);
+      } catch (error) {
+        // تسجيل الخطأ ولكن عدم إرجاع خطأ للمستخدم
+        console.error('Error incrementing view count:', error);
       }
       
-      return response;
+      // إرجاع النتيجة
+      const sanitizedEntity = await this.sanitizeOutput(entity, ctx);
+      return this.transformResponse(sanitizedEntity);
     } catch (error) {
-      // معالجة أي أخطاء غير متوقعة
-      return ctx.badRequest('حدث خطأ أثناء البحث عن المقالة', { error: error instanceof Error ? error.message : 'خطأ غير معروف' });
+      console.error('Error in findOne:', error);
+      return ctx.badRequest('Error finding blog article');
     }
   },
-  
-  /**
-   * دالة للحصول على المقالات المتعلقة بمقالة معينة
-   * إما من نفس التصنيف أو بنفس العلامات
-   */
+
   async findRelated(ctx) {
     const { id } = ctx.params;
     const { query } = ctx;
+    
+    // الحصول على limit من الاستعلام أو استخدام القيمة الافتراضية
     const limit = query.limit ? parseInt(query.limit as string) : 3;
     
     try {
-      // التحقق من صحة المعرف
-      const articleId = parseInt(id);
-      if (isNaN(articleId)) {
-        return ctx.badRequest('معرف المقالة غير صالح');
-      }
-      
-      // الحصول على المقالة الحالية
+      // البحث عن المقالة الحالية
       const article = await strapi.db.query('api::blog-article.blog-article').findOne({
-        where: { id: articleId },
+        where: { id },
         populate: {
           category: true,
           tags: true
@@ -89,38 +81,39 @@ export default factories.createCoreController('api::blog-article.blog-article', 
       });
       
       if (!article) {
-        return ctx.notFound('المقالة غير موجودة');
+        return ctx.notFound(`No blog article found with id: ${id}`);
       }
       
-      // الحصول على معرفات العلامات
-      const tagIds = article.tags?.map(tag => tag.id) || [];
+      // الحصول على معرفات التصنيفات والعلامات للمقالة الحالية
       const categoryId = article.category?.id;
+      const tagIds = article.tags?.map(tag => tag.id) || [];
       
-      // استعلام للمقالات ذات الصلة (من نفس التصنيف أو بنفس العلامات)
+      // استخدام query.findMany مباشرة بدلاً من entityService.findMany لتجنب مشكلات التوافق
       const relatedArticles = await strapi.db.query('api::blog-article.blog-article').findMany({
         where: {
-          id: { $ne: articleId },
+          id: { $ne: article.id },
           $or: [
             categoryId ? { category: categoryId } : {},
             tagIds.length > 0 ? { tags: { id: { $in: tagIds } } } : {}
-          ]
+          ].filter(cond => Object.keys(cond).length > 0) // تصفية الشروط الفارغة
         },
-        populate: {
-          featuredImage: true,
-          category: true,
-          author: {
-            populate: ['avatar']
-          }
-        },
+        orderBy: { publishDate: 'desc' },
+        populate: defaultPopulate,
         limit
       });
       
-      const sanitizedEntities = await this.sanitizeOutput(relatedArticles, ctx);
-      return this.transformResponse(sanitizedEntities);
+      // تنظيف النتائج وإرجاعها
+      const sanitizedEntities = await Promise.all(
+        relatedArticles.map(entity => this.sanitizeOutput(entity, ctx))
+      );
+      
+      return {
+        data: sanitizedEntities,
+        meta: { limit }
+      };
     } catch (error) {
-      return ctx.badRequest('حدث خطأ أثناء البحث عن المقالات ذات الصلة', { 
-        error: error instanceof Error ? error.message : 'خطأ غير معروف' 
-      });
+      console.error('Error in findRelated:', error);
+      return ctx.badRequest('Error finding related articles');
     }
   }
 }));
