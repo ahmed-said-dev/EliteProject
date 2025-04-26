@@ -1380,7 +1380,7 @@
       "features": [
         "خدمات طوارئ بيطرية على مدار الساعة",
         "أخصائيون بيطريون مؤهلون تأهيلاً عالياً",
-        "معدات طبية متطورة",
+        "معدات طبية متقدمة",
         "وحدات عناية مركزة متخصصة"
       ],
       "contactNumber": "1-800-PET-HELP",
@@ -1481,5 +1481,23 @@
     "noRelatedArticles": "لا توجد مقالات ذات صلة",
     "minutes": "دقائق",
     "shareOn": "مشاركة على"
+  },
+  "blogSidebar": {
+    "search": "بحث",
+    "searchPlaceholder": "ابحث في المقالات...",
+    "categories": "التصنيفات",
+    "allCategories": "جميع التصنيفات",
+    "noCategories": "لا توجد تصنيفات",
+    "tags": "الوسوم",
+    "allTags": "جميع الوسوم",
+    "noTags": "لا توجد وسوم",
+    "popularPosts": "المقالات الشائعة",
+    "filteredByCategory": "تصفية حسب التصنيف",
+    "filteredByTag": "تصفية حسب الوسم",
+    "searchResults": "نتائج البحث",
+    "clearFilters": "مسح المرشحات",
+    "noArticlesFound": "لم يتم العثور على مقالات",
+    "tryDifferentFilters": "جرب مرشحات مختلفة أو تحقق لاحقاً من المحتوى الجديد",
+    "readMore": "اقرأ المزيد"
   }
 }

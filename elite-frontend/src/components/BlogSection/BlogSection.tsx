@@ -62,7 +62,6 @@ const BlogSection: React.FC<BlogSectionProps> = ({ articles = [], isHomePage = f
         <div className={`${styles.shape} ${styles.shape2}`}></div>
         <div className={`${styles.shape} ${styles.shape3}`}></div>
       </div>
-      
       <div className={styles.container}>
         <div className={styles.sectionHeader}>
           <h2 className={styles.sectionTitle}>{t('blogSection.title')}</h2>

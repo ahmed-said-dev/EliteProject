@@ -1474,5 +1474,23 @@
     "noRelatedArticles": "No related articles found",
     "minutes": "minutes",
     "shareOn": "Share on"
+  },
+  "blogSidebar": {
+    "search": "Search",
+    "searchPlaceholder": "Search articles...",
+    "categories": "Categories",
+    "allCategories": "All Categories",
+    "noCategories": "No categories found",
+    "tags": "Tags",
+    "allTags": "All Tags",
+    "noTags": "No tags found",
+    "popularPosts": "Popular Posts",
+    "filteredByCategory": "Filtered by Category",
+    "filteredByTag": "Filtered by Tag",
+    "searchResults": "Search Results",
+    "clearFilters": "Clear Filters",
+    "noArticlesFound": "No Articles Found",
+    "tryDifferentFilters": "Try different filters or check back later for new content",
+    "readMore": "Read more"
   }
 }

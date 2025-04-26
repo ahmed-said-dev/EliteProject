@@ -9,6 +9,7 @@ import { useLanguage } from '@/context/LanguageContext';
 import { useBlogArticle, useRelatedArticles, getArticleImage, getAuthorImage } from '@/hooks/useBlogApi';
 import { Loader } from '@/components/ui/Loader';
 import BlogSection from '@/components/BlogSection';
+import BlogSidebar from '@/components/BlogSidebar'; // Added import statement
 
 const formatDate = (dateString, locale) => {
   if (!dateString) return '';
@@ -363,37 +364,10 @@ export default function ArticleDetail({ initialArticleData, initialRelatedData }
                 </div>
               )}
               
-              {/* زر العودة للمدونة */}
-              <div className="hidden lg:block">
-                <button 
-                  onClick={() => router.push('/media')}
-                  className="w-full p-4 rounded-xl font-semibold transition-all duration-300 relative overflow-hidden group mt-4"
-                  style={{
-                    background: 'linear-gradient(135deg, #4F46E5 0%, #7C3AED 100%)'
-                  }}
-                >
-                  {/* خلفية متحركة */}
-                  <div className="absolute inset-0 w-full h-full">
-                    <div className="absolute top-0 left-0 w-full h-full bg-white/10 skew-y-12 translate-x-full group-hover:translate-x-0 transition-transform duration-700"></div>
-                    <div className="absolute top-0 left-0 w-full h-full bg-white/5 -skew-y-12 -translate-x-full group-hover:translate-x-0 transition-transform duration-700"></div>
-                  </div>
-                  
-                  {/* زخرفة النقاط */}
-                  <div className="absolute top-2 right-2 w-2 h-2 rounded-full bg-white/30"></div>
-                  <div className="absolute bottom-2 left-2 w-2 h-2 rounded-full bg-white/30"></div>
-                  
-                  {/* محتوى الزر */}
-                  <div className="relative z-10 flex items-center justify-center gap-2">
-                    <span className="text-white text-lg">{t('article.viewAllArticles')}</span>
-                    <span className="flex items-center justify-center w-7 h-7 rounded-full bg-white/20 text-white transition-all duration-300 group-hover:bg-white group-hover:text-primary">
-                      {locale === 'ar' ? <FaChevronLeft size={12} /> : <FaChevronRight size={12} />}
-                    </span>
-                  </div>
-                  
-                  {/* هالة الضوء */}
-                  <div className="absolute -bottom-10 left-1/2 transform -translate-x-1/2 w-2/3 h-20 bg-white/20 blur-2xl rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
-                </button>
-              </div>
+              {/* مكونات البحث والتصنيفات والوسوم */}
+              <BlogSidebar />
+              
+              {/* تمت إزالة زر العودة للمدونة هنا لتجنب التكرار مع الزر الموجود في BlogSidebar */}
             </div>
           </div>
         </div>

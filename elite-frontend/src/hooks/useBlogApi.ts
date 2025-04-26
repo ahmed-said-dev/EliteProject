@@ -1,6 +1,11 @@
 import { useState, useEffect } from 'react';
 import { useLanguage } from '@/context/LanguageContext';
 
+// إضافة دالة useApiUrl لاستخدامها في الدوال الأخرى
+function useApiUrl() {
+  return { data: process.env.NEXT_PUBLIC_API_URL || 'http://localhost:1337' };
+}
+
 // تعريف واجهات البيانات المحدثة حسب هيكل API الجديد
 export interface BlogImage {
   id: number;
@@ -36,6 +41,7 @@ export interface Category {
   name: string;
   slug: string;
   description?: string;
+  articlesCount?: number;
 }
 
 export interface Tag {
@@ -135,73 +141,104 @@ export const getCategoryName = (article: BlogArticle): string => {
   return article?.category?.name || 'Uncategorized';
 };
 
-// دالة للحصول على قائمة المقالات
-export function useBlogArticles(page = 1, pageSize = 10, initialData = null, filters?: Record<string, any>) {
-  const [state, setState] = useState<FetchState<ApiResponse<BlogArticle[]>>>({
-    data: initialData || null,
-    isLoading: !initialData,
-    error: null,
-  });
+// تحديث دالة useBlogArticles لدعم التصفية حسب التصنيف والوسم
+export function useBlogArticles(page = 1, pageSize = 10, filters?: Record<string, any>) {
+  const { data: apiUrl } = useApiUrl();
   const { locale } = useLanguage();
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<Error | null>(null);
+  const [articles, setArticles] = useState<any[]>([]);
+  const [pagination, setPagination] = useState({
+    pageCount: 0,
+    total: 0,
+    page: 1,
+    pageSize: 10,
+  });
+
+  // تحويل filters إلى سلسلة JSON ثابتة لمنع إعادة استدعاء useEffect بشكل متكرر
+  const filtersString = JSON.stringify(filters);
 
   useEffect(() => {
-    // إذا كانت لدينا بيانات أولية وهذا هو الطلب الأول (الصفحة 1)، فلا نحتاج إلى جلب البيانات مرة أخرى
-    if (initialData && page === 1 && !filters) {
-      setState({
-        data: initialData,
-        isLoading: false,
-        error: null
-      });
-      return;
-    }
+    // إنشاء متغير للتحكم في إلغاء الطلب في حالة إلغاء المكون
+    let isActive = true;
 
     const fetchArticles = async () => {
-      setState(prev => ({ ...prev, isLoading: true }));
       try {
-        // بناء معلمات الاستعلام
-        const queryParams = new URLSearchParams({
-          'pagination[page]': page.toString(),
-          'pagination[pageSize]': pageSize.toString(),
-          'locale': locale,
-          'populate': '*'
-        });
-
-        // إضافة مرشحات إضافية إذا كانت موجودة
-        if (filters) {
-          Object.entries(filters).forEach(([key, value]) => {
-            queryParams.append(`filters[${key}]`, value.toString());
-          });
+        setLoading(true);
+        
+        // بناء عنوان URL مع المرشحات
+        let url = `${apiUrl}/api/blog-articles?populate=*&pagination[page]=${page}&pagination[pageSize]=${pageSize}&locale=${locale}`;
+        
+        // إضافة مرشح التصنيف
+        if (filters?.category) {
+          url += `&filters[category][id][$eq]=${filters.category}`;
+        }
+        
+        // إضافة مرشح الوسم
+        if (filters?.tag) {
+          url += `&filters[tags][id][$eq]=${filters.tag}`;
+        }
+        
+        // إضافة مرشح البحث
+        if (filters?.search) {
+          url += `&filters[$or][0][title][$containsi]=${encodeURIComponent(filters.search)}`;
+          url += `&filters[$or][1][content][$containsi]=${encodeURIComponent(filters.search)}`;
         }
 
-        const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:1337'}/api/blog-articles?${queryParams}`);
+        // استخدام AbortController للتحكم في إلغاء الطلب
+        const controller = new AbortController();
+        const signal = controller.signal;
+
+        const response = await fetch(url, { signal });
+        
+        // التحقق من أن المكون لا يزال نشطاً
+        if (!isActive) return;
         
         if (!response.ok) {
-          const errorData: ApiError = await response.json();
-          throw new Error(errorData.error?.message || 'حدث خطأ أثناء جلب المقالات');
+          throw new Error('Failed to fetch articles');
         }
         
-        const data: ApiResponse<BlogArticle[]> = await response.json();
-        setState({
-          data,
-          isLoading: false,
-          error: null,
-        });
-      } catch (error) {
-        setState({
-          data: null,
-          isLoading: false,
-          error: error instanceof Error ? error.message : 'حدث خطأ غير متوقع',
-        });
+        const data = await response.json();
+        
+        // التحقق مرة أخرى من أن المكون لا يزال نشطاً
+        if (!isActive) return;
+        
+        setArticles(Array.isArray(data) ? data : data.data || []);
+        
+        if (data.meta?.pagination) {
+          setPagination(data.meta.pagination);
+        }
+        setError(null);
+      } catch (err) {
+        // تجاهل أخطاء الإلغاء
+        if (err.name === 'AbortError') return;
+        
+        if (isActive) {
+          console.error('Error fetching blog articles:', err);
+          setError(err instanceof Error ? err : new Error('Unknown error occurred'));
+          setArticles([]);
+        }
+      } finally {
+        if (isActive) {
+          setLoading(false);
+        }
       }
     };
 
-    fetchArticles();
-  }, [page, pageSize, JSON.stringify(filters), locale, initialData]);
+    if (apiUrl) {
+      fetchArticles();
+    }
+    
+    // دالة التنظيف لإلغاء الاشتراك عند إلغاء التثبيت
+    return () => {
+      isActive = false;
+    };
+  }, [apiUrl, locale, page, pageSize, filtersString]); // استخدام filtersString بدلاً من filters
 
-  return state;
+  return { articles, loading, error, pagination };
 }
 
-// الحصول على مقالة واحدة باستخدام المعرف أو الـ slug
+// دالة للحصول على مقالة واحدة باستخدام المعرف أو الـ slug
 export function useBlogArticle(id: string | number | undefined, initialData?: any) {
   const { locale } = useLanguage();
   const [data, setData] = useState<any>(initialData || null);
@@ -354,117 +391,130 @@ export function useRelatedArticles(articleId: string | number | undefined, limit
 }
 
 // دالة للحصول على فئات المدونة
-export function useBlogCategories(initialData = null) {
-  const [state, setState] = useState<FetchState<Category[]>>({
-    data: initialData || null,
-    isLoading: !initialData,
-    error: null,
-  });
+export function useBlogCategories() {
+  const { data: apiUrl } = useApiUrl();
   const { locale } = useLanguage();
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<Error | null>(null);
+  const [categories, setCategories] = useState<any[]>([]);
 
   useEffect(() => {
-    // إذا كانت لدينا بيانات أولية، فلا نحتاج إلى جلب البيانات مرة أخرى
-    if (initialData) {
-      setState({
-        data: initialData,
-        isLoading: false,
-        error: null
-      });
-      return;
-    }
+    // إنشاء متغير للتحكم في إلغاء الطلب في حالة إلغاء المكون
+    let isActive = true;
 
     const fetchCategories = async () => {
-      setState(prev => ({ ...prev, isLoading: true }));
       try {
-        const queryParams = new URLSearchParams({
-          'locale': locale,
-          'sort[0]': 'name:asc'
-        });
-
-        const response = await fetch(
-          `${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:1337'}/api/blog-categories?${queryParams}`
-        );
-
+        setLoading(true);
+        
+        // جلب التصنيفات مع عدد المقالات المرتبطة بكل تصنيف
+        const response = await fetch(`${apiUrl}/api/blog-categories?populate[articles][count]=true&locale=${locale}`);
+        
+        // التحقق من أن المكون لا يزال نشطاً
+        if (!isActive) return;
+        
         if (!response.ok) {
-          const errorData: ApiError = await response.json();
-          throw new Error(errorData.error?.message || 'حدث خطأ أثناء جلب التصنيفات');
+          throw new Error('Failed to fetch categories');
         }
-
-        const responseData = await response.json();
-        setState({
-          data: responseData.data,
-          isLoading: false,
-          error: null,
-        });
-      } catch (error) {
-        setState({
-          data: null,
-          isLoading: false,
-          error: error instanceof Error ? error.message : 'حدث خطأ غير متوقع',
-        });
+        
+        const data = await response.json();
+        
+        // التحقق مرة أخرى من أن المكون لا يزال نشطاً
+        if (!isActive) return;
+        
+        // جلب عدد المقالات لكل تصنيف بشكل منفصل
+        const categoriesWithCounts = await Promise.all(
+          (Array.isArray(data) ? data : data.data || []).map(async (category) => {
+            if (!isActive) return category;
+            
+            try {
+              // استعلام للحصول على عدد المقالات في هذا التصنيف
+              const countResponse = await fetch(
+                `${apiUrl}/api/blog-articles?filters[category][id][$eq]=${category.id}&pagination[pageSize]=1&pagination[page]=1&locale=${locale}`
+              );
+              
+              if (!isActive) return category;
+              
+              if (countResponse.ok) {
+                const countData = await countResponse.json();
+                // إضافة عدد المقالات إلى كائن التصنيف
+                return {
+                  ...category,
+                  articlesCount: countData.meta?.pagination?.total || 0
+                };
+              }
+            } catch (err) {
+              console.error(`Error fetching articles count for category ${category.id}:`, err);
+            }
+            
+            return category;
+          })
+        );
+        
+        if (!isActive) return;
+        
+        setCategories(categoriesWithCounts);
+        setError(null);
+      } catch (err) {
+        // تجاهل أخطاء الإلغاء
+        if (err.name === 'AbortError') return;
+        
+        if (isActive) {
+          console.error('Error fetching blog categories:', err);
+          setError(err instanceof Error ? err : new Error('Unknown error occurred'));
+          setCategories([]);
+        }
+      } finally {
+        if (isActive) {
+          setLoading(false);
+        }
       }
     };
 
-    fetchCategories();
-  }, [locale, initialData]);
+    if (apiUrl) {
+      fetchCategories();
+    }
+    
+    // دالة التنظيف لإلغاء الاشتراك عند إلغاء التثبيت
+    return () => {
+      isActive = false;
+    };
+  }, [apiUrl, locale]);
 
-  return state;
+  return { categories, loading, error };
 }
 
 // دالة للحصول على علامات المدونة
-export function useBlogTags(initialData = null) {
-  const [state, setState] = useState<FetchState<Tag[]>>({
-    data: initialData || null,
-    isLoading: !initialData,
-    error: null,
-  });
+export function useBlogTags() {
+  const { data: apiUrl } = useApiUrl();
   const { locale } = useLanguage();
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<Error | null>(null);
+  const [tags, setTags] = useState<any[]>([]);
 
   useEffect(() => {
-    // إذا كانت لدينا بيانات أولية، فلا نحتاج إلى جلب البيانات مرة أخرى
-    if (initialData) {
-      setState({
-        data: initialData,
-        isLoading: false,
-        error: null
-      });
-      return;
-    }
-
     const fetchTags = async () => {
-      setState(prev => ({ ...prev, isLoading: true }));
       try {
-        const queryParams = new URLSearchParams({
-          'locale': locale,
-          'sort[0]': 'name:asc'
-        });
-
-        const response = await fetch(
-          `${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:1337'}/api/blog-tags?${queryParams}`
-        );
-
+        setLoading(true);
+        const response = await fetch(`${apiUrl}/api/blog-tags?populate=*&locale=${locale}`);
         if (!response.ok) {
-          const errorData: ApiError = await response.json();
-          throw new Error(errorData.error?.message || 'حدث خطأ أثناء جلب العلامات');
+          throw new Error('Failed to fetch tags');
         }
-
-        const responseData = await response.json();
-        setState({
-          data: responseData.data,
-          isLoading: false,
-          error: null,
-        });
-      } catch (error) {
-        setState({
-          data: null,
-          isLoading: false,
-          error: error instanceof Error ? error.message : 'حدث خطأ غير متوقع',
-        });
+        const data = await response.json();
+        setTags(Array.isArray(data) ? data : data.data || []);
+        setError(null);
+      } catch (err) {
+        console.error('Error fetching blog tags:', err);
+        setError(err instanceof Error ? err : new Error('Unknown error occurred'));
+        setTags([]);
+      } finally {
+        setLoading(false);
       }
     };
 
-    fetchTags();
-  }, [locale, initialData]);
+    if (apiUrl) {
+      fetchTags();
+    }
+  }, [apiUrl, locale]);
 
-  return state;
+  return { tags, loading, error };
 }
