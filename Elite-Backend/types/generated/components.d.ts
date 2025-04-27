@@ -1,5 +1,18 @@
 import type { Schema, Struct } from '@strapi/strapi';
 
+export interface MembershipFeature extends Struct.ComponentSchema {
+  collectionName: 'components_membership_features';
+  info: {
+    description: 'Membership plan features with inclusion indicator';
+    displayName: 'Feature';
+    icon: 'check-square';
+  };
+  attributes: {
+    isIncluded: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<true>;
+    text: Schema.Attribute.String & Schema.Attribute.Required;
+  };
+}
+
 export interface SharedMedia extends Struct.ComponentSchema {
   collectionName: 'components_shared_media';
   info: {
@@ -116,6 +129,7 @@ export interface SharedSpecialties extends Struct.ComponentSchema {
 declare module '@strapi/strapi' {
   export module Public {
     export interface ComponentSchemas {
+      'membership.feature': MembershipFeature;
       'shared.media': SharedMedia;
       'shared.quote': SharedQuote;
       'shared.rich-text': SharedRichText;

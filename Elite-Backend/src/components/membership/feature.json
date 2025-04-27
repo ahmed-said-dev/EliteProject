@@ -1,0 +1,19 @@
+{
+  "collectionName": "components_membership_features",
+  "info": {
+    "displayName": "Feature",
+    "description": "Membership plan features with inclusion indicator",
+    "icon": "check-square"
+  },
+  "options": {},
+  "attributes": {
+    "text": {
+      "type": "string",
+      "required": true
+    },
+    "isIncluded": {
+      "type": "boolean",
+      "default": true
+    }
+  }
+}

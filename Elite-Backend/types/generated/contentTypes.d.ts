@@ -758,6 +758,137 @@ export interface ApiHomeServiceHomeService extends Struct.CollectionTypeSchema {
   };
 }
 
+export interface ApiMembershipIntroMembershipIntro
+  extends Struct.CollectionTypeSchema {
+  collectionName: 'membership_intros';
+  info: {
+    description: 'Introduction section for membership page';
+    displayName: 'Membership Intro';
+    pluralName: 'membership-intros';
+    singularName: 'membership-intro';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  pluginOptions: {
+    i18n: {
+      localized: true;
+    };
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    description: Schema.Attribute.RichText &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    image: Schema.Attribute.Media<'images'> &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    locale: Schema.Attribute.String;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::membership-intro.membership-intro'
+    >;
+    publishedAt: Schema.Attribute.DateTime;
+    title: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiMembershipPlanMembershipPlan
+  extends Struct.CollectionTypeSchema {
+  collectionName: 'membership_plans';
+  info: {
+    description: 'Plans and pricing options for membership';
+    displayName: 'Membership Plan';
+    pluralName: 'membership-plans';
+    singularName: 'membership-plan';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  pluginOptions: {
+    i18n: {
+      localized: true;
+    };
+  };
+  attributes: {
+    annualPrice: Schema.Attribute.Decimal &
+      Schema.Attribute.SetMinMax<
+        {
+          min: 0;
+        },
+        number
+      >;
+    coverImage: Schema.Attribute.Media<'images'> &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    description: Schema.Attribute.Text &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    features: Schema.Attribute.Component<'membership.feature', true> &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    iconClass: Schema.Attribute.String;
+    isFeatured: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
+    locale: Schema.Attribute.String;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::membership-plan.membership-plan'
+    >;
+    monthlyPrice: Schema.Attribute.Decimal &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMax<
+        {
+          min: 0;
+        },
+        number
+      >;
+    PetType: Schema.Attribute.String;
+    publishedAt: Schema.Attribute.DateTime;
+    title: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiServicePageServicePage extends Struct.CollectionTypeSchema {
   collectionName: 'service_pages';
   info: {
@@ -1440,6 +1571,8 @@ declare module '@strapi/strapi' {
       'api::doctor-home.doctor-home': ApiDoctorHomeDoctorHome;
       'api::global.global': ApiGlobalGlobal;
       'api::home-service.home-service': ApiHomeServiceHomeService;
+      'api::membership-intro.membership-intro': ApiMembershipIntroMembershipIntro;
+      'api::membership-plan.membership-plan': ApiMembershipPlanMembershipPlan;
       'api::service-page.service-page': ApiServicePageServicePage;
       'api::team-member.team-member': ApiTeamMemberTeamMember;
       'api::testone.testone': ApiTestoneTestone;
