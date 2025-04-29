@@ -1,31 +1,97 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
+import axios from 'axios';
 import PageBanner from '@/components/PageBanner/PageBanner';
 import ProductDetail from '@/components/ProductDetail';
-import { productData } from '@/components/ProductsSection/data/productData';
 
 export default function ProductDetailPage() {
   const router = useRouter();
   const { id } = router.query;
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
   
   useEffect(() => {
     if (id) {
-      // Obtener datos del producto desde nuestro dataset
-      const productId = parseInt(id);
-      const foundProduct = productData.find(p => p.id === productId);
+      // تعيين حالة التحميل
+      setLoading(true);
       
-      if (foundProduct) {
-        setProduct(foundProduct);
-      } else {
-        // Producto no encontrado, redirigir a la página de productos
-        router.push('/products');
-      }
-      
-      setLoading(false);
+      // جلب بيانات المنتج من Medusa API
+      // استخدام معرف المنتج كما هو دون تعديله
+      axios.get(`${process.env.NEXT_PUBLIC_MEDUSA_BACKEND_URL}/store/products/${id}`, {
+        headers: {
+          'x-publishable-api-key': process.env.NEXT_PUBLIC_API_KEY
+        }
+      })
+      .then(res => {
+        if (res.data && res.data.product) {
+          // تحويل بيانات المنتج من API إلى التنسيق المطلوب لمكون ProductDetail
+          const apiProduct = res.data.product;
+          
+          // استخراج سعر المنتج من أول متغير إذا كان متوفراً
+          let price = 0;
+          let salePrice = undefined;
+          
+          if (apiProduct.variants && apiProduct.variants.length > 0 && 
+              apiProduct.variants[0].prices && apiProduct.variants[0].prices.length > 0) {
+            price = apiProduct.variants[0].prices[0].amount / 100;
+            
+            // تطبيق خصم عشوائي لبعض المنتجات (يمكن تعديله حسب البيانات الفعلية)
+            if (Math.random() > 0.7) {
+              salePrice = price * 0.85;
+            }
+          }
+          
+          // استخراج الصورة
+          const image = apiProduct.images && apiProduct.images.length > 0 
+            ? apiProduct.images[0].url 
+            : apiProduct.thumbnail;
+          
+          // تجهيز التقييم والبيانات الأخرى
+          const rating = 4.5; // قيمة افتراضية للتقييم
+          const reviewCount = Math.floor(Math.random() * 100) + 5; // عدد عشوائي للمراجعات
+          
+          // تحويل البيانات إلى التنسيق المطلوب
+          const formattedProduct = {
+            id: Number(apiProduct.id.replace('prod_', '')) || 0,
+            name: apiProduct.title,
+            price: price,
+            salePrice: salePrice,
+            description: apiProduct.description || apiProduct.subtitle || '',
+            image: image,
+            rating: rating,
+            reviewCount: reviewCount,
+            petType: 'cat', // قيمة افتراضية
+            productType: 'food', // قيمة افتراضية
+            brand: 'Elite', // قيمة افتراضية
+            inStock: true, // قيمة افتراضية
+            soldCount: Math.floor(Math.random() * 200) + 10, // قيمة عشوائية
+            releaseDate: apiProduct.created_at || new Date().toISOString(),
+            isBestSeller: Math.random() > 0.7, // قيمة عشوائية
+            isNew: apiProduct.created_at 
+              ? new Date(apiProduct.created_at) > new Date(Date.now() - 30 * 24 * 60 * 60 * 1000) 
+              : Math.random() > 0.8, // منتج جديد إذا تم إنشاؤه في آخر 30 يوم
+            isSale: salePrice !== undefined, // يعتبر في حالة بيع إذا كان له سعر خصم
+          };
+          
+          setProduct(formattedProduct);
+          setError(null);
+        } else {
+          // لم يتم العثور على المنتج
+          setError('Product not found');
+          setProduct(null);
+        }
+      })
+      .catch(err => {
+        console.error('Error fetching product data:', err);
+        setError(err.message || 'Failed to load product');
+        setProduct(null);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
     }
-  }, [id, router]);
+  }, [id]);
   
   // Mostrar un estado de carga mientras se obtienen los datos
   if (loading) {

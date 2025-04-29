@@ -13,6 +13,7 @@ import { useLanguage } from '@/context/LanguageContext';
 
 interface ProductProps {
   id: number;
+  original_id?: string; // معرف المنتج الأصلي من API
   name: string;
   price: number;
   salePrice?: number;
@@ -130,7 +131,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, viewType }) => {
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
       >
-        <Link href={`/products/${product.id}`} className={styles.productLink}>
+        <Link href={`/products/${product.original_id || product.id}`} className={styles.productLink}>
           <div className={styles.imageContainer}>
             <img 
               src={product.image} 
@@ -205,11 +206,11 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, viewType }) => {
               <div className={styles.productPrice}>
                 {product.salePrice ? (
                   <>
-                    <span className={styles.salePrice}>${product.salePrice.toFixed(2)}</span>
-                    <span className={styles.regularPrice}>${product.price.toFixed(2)}</span>
+                    <span className={styles.salePrice}>${(product.salePrice || 0).toFixed(2)}</span>
+                    <span className={styles.regularPrice}>${(product.price || 0).toFixed(2)}</span>
                   </>
                 ) : (
-                  <span className={styles.price}>${product.price.toFixed(2)}</span>
+                  <span className={styles.price}>${(product.price || 0).toFixed(2)}</span>
                 )}
               </div>
               
