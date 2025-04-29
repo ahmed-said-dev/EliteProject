@@ -101,18 +101,25 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, viewType }) => {
     // Aquí podría ir código para guardar en localStorage o enviar a API
   };
   
-  // Manejar click en botón de agregar al carrito
-  const handleAddToCart = (e: React.MouseEvent) => {
+  // معالجة نقرة زر إضافة إلى السلة
+  const handleAddToCart = async (e: React.MouseEvent) => {
     e.preventDefault();
     
-    // Agregar producto al carrito usando el contexto
-    addToCart(product, 1);
+    console.log('Adding to cart:', product);
     
-    // Mostrar feedback visual
-    setAddedToCart(true);
-    setTimeout(() => {
-      setAddedToCart(false);
-    }, 2000);
+    try {
+      // إضافة المنتج إلى السلة باستخدام السياق
+      await addToCart(product, 1);
+      
+      // إظهار ملاحظة بصرية
+      setAddedToCart(true);
+      setTimeout(() => {
+        setAddedToCart(false);
+      }, 2000);
+    } catch (err) {
+      console.error('Error adding to cart:', err);
+      alert('Failed to add item to cart. Please try again.');
+    }
   };
 
   // Manejar vista rápida
@@ -180,7 +187,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, viewType }) => {
               <span className={styles.productCategory}>{t(`products.productTypes.${product.productType.toLowerCase()}`)}</span>
             </div>
             
-            <h3 className={styles.productName}>{t(`products.${product.id}.name`)}</h3>
+            <h3 className={styles.productName}>{product.name}</h3>
             
             <div className={styles.productRating}>
               <div className={styles.stars}>
@@ -191,13 +198,13 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, viewType }) => {
             
             <div className={styles.productDescription}>
               {isListView ? (
-                <p>{t(`products.${product.id}.description`)}</p>
+                <p>{product.description}</p>
               ) : (
                 <p>
-                  {(() => {
-                    const desc = t(`products.${product.id}.description`);
-                    return desc.length > 80 ? `${desc.substring(0, 80)}...` : desc;
-                  })()}
+                  {product.description && product.description.length > 80 
+                    ? `${product.description.substring(0, 80)}...` 
+                    : product.description
+                  }
                 </p>
               )}
             </div>
@@ -206,11 +213,11 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, viewType }) => {
               <div className={styles.productPrice}>
                 {product.salePrice ? (
                   <>
-                    <span className={styles.salePrice}>${(product.salePrice || 0).toFixed(2)}</span>
-                    <span className={styles.regularPrice}>${(product.price || 0).toFixed(2)}</span>
+                    <span className={styles.salePrice}>${((product.salePrice || 0) / 100).toFixed(2)}</span>
+                    <span className={styles.regularPrice}>${((product.price || 0) / 100).toFixed(2)}</span>
                   </>
                 ) : (
-                  <span className={styles.price}>${(product.price || 0).toFixed(2)}</span>
+                  <span className={styles.price}>${((product.price || 0) / 100).toFixed(2)}</span>
                 )}
               </div>
               

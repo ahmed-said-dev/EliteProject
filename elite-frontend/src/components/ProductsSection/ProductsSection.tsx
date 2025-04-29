@@ -34,36 +34,61 @@ const mapApiProductToCardProduct = (product: ApiProduct) => {
     ? product.images[0].url
     : product.thumbnail || '';
   
-  // استخراج سعر المنتج من أول variant
-  let productPrice = product.price || 0;
+  // استخراج سعر المنتج من المتغيرات (variants)
+  let productPrice = 0;
+  if (product.variants && product.variants.length > 0) {
+    const variant = product.variants[0];
+    // التحقق من وجود أسعار في المتغير
+    if (variant.prices && variant.prices.length > 0) {
+      productPrice = variant.prices[0].amount;
+    }
+  }
   
-  // استخراج اسم العلامة التجارية من metadata إذا كان متوفرًا
-  const productBrand = product.brand || 'Elite';
+  // استخراج اسم العلامة التجارية من collection إذا كان متوفرًا
+  const productBrand = product.collection?.title || 'Elite';
   
   // حساب قيمة عشوائية للتقييم بين 3 و 5
   const randomRating = Math.floor(Math.random() * 2) + 3;
   
+  // التحقق من وجود سعر مخفض (يمكن تحديثه للعمل مع التخفيضات الفعلية)
+  const salePrice = undefined; // يمكن تعديله لاستخدام التخفيضات الفعلية إذا توفرت
+  
+  // التحقق مما إذا كان المنتج جديدًا بناءً على تاريخ الإنشاء
+  const isNew = product.created_at 
+    ? new Date(product.created_at) > new Date(Date.now() - 30 * 24 * 60 * 60 * 1000)
+    : false;
+    
   return {
     id: Number(product.id.replace('prod_', '')) || 0,
     original_id: product.id, // حفظ معرف المنتج الأصلي للاستخدام في الروابط
-    name: product.title,
-    price: productPrice,
-    salePrice: Math.random() > 0.7 ? productPrice * 0.85 : undefined, // سعر مخفض عشوائي
-    description: product.description || product.subtitle || '',
-    image: productImage,
-    rating: product.rating || randomRating,
-    reviewCount: Math.floor(Math.random() * 100) + 5,  // قيمة عشوائية
-    petType: product.petType || 'cat',
-    productType: product.productType || 'food',
-    brand: productBrand,
-    inStock: product.availability === 'In Stock' || true,
-    soldCount: Math.floor(Math.random() * 200) + 10, // قيمة عشوائية
-    releaseDate: product.created_at || new Date().toISOString(), 
-    isBestSeller: Math.random() > 0.7, // قيمة عشوائية
-    isNew: product.created_at ? 
-      new Date(product.created_at) > new Date(Date.now() - 30 * 24 * 60 * 60 * 1000) : 
-      Math.random() > 0.8, // جديد إذا تم إنشاؤه في آخر 30 يوم
-    isSale: Math.random() > 0.7 // قيمة عشوائية
+    name: product.title, // اسم المنتج من البيانات
+    price: productPrice, // السعر من المتغيرات
+    salePrice: salePrice,
+    description: product.description || product.subtitle || '', // الوصف من البيانات
+    image: productImage, // الصورة من البيانات
+    rating: randomRating, // لا يوجد تقييم في البيانات
+    reviewCount: Math.floor(Math.random() * 100) + 5,  // لا يوجد عدد مراجعات في البيانات
+    petType: 'cat', // يمكن تحديثه لاستخدام البيانات الفعلية
+    productType: 'food', // يمكن تحديثه لاستخدام البيانات الفعلية
+    brand: productBrand, // اسم التشكيلة من البيانات
+    inStock: true, // يمكن تحديثه لاستخدام البيانات الفعلية
+    soldCount: Math.floor(Math.random() * 200) + 10, // لا يوجد عدد مبيعات في البيانات
+    releaseDate: product.created_at || new Date().toISOString(), // تاريخ الإنشاء من البيانات
+    isBestSeller: false, // يمكن تحديثه لاستخدام البيانات الفعلية
+    isNew: isNew, // جديد إذا تم إنشاؤه في آخر 30 يوم
+    isSale: salePrice !== undefined, // في حالة بيع إذا كان له سعر خصم
+    
+    // إضافة المتغيرات المطلوبة لسلة التسوق
+    variants: product.variants || [{
+      id: product.variants && product.variants.length > 0 
+        ? product.variants[0].id 
+        : `variant_${product.id}`,
+      title: product.title,
+      prices: [{
+        amount: productPrice,
+        currency_code: 'USD'
+      }]
+    }]
   };
 };
 

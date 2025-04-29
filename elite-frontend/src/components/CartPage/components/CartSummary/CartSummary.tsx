@@ -12,7 +12,15 @@ type ShippingOption = {
 
 const CartSummary: React.FC = () => {
   const { t, isRTL } = useLanguage();
-  const { cartItems, cartTotal } = useCart();
+  const { 
+    cartItems, 
+    cartTotal, 
+    cart, 
+    loading, 
+    startCheckout,
+    createPaymentSessions,
+    addShippingMethod
+  } = useCart();
   
   const [selectedShipping, setSelectedShipping] = useState<string>('standard');
   const [couponCode, setCouponCode] = useState<string>('');
@@ -35,10 +43,34 @@ const CartSummary: React.FC = () => {
 
   const formatPrice = (price: number) => {
     return isRTL 
-      ? `${price.toFixed(2)} ر.س` 
-      : `SAR ${price.toFixed(2)}`;
+      ? `${Math.round(price)} ر.س` 
+      : `SAR ${Math.round(price)}`;
   };
 
+  // طلب خيارات الشحن من API
+  const [apiShippingOptions, setApiShippingOptions] = useState<any[]>([]);
+  const [checkoutStep, setCheckoutStep] = useState<'cart' | 'shipping' | 'payment' | 'review'>('cart');
+  const [checkoutLoading, setCheckoutLoading] = useState(false);
+  const [checkoutError, setCheckoutError] = useState<string | null>(null);
+
+  // معالجة تغيير طريقة الشحن
+  const handleShippingChange = async (optionId: string) => {
+    setSelectedShipping(optionId);
+    
+    // إذا كانت هناك خيارات شحن من API، قم بتطبيقها
+    if (apiShippingOptions.length > 0) {
+      try {
+        const apiOption = apiShippingOptions.find(opt => opt.id === optionId);
+        if (apiOption) {
+          await addShippingMethod(apiOption.id);
+        }
+      } catch (err) {
+        console.error('Error applying shipping method:', err);
+      }
+    }
+  };
+
+  // معالجة تطبيق كوبون الخصم
   const handleApplyCoupon = (e: React.FormEvent) => {
     e.preventDefault();
     
@@ -56,6 +88,37 @@ const CartSummary: React.FC = () => {
         message: t('cart.coupon.error'),
         type: 'error'
       });
+    }
+  };
+  
+  // معالجة عملية الدفع
+  const handleCheckout = async () => {
+    if (!cart) {
+      setCheckoutError(t('cart.error.noCart'));
+      return;
+    }
+    
+    try {
+      setCheckoutLoading(true);
+      setCheckoutError(null);
+      
+      // 1. إنشاء جلسات الدفع
+      await createPaymentSessions();
+      
+      // 2. بدء عملية الدفع
+      const order = await startCheckout();
+      
+      // 3. توجيه المستخدم إلى صفحة تأكيد الطلب
+      if (order && order.id) {
+        window.location.href = `/order-confirmation?id=${order.id}`;
+      } else {
+        setCheckoutError(t('cart.error.checkoutFailed'));
+      }
+    } catch (err: any) {
+      console.error('Checkout error:', err);
+      setCheckoutError(err.message || t('cart.error.checkoutFailed'));
+    } finally {
+      setCheckoutLoading(false);
     }
   };
 
@@ -131,8 +194,18 @@ const CartSummary: React.FC = () => {
         )}
       </div>
       
-      <button className={styles.checkoutButton} onClick={() => alert(t('cart.cartSummary.proceedToCheckout'))}>
-        {t('cart.cartSummary.proceedToCheckout')}
+      {checkoutError && (
+        <div className={styles.checkoutError}>
+          {checkoutError}
+        </div>
+      )}
+      
+      <button 
+        className={styles.checkoutButton} 
+        onClick={handleCheckout}
+        disabled={checkoutLoading || cartItems.length === 0 || loading}
+      >
+        {checkoutLoading ? t('cart.cartSummary.processing') : t('cart.cartSummary.proceedToCheckout')}
       </button>
     </div>
   );

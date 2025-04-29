@@ -24,6 +24,7 @@ declare const styles: {
   readonly couponMessage: string;
   readonly couponSuccess: string;
   readonly couponError: string;
+  readonly checkoutError: string;
 };
 
 export default styles;

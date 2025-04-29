@@ -54,6 +54,7 @@ export default function ProductDetailPage() {
           // تحويل البيانات إلى التنسيق المطلوب
           const formattedProduct = {
             id: Number(apiProduct.id.replace('prod_', '')) || 0,
+            original_id: apiProduct.id, // إضافة معرف API الأصلي
             name: apiProduct.title,
             price: price,
             salePrice: salePrice,
@@ -72,6 +73,18 @@ export default function ProductDetailPage() {
               ? new Date(apiProduct.created_at) > new Date(Date.now() - 30 * 24 * 60 * 60 * 1000) 
               : Math.random() > 0.8, // منتج جديد إذا تم إنشاؤه في آخر 30 يوم
             isSale: salePrice !== undefined, // يعتبر في حالة بيع إذا كان له سعر خصم
+            
+            // إضافة متغيرات المنتج المطلوبة لسلة التسوق
+            variants: apiProduct.variants || [{
+              id: apiProduct.variants && apiProduct.variants.length > 0 
+                ? apiProduct.variants[0].id 
+                : `variant_${apiProduct.id}`,
+              title: apiProduct.title,
+              prices: [{
+                amount: price * 100,
+                currency_code: 'USD'
+              }]
+            }]
           };
           
           setProduct(formattedProduct);

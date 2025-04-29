@@ -95,16 +95,23 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ product }) => {
     // Aquí podría ir código para guardar en localStorage o enviar a API
   };
   
-  // Manejar click en botón de agregar al carrito
-  const handleAddToCart = () => {
-    // Agregar producto al carrito usando el contexto
-    addToCart(product, quantity);
-    
-    // Mostrar mensaje de éxito temporalmente
-    setAddedToCart(true);
-    setTimeout(() => {
-      setAddedToCart(false);
-    }, 3000);
+  // معالجة نقرة زر إضافة إلى السلة
+  const handleAddToCart = async () => {
+    try {
+      console.log('Adding to cart from product detail:', product);
+      
+      // إضافة المنتج إلى السلة باستخدام السياق
+      await addToCart(product, quantity);
+      
+      // إظهار رسالة نجاح مؤقتة
+      setAddedToCart(true);
+      setTimeout(() => {
+        setAddedToCart(false);
+      }, 3000);
+    } catch (err) {
+      console.error('Error adding product to cart:', err);
+      alert('Failed to add product to cart. Please try again.');
+    }
   };
   
   // Manejar compra directa

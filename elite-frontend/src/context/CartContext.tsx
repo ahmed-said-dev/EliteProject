@@ -1,22 +1,43 @@
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
+import { useMedusaCart, Cart as MedusaCart, LineItem as MedusaLineItem } from '../hooks/useMedusaCart';
 
 interface CartItem {
-  id: number;
+  id: string;
   name: string;
   price: number;
   salePrice?: number;
   image: string;
   quantity: number;
+  variant_id: string;
 }
 
 interface CartContextType {
   cartItems: CartItem[];
   addToCart: (product: any, quantity: number) => void;
-  removeFromCart: (productId: number) => void;
-  updateQuantity: (productId: number, quantity: number) => void;
+  removeFromCart: (lineItemId: string) => void;
+  updateQuantity: (lineItemId: string, quantity: number) => void;
   clearCart: () => void;
   cartCount: number;
   cartTotal: number;
+  loading: boolean;
+  error: Error | null;
+  startCheckout: () => Promise<any>;
+  cart: MedusaCart | null;
+  
+  // حالة سلة التسوق
+  fetchCart: (cartId: string) => Promise<any>;
+  
+  // عنوان الشحن والفواتير
+  updateShippingAddress: (address: any) => Promise<any>;
+  updateBillingAddress: (address: any) => Promise<any>;
+  
+  // إعدادات الشحن
+  getShippingOptions: () => Promise<any>;
+  addShippingMethod: (optionId: string) => Promise<any>;
+  
+  // طرق الدفع
+  createPaymentSessions: () => Promise<any>;
+  selectPaymentMethod: (providerId: string) => Promise<any>;
 }
 
 const CartContext = createContext<CartContextType | undefined>(undefined);
@@ -30,87 +51,113 @@ export const useCart = () => {
 };
 
 export const CartProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
+  const {
+    cart,
+    loading,
+    error,
+    addItem,
+    updateItem,
+    removeItem,
+    startCheckout,
+    fetchCart,
+    updateShippingAddress,
+    updateBillingAddress,
+    createPaymentSessions,
+    selectPaymentMethod,
+    getShippingOptions,
+    addShippingMethod
+  } = useMedusaCart();
+  
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
   const [cartCount, setCartCount] = useState(0);
   const [cartTotal, setCartTotal] = useState(0);
 
-  // Cargar el carrito del localStorage cuando el componente se monta
+  // تحديث حالة UI للسلة عندما تتغير بيانات السلة الحقيقية من API
   useEffect(() => {
-    const storedCart = localStorage.getItem('cart');
-    if (storedCart) {
-      try {
-        const parsedCart = JSON.parse(storedCart);
-        setCartItems(parsedCart);
-      } catch (error) {
-        console.error('Error parsing cart from localStorage', error);
-        setCartItems([]);
-      }
-    }
-  }, []);
-
-  // Actualizar el localStorage cuando cambia el carrito
-  useEffect(() => {
-    localStorage.setItem('cart', JSON.stringify(cartItems));
-    
-    // Calcular total de artículos
-    const itemCount = cartItems.reduce((total, item) => total + item.quantity, 0);
-    setCartCount(itemCount);
-    
-    // Calcular total del carrito
-    const total = cartItems.reduce((sum, item) => {
-      const price = item.salePrice || item.price;
-      return sum + price * item.quantity;
-    }, 0);
-    setCartTotal(total);
-  }, [cartItems]);
-
-  // Añadir producto al carrito
-  const addToCart = (product: any, quantity: number = 1) => {
-    setCartItems(prevItems => {
-      // Comprobar si el producto ya está en el carrito
-      const existingItemIndex = prevItems.findIndex(item => item.id === product.id);
+    if (cart && cart.items) {
+      // تحويل منتجات السلة من API إلى تنسيق واجهة المستخدم
+      const items: CartItem[] = cart.items.map(item => ({
+        id: item.id,
+        name: item.product_title || item.title,
+        price: item.unit_price, // عرض السعر كما هو بدون تحويل
+        image: item.thumbnail || '',
+        quantity: item.quantity,
+        variant_id: item.variant_id
+      }));
       
-      if (existingItemIndex >= 0) {
-        // Producto ya en el carrito, actualizar cantidad
-        const updatedItems = [...prevItems];
-        updatedItems[existingItemIndex].quantity += quantity;
-        return updatedItems;
-      } else {
-        // Producto nuevo, añadir al carrito
-        return [...prevItems, {
-          id: product.id,
-          name: product.name,
-          price: product.price,
-          salePrice: product.salePrice,
-          image: product.image,
-          quantity
-        }];
-      }
-    });
-  };
-
-  // Eliminar producto del carrito
-  const removeFromCart = (productId: number) => {
-    setCartItems(prevItems => prevItems.filter(item => item.id !== productId));
-  };
-
-  // Actualizar cantidad de un producto
-  const updateQuantity = (productId: number, quantity: number) => {
-    if (quantity <= 0) {
-      removeFromCart(productId);
-      return;
+      setCartItems(items);
+      
+      // حساب إجمالي المنتجات
+      const itemCount = cart.items.reduce((total, item) => total + item.quantity, 0);
+      setCartCount(itemCount);
+      
+      // حساب المبلغ الإجمالي
+      const total = cart.total ? cart.total / 100 : 0; // تحويل من السنتات إلى الدولارات
+      setCartTotal(total);
+    } else {
+      // في حالة عدم وجود سلة، إعادة تعيين القيم
+      setCartItems([]);
+      setCartCount(0);
+      setCartTotal(0);
     }
-    
-    setCartItems(prevItems => 
-      prevItems.map(item => 
-        item.id === productId ? { ...item, quantity } : item
-      )
-    );
+  }, [cart]);
+
+  // إضافة منتج إلى سلة التسوق عبر Medusa API
+  const addToCart = async (product: any, quantity: number = 1) => {
+    try {
+      // التحقق من وجود متغير للمنتج
+      if (!product.variants || product.variants.length === 0) {
+        console.error('Product has no variants', product);
+        return;
+      }
+      
+      // استخدام أول متغير للمنتج (يمكن تعديل هذا لاختيار المتغير المناسب)
+      const variantId = product.original_id 
+        ? product.variants[0].id
+        : product.variant_id || product.variants[0].id;
+        
+      // إضافة المنتج إلى السلة باستخدام Medusa API
+      await addItem(variantId, quantity);
+    } catch (err) {
+      console.error('Error adding item to cart:', err);
+    }
   };
 
-  // Vaciar el carrito
-  const clearCart = () => {
-    setCartItems([]);
+  // إزالة منتج من سلة التسوق عبر Medusa API
+  const removeFromCart = async (lineItemId: string) => {
+    try {
+      await removeItem(lineItemId);
+    } catch (err) {
+      console.error('Error removing item from cart:', err);
+    }
+  };
+
+  // تحديث كمية منتج في سلة التسوق عبر Medusa API
+  const updateQuantity = async (lineItemId: string, quantity: number) => {
+    try {
+      if (quantity <= 0) {
+        await removeFromCart(lineItemId);
+        return;
+      }
+      
+      await updateItem(lineItemId, quantity);
+    } catch (err) {
+      console.error('Error updating item quantity:', err);
+    }
+  };
+
+  // إفراغ سلة التسوق بالكامل
+  const clearCart = async () => {
+    try {
+      if (cart && cart.items) {
+        // إزالة كل عنصر من السلة بالتتابع
+        for (const item of cart.items) {
+          await removeItem(item.id);
+        }
+      }
+    } catch (err) {
+      console.error('Error clearing cart:', err);
+    }
   };
 
   return (
@@ -121,7 +168,19 @@ export const CartProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
       updateQuantity,
       clearCart,
       cartCount,
-      cartTotal
+      cartTotal,
+      loading,
+      error,
+      startCheckout,
+      cart,
+      // جميع وظائف API الجديدة
+      fetchCart,
+      updateShippingAddress,
+      updateBillingAddress,
+      createPaymentSessions,
+      selectPaymentMethod,
+      getShippingOptions,
+      addShippingMethod
     }}>
       {children}
     </CartContext.Provider>

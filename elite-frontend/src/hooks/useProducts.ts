@@ -23,6 +23,12 @@ export interface ProductImage {
   url: string;
 }
 
+export interface ProductCollection {
+  id: string;
+  title: string;
+  handle: string;
+}
+
 export interface Product {
   id: string;
   title: string;
@@ -35,6 +41,7 @@ export interface Product {
   updated_at?: string;
   images?: ProductImage[];
   variants?: ProductVariant[];
+  collection?: ProductCollection;
   options?: Array<{
     id: string;
     title: string;

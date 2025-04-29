@@ -11,6 +11,7 @@ declare const styles: {
   readonly salePrice: string;
   readonly quantityCell: string;
   readonly quantityButton: string;
+  readonly quantityInputWrapper: string;
   readonly quantityInput: string;
   readonly totalCell: string;
   readonly removeButton: string;
