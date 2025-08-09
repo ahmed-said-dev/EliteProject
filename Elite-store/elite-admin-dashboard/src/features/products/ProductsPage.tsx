@@ -76,7 +76,7 @@ const ProductsTable: React.FC<{
             <th>اسم المنتج</th>
             <th>الفئة</th>
             <th>السعر</th>
-            <th>سعر الخصم</th>
+            <th>السعر بعد الخصم</th>
             <th>المخزون</th>
             <th>الحالة</th>
             <th>مميز</th>

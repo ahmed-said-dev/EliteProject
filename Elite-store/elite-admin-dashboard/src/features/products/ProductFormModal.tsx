@@ -267,7 +267,7 @@ const ProductFormModal: React.FC<Props> = ({ open, onClose, onSaved, product }) 
                 {errors.price && <span className="form-error">{errors.price.message}</span>}
               </div>
               <div>
-                <label className="form-label">سعر الخصم</label>
+                <label className="form-label">السعر بعد الخصم</label>
                 <Controller control={control} name="salePrice" render={({ field }) => (
                   <InputNumber className="w-full" step={0.01} value={field.value as number | null | undefined} onChange={(val) => field.onChange(val ?? undefined)} />
                 )} />

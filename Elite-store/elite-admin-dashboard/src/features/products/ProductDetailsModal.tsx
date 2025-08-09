@@ -31,7 +31,7 @@ const ProductDetailsModal: React.FC<Props> = ({ open, product, onClose, onEdit }
         <div>
           <p><strong>SKU:</strong> {product.sku}</p>
           <p><strong>السعر:</strong> {product.price}</p>
-          {product.salePrice != null && <p><strong>سعر الخصم:</strong> {product.salePrice}</p>}
+          {product.salePrice != null && <p><strong>السعر بعد الخصم:</strong> {product.salePrice}</p>}
           <p><strong>المخزون:</strong> {product.stockQuantity}</p>
           <p><strong>الحالة:</strong> {product.status}</p>
           <p style={{ marginTop: 8 }}>{product.description}</p>
