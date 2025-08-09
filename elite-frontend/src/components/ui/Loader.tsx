@@ -37,4 +37,5 @@ const Loader: React.FC<LoaderProps> = ({ size = 'medium', color = '#4a2d71' }) =
   );
 };
 
+export { Loader };
 export default Loader;

@@ -2,7 +2,7 @@ import { useRouter } from 'next/router';
 import Image from 'next/image';
 import { Section } from '@/components/ui/Section';
 import { Avatar } from '@/components/ui/Avatar';
-import { Button } from '@/components/ui/Button';
+import { Button } from '@/components/ui/button';
 import { FaClock, FaCalendarAlt, FaFacebook, FaTwitter, FaInstagram, FaLinkedinIn, FaTag, FaEye, FaChevronLeft, FaChevronRight, FaQuoteRight } from 'react-icons/fa';
 import PageBanner from '@/components/PageBanner/PageBanner';
 import { useLanguage } from '@/context/LanguageContext';

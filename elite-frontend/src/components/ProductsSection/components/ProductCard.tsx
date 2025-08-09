@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
-import { useCart } from '@/context/CartContext';
+import { useCart } from '@/context/SaleorCartContext';
 // @ts-ignore
 import styles from '../styles/ProductCard.module.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';

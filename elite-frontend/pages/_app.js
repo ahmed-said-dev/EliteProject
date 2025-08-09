@@ -13,12 +13,15 @@ import feather from 'feather-icons';
 import Head from 'next/head';
 import Layout from '@/components/Layout';
 import { useEffect, useState } from 'react';
-import { CartProvider } from '@/context/CartContext';
+import { CartProvider } from '@/context/SaleorCartContext';
 import { LanguageProvider } from '@/context/LanguageContext';
+import { AuthProvider } from '@/context/SaleorAuthContext';
 import LoadingSpinner from '@/components/LoadingSpinner';
 import { useRouter } from 'next/router';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { ReactQueryDevtools } from 'react-query/devtools';
+import { ApolloProvider } from '@apollo/client';
+import { apolloClient } from '../src/lib/apollo';
 
 // Prevent Font Awesome from adding its CSS since we did it manually above
 config.autoAddCss = false;
@@ -67,17 +70,21 @@ function MyApp({ Component, pageProps }) {
         <meta name="description" content="عيادة إيليت البيطرية - شريكك الموثوق في رعاية حيوانك الأليف" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <QueryClientProvider client={queryClient}>
-        <CartProvider>
-          <LanguageProvider>
-            <LoadingSpinner isLoading={loading} />
-            <Layout>
-              <Component {...pageProps} />
-            </Layout>
-          </LanguageProvider>
-        </CartProvider>
-        {process.env.NODE_ENV === 'development' && <ReactQueryDevtools initialIsOpen={false} />}
-      </QueryClientProvider>
+      <ApolloProvider client={apolloClient}>
+        <QueryClientProvider client={queryClient}>
+          <AuthProvider>
+            <CartProvider>
+              <LanguageProvider>
+                <LoadingSpinner isLoading={loading} />
+                <Layout>
+                  <Component {...pageProps} />
+                </Layout>
+              </LanguageProvider>
+            </CartProvider>
+          </AuthProvider>
+          {process.env.NODE_ENV === 'development' && <ReactQueryDevtools initialIsOpen={false} />}
+        </QueryClientProvider>
+      </ApolloProvider>
     </>
   );
 }

@@ -14,6 +14,8 @@ import {
 import { faGoogle, faFacebook, faApple } from '@fortawesome/free-brands-svg-icons';
 import styles from '@/styles/components/LoginForm.module.css';
 import { useLanguage } from '@/context/LanguageContext';
+import { useAuth } from '@/context/SaleorAuthContext';
+import { useRouter } from 'next/router';
 
 interface LoginFormProps {
   onToggleMode: () => void;
@@ -22,6 +24,8 @@ interface LoginFormProps {
 
 export default function LoginForm({ onToggleMode, isLogin }: LoginFormProps) {
   const { t, isRTL } = useLanguage();
+  const { login, register, error: authError, clearError } = useAuth();
+  const router = useRouter();
   const dir = isRTL ? 'rtl' : 'ltr';
   const [showPassword, setShowPassword] = useState(false);
   const [rememberMe, setRememberMe] = useState(false);
@@ -31,7 +35,9 @@ export default function LoginForm({ onToggleMode, isLogin }: LoginFormProps) {
   const [formData, setFormData] = useState({
     email: '',
     password: '',
-    name: '',
+    firstName: '',
+    lastName: '',
+    phone: '',
     confirmPassword: '',
   });
 
@@ -63,8 +69,12 @@ export default function LoginForm({ onToggleMode, isLogin }: LoginFormProps) {
     }
     
     // Name validation (only for registration)
-    if (!isLogin && !formData.name) {
-      errors.name = t('auth.errors.nameRequired');
+    if (!isLogin && !formData.firstName) {
+      errors.firstName = t('auth.errors.firstNameRequired') || 'الاسم الأول مطلوب';
+    }
+    
+    if (!isLogin && !formData.lastName) {
+      errors.lastName = t('auth.errors.lastNameRequired') || 'الاسم الأخير مطلوب';
     }
     
     // Confirm password validation (only for registration)
@@ -85,26 +95,38 @@ export default function LoginForm({ onToggleMode, isLogin }: LoginFormProps) {
       return;
     }
     
+    // Clear any previous auth errors
+    clearError();
     setLoading(true);
     
     try {
-      // Simulate API call for authentication
-      await new Promise(resolve => setTimeout(resolve, 1500));
+      let success = false;
       
-      // Show success message
-      setShowSuccess(true);
+      if (isLogin) {
+        // Login
+        success = await login(formData.email, formData.password);
+      } else {
+        // Register
+        success = await register({
+          firstName: formData.firstName,
+          lastName: formData.lastName,
+          email: formData.email,
+          password: formData.password
+        });
+      }
       
-      // Reset form errors
-      setFormErrors({});
-      
-      // Redirect after successful login/registration (simulated)
-      setTimeout(() => {
-        window.location.href = '/';
-      }, 2000);
+      if (success) {
+        setShowSuccess(true);
+        setFormErrors({});
+        
+        // Redirect after successful authentication
+        setTimeout(() => {
+          router.push('/dashboard');
+        }, 1500);
+      }
       
     } catch (error) {
       console.error('Authentication error:', error);
-      setFormErrors({ general: t('auth.errors.loginError') });
     } finally {
       setLoading(false);
     }
@@ -174,39 +196,85 @@ export default function LoginForm({ onToggleMode, isLogin }: LoginFormProps) {
 
         <form onSubmit={handleSubmit} className="space-y-5">
           {/* Form error message if any */}
-          {formErrors.general && (
+          {(formErrors.general || authError) && (
             <div className="bg-red-50 border-l-4 border-red-500 p-4 mb-6">
               <div className="flex items-center">
                 <FontAwesomeIcon icon={faExclamationCircle} className="text-red-500 mr-3" />
-                <p className="text-red-700">{formErrors.general}</p>
+                <p className="text-red-700">{formErrors.general || authError}</p>
               </div>
             </div>
           )}
           
           {!isLogin && (
-            <div className="relative group">
-              <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">{t('auth.register.nameLabel')}</label>
-              <div className="relative">
-                <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                  <FontAwesomeIcon icon={faUser} className="text-purple-400 group-hover:text-purple-600 transition-colors duration-200" />
-                </div>
-                <input
+            <>
+              <div className="grid grid-cols-2 gap-4">
+                <div className="relative group">
+                  <label htmlFor="first_name" className="block text-sm font-medium text-gray-700 mb-1">الاسم الأول</label>
+                  <div className="relative">
+                    <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                      <FontAwesomeIcon icon={faUser} className="text-purple-400 group-hover:text-purple-600 transition-colors duration-200" />
+                    </div>
+                                    <input
                   type="text"
-                  id="name"
-                  name="name"
-                  value={formData.name}
+                  id="first_name"
+                  name="firstName"
+                  value={formData.firstName}
                   onChange={handleChange}
-                  className={`w-full pl-10 pr-4 py-3 border ${formErrors.name ? 'border-red-300 bg-red-50' : 'border-gray-300 group-hover:border-purple-400'} rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-200`}
-                  placeholder={t('auth.register.namePlaceholder')}
-                />
+                  className={`w-full pl-10 pr-4 py-3 border ${formErrors.firstName ? 'border-red-300 bg-red-50' : 'border-gray-300 group-hover:border-purple-400'} rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-200`}
+                      placeholder="أدخل الاسم الأول"
+                    />
+                  </div>
+                  {formErrors.firstName && (
+                    <p className="mt-2 text-sm text-red-600 flex items-center">
+                      <FontAwesomeIcon icon={faExclamationCircle} className="mr-1" />
+                      {formErrors.firstName}
+                    </p>
+                  )}
+                </div>
+
+                <div className="relative group">
+                  <label htmlFor="last_name" className="block text-sm font-medium text-gray-700 mb-1">الاسم الأخير</label>
+                  <div className="relative">
+                    <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                      <FontAwesomeIcon icon={faUser} className="text-purple-400 group-hover:text-purple-600 transition-colors duration-200" />
+                    </div>
+                    <input
+                      type="text"
+                                        id="last_name"
+                  name="lastName"
+                  value={formData.lastName}
+                      onChange={handleChange}
+                      className={`w-full pl-10 pr-4 py-3 border ${formErrors.lastName ? 'border-red-300 bg-red-50' : 'border-gray-300 group-hover:border-purple-400'} rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-200`}
+                      placeholder="أدخل الاسم الأخير"
+                    />
+                  </div>
+                  {formErrors.lastName && (
+                    <p className="mt-2 text-sm text-red-600 flex items-center">
+                      <FontAwesomeIcon icon={faExclamationCircle} className="mr-1" />
+                      {formErrors.lastName}
+                    </p>
+                  )}
+                </div>
               </div>
-              {formErrors.name && (
-                <p className="mt-2 text-sm text-red-600 flex items-center">
-                  <FontAwesomeIcon icon={faExclamationCircle} className="mr-1" />
-                  {formErrors.name}
-                </p>
-              )}
-            </div>
+
+              <div className="relative group">
+                <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-1">رقم الهاتف (اختياري)</label>
+                <div className="relative">
+                  <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                    <i className="fas fa-phone text-purple-400 group-hover:text-purple-600 transition-colors duration-200"></i>
+                  </div>
+                  <input
+                    type="tel"
+                    id="phone"
+                    name="phone"
+                    value={formData.phone}
+                    onChange={handleChange}
+                    className="w-full pl-10 pr-4 py-3 border border-gray-300 group-hover:border-purple-400 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-200"
+                    placeholder="أدخل رقم الهاتف"
+                  />
+                </div>
+              </div>
+            </>
           )}
           
           <div className="relative group">

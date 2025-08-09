@@ -3,14 +3,16 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import styles from './Header.module.css';
-import { useCart } from '@/context/CartContext';
+import { useCart } from '@/context/SaleorCartContext';
 import { useLanguage } from '@/context/LanguageContext';
+import { useAuth } from '@/context/SaleorAuthContext';
 import LanguageSwitcher from '@/components/LanguageSwitcher';
 
 const Header = () => {
   const pathname = usePathname();
   const { cartCount } = useCart();
   const { t, isRTL } = useLanguage();
+  const { user, isAuthenticated, logout } = useAuth();
   const [showAccountMenu, setShowAccountMenu] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const accountMenuRef = useRef(null);
@@ -141,19 +143,47 @@ const Header = () => {
                 aria-haspopup="true"
               >
                 <i className="fa-solid fa-user"></i>
-                <span className={styles.accountText}>{t('header.account')}</span>
+                <span className={styles.accountText}>
+                  {isAuthenticated ? `مرحباً، ${user?.firstName}` : t('header.account')}
+                </span>
                 <i className={`fa-solid fa-chevron-down ${showAccountMenu ? styles.rotateIcon : ''}`}></i>
               </button>
               {showAccountMenu && (
                 <div className={styles.accountDropdown}>
-                  <Link href="/login" className={styles.dropdownItem}>
-                    <i className="fa-solid fa-sign-in-alt"></i>
-                    <span>{t('header.login')}</span>
-                  </Link>
-                  <Link href="/register" className={styles.dropdownItem}>
-                    <i className="fa-solid fa-user-plus"></i>
-                    <span>{t('header.register')}</span>
-                  </Link>
+                  {isAuthenticated ? (
+                    <>
+                      <Link href="/dashboard" className={styles.dropdownItem}>
+                        <i className="fa-solid fa-chart-line"></i>
+                        <span>لوحة التحكم</span>
+                      </Link>
+                      <Link href="/dashboard" className={styles.dropdownItem}>
+                        <i className="fa-solid fa-shopping-bag"></i>
+                        <span>طلباتي</span>
+                      </Link>
+                      <Link href="/dashboard" className={styles.dropdownItem}>
+                        <i className="fa-solid fa-user-cog"></i>
+                        <span>الملف الشخصي</span>
+                      </Link>
+                      <button 
+                        onClick={logout} 
+                        className={`${styles.dropdownItem} ${styles.logoutBtn}`}
+                      >
+                        <i className="fa-solid fa-sign-out-alt"></i>
+                        <span>تسجيل الخروج</span>
+                      </button>
+                    </>
+                  ) : (
+                    <>
+                      <Link href="/login" className={styles.dropdownItem}>
+                        <i className="fa-solid fa-sign-in-alt"></i>
+                        <span>{t('header.login')}</span>
+                      </Link>
+                      <Link href="/register" className={styles.dropdownItem}>
+                        <i className="fa-solid fa-user-plus"></i>
+                        <span>{t('header.register')}</span>
+                      </Link>
+                    </>
+                  )}
                 </div>
               )}
             </div>

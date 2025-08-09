@@ -9,6 +9,7 @@ import {
 } from '@/components/Auth';
 import Divider from '@/components/Divider';
 import { useLanguage } from '@/context/LanguageContext';
+import RegistrationDebugger from '@/components/Debug/RegistrationDebugger';
 
 
 export default function Register() {
@@ -88,6 +89,9 @@ export default function Register() {
         isLogin={false}
         toggleForm={toggleForm}
       />
+      
+      {/* Debug tool - remove in production */}
+      {process.env.NODE_ENV === 'development' && <RegistrationDebugger />}
     </main>
   );
 }

@@ -1,17 +1,5 @@
-export function Button({ children, variant = 'primary', className = '', ...props }) {
-  const baseStyles = 'px-6 py-2 rounded-lg font-semibold transition-colors duration-200';
-  const variants = {
-    primary: 'bg-purple-600 text-white hover:bg-purple-700',
-    secondary: 'bg-gray-200 text-gray-800 hover:bg-gray-300',
-    outline: 'border-2 border-purple-600 text-purple-600 hover:bg-purple-600 hover:text-white'
-  };
+// Shim to support imports that explicitly reference .js extension
+// IMPORTANT: Point explicitly to the TSX file to avoid self-import recursion
+export { Button, buttonVariants } from './button.tsx'
 
-  return (
-    <button
-      className={`${baseStyles} ${variants[variant]} ${className}`}
-      {...props}
-    >
-      {children}
-    </button>
-  );
-}
+
