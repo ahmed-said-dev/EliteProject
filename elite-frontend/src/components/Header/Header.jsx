@@ -4,13 +4,16 @@ import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import styles from './Header.module.css';
 import { useCart } from '@/context/SaleorCartContext';
+import { useUnifiedCart } from '@/context/UnifiedCartContext';
 import { useLanguage } from '@/context/LanguageContext';
 import { useAuth } from '@/context/SaleorAuthContext';
 import LanguageSwitcher from '@/components/LanguageSwitcher';
 
 const Header = () => {
   const pathname = usePathname();
-  const { cartCount } = useCart();
+  const { cartCount: saleorCartCount } = useCart();
+  const { getCartCount: getUnifiedCartCount } = useUnifiedCart();
+  const totalCartCount = saleorCartCount + getUnifiedCartCount();
   const { t, isRTL } = useLanguage();
   const { user, isAuthenticated, logout } = useAuth();
   const [showAccountMenu, setShowAccountMenu] = useState(false);
@@ -132,7 +135,11 @@ const Header = () => {
             <Link href="/cart" className={styles.cartButton}>
               <div className={styles.cartIcon}>
                 <i className="fa-solid fa-shopping-cart"></i>
-                {cartCount > 0 && <span className={styles.cartCount}>{cartCount}</span>}
+                {totalCartCount > 0 && (
+                  <span className={styles.cartCount}>
+                    {totalCartCount > 99 ? '99+' : totalCartCount}
+                  </span>
+                )}
               </div>
             </Link>
             <div className={styles.accountContainer} ref={accountMenuRef}>

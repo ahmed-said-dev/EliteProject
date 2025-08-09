@@ -18,6 +18,7 @@ import {
 import { useSaleorProduct } from '@/hooks/useSaleorProducts';
 import { useStoreProduct } from '@/hooks/useStoreProduct';
 import { useCart } from '@/context/SaleorCartContext';
+import { useUnifiedCart } from '@/context/UnifiedCartContext';
 import { useLanguage } from '@/context/LanguageContext';
 import PageBanner from '@/components/PageBanner/PageBanner';
 
@@ -25,7 +26,8 @@ export default function ProductPage() {
   const router = useRouter();
   const { slug } = router.query;
   const { t } = useLanguage();
-  const { addToCart } = useCart();
+  const { addToCart: addToSaleorCart } = useCart();
+  const { addToCart: addToUnifiedCart, isInCart, getCartItem } = useUnifiedCart();
   
   const [selectedVariant, setSelectedVariant] = useState(null);
   const [quantity, setQuantity] = useState(1);
@@ -49,12 +51,34 @@ export default function ProductPage() {
   }, [product, selectedVariant]);
 
   const handleAddToCart = async () => {
-    if (!selectedVariant) return;
+    if (!product) return;
     
     setIsAddingToCart(true);
     try {
-      await addToCart(selectedVariant.id, quantity);
-      // Show success message or notification here
+      if (isUuid) {
+        // Add to unified cart for Elite Store Backend products
+        await addToUnifiedCart({
+          name: product.name,
+          price: product.price || 0,
+          salePrice: product.salePrice,
+          image: mainImage,
+          source: 'elite-store',
+          productId: product.id,
+          stockQuantity: product.stockQuantity,
+          maxQuantity: product.stockQuantity,
+          sku: product.sku,
+          category: product.category ? {
+            id: product.category.id,
+            name: product.category.name
+          } : undefined,
+        }, quantity);
+        console.log('تم إضافة المنتج إلى السلة بنجاح');
+      } else {
+        // Add to Saleor cart for Saleor products
+        if (!selectedVariant) return;
+        await addToSaleorCart(selectedVariant.id, quantity);
+        console.log('تم إضافة المنتج إلى السلة بنجاح');
+      }
     } catch (error) {
       console.error('Error adding to cart:', error);
       // Show error message here

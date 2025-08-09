@@ -14,6 +14,7 @@ import Head from 'next/head';
 import Layout from '@/components/Layout';
 import { useEffect, useState } from 'react';
 import { CartProvider } from '@/context/SaleorCartContext';
+import { UnifiedCartProvider } from '@/context/UnifiedCartContext';
 import { LanguageProvider } from '@/context/LanguageContext';
 import { AuthProvider } from '@/context/SaleorAuthContext';
 import LoadingSpinner from '@/components/LoadingSpinner';
@@ -74,12 +75,14 @@ function MyApp({ Component, pageProps }) {
         <QueryClientProvider client={queryClient}>
           <AuthProvider>
             <CartProvider>
-              <LanguageProvider>
-                <LoadingSpinner isLoading={loading} />
-                <Layout>
-                  <Component {...pageProps} />
-                </Layout>
-              </LanguageProvider>
+              <UnifiedCartProvider>
+                <LanguageProvider>
+                  <LoadingSpinner isLoading={loading} />
+                  <Layout>
+                    <Component {...pageProps} />
+                  </Layout>
+                </LanguageProvider>
+              </UnifiedCartProvider>
             </CartProvider>
           </AuthProvider>
           {process.env.NODE_ENV === 'development' && <ReactQueryDevtools initialIsOpen={false} />}

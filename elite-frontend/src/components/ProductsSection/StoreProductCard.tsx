@@ -2,6 +2,9 @@ import React, { useState } from 'react';
 import Link from 'next/link';
 import { StoreProduct } from '@/hooks/useStoreProducts';
 import { resolveAssetUrl } from '@/lib/storeApi';
+import { useUnifiedCart } from '@/context/UnifiedCartContext';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faShoppingCart, faHeart, faEye, faCheck } from '@fortawesome/free-solid-svg-icons';
 
 interface StoreProductCardProps {
   product: StoreProduct;
@@ -10,6 +13,10 @@ interface StoreProductCardProps {
 export default function StoreProductCard({ product }: StoreProductCardProps) {
   const [imageLoading, setImageLoading] = useState(true);
   const [imageError, setImageError] = useState(false);
+  const [isAddingToCart, setIsAddingToCart] = useState(false);
+  const [addedToCart, setAddedToCart] = useState(false);
+  
+  const { addToCart, isInCart, getCartItem } = useUnifiedCart();
   
   const primaryImage = product.images?.find(img => img.isPrimary) || product.images?.[0];
   const imageUrl = resolveAssetUrl(primaryImage?.url) || '/placeholder.png';
@@ -18,6 +25,38 @@ export default function StoreProductCard({ product }: StoreProductCardProps) {
   const salePrice = product.salePrice;
   const hasDiscount = salePrice && salePrice < price;
   const discountPercent = hasDiscount ? Math.round(((price - salePrice) / price) * 100) : 0;
+  
+  const isProductInCart = isInCart(product.id, 'elite-store');
+  const cartItem = getCartItem(product.id, 'elite-store');
+  
+  const handleAddToCart = async () => {
+    setIsAddingToCart(true);
+    
+    try {
+      await addToCart({
+        name: product.name,
+        price: price,
+        salePrice: salePrice,
+        image: imageUrl,
+        source: 'elite-store',
+        productId: product.id,
+        stockQuantity: product.stockQuantity,
+        maxQuantity: product.stockQuantity,
+        sku: product.sku,
+        category: product.category ? {
+          id: product.category.id,
+          name: product.category.name
+        } : undefined,
+      }, 1);
+      
+      setAddedToCart(true);
+      setTimeout(() => setAddedToCart(false), 2000);
+    } catch (error) {
+      console.error('Error adding to cart:', error);
+    } finally {
+      setIsAddingToCart(false);
+    }
+  };
 
   return (
     <div className="group relative bg-white rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden border border-purple-100 hover:border-purple-300 hover:shadow-purple-200/25">
@@ -29,11 +68,17 @@ export default function StoreProductCard({ product }: StoreProductCardProps) {
       )}
       
       {/* Wishlist Button */}
-      <button className="absolute top-3 right-3 z-10 w-8 h-8 bg-white/80 backdrop-blur-sm rounded-full flex items-center justify-center text-gray-600 hover:text-purple-500 hover:bg-white transition-all duration-200 opacity-0 group-hover:opacity-100">
-        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
-        </svg>
+      <button className="absolute top-3 right-3 z-10 w-8 h-8 bg-white/80 backdrop-blur-sm rounded-full flex items-center justify-center text-gray-600 hover:text-red-500 hover:bg-white transition-all duration-200 opacity-0 group-hover:opacity-100">
+        <FontAwesomeIcon icon={faHeart} className="text-sm" />
       </button>
+      
+      {/* Cart Status Badge */}
+      {isProductInCart && (
+        <div className="absolute top-3 left-3 z-20 bg-gradient-to-r from-green-500 to-emerald-500 text-white text-xs font-bold px-2 py-1 rounded-full shadow-lg flex items-center gap-1">
+          <FontAwesomeIcon icon={faCheck} className="text-xs" />
+          في السلة ({cartItem?.quantity})
+        </div>
+      )}
 
       {/* Product Image */}
       <Link href={`/products/${product.id}`} className="block relative overflow-hidden">
@@ -58,7 +103,8 @@ export default function StoreProductCard({ product }: StoreProductCardProps) {
           
           {/* Quick View Overlay */}
           <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-            <button className="bg-purple-600 text-white px-4 py-2 rounded-lg font-medium hover:bg-purple-700 transition-colors transform translate-y-2 group-hover:translate-y-0 shadow-lg">
+            <button className="bg-purple-600 text-white px-4 py-2 rounded-lg font-medium hover:bg-purple-700 transition-colors transform translate-y-2 group-hover:translate-y-0 shadow-lg flex items-center gap-2">
+              <FontAwesomeIcon icon={faEye} />
               عرض سريع
             </button>
           </div>
@@ -120,27 +166,63 @@ export default function StoreProductCard({ product }: StoreProductCardProps) {
 
         {/* Action Buttons */}
         <div className="flex gap-2">
-          <button className="flex-1 bg-gradient-to-r from-purple-600 to-violet-600 hover:from-purple-700 hover:to-violet-700 text-white py-2.5 px-4 rounded-xl font-medium transition-all duration-200 flex items-center justify-center gap-2 shadow-lg hover:shadow-purple-300/50">
-            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 3h2l.4 2M7 13h10l4-8H5.4m0 0L7 13m0 0l-1.5 6M7 13l-1.5 6m0 0h9m-9 0V19a2 2 0 002 2h7a2 2 0 002-2v-.5" />
-            </svg>
-            أضف للسلة
+          <button 
+            onClick={handleAddToCart}
+            disabled={isAddingToCart || !product.stockQuantity || product.stockQuantity <= 0}
+            className={`flex-1 py-2.5 px-4 rounded-xl font-medium transition-all duration-200 flex items-center justify-center gap-2 shadow-lg ${
+              addedToCart 
+                ? 'bg-gradient-to-r from-green-500 to-emerald-500 text-white'
+                : isProductInCart
+                ? 'bg-gradient-to-r from-indigo-500 to-purple-500 hover:from-indigo-600 hover:to-purple-600 text-white hover:shadow-indigo-300/50'
+                : 'bg-gradient-to-r from-purple-600 to-violet-600 hover:from-purple-700 hover:to-violet-700 text-white hover:shadow-purple-300/50'
+            } disabled:opacity-50 disabled:cursor-not-allowed`}
+          >
+            {isAddingToCart ? (
+              <>
+                <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                جاري الإضافة...
+              </>
+            ) : addedToCart ? (
+              <>
+                <FontAwesomeIcon icon={faCheck} />
+                تم الإضافة!
+              </>
+            ) : isProductInCart ? (
+              <>
+                <FontAwesomeIcon icon={faCheck} />
+                في السلة ({cartItem?.quantity})
+              </>
+            ) : (
+              <>
+                <FontAwesomeIcon icon={faShoppingCart} />
+                أضف للسلة
+              </>
+            )}
           </button>
           
-          <button className="bg-gray-100 hover:bg-gray-200 text-gray-700 p-2.5 rounded-xl transition-colors duration-200">
-            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
-            </svg>
-          </button>
+          <Link 
+            href={`/products/${product.id}`}
+            className="bg-gray-100 hover:bg-gray-200 text-gray-700 p-2.5 rounded-xl transition-colors duration-200 flex items-center justify-center"
+          >
+            <FontAwesomeIcon icon={faEye} className="text-sm" />
+          </Link>
         </div>
       </div>
 
       {/* Stock Status */}
       <div className="px-4 pb-4">
         <div className="flex items-center justify-between text-xs">
-          <span className="text-purple-600 font-medium">✓ متوفر</span>
-          <span className="text-gray-500">شحن مجاني</span>
+          {product.stockQuantity && product.stockQuantity > 0 ? (
+            <span className="text-green-600 font-medium flex items-center gap-1">
+              <FontAwesomeIcon icon={faCheck} />
+              متوفر ({product.stockQuantity} قطعة)
+            </span>
+          ) : (
+            <span className="text-red-500 font-medium">غير متوفر</span>
+          )}
+          <span className="text-gray-500">
+            {(salePrice || price) >= 500 ? 'شحن مجاني' : 'شحن 50 ج.م'}
+          </span>
         </div>
       </div>
     </div>

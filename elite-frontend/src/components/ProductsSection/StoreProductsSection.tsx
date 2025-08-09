@@ -8,14 +8,14 @@ export default function StoreProductsSection() {
   return (
     <div className="space-y-6">
       {/* Advanced Filters */}
-      <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
-        <h3 className="text-lg font-semibold text-gray-800 mb-4">فلاتر البحث</h3>
+      <div className="bg-white/80 backdrop-blur-md rounded-2xl shadow-lg border border-purple-200/30 p-6">
+        <h3 className="text-lg font-bold bg-gradient-to-r from-purple-600 to-indigo-600 bg-clip-text text-transparent mb-4">فلاتر البحث</h3>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-2">بحث بالاسم</label>
             <div className="relative">
               <input 
-                className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" 
+                className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent" 
                 placeholder="ابحث عن منتج..." 
                 value={params.search || ''} 
                 onChange={(e) => setFilter({ search: e.target.value })} 
@@ -32,7 +32,7 @@ export default function StoreProductsSection() {
             <label className="block text-sm font-medium text-gray-700 mb-2">السعر من</label>
             <input 
               type="number" 
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" 
+              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent" 
               placeholder="0" 
               value={params.minPrice ?? ''} 
               onChange={(e) => setFilter({ minPrice: e.target.value ? Number(e.target.value) : undefined })} 
@@ -43,7 +43,7 @@ export default function StoreProductsSection() {
             <label className="block text-sm font-medium text-gray-700 mb-2">السعر إلى</label>
             <input 
               type="number" 
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" 
+              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent" 
               placeholder="1000" 
               value={params.maxPrice ?? ''} 
               onChange={(e) => setFilter({ maxPrice: e.target.value ? Number(e.target.value) : undefined })} 
@@ -53,7 +53,7 @@ export default function StoreProductsSection() {
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-2">الحالة</label>
             <select 
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" 
+              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent" 
               value={params.published !== undefined ? String(params.published) : ''} 
               onChange={(e) => setFilter({ published: e.target.value === '' ? undefined : e.target.value === 'true' })}
             >
@@ -66,7 +66,7 @@ export default function StoreProductsSection() {
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-2">الترتيب</label>
             <select 
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" 
+              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent" 
               value={`${params.sortBy}:${params.sortOrder}`} 
               onChange={(e) => {
                 const [sortBy, sortOrder] = e.target.value.split(':');
@@ -88,7 +88,7 @@ export default function StoreProductsSection() {
       {loading && (
         <div className="flex items-center justify-center py-12">
           <div className="flex items-center gap-3 text-gray-600">
-            <div className="w-6 h-6 border-2 border-gray-300 border-t-blue-500 rounded-full animate-spin"></div>
+            <div className="w-6 h-6 border-2 border-gray-300 border-t-purple-500 rounded-full animate-spin"></div>
             <span>جاري تحميل المنتجات...</span>
           </div>
         </div>
