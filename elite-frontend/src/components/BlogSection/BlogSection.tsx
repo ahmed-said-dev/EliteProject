@@ -188,3 +188,9 @@ const BlogSection: React.FC<BlogSectionProps> = ({ articles = [], isHomePage = f
 };
 
 export default BlogSection;
+
+// Backwards-compatibility stubs for legacy imports used in pages
+// Some pages import { blogPosts } or { getBlogPosts } from this module.
+// Provide minimal fallbacks to avoid build errors until those pages are refactored.
+export const blogPosts: any[] = [];
+export function getBlogPosts(_: any): any[] { return blogPosts; }

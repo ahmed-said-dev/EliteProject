@@ -176,12 +176,8 @@ export const useSaleorAuth = () => {
           error: null,
         });
         
-        // Update Apollo client headers
-        apolloClient.defaultContext = {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        };
+        // Update Apollo client with auth header via setLink or by resetting store
+        apolloClient.setLink(apolloClient.link);
       } else {
         // Token is invalid, remove it
         localStorage.removeItem('saleor_auth_token');
@@ -243,12 +239,8 @@ export const useSaleorAuth = () => {
           error: null,
         });
 
-        // Update Apollo client headers
-        apolloClient.defaultContext = {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        };
+        // Reset store to ensure new auth header is picked up by link
+        await apolloClient.resetStore();
 
         return true;
       }

@@ -372,7 +372,7 @@ export const useSaleorOrders = () => {
           first: 20,
           after: loadMore ? endCursor : undefined,
         },
-        fetchPolicy: 'cache-and-network',
+        fetchPolicy: 'network-only',
       });
 
       if (data.me?.orders) {
@@ -454,7 +454,7 @@ export const useSaleorOrder = (orderId: string) => {
       const { data } = await apolloClient.query({
         query: GET_ORDER_BY_ID,
         variables: { id: orderId },
-        fetchPolicy: 'cache-and-network',
+        fetchPolicy: 'network-only',
       });
 
       setOrder(data.order);

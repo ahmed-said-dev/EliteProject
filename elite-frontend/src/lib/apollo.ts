@@ -31,13 +31,15 @@ const errorLink = onError(({ graphQLErrors, networkError, operation, forward }) 
   }
 
   if (networkError) {
-    console.error(`Network error: ${networkError}`);
-    
-    // If unauthorized, clear token
-    if (networkError.statusCode === 401) {
-      localStorage.removeItem('saleor_auth_token');
-      // Optionally redirect to login
-      window.location.href = '/login';
+    console.error(`Network error:`, networkError);
+    // Attempt to read status if available
+    const anyErr: any = networkError as any;
+    const status = anyErr?.statusCode || anyErr?.status || anyErr?.result?.errors?.[0]?.extensions?.exception?.status;
+    if (status === 401) {
+      try { localStorage.removeItem('saleor_auth_token'); } catch {}
+      if (typeof window !== 'undefined') {
+        window.location.href = '/login';
+      }
     }
   }
 });

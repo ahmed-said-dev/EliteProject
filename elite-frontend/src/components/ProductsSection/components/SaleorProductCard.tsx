@@ -34,10 +34,11 @@ const SaleorProductCard: React.FC<SaleorProductCardProps> = ({ product, viewType
   // Get product price
   const getProductPrice = () => {
     if (product.variants && product.variants.length > 0 && product.variants[0].pricing?.price) {
+      const p = product.variants[0].pricing as any;
       return {
-        current: product.variants[0].pricing.price.gross,
-        undiscounted: product.variants[0].pricing.priceUndiscounted?.gross,
-        discount: product.variants[0].pricing.discount?.gross
+        current: p.price?.gross,
+        undiscounted: p.priceUndiscounted?.gross || p.price?.gross,
+        discount: p.discount?.gross || null
       };
     }
     if (product.pricing?.priceRange?.start) {
@@ -59,7 +60,7 @@ const SaleorProductCard: React.FC<SaleorProductCardProps> = ({ product, viewType
   const discountPercentage = hasDiscount 
     ? Math.round(((price.undiscounted.amount - price.current.amount) / price.undiscounted.amount) * 100) 
     : 0;
-  const productImage = product.thumbnail?.url || product.images?.[0]?.url || '/placeholder-product.jpg';
+  const productImage = product.thumbnail?.url || product.images?.[0]?.url || '/placeholder.svg';
 
   // Render stars for rating (mock for now)
   const renderStars = (rating: number = 4) => {

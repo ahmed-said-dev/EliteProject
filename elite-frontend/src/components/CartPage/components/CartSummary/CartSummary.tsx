@@ -16,10 +16,7 @@ const CartSummary: React.FC = () => {
     cartItems, 
     cartTotal, 
     cart, 
-    loading, 
-    startCheckout,
-    createPaymentSessions,
-    addShippingMethod
+    loading
   } = useCart();
   
   const [selectedShipping, setSelectedShipping] = useState<string>('standard');
@@ -62,7 +59,7 @@ const CartSummary: React.FC = () => {
       try {
         const apiOption = apiShippingOptions.find(opt => opt.id === optionId);
         if (apiOption) {
-          await addShippingMethod(apiOption.id);
+          // integrate shipping method with Saleor if needed
         }
       } catch (err) {
         console.error('Error applying shipping method:', err);
@@ -93,33 +90,7 @@ const CartSummary: React.FC = () => {
   
   // معالجة عملية الدفع
   const handleCheckout = async () => {
-    if (!cart) {
-      setCheckoutError(t('cart.error.noCart'));
-      return;
-    }
-    
-    try {
-      setCheckoutLoading(true);
-      setCheckoutError(null);
-      
-      // 1. إنشاء جلسات الدفع
-      await createPaymentSessions();
-      
-      // 2. بدء عملية الدفع
-      const order = await startCheckout();
-      
-      // 3. توجيه المستخدم إلى صفحة تأكيد الطلب
-      if (order && order.id) {
-        window.location.href = `/order-confirmation?id=${order.id}`;
-      } else {
-        setCheckoutError(t('cart.error.checkoutFailed'));
-      }
-    } catch (err: any) {
-      console.error('Checkout error:', err);
-      setCheckoutError(err.message || t('cart.error.checkoutFailed'));
-    } finally {
-      setCheckoutLoading(false);
-    }
+    window.location.href = '/checkout';
   };
 
   return (

@@ -223,3 +223,8 @@ const ServicesSection: React.FC = () => {
 };
 
 export default ServicesSection;
+
+// Backward-compatibility export for ServiceRelated dynamic import
+export function getServices(t: (k: string) => string) {
+  return Array.from({ length: 6 }).map((_, index) => getDefaultService(index + 1));
+}

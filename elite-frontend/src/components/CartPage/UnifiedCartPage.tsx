@@ -1,6 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+import { useRouter } from 'next/router';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { 
   faShoppingCart, 
@@ -18,6 +19,7 @@ import { useLanguage } from '@/context/LanguageContext';
 import { useUnifiedCart } from '@/context/UnifiedCartContext';
 
 const UnifiedCartPage: React.FC = () => {
+  const router = useRouter();
   const { t, isRTL } = useLanguage();
   const { 
     state, 
@@ -41,8 +43,8 @@ const UnifiedCartPage: React.FC = () => {
   };
 
   const handleCheckout = () => {
-    // Redirect to checkout page
-    window.location.href = '/checkout';
+    // Navigate to checkout page using Next.js router
+    router.push('/checkout');
   };
 
   const subtotal = getCartTotal();
@@ -129,13 +131,13 @@ const UnifiedCartPage: React.FC = () => {
                       <div className="relative">
                         <div className="w-24 h-24 bg-gradient-to-br from-white to-purple-50 rounded-2xl overflow-hidden shadow-lg border border-purple-100/50">
                           <Image
-                            src={item.image}
+                            src={item.image || '/placeholder.svg'}
                             alt={item.name}
                             width={96}
                             height={96}
                             className="w-full h-full object-cover"
                             onError={(e) => {
-                              e.currentTarget.src = '/placeholder-product.jpg';
+                              e.currentTarget.src = '/placeholder.svg';
                             }}
                           />
                         </div>

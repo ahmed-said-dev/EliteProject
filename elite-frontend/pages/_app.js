@@ -17,7 +17,9 @@ import { CartProvider } from '@/context/SaleorCartContext';
 import { UnifiedCartProvider } from '@/context/UnifiedCartContext';
 import { LanguageProvider } from '@/context/LanguageContext';
 import { AuthProvider } from '@/context/SaleorAuthContext';
+import { NotificationProvider } from '@/context/NotificationContext';
 import LoadingSpinner from '@/components/LoadingSpinner';
+import NotificationContainer from '@/components/common/NotificationContainer';
 import { useRouter } from 'next/router';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { ReactQueryDevtools } from 'react-query/devtools';
@@ -77,10 +79,13 @@ function MyApp({ Component, pageProps }) {
             <CartProvider>
               <UnifiedCartProvider>
                 <LanguageProvider>
-                  <LoadingSpinner isLoading={loading} />
-                  <Layout>
-                    <Component {...pageProps} />
-                  </Layout>
+                  <NotificationProvider>
+                    <LoadingSpinner isLoading={loading} />
+                    <Layout>
+                      <Component {...pageProps} />
+                    </Layout>
+                    <NotificationContainer />
+                  </NotificationProvider>
                 </LanguageProvider>
               </UnifiedCartProvider>
             </CartProvider>

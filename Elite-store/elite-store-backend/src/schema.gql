@@ -112,8 +112,8 @@ type Order {
   total: Float!
   trackingNumber: String
   updatedAt: DateTime!
-  user: User!
-  userId: String!
+  user: User
+  userId: String
 }
 
 type OrderItem {

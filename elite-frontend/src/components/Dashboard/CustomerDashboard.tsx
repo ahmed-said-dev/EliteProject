@@ -94,8 +94,8 @@ const OverviewTab: React.FC = () => {
               </span>
             </div>
             <div className={styles.orderInfo}>
-              <span>{formatPrice(order.total, order.currency_code)}</span>
-              <span>{new Date(order.created_at).toLocaleDateString('ar-EG')}</span>
+              <span>{formatPrice(order.total.gross.amount, order.total.gross.currency)}</span>
+              <span>{new Date(order.created).toLocaleDateString('ar-EG')}</span>
             </div>
           </div>
         ))}
@@ -214,21 +214,21 @@ const ProfileTab: React.FC = () => {
           <i className="fas fa-user"></i>
         </div>
         <div className={styles.userInfo}>
-          <h2>{user.first_name} {user.last_name}</h2>
+          <h2>{(user as any).first_name || user.firstName} {(user as any).last_name || user.lastName}</h2>
           <p>{user.email}</p>
-          {user.phone && <p>{user.phone}</p>}
+          {(user as any).phone && <p>{(user as any).phone}</p>}
         </div>
       </div>
 
       <div className={styles.profileDetails}>
         <div className={styles.detailGroup}>
           <label>الاسم الأول</label>
-          <input type="text" value={user.first_name} readOnly />
+          <input type="text" value={(user as any).first_name || user.firstName} readOnly />
         </div>
         
         <div className={styles.detailGroup}>
           <label>الاسم الأخير</label>
-          <input type="text" value={user.last_name} readOnly />
+          <input type="text" value={(user as any).last_name || user.lastName} readOnly />
         </div>
         
         <div className={styles.detailGroup}>
@@ -236,10 +236,10 @@ const ProfileTab: React.FC = () => {
           <input type="email" value={user.email} readOnly />
         </div>
         
-        {user.phone && (
+          {(user as any).phone && (
           <div className={styles.detailGroup}>
             <label>رقم الهاتف</label>
-            <input type="tel" value={user.phone} readOnly />
+            <input type="tel" value={(user as any).phone} readOnly />
           </div>
         )}
         
@@ -247,7 +247,7 @@ const ProfileTab: React.FC = () => {
           <label>تاريخ التسجيل</label>
           <input 
             type="text" 
-            value={new Date(user.created_at).toLocaleDateString('ar-EG')} 
+            value={new Date((user as any).created_at || (user as any).createdAt || Date.now()).toLocaleDateString('ar-EG')} 
             readOnly 
           />
         </div>
@@ -300,7 +300,7 @@ const CustomerDashboard: React.FC = () => {
   return (
     <div className={styles.dashboardContainer}>
       <div className={styles.dashboardHeader}>
-        <h1>مرحباً، {user.first_name}!</h1>
+        <h1>مرحباً، {(user as any).first_name || user.firstName}!</h1>
         <p>إدارة حسابك وطلباتك من هنا</p>
       </div>
       

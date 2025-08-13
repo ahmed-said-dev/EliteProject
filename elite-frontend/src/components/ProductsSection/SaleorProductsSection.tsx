@@ -70,7 +70,7 @@ const SaleorProductsSection: React.FC = () => {
     search: searchQuery || undefined,
     categories: filters.categories.length > 0 ? filters.categories : undefined,
     collections: filters.collections.length > 0 ? filters.collections : undefined,
-    priceRange: filters.priceRange.min > 0 || filters.priceRange.max < 1000 ? filters.priceRange : undefined,
+    priceRange: filters.priceRange.min > 0 || filters.priceRange.max < 1000 ? { gte: filters.priceRange.min, lte: filters.priceRange.max } : undefined,
     sortBy: {
       field: sortBy.field,
       direction: sortBy.direction,

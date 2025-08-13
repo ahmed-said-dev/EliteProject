@@ -46,36 +46,36 @@ const Sidebar: React.FC = () => {
       label: 'الطلبات',
       englishLabel: 'Orders'
     },
-    { 
-      to: '/appointments', 
-      icon: CalendarIcon, 
-      label: 'المواعيد',
-      englishLabel: 'Appointments'
-    },
-    { 
-      to: '/users', 
-      icon: UsersIcon, 
-      label: 'المستخدمين',
-      englishLabel: 'Users'
-    },
-    { 
-      to: '/team', 
-      icon: UserGroupIcon, 
-      label: 'الفريق الطبي',
-      englishLabel: 'Medical Team'
-    },
-    { 
-      to: '/blog', 
-      icon: DocumentTextIcon, 
-      label: 'المدونة',
-      englishLabel: 'Blog'
-    },
-    { 
-      to: '/settings', 
-      icon: CogIcon, 
-      label: 'الإعدادات',
-      englishLabel: 'Settings'
-    },
+    // { 
+    //   to: '/appointments', 
+    //   icon: CalendarIcon, 
+    //   label: 'المواعيد',
+    //   englishLabel: 'Appointments'
+    // },
+    // { 
+    //   to: '/users', 
+    //   icon: UsersIcon, 
+    //   label: 'المستخدمين',
+    //   englishLabel: 'Users'
+    // },
+    // { 
+    //   to: '/team', 
+    //   icon: UserGroupIcon, 
+    //   label: 'الفريق الطبي',
+    //   englishLabel: 'Medical Team'
+    // },
+    // { 
+    //   to: '/blog', 
+    //   icon: DocumentTextIcon, 
+    //   label: 'المدونة',
+    //   englishLabel: 'Blog'
+    // },
+    // { 
+    //   to: '/settings', 
+    //   icon: CogIcon, 
+    //   label: 'الإعدادات',
+    //   englishLabel: 'Settings'
+    // },
   ];
 
   return (

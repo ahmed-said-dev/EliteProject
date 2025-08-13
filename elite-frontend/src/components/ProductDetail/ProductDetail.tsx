@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
-import { useCart } from '@/context/CartContext';
+import { useCart } from '@/context/SaleorCartContext';
 import { ProductGallery, ProductInfo, ProductTabs, RelatedProducts } from './components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { 
@@ -57,11 +57,12 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ product }) => {
   const router = useRouter();
   
   // Generar imágenes adicionales (para fines de demostración)
+  const baseImage = product.image || '/placeholder.svg';
   const productImages = [
-    product.image,
-    product.image.replace('.jpg', '-2.jpg'),
-    product.image.replace('.jpg', '-3.jpg'),
-    product.image.replace('.jpg', '-4.jpg')
+    baseImage,
+    baseImage,
+    baseImage,
+    baseImage,
   ];
   
   // Calcular descuento si hay precio de oferta
@@ -100,8 +101,8 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ product }) => {
     try {
       console.log('Adding to cart from product detail:', product);
       
-      // إضافة المنتج إلى السلة باستخدام السياق
-      await addToCart(product, quantity);
+      // إضافة المنتج إلى السلة باستخدام سياق Saleor (باستخدام معرّف بديل)
+      await addToCart(String(product.id), quantity);
       
       // إظهار رسالة نجاح مؤقتة
       setAddedToCart(true);

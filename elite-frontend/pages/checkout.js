@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { 
   faShieldAlt, 
@@ -15,19 +16,26 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { useUnifiedCart } from '@/context/UnifiedCartContext';
 import { useLanguage } from '@/context/LanguageContext';
+import { useNotifications } from '@/context/NotificationContext';
+import { eliteApi } from '@/lib/eliteApi';
 import PageBanner from '@/components/PageBanner/PageBanner';
 
 export default function CheckoutPage() {
+  const router = useRouter();
   const { state, getCartTotal, getCartCount, clearCart } = useUnifiedCart();
   const { t } = useLanguage();
+  const { addNotification } = useNotifications();
   const [formData, setFormData] = useState({
-    firstName: '',
-    lastName: '',
-    email: '',
-    phone: '',
-    address: '',
-    city: '',
-    country: 'Egypt',
+    customerFirstName: '',
+    customerLastName: '',
+    customerEmail: '',
+    customerPhone: '',
+    shippingAddress: '',
+    shippingCity: '',
+    shippingCountry: 'Egypt',
+    billingAddress: '',
+    billingCity: '',
+    billingCountry: 'Egypt',
     paymentMethod: 'cash_on_delivery',
     notes: ''
   });
@@ -38,7 +46,9 @@ export default function CheckoutPage() {
     return `${Math.round(price)} ج.م`;
   };
 
-  const subtotal = getCartTotal();
+  // Calculate totals for Elite Store items only
+  const eliteStoreItems = state.items.filter(item => item.source === 'elite-store');
+  const subtotal = eliteStoreItems.reduce((sum, item) => sum + (item.salePrice || item.price) * item.quantity, 0);
   const shippingCost = subtotal > 500 ? 0 : 50;
   const taxRate = 0.14;
   const taxAmount = subtotal * taxRate;
@@ -54,19 +64,99 @@ export default function CheckoutPage() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    
+    // Check if we have Elite Store items
+    const eliteStoreItems = state.items.filter(item => item.source === 'elite-store');
+    if (eliteStoreItems.length === 0) {
+      addNotification({
+        type: 'error',
+        title: 'خطأ',
+        message: 'لا توجد منتجات من متجر Elite في السلة'
+      });
+      return;
+    }
+
+    // Validate required fields
+    const requiredFields = ['customerFirstName', 'customerLastName', 'customerEmail', 'customerPhone', 'shippingAddress', 'shippingCity', 'shippingCountry'];
+    const missingFields = requiredFields.filter(field => !formData[field]);
+    
+    if (missingFields.length > 0) {
+      addNotification({
+        type: 'error',
+        title: 'يرجى تعبئة جميع الحقول المطلوبة',
+        message: `حقول مفقودة: ${missingFields.join(', ')}`,
+        duration: 5000
+      });
+      return;
+    }
+
     setIsProcessing(true);
 
-    // Simulate order processing
-    setTimeout(() => {
-      setIsProcessing(false);
-      setOrderComplete(true);
-      // Clear cart after successful order
+    try {
+      // Prepare order items - ensure we only include Elite Store items
+      const orderItems = eliteStoreItems.map(item => ({
+        productId: item.productId || item.id,
+        productName: item.name,
+        productSku: item.sku || `SKU-${item.id}`,
+        quantity: item.quantity,
+        price: item.salePrice || item.price
+      }));
+
+      // Calculate totals for Elite Store items only
+      const subtotal = eliteStoreItems.reduce((sum, item) => sum + (item.salePrice || item.price) * item.quantity, 0);
+      const shippingCost = subtotal > 500 ? 0 : 50;
+      const taxAmount = subtotal * 0.14;
+
+      const orderData = {
+        customerFirstName: formData.customerFirstName,
+        customerLastName: formData.customerLastName,
+        customerEmail: formData.customerEmail,
+        customerPhone: formData.customerPhone,
+        shippingAddress: formData.shippingAddress,
+        shippingCity: formData.shippingCity,
+        shippingCountry: formData.shippingCountry,
+        billingAddress: formData.billingAddress || formData.shippingAddress,
+        billingCity: formData.billingCity || formData.shippingCity,
+        billingCountry: formData.billingCountry || formData.shippingCountry,
+        paymentMethod: formData.paymentMethod,
+        notes: formData.notes,
+        items: orderItems,
+        shippingCost,
+        taxAmount,
+        discountAmount: 0
+      };
+
+      console.log('🚀 Sending order data to backend:', orderData);
+      const order = await eliteApi.createOrder(orderData);
+      console.log('✅ Order created successfully:', order);
+      
+      // Clear cart on successful order
       clearCart();
-    }, 3000);
+      
+      addNotification({
+        type: 'success',
+        title: 'تم إنشاء الطلب بنجاح!',
+        message: `رقم الطلب: ${order?.orderNumber || 'غير متاح'}`,
+        duration: 8000
+      });
+
+      // Set order complete state
+      setOrderComplete(true);
+      
+    } catch (error) {
+      console.error('❌ Order creation failed:', error);
+      addNotification({
+        type: 'error',
+        title: 'فشل في إنشاء الطلب',
+        message: error.message || 'حدث خطأ غير متوقع'
+      });
+    } finally {
+      setIsProcessing(false);
+    }
   };
 
-  // Redirect to cart if empty
-  if (state.items.length === 0 && !orderComplete) {
+  // Redirect to cart if empty or no Elite Store items
+  if (eliteStoreItems.length === 0 && !orderComplete) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-purple-50 via-white to-indigo-50">
         <PageBanner
@@ -195,8 +285,8 @@ export default function CheckoutPage() {
                   <label className="block text-sm font-bold text-gray-700 mb-2">الاسم الأول *</label>
                   <input
                     type="text"
-                    name="firstName"
-                    value={formData.firstName}
+                    name="customerFirstName"
+                    value={formData.customerFirstName}
                     onChange={handleInputChange}
                     required
                     className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-transparent"
@@ -208,8 +298,8 @@ export default function CheckoutPage() {
                   <label className="block text-sm font-bold text-gray-700 mb-2">الاسم الأخير *</label>
                   <input
                     type="text"
-                    name="lastName"
-                    value={formData.lastName}
+                    name="customerLastName"
+                    value={formData.customerLastName}
                     onChange={handleInputChange}
                     required
                     className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-transparent"
@@ -221,8 +311,8 @@ export default function CheckoutPage() {
                   <label className="block text-sm font-bold text-gray-700 mb-2">البريد الإلكتروني *</label>
                   <input
                     type="email"
-                    name="email"
-                    value={formData.email}
+                    name="customerEmail"
+                    value={formData.customerEmail}
                     onChange={handleInputChange}
                     required
                     className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-transparent"
@@ -234,8 +324,8 @@ export default function CheckoutPage() {
                   <label className="block text-sm font-bold text-gray-700 mb-2">رقم الهاتف *</label>
                   <input
                     type="tel"
-                    name="phone"
-                    value={formData.phone}
+                    name="customerPhone"
+                    value={formData.customerPhone}
                     onChange={handleInputChange}
                     required
                     className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-transparent"
@@ -256,8 +346,8 @@ export default function CheckoutPage() {
                 <div>
                   <label className="block text-sm font-bold text-gray-700 mb-2">العنوان التفصيلي *</label>
                   <textarea
-                    name="address"
-                    value={formData.address}
+                    name="shippingAddress"
+                    value={formData.shippingAddress}
                     onChange={handleInputChange}
                     required
                     rows={3}
@@ -271,8 +361,8 @@ export default function CheckoutPage() {
                     <label className="block text-sm font-bold text-gray-700 mb-2">المدينة *</label>
                     <input
                       type="text"
-                      name="city"
-                      value={formData.city}
+                      name="shippingCity"
+                      value={formData.shippingCity}
                       onChange={handleInputChange}
                       required
                       className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-transparent"
@@ -283,8 +373,8 @@ export default function CheckoutPage() {
                   <div>
                     <label className="block text-sm font-bold text-gray-700 mb-2">البلد *</label>
                     <select
-                      name="country"
-                      value={formData.country}
+                      name="shippingCountry"
+                      value={formData.shippingCountry}
                       onChange={handleInputChange}
                       className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-transparent"
                     >
@@ -362,7 +452,7 @@ export default function CheckoutPage() {
               <div className="p-6 space-y-4">
                 {/* Cart Items */}
                 <div className="space-y-3 max-h-60 overflow-y-auto">
-                  {state.items.map((item) => (
+                  {eliteStoreItems.map((item) => (
                     <div key={item.id} className="flex gap-3 p-3 bg-gray-50 rounded-xl">
                       <img
                         src={item.image}

@@ -108,8 +108,8 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, viewType }) => {
     console.log('Adding to cart:', product);
     
     try {
-      // إضافة المنتج إلى السلة باستخدام السياق
-      await addToCart(product, 1);
+      // إضافة المنتج إلى السلة باستخدام سياق Saleor (تمرير معرف كسلسلة)
+      await addToCart(String(product.original_id || product.id), 1);
       
       // إظهار ملاحظة بصرية
       setAddedToCart(true);
@@ -140,8 +140,8 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, viewType }) => {
       >
         <Link href={`/products/${product.original_id || product.id}`} className={styles.productLink}>
           <div className={styles.imageContainer}>
-            <img 
-              src={product.image} 
+              <img 
+               src={product.image || '/placeholder.svg'} 
               alt={t(`products.${product.id}.name`)}
               className={styles.productImage}
             />

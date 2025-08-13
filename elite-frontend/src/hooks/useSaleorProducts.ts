@@ -422,7 +422,7 @@ export const useSaleorProducts = (options: UseProductsOptions = {}) => {
           sortBy: sortByInput,
           channel,
         },
-        fetchPolicy: 'cache-and-network',
+        fetchPolicy: 'network-only',
       });
 
       const newProducts = data.products.edges.map((edge: any) => edge.node);
@@ -491,7 +491,7 @@ export const useSaleorProduct = (slug: string, channel: string = 'default-channe
       const { data } = await apolloClient.query({
         query: GET_PRODUCT_BY_SLUG,
         variables: { slug, channel },
-        fetchPolicy: 'cache-and-network',
+        fetchPolicy: 'network-only',
       });
 
       setProduct(data.product);
@@ -530,7 +530,7 @@ export const useSaleorCategories = () => {
       const { data } = await apolloClient.query({
         query: GET_CATEGORIES,
         variables: { first: 100 },
-        fetchPolicy: 'cache-and-network',
+        fetchPolicy: 'network-only',
       });
 
       setCategories(data.categories.edges.map((edge: any) => edge.node));
@@ -568,7 +568,7 @@ export const useSaleorCollections = (channel: string = 'default-channel') => {
       const { data } = await apolloClient.query({
         query: GET_COLLECTIONS,
         variables: { first: 100, channel },
-        fetchPolicy: 'cache-and-network',
+        fetchPolicy: 'network-only',
       });
 
       setCollections(data.collections.edges.map((edge: any) => edge.node));

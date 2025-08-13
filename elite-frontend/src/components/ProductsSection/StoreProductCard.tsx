@@ -40,9 +40,9 @@ export default function StoreProductCard({ product }: StoreProductCardProps) {
         image: imageUrl,
         source: 'elite-store',
         productId: product.id,
-        stockQuantity: product.stockQuantity,
-        maxQuantity: product.stockQuantity,
-        sku: product.sku,
+        stockQuantity: (product as any).stockQuantity,
+        maxQuantity: (product as any).stockQuantity,
+        sku: (product as any).sku,
         category: product.category ? {
           id: product.category.id,
           name: product.category.name
@@ -168,7 +168,7 @@ export default function StoreProductCard({ product }: StoreProductCardProps) {
         <div className="flex gap-2">
           <button 
             onClick={handleAddToCart}
-            disabled={isAddingToCart || !product.stockQuantity || product.stockQuantity <= 0}
+            disabled={isAddingToCart || !(product as any).stockQuantity || (product as any).stockQuantity <= 0}
             className={`flex-1 py-2.5 px-4 rounded-xl font-medium transition-all duration-200 flex items-center justify-center gap-2 shadow-lg ${
               addedToCart 
                 ? 'bg-gradient-to-r from-green-500 to-emerald-500 text-white'
@@ -212,10 +212,10 @@ export default function StoreProductCard({ product }: StoreProductCardProps) {
       {/* Stock Status */}
       <div className="px-4 pb-4">
         <div className="flex items-center justify-between text-xs">
-          {product.stockQuantity && product.stockQuantity > 0 ? (
+          {(product as any).stockQuantity && (product as any).stockQuantity > 0 ? (
             <span className="text-green-600 font-medium flex items-center gap-1">
               <FontAwesomeIcon icon={faCheck} />
-              متوفر ({product.stockQuantity} قطعة)
+               متوفر ({(product as any).stockQuantity} قطعة)
             </span>
           ) : (
             <span className="text-red-500 font-medium">غير متوفر</span>

@@ -156,14 +156,14 @@ export class Order {
   @Column({ nullable: true })
   deliveredAt?: Date;
 
-  @Field()
-  @Column()
-  userId: string;
+  @Field({ nullable: true })
+  @Column({ nullable: true })
+  userId?: string;
 
-  @Field(() => User)
-  @ManyToOne(() => User, user => user.orders)
+  @Field(() => User, { nullable: true })
+  @ManyToOne(() => User, user => user.orders, { nullable: true })
   @JoinColumn({ name: 'userId' })
-  user: User;
+  user?: User;
 
   @Field(() => [OrderItem])
   @OneToMany(() => OrderItem, orderItem => orderItem.order, { cascade: true })
