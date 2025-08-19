@@ -10,8 +10,10 @@
 - **Host**: elite-store-db-do-user-24606323-0.i.db.ondigitalocean.com
 - **Port**: 25060
 - **Username**: doadmin
-- **Password**: AVNS_Sfg3cMWF_zNOSTFufbo
+- **Password**: [Get from DigitalOcean Dashboard > Databases > Connection Details]
 - **Database**: defaultdb
+
+⚠️ **SECURITY NOTE**: Never commit real passwords to Git. Get the actual password from your DigitalOcean dashboard.
 
 ## 📱 Applications Overview
 

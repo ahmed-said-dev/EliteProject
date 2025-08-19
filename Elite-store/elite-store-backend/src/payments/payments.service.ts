@@ -7,7 +7,7 @@ export class PaymentsService {
   private stripe: Stripe;
 
   constructor(private configService: ConfigService) {
-    this.stripe = new Stripe(this.configService.get<string>('stripe.secretKey') || 'sk_test_default', {
+    this.stripe = new Stripe(this.configService.get<string>('stripe.secretKey') || 'your_stripe_secret_key', {
       apiVersion: '2025-07-30.basil',
     });
   }

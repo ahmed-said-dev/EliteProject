@@ -2,6 +2,8 @@
 
 ## 📋 Environment Variables
 
+⚠️ **IMPORTANT**: Replace placeholder values with your actual credentials!
+
 Create a `.env` file in the root directory with these variables:
 
 ```bash
@@ -13,11 +15,11 @@ PORT=3001
 DB_HOST=elite-store-db-do-user-24606323-0.i.db.ondigitalocean.com
 DB_PORT=25060
 DB_USERNAME=doadmin
-DB_PASSWORD=AVNS_Sfg3cMWF_zNOSTFufbo
+DB_PASSWORD=[YOUR_POSTGRES_PASSWORD]
 DB_NAME=defaultdb
 
 # JWT Configuration
-JWT_SECRET=elite-store-production-secret-2024-change-this-in-production
+JWT_SECRET=[YOUR_JWT_SECRET_HERE]
 JWT_EXPIRES_IN=7d
 
 # CORS Configuration - Server IP
@@ -73,3 +75,11 @@ npm run start:prod
 - All CORS origins are configured for server IP: 134.122.102.182
 - Database connection is configured for DigitalOcean PostgreSQL
 - SSL is enabled for database connections
+
+## 🔐 Getting Real Credentials
+
+**PostgreSQL Password**: Available in your DigitalOcean Dashboard > Databases > elite-store-db > Connection Details
+
+**JWT Secret**: Generate a strong secret (e.g., using `openssl rand -hex 32`)
+
+**Other Secrets**: Replace all placeholder values with real production secrets
