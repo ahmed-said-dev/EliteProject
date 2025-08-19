@@ -12,6 +12,7 @@ import AppointmentsPage from '../features/appointments/AppointmentsPage';
 import TeamPage from '../features/team/TeamPage';
 import BlogPage from '../features/blog/BlogPage';
 import SettingsPage from '../features/settings/SettingsPage';
+import ReportsPage from '../features/reports/ReportsPage';
 import { useAuth } from '../hooks/useAuth';
 import { setGlobalNavigateHandler } from '../services/api';
 
@@ -70,6 +71,7 @@ const App: React.FC = () => {
                   <Route path="/users" element={<UsersPage />} />
                   <Route path="/orders" element={<OrdersPage />} />
                   <Route path="/categories" element={<CategoriesPage />} />
+                  <Route path="/reports" element={<ReportsPage />} />
                   <Route path="/appointments" element={<AppointmentsPage />} />
                   <Route path="/team" element={<TeamPage />} />
                   <Route path="/blog" element={<BlogPage />} />

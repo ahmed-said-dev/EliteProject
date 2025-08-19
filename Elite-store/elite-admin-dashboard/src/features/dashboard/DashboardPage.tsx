@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { 
   ShoppingBagIcon, 
   UsersIcon, 
@@ -49,26 +49,27 @@ const StatsCard: React.FC<StatsCardProps> = ({ title, value, icon: Icon, color, 
 );
 
 // Quick Actions Component
-const QuickActions: React.FC = () => (
+const QuickActions: React.FC<{ onAddProduct: () => void; onAddUser: () => void; onViewOrders: () => void; onViewReports: () => void; }>
+  = ({ onAddProduct, onAddUser, onViewOrders, onViewReports }) => (
   <div className="card">
     <div className="card-header">
       <h3 className="card-title">إجراءات سريعة</h3>
     </div>
     <div className="card-body">
       <div className="quick-actions-grid">
-        <button className="quick-action-btn">
+        <button className="quick-action-btn" onClick={onAddProduct}>
           <ShoppingBagIcon className="w-6 h-6" />
           <span>إضافة منتج جديد</span>
         </button>
-        <button className="quick-action-btn">
+        <button className="quick-action-btn" onClick={onAddUser}>
           <UsersIcon className="w-6 h-6" />
           <span>إضافة مستخدم</span>
         </button>
-        <button className="quick-action-btn">
+        <button className="quick-action-btn" onClick={onViewOrders}>
           <ShoppingCartIcon className="w-6 h-6" />
           <span>عرض الطلبات</span>
         </button>
-        <button className="quick-action-btn">
+        <button className="quick-action-btn" onClick={onViewReports}>
           <CurrencyDollarIcon className="w-6 h-6" />
           <span>تقارير المبيعات</span>
         </button>
@@ -212,8 +213,15 @@ const LowStockAlert: React.FC = () => {
 };
 
 // Main Dashboard Component
+import ProductFormModal from '../products/ProductFormModal';
+import CreateUserModal from '../users/CreateUserModal';
+import { useNavigate } from 'react-router-dom';
+
 const DashboardPage: React.FC = () => {
   const { data: stats, isLoading: statsLoading, error: statsError } = useDashboardStats();
+  const [productModalOpen, setProductModalOpen] = useState(false);
+  const [userModalOpen, setUserModalOpen] = useState(false);
+  const navigate = useNavigate();
 
   return (
     <div className="page-container">
@@ -270,10 +278,28 @@ const DashboardPage: React.FC = () => {
 
         {/* Right Column */}
         <div className="dashboard-right">
-          <QuickActions />
+                     <QuickActions 
+             onAddProduct={() => setProductModalOpen(true)}
+             onAddUser={() => setUserModalOpen(true)}
+             onViewOrders={() => navigate('/orders')}
+             onViewReports={() => navigate('/reports')}
+           />
           <LowStockAlert />
         </div>
       </div>
+
+      {/* Modals */}
+      <ProductFormModal
+        open={productModalOpen}
+        onClose={() => setProductModalOpen(false)}
+        onSaved={() => { /* could refresh lists if needed */ }}
+        product={null}
+      />
+      <CreateUserModal
+        open={userModalOpen}
+        onClose={() => setUserModalOpen(false)}
+        onCreated={() => { /* optionally refresh users */ }}
+      />
     </div>
   );
 };

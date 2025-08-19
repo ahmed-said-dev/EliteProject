@@ -199,6 +199,23 @@ export class ProductsService {
     };
   }
 
+  async getTopSelling(limit: number = 5): Promise<Product[]> {
+    return this.productRepository.find({
+      order: { salesCount: 'DESC' },
+      take: limit,
+    });
+  }
+
+  async getLowStock(limit: number = 10, threshold: number = 5): Promise<Product[]> {
+    return this.productRepository
+      .createQueryBuilder('product')
+      .where('product.stockQuantity <= :threshold', { threshold })
+      .orderBy('product.stockQuantity', 'ASC')
+      .addOrderBy('product.name', 'ASC')
+      .limit(limit)
+      .getMany();
+  }
+
   async create(dto: CreateProductDto): Promise<Product> {
     try {
       // Pre-check unique slug to return a clear error (avoids generic 500)

@@ -73,6 +73,24 @@ export class ProductsController {
     return this.productsService.findFeatured();
   }
 
+  @Get('top-selling')
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  @Roles(UserRole.ADMIN)
+  @ApiBearerAuth()
+  @ApiOperation({ summary: 'Get top selling products (Admin only)' })
+  async getTopSelling(@Query('limit') limit: string = '5'): Promise<Product[]> {
+    return this.productsService.getTopSelling(Number(limit) || 5);
+  }
+
+  @Get('low-stock')
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  @Roles(UserRole.ADMIN)
+  @ApiBearerAuth()
+  @ApiOperation({ summary: 'Get low stock products (Admin only)' })
+  async getLowStock(@Query('limit') limit: string = '10', @Query('threshold') threshold: string = '5'): Promise<Product[]> {
+    return this.productsService.getLowStock(Number(limit) || 10, Number(threshold) || 5);
+  }
+
   @Get('search')
   @Public()
   @ApiOperation({ summary: 'Search products' })

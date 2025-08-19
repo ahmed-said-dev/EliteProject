@@ -6,11 +6,8 @@ import {
   UsersIcon, 
   ShoppingCartIcon,
   TagIcon,
-  CalendarIcon,
-  UserGroupIcon,
-  DocumentTextIcon,
-  CogIcon,
-  HeartIcon
+  HeartIcon,
+  ChartBarIcon
 } from '@heroicons/react/24/outline';
 
 // Custom Veterinary Icons
@@ -46,17 +43,23 @@ const Sidebar: React.FC = () => {
       label: 'الطلبات',
       englishLabel: 'Orders'
     },
+    { 
+      to: '/users', 
+      icon: UsersIcon, 
+      label: 'المستخدمين',
+      englishLabel: 'Users'
+    },
+    { 
+      to: '/reports', 
+      icon: ChartBarIcon, 
+      label: 'التقارير',
+      englishLabel: 'Reports'
+    },
     // { 
     //   to: '/appointments', 
     //   icon: CalendarIcon, 
     //   label: 'المواعيد',
     //   englishLabel: 'Appointments'
-    // },
-    // { 
-    //   to: '/users', 
-    //   icon: UsersIcon, 
-    //   label: 'المستخدمين',
-    //   englishLabel: 'Users'
     // },
     // { 
     //   to: '/team', 
