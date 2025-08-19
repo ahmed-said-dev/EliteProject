@@ -41,7 +41,7 @@ async function seed() {
     const adminUser = new User();
     adminUser.email = 'admin@elitestore.com';
     // Set plain password; it will be hashed by the User entity @BeforeInsert hook
-    adminUser.password = 'admin123456';
+    adminUser.password = 'change_admin_password_here';
     adminUser.firstName = 'Elite';
     adminUser.lastName = 'Admin';
     adminUser.role = UserRole.ADMIN;
@@ -119,12 +119,12 @@ async function seed() {
     
     console.log('✅ Database seeding completed successfully!');
     console.log('📊 Created:');
-    console.log(`   - 1 Admin user (admin@elitestore.com / admin123456)`);
+    console.log(`   - 1 Admin user (admin@elitestore.com / [admin_password])`);
     console.log(`   - ${savedCategories.length} Categories`);
     console.log(`   - ${savedProducts.length} Products`);
     console.log('');
     console.log('🔗 You can now:');
-    console.log('   - Login as admin: admin@elitestore.com / admin123456');
+    console.log('   - Login as admin: admin@elitestore.com / [admin_password]');
     console.log('   - Access API docs: http://localhost:3001/api/docs');
     console.log('   - Access GraphQL: http://localhost:3001/graphql');
     

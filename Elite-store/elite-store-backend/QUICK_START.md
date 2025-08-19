@@ -38,7 +38,7 @@ npm run start:dev
 إذا قمت بتشغيل `npm run dev:setup`، ستجد حساب مدير جاهز:
 
 - **البريد**: admin@elitestore.com
-- **كلمة المرور**: admin123456
+- **كلمة المرور**: [use_your_admin_password]
 
 ## 📱 اختبار APIs
 
@@ -60,7 +60,7 @@ curl -X POST http://localhost:3001/api/auth/login \
   -H "Content-Type: application/json" \
   -d '{
     "email": "admin@elitestore.com",
-    "password": "admin123456"
+    "password": "[your_admin_password]"
   }'
 ```
 

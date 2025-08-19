@@ -25,6 +25,9 @@ async function bootstrap() {
         'http://127.0.0.1:3001',
         'http://127.0.0.1:5173',
         'http://127.0.0.1:4173',
+        'http://134.122.102.182:3000',
+        'http://134.122.102.182:5173',
+        'http://134.122.102.182',
       ];
       
       if (allowedOrigins.includes(origin)) {

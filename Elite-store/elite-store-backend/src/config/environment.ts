@@ -6,7 +6,7 @@ export const environment = {
     database: 'elite-store.db',
   },
   jwt: {
-    secret: 'elite-store-secret-key-123456-change-in-production',
+    secret: 'your_jwt_secret_here',
     expiresIn: '7d',
   },
   email: {
@@ -29,7 +29,7 @@ export const environment = {
   },
   admin: {
     email: 'admin@elitestore.com',
-    password: 'admin123456',
+    password: 'change_admin_password',
   },
 };
  

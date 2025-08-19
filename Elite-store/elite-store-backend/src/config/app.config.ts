@@ -5,11 +5,11 @@ export const appConfig = () => ({
     host: process.env.DB_HOST || 'localhost',
     port: parseInt(process.env.DB_PORT || '5432', 10),
     username: process.env.DB_USERNAME || 'postgres',
-    password: process.env.DB_PASSWORD || 'asd97asd@A',
+    password: process.env.DB_PASSWORD || 'your_postgres_password',
     database: process.env.DB_NAME || 'elite_store',
   },
   jwt: {
-    secret: process.env.JWT_SECRET || 'elite-store-secret-key-123456',
+    secret: process.env.JWT_SECRET || 'your_jwt_secret_here',
     expiresIn: process.env.JWT_EXPIRES_IN || '7d',
   },
   email: {
