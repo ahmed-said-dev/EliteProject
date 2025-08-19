@@ -7,14 +7,16 @@ import {
 import Image from "next/image";
 import { translate } from "../../i18n";
 import { useLanguage } from "@/context/LanguageContext";
+import useDoctors from "@/hooks/useDoctors";
 
 interface DoctorCardProps {
+  id?: number;
   image: string;
   name: string;
   specialty?: string;
 }
 
-const DoctorCard: React.FC<DoctorCardProps> = ({ image, name, specialty }) => {
+const DoctorCard: React.FC<DoctorCardProps> = ({ id, image, name, specialty }) => {
   return (
     <div className="flex flex-col items-center group relative hover:transform hover:scale-105 transition-all duration-300">
       {/* Animal icon that appears on hover */}
@@ -40,6 +42,9 @@ const DoctorCard: React.FC<DoctorCardProps> = ({ image, name, specialty }) => {
 const Doctors = () => {
   const { locale, isRTL } = useLanguage();
   const dir = isRTL ? 'rtl' : 'ltr';
+  
+  // استخدام hook للحصول على بيانات الأطباء من API
+  const { formattedDoctors, isLoading, error } = useDoctors();
   
   return (
     <div className="w-full py-16 pb-48 bg-gray-100 relative" dir={dir}>
@@ -123,27 +128,63 @@ const Doctors = () => {
           {translate('doctors.description', locale)}
         </p>
         
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-2 mb-12 relative">
-          {/* Floating animal icons near the doctor cards */}
-          
-
-          
-          <DoctorCard 
-            image="/DoctorsSections/Asset 28-.png" 
-            name={translate('doctors.doctor1.name', locale)}
-            specialty={translate('doctors.doctor1.specialty', locale)}
-          />
-          <DoctorCard 
-            image="/DoctorsSections/Asset 29-.png" 
-            name={translate('doctors.doctor2.name', locale)}
-            specialty={translate('doctors.doctor2.specialty', locale)}
-          />
-          <DoctorCard 
-            image="/DoctorsSections/Asset 30-.png" 
-            name={translate('doctors.doctor3.name', locale)}
-            specialty={translate('doctors.doctor3.specialty', locale)}
-          />
-        </div>
+        {/* عرض رسالة تحميل أثناء جلب البيانات */}
+        {isLoading && (
+          <div className="text-center py-8">
+            <div className="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-[#44396F] mb-4"></div>
+            <p>{translate('common.loading', locale) || 'جاري التحميل...'}</p>
+          </div>
+        )}
+        
+        {/* عرض رسالة خطأ في حالة فشل جلب البيانات */}
+        {error && (
+          <div className="text-center py-8 text-red-600">
+            <p>{translate('common.error', locale) || 'حدث خطأ أثناء جلب البيانات'}</p>
+            <button 
+              onClick={() => window.location.reload()} 
+              className="mt-2 px-4 py-2 bg-[#44396F] text-white rounded-md hover:bg-[#9b87f5] transition-colors"
+            >
+              {translate('common.retry', locale) || 'إعادة المحاولة'}
+            </button>
+          </div>
+        )}
+        
+        {/* عرض بيانات الأطباء من API */}
+        {!isLoading && !error && (
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-2 mb-12 relative">
+            {/* الأطباء من API */}
+            {formattedDoctors.length > 0 ? (
+              formattedDoctors.map((doctor) => (
+                <DoctorCard 
+                  key={doctor.id}
+                  id={doctor.id}
+                  image={doctor.image} 
+                  name={doctor.name}
+                  specialty={doctor.specialty}
+                />
+              ))
+            ) : (
+              // عرض بيانات افتراضية إذا لم يكن هناك بيانات من API
+              <>
+                <DoctorCard 
+                  image="/DoctorsSections/Asset 28-.png" 
+                  name={translate('doctors.doctor1.name', locale)}
+                  specialty={translate('doctors.doctor1.specialty', locale)}
+                />
+                <DoctorCard 
+                  image="/DoctorsSections/Asset 29-.png" 
+                  name={translate('doctors.doctor2.name', locale)}
+                  specialty={translate('doctors.doctor2.specialty', locale)}
+                />
+                <DoctorCard 
+                  image="/DoctorsSections/Asset 30-.png" 
+                  name={translate('doctors.doctor3.name', locale)}
+                  specialty={translate('doctors.doctor3.specialty', locale)}
+                />
+              </>
+            )}
+          </div>
+        )}
       </div>
     </div>
   );

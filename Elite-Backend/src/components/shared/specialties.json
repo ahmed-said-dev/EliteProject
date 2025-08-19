@@ -1,0 +1,21 @@
+{
+  "collectionName": "components_shared_specialties",
+  "info": {
+    "displayName": "specialties",
+    "icon": "dashboard",
+    "description": "مكون التخصصات لأعضاء الفريق"
+  },
+  "options": {},
+  "attributes": {
+    "icon": {
+      "type": "string",
+      "required": true,
+      "description": "اسم أيقونة Font Awesome، مثل: fa-heart"
+    },
+    "text": {
+      "type": "string",
+      "required": true,
+      "description": "نص التخصص"
+    }
+  }
+}

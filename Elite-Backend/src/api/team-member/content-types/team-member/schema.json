@@ -1,0 +1,56 @@
+{
+  "kind": "collectionType",
+  "collectionName": "team_members",
+  "info": {
+    "singularName": "team-member",
+    "pluralName": "team-members",
+    "displayName": "team-member",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "position": {
+      "type": "string",
+      "required": true
+    },
+    "image": {
+      "type": "media",
+      "multiple": false,
+      "required": true,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "isActive": {
+      "type": "boolean"
+    },
+    "specialties": {
+      "displayName": "specialties",
+      "type": "component",
+      "repeatable": true,
+      "component": "shared.specialties"
+    },
+    "socialLinks": {
+      "displayName": "روابط التواصل الاجتماعي",
+      "type": "component",
+      "repeatable": true,
+      "component": "shared.social-links",
+      "min": 0,
+      "max": 5,
+      "description": "روابط مواقع التواصل الاجتماعي (فيسبوك، تويتر، إنستغرام، إلخ)"
+    },
+    "animationDelay": {
+      "type": "string",
+      "default": "0.2s"
+    }
+  }
+}

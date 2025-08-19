@@ -1,0 +1,23 @@
+{
+  "kind": "collectionType",
+  "collectionName": "testones",
+  "info": {
+    "singularName": "testone",
+    "pluralName": "testones",
+    "displayName": "testone"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "num": {
+      "type": "integer"
+    },
+    "des": {
+      "type": "string"
+    }
+  }
+}

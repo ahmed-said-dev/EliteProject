@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import styles from './ServiceDetail.module.css';
 import { useLanguage } from '@/context/LanguageContext';
+import useServicePages from '@/hooks/useServicePages';
 
 // Dynamic imports to prevent issues during initial render
 const ServiceHero = React.lazy(() => import('./components/ServiceHero'));
@@ -14,28 +15,40 @@ export interface ServiceDetailProps {
 }
 
 const ServiceDetail: React.FC<ServiceDetailProps> = ({ serviceId }) => {
-  const [service, setService] = useState<any>(null);
-  const { t } = useLanguage();
+  const { locale } = useLanguage();
+  
+  // استخدام الـ hook المحدث لجلب بيانات الخدمة مباشرة من API بدلاً من تحميلها محلياً
+  const { 
+    formattedServiceDetail: service, 
+    isLoading, 
+    error, 
+    refetch 
+  } = useServicePages({ 
+    id: serviceId ? Number(serviceId) : undefined,
+    locale
+  });
   
   useEffect(() => {
+    // إعادة جلب البيانات عند تغيير معرف الخدمة أو اللغة
     if (serviceId) {
-      // Import the services data dynamically to avoid circular imports
-      import('../ServicesSection/ServicesSection').then((module) => {
-        const { getServices } = module;
-        // Get the services using the exported function
-        const services = getServices(t);
-        const foundService = services.find(s => s.id === Number(serviceId));
-        if (foundService) {
-          setService(foundService);
-        }
-      }).catch(error => {
-        console.error('Error loading services:', error);
-      });
+      refetch();
     }
-  }, [serviceId, t]);
+  }, [serviceId, locale, refetch]);
 
-  if (!service) {
-    return <div className={styles.loadingContainer}>Loading service details...</div>;
+  if (isLoading) {
+    return <div className={styles.loadingContainer}>جاري تحميل تفاصيل الخدمة...</div>;
+  }
+
+  if (error || !service) {
+    return (
+      <div className={styles.errorContainer}>
+        <h3>عذراً، حدث خطأ أثناء تحميل تفاصيل الخدمة</h3>
+        <p>{error?.message || 'لم يتم العثور على الخدمة المطلوبة'}</p>
+        <button onClick={() => refetch()} className={styles.retryButton}>
+          إعادة المحاولة
+        </button>
+      </div>
+    );
   }
 
   return (
@@ -56,14 +69,14 @@ const ServiceDetail: React.FC<ServiceDetailProps> = ({ serviceId }) => {
         
         {/* Service Description Section */}
         <ServiceDescription 
-          description={service.description || "Our comprehensive veterinary service delivers exceptional care tailored to your pet's specific needs. With state-of-the-art equipment and expert veterinarians, we ensure your beloved companion receives the highest standard of medical attention."} 
+          description={service.description || "خدمة بيطرية شاملة تقدم رعاية استثنائية مصممة لتلبية احتياجات حيوانك الأليف. مع أحدث المعدات وخبرة الأطباء البيطريين، نضمن حصول رفيقك المحبوب على أعلى مستوى من الرعاية الطبية."} 
           icons={service.icons}
         />
         
         {/* Service Features List Section */}
         <ServiceFeatures 
           features={service.features} 
-          title="What We Offer"
+          title="ما نقدمه"
         />
         
         {/* FAQs Section */}

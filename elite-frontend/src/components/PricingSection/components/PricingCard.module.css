@@ -187,6 +187,11 @@
   padding-left: 0px;
 }
 
+.rtlFeatures {
+  direction: rtl;
+  text-align: right;
+}
+
 .featureItem {
   box-sizing: border-box;
   outline: none;

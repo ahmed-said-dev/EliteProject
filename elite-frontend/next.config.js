@@ -7,7 +7,7 @@ const nextConfig = {
     localeDetection: false,
   },
   images: {
-    domains: ['images.pexels.com', 'www.svgrepo.com', 'images.unsplash.com'],
+    domains: ['images.pexels.com', 'www.svgrepo.com', 'images.unsplash.com', 'localhost'],
   },
   webpack: (config) => {
     config.resolve.alias = {

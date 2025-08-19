@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
-import { useCart } from '@/context/CartContext';
+import { useCart } from '@/context/SaleorCartContext';
 // @ts-ignore
 import styles from '../styles/ProductCard.module.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -13,6 +13,7 @@ import { useLanguage } from '@/context/LanguageContext';
 
 interface ProductProps {
   id: number;
+  original_id?: string; // معرف المنتج الأصلي من API
   name: string;
   price: number;
   salePrice?: number;
@@ -100,18 +101,25 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, viewType }) => {
     // Aquí podría ir código para guardar en localStorage o enviar a API
   };
   
-  // Manejar click en botón de agregar al carrito
-  const handleAddToCart = (e: React.MouseEvent) => {
+  // معالجة نقرة زر إضافة إلى السلة
+  const handleAddToCart = async (e: React.MouseEvent) => {
     e.preventDefault();
     
-    // Agregar producto al carrito usando el contexto
-    addToCart(product, 1);
+    console.log('Adding to cart:', product);
     
-    // Mostrar feedback visual
-    setAddedToCart(true);
-    setTimeout(() => {
-      setAddedToCart(false);
-    }, 2000);
+    try {
+      // إضافة المنتج إلى السلة باستخدام سياق Saleor (تمرير معرف كسلسلة)
+      await addToCart(String(product.original_id || product.id), 1);
+      
+      // إظهار ملاحظة بصرية
+      setAddedToCart(true);
+      setTimeout(() => {
+        setAddedToCart(false);
+      }, 2000);
+    } catch (err) {
+      console.error('Error adding to cart:', err);
+      alert('Failed to add item to cart. Please try again.');
+    }
   };
 
   // Manejar vista rápida
@@ -130,10 +138,10 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, viewType }) => {
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
       >
-        <Link href={`/products/${product.id}`} className={styles.productLink}>
+        <Link href={`/products/${product.original_id || product.id}`} className={styles.productLink}>
           <div className={styles.imageContainer}>
-            <img 
-              src={product.image} 
+              <img 
+               src={product.image || '/placeholder.svg'} 
               alt={t(`products.${product.id}.name`)}
               className={styles.productImage}
             />
@@ -179,7 +187,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, viewType }) => {
               <span className={styles.productCategory}>{t(`products.productTypes.${product.productType.toLowerCase()}`)}</span>
             </div>
             
-            <h3 className={styles.productName}>{t(`products.${product.id}.name`)}</h3>
+            <h3 className={styles.productName}>{product.name}</h3>
             
             <div className={styles.productRating}>
               <div className={styles.stars}>
@@ -190,13 +198,13 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, viewType }) => {
             
             <div className={styles.productDescription}>
               {isListView ? (
-                <p>{t(`products.${product.id}.description`)}</p>
+                <p>{product.description}</p>
               ) : (
                 <p>
-                  {(() => {
-                    const desc = t(`products.${product.id}.description`);
-                    return desc.length > 80 ? `${desc.substring(0, 80)}...` : desc;
-                  })()}
+                  {product.description && product.description.length > 80 
+                    ? `${product.description.substring(0, 80)}...` 
+                    : product.description
+                  }
                 </p>
               )}
             </div>
@@ -205,11 +213,11 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, viewType }) => {
               <div className={styles.productPrice}>
                 {product.salePrice ? (
                   <>
-                    <span className={styles.salePrice}>${product.salePrice.toFixed(2)}</span>
-                    <span className={styles.regularPrice}>${product.price.toFixed(2)}</span>
+                    <span className={styles.salePrice}>${((product.salePrice || 0) / 100).toFixed(2)}</span>
+                    <span className={styles.regularPrice}>${((product.price || 0) / 100).toFixed(2)}</span>
                   </>
                 ) : (
-                  <span className={styles.price}>${product.price.toFixed(2)}</span>
+                  <span className={styles.price}>${((product.price || 0) / 100).toFixed(2)}</span>
                 )}
               </div>
               

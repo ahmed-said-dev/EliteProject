@@ -1,0 +1,26 @@
+{
+  "collectionName": "components_shared_social_links",
+  "info": {
+    "displayName": "socialLinks",
+    "icon": "bulletList",
+    "description": "روابط التواصل الاجتماعي"
+  },
+  "options": {},
+  "attributes": {
+    "platform": {
+      "type": "string",
+      "required": true,
+      "description": "اسم المنصة، مثل: facebook, twitter, linkedin"
+    },
+    "url": {
+      "type": "string",
+      "required": true,
+      "description": "رابط الملف الشخصي"
+    },
+    "icon": {
+      "type": "string",
+      "required": true,
+      "description": "اسم أيقونة Font Awesome، مثل: fab fa-facebook-f"
+    }
+  }
+}

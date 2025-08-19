@@ -14,6 +14,9 @@
     "language": "Language"
   },
   "direction": "ltr",
+  "loading": {
+    "text": "Loading..."
+  },
   "hero": {
     "title": "EXPERT VETERINARY CARE, TAILORED TO YOUR PET'S NEEDS",
     "subtitle": "A Pioneering Veterinary Clinic, Providing Exceptional Care Every Step of the Way.",
@@ -1450,5 +1453,44 @@
       "singular": "1 product in your cart",
       "plural": "%count% products in your cart"
     }
+  },
+  "article": {
+    "blogDetail": "Blog Detail",
+    "readOurLatestArticles": "Read our latest articles from our veterinary experts",
+    "backToBlog": "Back to Blog",
+    "viewAllArticles": "View All Articles",
+    "by": "By",
+    "readTime": "Read Time",
+    "views": "Views",
+    "publishedOn": "Published on",
+    "excerpt": "Article Excerpt",
+    "relatedArticles": "Related Articles",
+    "share": "Share",
+    "tags": "Tags",
+    "category": "Category",
+    "author": "Author",
+    "authorBio": "About the Author",
+    "readMore": "Read more",
+    "noRelatedArticles": "No related articles found",
+    "minutes": "minutes",
+    "shareOn": "Share on"
+  },
+  "blogSidebar": {
+    "search": "Search",
+    "searchPlaceholder": "Search articles...",
+    "categories": "Categories",
+    "allCategories": "All Categories",
+    "noCategories": "No categories found",
+    "tags": "Tags",
+    "allTags": "All Tags",
+    "noTags": "No tags found",
+    "popularPosts": "Popular Posts",
+    "filteredByCategory": "Filtered by Category",
+    "filteredByTag": "Filtered by Tag",
+    "searchResults": "Search Results",
+    "clearFilters": "Clear Filters",
+    "noArticlesFound": "No Articles Found",
+    "tryDifferentFilters": "Try different filters or check back later for new content",
+    "readMore": "Read more"
   }
 }

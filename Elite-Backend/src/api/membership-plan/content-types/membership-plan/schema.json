@@ -1,0 +1,80 @@
+{
+  "kind": "collectionType",
+  "collectionName": "membership_plans",
+  "info": {
+    "singularName": "membership-plan",
+    "pluralName": "membership-plans",
+    "displayName": "Membership Plan",
+    "description": "Plans and pricing options for membership"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {
+    "i18n": {
+      "localized": true
+    }
+  },
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true,
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
+    },
+    "description": {
+      "type": "text",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
+    },
+    "monthlyPrice": {
+      "type": "decimal",
+      "required": true,
+      "min": 0
+    },
+    "annualPrice": {
+      "type": "decimal",
+      "min": 0
+    },
+    "isFeatured": {
+      "type": "boolean",
+      "default": false
+    },
+    "features": {
+      "type": "component",
+      "repeatable": true,
+      "component": "membership.feature",
+      "required": true,
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
+    },
+    "coverImage": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": [
+        "images"
+      ],
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
+    },
+    "PetType": {
+      "type": "string"
+    },
+    "iconClass": {
+      "type": "string"
+    }
+  }
+}

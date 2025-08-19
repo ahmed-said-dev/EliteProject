@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import { useLanguage } from '@/context/LanguageContext';
-import { useCart } from '@/context/CartContext';
+import { useCart } from '@/context/SaleorCartContext';
 import styles from './CartSummary.module.css';
 
 type ShippingOption = {
@@ -12,7 +12,12 @@ type ShippingOption = {
 
 const CartSummary: React.FC = () => {
   const { t, isRTL } = useLanguage();
-  const { cartItems, cartTotal } = useCart();
+  const { 
+    cartItems, 
+    cartTotal, 
+    cart, 
+    loading
+  } = useCart();
   
   const [selectedShipping, setSelectedShipping] = useState<string>('standard');
   const [couponCode, setCouponCode] = useState<string>('');
@@ -35,10 +40,34 @@ const CartSummary: React.FC = () => {
 
   const formatPrice = (price: number) => {
     return isRTL 
-      ? `${price.toFixed(2)} ر.س` 
-      : `SAR ${price.toFixed(2)}`;
+      ? `${Math.round(price)} ر.س` 
+      : `SAR ${Math.round(price)}`;
   };
 
+  // طلب خيارات الشحن من API
+  const [apiShippingOptions, setApiShippingOptions] = useState<any[]>([]);
+  const [checkoutStep, setCheckoutStep] = useState<'cart' | 'shipping' | 'payment' | 'review'>('cart');
+  const [checkoutLoading, setCheckoutLoading] = useState(false);
+  const [checkoutError, setCheckoutError] = useState<string | null>(null);
+
+  // معالجة تغيير طريقة الشحن
+  const handleShippingChange = async (optionId: string) => {
+    setSelectedShipping(optionId);
+    
+    // إذا كانت هناك خيارات شحن من API، قم بتطبيقها
+    if (apiShippingOptions.length > 0) {
+      try {
+        const apiOption = apiShippingOptions.find(opt => opt.id === optionId);
+        if (apiOption) {
+          // integrate shipping method with Saleor if needed
+        }
+      } catch (err) {
+        console.error('Error applying shipping method:', err);
+      }
+    }
+  };
+
+  // معالجة تطبيق كوبون الخصم
   const handleApplyCoupon = (e: React.FormEvent) => {
     e.preventDefault();
     
@@ -57,6 +86,11 @@ const CartSummary: React.FC = () => {
         type: 'error'
       });
     }
+  };
+  
+  // معالجة عملية الدفع
+  const handleCheckout = async () => {
+    window.location.href = '/checkout';
   };
 
   return (
@@ -131,8 +165,18 @@ const CartSummary: React.FC = () => {
         )}
       </div>
       
-      <button className={styles.checkoutButton} onClick={() => alert(t('cart.cartSummary.proceedToCheckout'))}>
-        {t('cart.cartSummary.proceedToCheckout')}
+      {checkoutError && (
+        <div className={styles.checkoutError}>
+          {checkoutError}
+        </div>
+      )}
+      
+      <button 
+        className={styles.checkoutButton} 
+        onClick={handleCheckout}
+        disabled={checkoutLoading || cartItems.length === 0 || loading}
+      >
+        {checkoutLoading ? t('cart.cartSummary.processing') : t('cart.cartSummary.proceedToCheckout')}
       </button>
     </div>
   );

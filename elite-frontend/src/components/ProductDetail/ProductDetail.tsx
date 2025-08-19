@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
-import { useCart } from '@/context/CartContext';
+import { useCart } from '@/context/SaleorCartContext';
 import { ProductGallery, ProductInfo, ProductTabs, RelatedProducts } from './components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { 
@@ -57,11 +57,12 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ product }) => {
   const router = useRouter();
   
   // Generar imágenes adicionales (para fines de demostración)
+  const baseImage = product.image || '/placeholder.svg';
   const productImages = [
-    product.image,
-    product.image.replace('.jpg', '-2.jpg'),
-    product.image.replace('.jpg', '-3.jpg'),
-    product.image.replace('.jpg', '-4.jpg')
+    baseImage,
+    baseImage,
+    baseImage,
+    baseImage,
   ];
   
   // Calcular descuento si hay precio de oferta
@@ -95,16 +96,23 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ product }) => {
     // Aquí podría ir código para guardar en localStorage o enviar a API
   };
   
-  // Manejar click en botón de agregar al carrito
-  const handleAddToCart = () => {
-    // Agregar producto al carrito usando el contexto
-    addToCart(product, quantity);
-    
-    // Mostrar mensaje de éxito temporalmente
-    setAddedToCart(true);
-    setTimeout(() => {
-      setAddedToCart(false);
-    }, 3000);
+  // معالجة نقرة زر إضافة إلى السلة
+  const handleAddToCart = async () => {
+    try {
+      console.log('Adding to cart from product detail:', product);
+      
+      // إضافة المنتج إلى السلة باستخدام سياق Saleor (باستخدام معرّف بديل)
+      await addToCart(String(product.id), quantity);
+      
+      // إظهار رسالة نجاح مؤقتة
+      setAddedToCart(true);
+      setTimeout(() => {
+        setAddedToCart(false);
+      }, 3000);
+    } catch (err) {
+      console.error('Error adding product to cart:', err);
+      alert('Failed to add product to cart. Please try again.');
+    }
   };
   
   // Manejar compra directa

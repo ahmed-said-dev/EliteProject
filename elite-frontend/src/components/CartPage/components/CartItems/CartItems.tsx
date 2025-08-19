@@ -4,22 +4,29 @@ import Image from 'next/image';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus, faMinus, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { useLanguage } from '@/context/LanguageContext';
-import { useCart } from '@/context/CartContext';
+import { useCart } from '@/context/SaleorCartContext';
 import styles from './CartItems.module.css';
 
 const CartItems: React.FC = () => {
   const { t, isRTL } = useLanguage();
-  const { cartItems, updateQuantity, removeFromCart } = useCart();
+  const { 
+    cartItems, 
+    updateQuantity, 
+    removeFromCart,
+    loading,
+    cart
+  } = useCart();
 
   const formatPrice = (price: number) => {
     return isRTL 
-      ? `${price.toFixed(2)} ر.س` 
-      : `SAR ${price.toFixed(2)}`;
+      ? `${Math.round(price)} ر.س` 
+      : `SAR ${Math.round(price)}`;
   };
 
-  const handleQuantityChange = (productId: number, newQuantity: number) => {
+  // معالجة تغيير كمية المنتج
+  const handleQuantityChange = (lineItemId: string, newQuantity: number) => {
     if (newQuantity >= 1) {
-      updateQuantity(productId, newQuantity);
+      updateQuantity(lineItemId, newQuantity);
     }
   };
 
@@ -70,25 +77,32 @@ const CartItems: React.FC = () => {
                     <button 
                       className={styles.quantityButton}
                       onClick={() => handleQuantityChange(item.id, item.quantity - 1)}
-                      disabled={item.quantity <= 1}
+                      disabled={item.quantity <= 1 || loading}
+                      aria-label="Decrease quantity"
                     >
                       <FontAwesomeIcon icon={faMinus} />
                     </button>
-                    <input 
-                      type="number" 
-                      className={styles.quantityInput}
-                      value={item.quantity}
-                      min="1"
-                      onChange={(e) => {
-                        const value = parseInt(e.target.value);
-                        if (!isNaN(value)) {
-                          handleQuantityChange(item.id, value);
-                        }
-                      }}
-                    />
+                    <div className={styles.quantityInputWrapper}>
+                      <input 
+                        type="number" 
+                        className={styles.quantityInput}
+                        value={item.quantity}
+                        min="1"
+                        readOnly={loading}
+                        onChange={(e) => {
+                          const value = parseInt(e.target.value);
+                          if (!isNaN(value)) {
+                            handleQuantityChange(item.id, value);
+                          }
+                        }}
+                        aria-label="Product quantity"
+                      />
+                    </div>
                     <button 
                       className={styles.quantityButton}
                       onClick={() => handleQuantityChange(item.id, item.quantity + 1)}
+                      disabled={loading}
+                      aria-label="Increase quantity"
                     >
                       <FontAwesomeIcon icon={faPlus} />
                     </button>
@@ -101,9 +115,11 @@ const CartItems: React.FC = () => {
                   <button 
                     className={styles.removeButton}
                     onClick={() => removeFromCart(item.id)}
+                    aria-label={t('cart.cartItems.remove')}
+                    disabled={loading}
                   >
-                    <FontAwesomeIcon icon={faTrash} />
                     <span className="sr-only">{t('cart.cartItems.remove')}</span>
+                    <FontAwesomeIcon icon={faTrash} />
                   </button>
                 </td>
               </tr>

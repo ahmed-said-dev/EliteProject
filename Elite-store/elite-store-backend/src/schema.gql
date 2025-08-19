@@ -1,0 +1,308 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type AuthResponse {
+  accessToken: String!
+  expiresIn: Float!
+  tokenType: String!
+  user: User!
+}
+
+type Cart {
+  createdAt: DateTime!
+  id: ID!
+  isActive: Boolean!
+  items: [CartItem!]!
+  itemsCount: Float!
+  sessionId: String
+  subtotal: Float!
+  uniqueItemsCount: Float!
+  updatedAt: DateTime!
+  user: User
+  userId: String
+}
+
+type CartItem {
+  cart: Cart!
+  cartId: String!
+  createdAt: DateTime!
+  id: ID!
+  price: Float!
+  product: Product!
+  productId: String!
+  quantity: Int!
+  total: Float!
+  updatedAt: DateTime!
+}
+
+type Category {
+  children: [Category!]
+  createdAt: DateTime!
+  description: String
+  id: ID!
+  image: String
+  isActive: Boolean!
+  name: String!
+  parent: Category
+  parentId: String
+  productCount: Float!
+  products: [Product!]
+  slug: String!
+  sortOrder: Float!
+  updatedAt: DateTime!
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+input LoginDto {
+  email: String!
+  password: String!
+}
+
+type Mutation {
+  addToCart(productId: String!, quantity: Float!): Cart!
+  clearCart: String!
+  deleteUser(id: ID!): String!
+  login(loginInput: LoginDto!): AuthResponse!
+  refreshToken: AuthResponse!
+  register(registerInput: RegisterDto!): AuthResponse!
+  requestPasswordReset(email: String!): String!
+  resetPassword(newPassword: String!, token: String!): String!
+  updateCartItem(itemId: String!, quantity: Float!): Cart!
+  updateOrderStatus(id: ID!, status: OrderStatus!): Order!
+  updateUser(id: ID!, updateUserInput: UpdateUserDto!): User!
+  updateUserPassword(currentPassword: String!, id: ID!, newPassword: String!): String!
+  updateUserRole(id: ID!, role: UserRole!): User!
+  updateUserStatus(id: ID!, status: UserStatus!): User!
+  verifyEmail(token: String!): String!
+}
+
+type Order {
+  billingAddress: String
+  billingCity: String
+  billingCountry: String
+  createdAt: DateTime!
+  customerEmail: String!
+  customerFirstName: String!
+  customerFullName: String!
+  customerLastName: String!
+  customerPhone: String!
+  deliveredAt: DateTime
+  discountAmount: Float!
+  id: ID!
+  items: [OrderItem!]!
+  itemsCount: Float!
+  notes: String
+  orderNumber: String!
+  paymentMethod: PaymentMethod!
+  paymentStatus: PaymentStatus!
+  paymentTransactionId: String
+  shippedAt: DateTime
+  shippingAddress: String!
+  shippingCity: String!
+  shippingCost: Float!
+  shippingCountry: String!
+  status: OrderStatus!
+  subtotal: Float!
+  taxAmount: Float!
+  total: Float!
+  trackingNumber: String
+  updatedAt: DateTime!
+  user: User
+  userId: String
+}
+
+type OrderItem {
+  id: ID!
+  order: Order!
+  orderId: String!
+  price: Float!
+  product: Product!
+  productId: String!
+  productImage: String
+  productName: String!
+  productSku: String!
+  quantity: Int!
+  total: Float!
+}
+
+enum OrderStatus {
+  CANCELLED
+  CONFIRMED
+  DELIVERED
+  PENDING
+  PROCESSING
+  REFUNDED
+  SHIPPED
+}
+
+enum PaymentMethod {
+  BANK_TRANSFER
+  CASH_ON_DELIVERY
+  CREDIT_CARD
+  PAYPAL
+  STRIPE
+}
+
+enum PaymentStatus {
+  FAILED
+  PAID
+  PARTIALLY_REFUNDED
+  PENDING
+  REFUNDED
+}
+
+type Product {
+  averageRating: Float!
+  cartItems: [CartItem!]
+  category: Category
+  categoryId: String
+  createdAt: DateTime!
+  description: String!
+  dimensions: String
+  discountPercentage: Float
+  featured: Boolean!
+  finalPrice: Float!
+  id: ID!
+  images: [ProductImage!]
+  inStock: Boolean!
+  isOnSale: Boolean!
+  manageStock: Boolean!
+  metaDescription: String
+  metaTitle: String
+  name: String!
+  orderItems: [OrderItem!]
+  price: Float!
+  published: Boolean!
+  reviews: [Review!]
+  reviewsCount: Int!
+  salePrice: Float
+  salesCount: Float!
+  shortDescription: String
+  sku: String!
+  slug: String!
+  status: ProductStatus!
+  stockQuantity: Int!
+  tags: [String!]
+  updatedAt: DateTime!
+  viewsCount: Float!
+  weight: Float
+}
+
+type ProductImage {
+  altText: String
+  createdAt: DateTime!
+  filename: String!
+  id: ID!
+  isPrimary: Boolean!
+  product: Product!
+  productId: String!
+  sortOrder: Int!
+  url: String!
+}
+
+enum ProductStatus {
+  ACTIVE
+  DISCONTINUED
+  INACTIVE
+  OUT_OF_STOCK
+}
+
+type Query {
+  categories: [Category!]!
+  category(id: ID!): Category!
+  featuredProducts: [Product!]!
+  me: User!
+  myCart: Cart!
+  myOrders: [Order!]!
+  order(id: ID!): Order!
+  orders: [Order!]!
+  product(id: ID!): Product!
+  products: [Product!]!
+  rootCategories: [Category!]!
+  searchProducts(query: String!): [Product!]!
+  searchUsers(query: String!): [User!]!
+  user(id: ID!): User!
+  users: [User!]!
+}
+
+input RegisterDto {
+  address: String
+  city: String
+  country: String
+  email: String!
+  firstName: String!
+  lastName: String!
+  password: String!
+  phone: String
+}
+
+type Review {
+  comment: String!
+  createdAt: DateTime!
+  helpfulCount: Float!
+  id: ID!
+  product: Product!
+  productId: String!
+  rating: Int!
+  status: ReviewStatus!
+  title: String!
+  updatedAt: DateTime!
+  user: User!
+  userId: String!
+  verified: Boolean!
+}
+
+enum ReviewStatus {
+  APPROVED
+  PENDING
+  REJECTED
+}
+
+input UpdateUserDto {
+  address: String
+  city: String
+  country: String
+  firstName: String
+  lastName: String
+  phone: String
+}
+
+type User {
+  address: String
+  avatar: String
+  carts: Cart
+  city: String
+  country: String
+  createdAt: DateTime!
+  email: String!
+  emailVerificationToken: String
+  emailVerified: Boolean!
+  firstName: String!
+  id: ID!
+  lastName: String!
+  orders: [Order!]
+  passwordResetExpires: DateTime
+  passwordResetToken: String
+  phone: String
+  reviews: [Review!]
+  role: UserRole!
+  status: UserStatus!
+  updatedAt: DateTime!
+}
+
+enum UserRole {
+  ADMIN
+  MODERATOR
+  USER
+}
+
+enum UserStatus {
+  ACTIVE
+  INACTIVE
+  SUSPENDED
+}

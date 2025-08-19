@@ -1,5 +1,18 @@
 import type { Schema, Struct } from '@strapi/strapi';
 
+export interface MembershipFeature extends Struct.ComponentSchema {
+  collectionName: 'components_membership_features';
+  info: {
+    description: 'Membership plan features with inclusion indicator';
+    displayName: 'Feature';
+    icon: 'check-square';
+  };
+  attributes: {
+    isIncluded: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<true>;
+    text: Schema.Attribute.String & Schema.Attribute.Required;
+  };
+}
+
 export interface SharedMedia extends Struct.ComponentSchema {
   collectionName: 'components_shared_media';
   info: {
@@ -50,6 +63,30 @@ export interface SharedSeo extends Struct.ComponentSchema {
   };
 }
 
+export interface SharedServiceFeature extends Struct.ComponentSchema {
+  collectionName: 'components_shared_service_features';
+  info: {
+    description: '\u0645\u064A\u0632\u0627\u062A \u0648\u062A\u0641\u0627\u0635\u064A\u0644 \u0627\u0644\u062E\u062F\u0645\u0629';
+    displayName: 'Service Feature';
+    icon: 'list';
+  };
+  attributes: {
+    text: Schema.Attribute.String & Schema.Attribute.Required;
+  };
+}
+
+export interface SharedServiceIcon extends Struct.ComponentSchema {
+  collectionName: 'components_shared_service_icons';
+  info: {
+    description: '\u0623\u064A\u0642\u0648\u0646\u0627\u062A \u0627\u0644\u062E\u062F\u0645\u0629 \u0641\u064A \u0635\u0641\u062D\u0629 \u0627\u0644\u062E\u062F\u0645\u0627\u062A';
+    displayName: 'Service Icon';
+    icon: 'brush';
+  };
+  attributes: {
+    icon: Schema.Attribute.String & Schema.Attribute.Required;
+  };
+}
+
 export interface SharedSlider extends Struct.ComponentSchema {
   collectionName: 'components_shared_sliders';
   info: {
@@ -62,14 +99,46 @@ export interface SharedSlider extends Struct.ComponentSchema {
   };
 }
 
+export interface SharedSocialLinks extends Struct.ComponentSchema {
+  collectionName: 'components_shared_social_links';
+  info: {
+    description: '\u0631\u0648\u0627\u0628\u0637 \u0627\u0644\u062A\u0648\u0627\u0635\u0644 \u0627\u0644\u0627\u062C\u062A\u0645\u0627\u0639\u064A';
+    displayName: 'socialLinks';
+    icon: 'bulletList';
+  };
+  attributes: {
+    icon: Schema.Attribute.String & Schema.Attribute.Required;
+    platform: Schema.Attribute.String & Schema.Attribute.Required;
+    url: Schema.Attribute.String & Schema.Attribute.Required;
+  };
+}
+
+export interface SharedSpecialties extends Struct.ComponentSchema {
+  collectionName: 'components_shared_specialties';
+  info: {
+    description: '\u0645\u0643\u0648\u0646 \u0627\u0644\u062A\u062E\u0635\u0635\u0627\u062A \u0644\u0623\u0639\u0636\u0627\u0621 \u0627\u0644\u0641\u0631\u064A\u0642';
+    displayName: 'specialties';
+    icon: 'dashboard';
+  };
+  attributes: {
+    icon: Schema.Attribute.String & Schema.Attribute.Required;
+    text: Schema.Attribute.String & Schema.Attribute.Required;
+  };
+}
+
 declare module '@strapi/strapi' {
   export module Public {
     export interface ComponentSchemas {
+      'membership.feature': MembershipFeature;
       'shared.media': SharedMedia;
       'shared.quote': SharedQuote;
       'shared.rich-text': SharedRichText;
       'shared.seo': SharedSeo;
+      'shared.service-feature': SharedServiceFeature;
+      'shared.service-icon': SharedServiceIcon;
       'shared.slider': SharedSlider;
+      'shared.social-links': SharedSocialLinks;
+      'shared.specialties': SharedSpecialties;
     }
   }
 }

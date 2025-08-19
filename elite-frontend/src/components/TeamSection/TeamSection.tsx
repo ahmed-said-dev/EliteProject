@@ -1,33 +1,40 @@
 import React from "react";
 import styles from "./TeamSection.module.css";
-import TeamMember, { TeamMemberProps } from "./TeamMember";
+import TeamMember from "./TeamMember";
 import { useLanguage } from "@/context/LanguageContext";
+import { useTeamMembers } from "@/hooks/useTeamMembers";
+import LoadingSpinner from "../LoadingSpinner/LoadingSpinner";
 
-interface TeamMemberData extends TeamMemberProps {
-  name: string;
-  position: string;
-  imageSrc: string;
-  specialties: Array<{ icon: string; text: string }>;
-  socialLinks: Array<{ platform: string; url: string; icon: string }>;
-  isActive: boolean;
-  animationDelay: string;
-}
+// أنماط مضمنة لحاويات الحالات
+const inlineStyles = {
+  loadingContainer: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    minHeight: '200px',
+    width: '100%'
+  },
+  errorContainer: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    minHeight: '200px',
+    width: '100%',
+    backgroundColor: 'rgba(255, 0, 0, 0.1)',
+    borderRadius: '8px',
+    padding: '20px'
+  },
+  errorMessage: {
+    color: '#d32f2f',
+    fontSize: '18px',
+    textAlign: 'center' as const // تثبيت نوع القيمة لتفادي خطأ TypeScript
+  }
+};
 
 export default function TeamSection() {
-  const { locale, isRTL, t } = useLanguage();
+  const { isRTL, t } = useLanguage();
   const dir = isRTL ? 'rtl' : 'ltr';
-  const teamMembers = t('about.team.members', { returnObjects: true }) as TeamMemberData[];
-
-  const membersWithDefaults = teamMembers.map((member, index) => ({
-    ...member,
-    isActive: true,
-    animationDelay: `${index * 0.2}s`,
-    socialLinks: [
-      { platform: 'facebook', icon: 'fab fa-facebook-f', url: '#' },
-      { platform: 'twitter', icon: 'fab fa-twitter', url: '#' },
-      { platform: 'linkedin', icon: 'fab fa-linkedin-in', url: '#' }
-    ]
-  }));
+  const { formattedTeamMembers, isLoading, error } = useTeamMembers();
 
   return (
     <section className={styles.sectionTeam} dir={dir}>
@@ -59,11 +66,22 @@ export default function TeamSection() {
             </div>
           </div>
         </div>
-        <div className={styles.teamRow}>
-          {membersWithDefaults.map((member, index) => (
-            <TeamMember key={index} {...member} />
-          ))}
-        </div>
+        
+        {isLoading ? (
+          <div style={inlineStyles.loadingContainer}>
+            <LoadingSpinner isLoading={isLoading} />
+          </div>
+        ) : error ? (
+          <div style={inlineStyles.errorContainer}>
+            <p style={inlineStyles.errorMessage}>{t('errors.dataLoading')}</p>
+          </div>
+        ) : (
+          <div className={styles.teamRow}>
+            {formattedTeamMembers.map((member, index) => (
+              <TeamMember key={member.id || index} {...member} />
+            ))}
+          </div>
+        )}
       </div>
     </section>
   );

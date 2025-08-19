@@ -196,3 +196,13 @@
 .couponError {
   color: #e94560;
 }
+
+.checkoutError {
+  background-color: #f8d7da;
+  color: #721c24;
+  padding: 10px;
+  border-radius: 4px;
+  margin-bottom: 15px;
+  text-align: center;
+  font-size: 14px;
+}

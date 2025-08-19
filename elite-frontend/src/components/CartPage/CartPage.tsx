@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faShoppingCart, faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import { useLanguage } from '@/context/LanguageContext';
-import { useCart } from '@/context/CartContext';
+import { useCart } from '@/context/SaleorCartContext';
 import CartItems from './components/CartItems';
 import CartSummary from './components/CartSummary';
 import styles from './CartPage.module.css';
