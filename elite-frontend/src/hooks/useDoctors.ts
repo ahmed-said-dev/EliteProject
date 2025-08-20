@@ -48,7 +48,11 @@ export const useDoctors = () => {
     ['doctors', locale], // مفتاح التخزين المؤقت (يتغير مع تغير اللغة)
     async () => {
       // إضافة معلمات اللغة إلى عنوان URL للحصول على البيانات بلغة المستخدم الحالية
-      const url = `${process.env.NEXT_PUBLIC_API_URL}/api/doctor-homes?populate=image&locale=${locale}`;      
+      const apiUrl = 'http://134.122.102.182:8080'; // الرابط المباشر للـ API
+      const url = `${apiUrl}/api/doctor-homes?populate=image&locale=${locale}`;      
+      
+      console.log('🔗 محاولة الوصول للرابط:', url);
+      
       const response = await fetch(url);
       
       if (!response.ok) {
@@ -70,19 +74,27 @@ export const useDoctors = () => {
   );
   
   // تحويل البيانات للصيغة المطلوبة
-  const formattedDoctors = data?.data.map(doctor => {
+  const formattedDoctors = data?.data.map((doctor, index) => {
     // طباعة البيانات الأصلية للمساعدة في التصحيح
     console.log('🔍 البيانات الأصلية للدكتور:', doctor);
     
+    // مصفوفة من الصور الافتراضية للأطباء
+    const defaultImages = [
+      '/DoctorsSections/Asset 28-.png',
+      '/DoctorsSections/Asset 29-.png', 
+      '/DoctorsSections/Asset 30-.png'
+    ];
+    
     const formattedDoctor = {
       id: doctor?.id,
+      documentId: doctor?.documentId,
       // التعامل مباشرة مع البيانات على المستوى الأعلى بدلاً من attributes
-      name: doctor?.name,
-      specialty: doctor?.specialty,
-      // بناء URL كامل للصورة
-      image: doctor?.image
-        ? `${process.env.NEXT_PUBLIC_IMAGE_BASE_URL}${doctor.image.url}`
-        : '/DoctorsSections/Asset 28-.png' // صورة افتراضية
+      name: doctor?.name || `دكتور ${index + 1}`,
+      specialty: doctor?.specialty || 'أخصائي بيطري',
+      // استخدام صورة افتراضية بناءً على الفهرس أو من البيانات إذا كانت متوفرة
+      image: doctor?.image?.url 
+        ? `http://134.122.102.182:8080${doctor.image.url}`
+        : defaultImages[index % defaultImages.length] // توزيع الصور الافتراضية
     };
     
     // عرض بيانات الدكتور بعد التحويل في وحدة التحكم
