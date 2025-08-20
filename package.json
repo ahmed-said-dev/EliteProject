@@ -1,0 +1,23 @@
+{
+  "name": "elite-project-management",
+  "version": "1.0.0",
+  "description": "Management scripts for Elite Project deployment and synchronization",
+  "scripts": {
+    "dev:frontend": "cd elite-frontend && npm run dev",
+    "dev:backend": "cd Elite-Backend && npm run develop",
+    "dev:store-backend": "cd Elite-store/elite-store-backend && npm run start:dev",
+    "dev:admin": "cd Elite-store/elite-admin-dashboard && npm run dev",
+    "build:frontend": "cd elite-frontend && npm run build",
+    "build:backend": "cd Elite-Backend && npm run build",
+    "build:store-backend": "cd Elite-store/elite-store-backend && npm run build",
+    "build:admin": "cd Elite-store/elite-admin-dashboard && npm run build",
+    "build:all": "npm run build:frontend && npm run build:backend && npm run build:store-backend && npm run build:admin",
+    "deploy": "git add . && git commit -m \"Auto deploy: $(date)\" && git push origin main && node deploy-to-server.js",
+    "sync": "git pull origin main && echo \"✅ Synced with remote repository\"",
+    "server-deploy": "node server-deploy.js",
+    "quick-push": "git add . && git commit -m \"Quick update: $(date)\" && git push origin main"
+  },
+  "keywords": ["deployment", "automation", "elite-project"],
+  "author": "Elite Project Team",
+  "license": "MIT"
+}
