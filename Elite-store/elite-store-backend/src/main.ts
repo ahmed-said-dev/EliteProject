@@ -113,25 +113,65 @@ async function bootstrap() {
   // Global prefix MUST be set BEFORE Swagger setup
   app.setGlobalPrefix('api');
 
+  // Force HTTP protocol detection
+  app.set('trust proxy', true);
+  
+  // Middleware to force HTTP protocol for Swagger
+  app.use('/api/docs*', (req, res, next) => {
+    req.headers['x-forwarded-proto'] = 'http';
+    req.protocol = 'http';
+    next();
+  });
+  
   const document = SwaggerModule.createDocument(app, config);
+  
+  // Custom HTML template to force HTTP URLs
+  const customHtml = `
+  <!DOCTYPE html>
+  <html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Elite Store API Documentation</title>
+    <link rel="stylesheet" type="text/css" href="http://134.122.102.182/api/docs/docs/swagger-ui.css" />
+    <link rel="icon" type="image/png" href="http://134.122.102.182/api/docs/docs/favicon-32x32.png" sizes="32x32" />
+    <link rel="icon" type="image/png" href="http://134.122.102.182/api/docs/docs/favicon-16x16.png" sizes="16x16" />
+    <style>
+      html { box-sizing: border-box; overflow: -moz-scrollbars-vertical; overflow-y: scroll; }
+      *, *:before, *:after { box-sizing: inherit; }
+      body { margin:0; background: #fafafa; }
+      .swagger-ui .topbar { display: none; }
+    </style>
+  </head>
+  <body>
+    <div id="swagger-ui"></div>
+    <script src="http://134.122.102.182/api/docs/docs/swagger-ui-bundle.js"></script>
+    <script src="http://134.122.102.182/api/docs/docs/swagger-ui-standalone-preset.js"></script>
+    <script>
+    window.onload = function() {
+      const ui = SwaggerUIBundle({
+        url: 'http://134.122.102.182/api/docs-json',
+        dom_id: '#swagger-ui',
+        deepLinking: true,
+        presets: [
+          SwaggerUIBundle.presets.apis,
+          SwaggerUIStandalonePreset
+        ],
+        plugins: [
+          SwaggerUIBundle.plugins.DownloadUrl
+        ],
+        layout: "StandaloneLayout",
+        persistAuthorization: true,
+        tagsSorter: 'alpha',
+        operationsSorter: 'alpha'
+      });
+    };
+    </script>
+  </body>
+  </html>`;
+
   SwaggerModule.setup('docs', app, document, {
-    swaggerOptions: {
-      persistAuthorization: true,
-      tagsSorter: 'alpha',
-      operationsSorter: 'alpha',
-      // Force HTTP URLs for static files
-      url: 'http://134.122.102.182/api/docs-json',
-      baseUrl: 'http://134.122.102.182/api/docs/'
-    },
     customSiteTitle: 'Elite Store API Documentation',
-    customCss: '.swagger-ui .topbar { display: none }',
-    // Force custom URLs for static files
-    customCssUrl: 'http://134.122.102.182/api/docs/docs/swagger-ui.css',
-    customJs: [
-      'http://134.122.102.182/api/docs/docs/swagger-ui-bundle.js',
-      'http://134.122.102.182/api/docs/docs/swagger-ui-standalone-preset.js'
-    ],
-    customfavIcon: 'http://134.122.102.182/api/docs/docs/favicon-32x32.png'
+    customHtml: customHtml
   });
 
   const port = configService.get<number>('port') || 3001;
