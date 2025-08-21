@@ -97,6 +97,8 @@ async function bootstrap() {
     .setTitle('Elite Store API')
     .setDescription('Complete E-commerce API for Elite Store')
     .setVersion('1.0')
+    .addServer('http://134.122.102.182/api', 'Production Server')
+    .addServer('http://localhost:3001/api', 'Development Server')
     .addTag('Authentication', 'User authentication and authorization')
     .addTag('Users', 'User management')
     .addTag('Products', 'Product management')
@@ -117,9 +119,19 @@ async function bootstrap() {
       persistAuthorization: true,
       tagsSorter: 'alpha',
       operationsSorter: 'alpha',
+      // Force HTTP URLs for static files
+      url: 'http://134.122.102.182/api/docs-json',
+      baseUrl: 'http://134.122.102.182/api/docs/'
     },
     customSiteTitle: 'Elite Store API Documentation',
-    customCss: '.swagger-ui .topbar { display: none }'
+    customCss: '.swagger-ui .topbar { display: none }',
+    // Force custom URLs for static files
+    customCssUrl: 'http://134.122.102.182/api/docs/docs/swagger-ui.css',
+    customJs: [
+      'http://134.122.102.182/api/docs/docs/swagger-ui-bundle.js',
+      'http://134.122.102.182/api/docs/docs/swagger-ui-standalone-preset.js'
+    ],
+    customfavIcon: 'http://134.122.102.182/api/docs/docs/favicon-32x32.png'
   });
 
   const port = configService.get<number>('port') || 3001;
