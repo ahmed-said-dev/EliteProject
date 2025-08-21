@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router';
 import Image from 'next/image';
 import { Section } from '@/components/ui/Section';
-import { Avatar } from '@/components/ui/Avatar';
+import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
 import { FaClock, FaCalendarAlt, FaFacebook, FaTwitter, FaInstagram, FaLinkedinIn, FaTag, FaEye, FaChevronLeft, FaChevronRight, FaQuoteRight } from 'react-icons/fa';
 import PageBanner from '@/components/PageBanner/PageBanner';
@@ -222,12 +222,10 @@ export default function ArticleDetail({ initialArticleData, initialRelatedData }
                 <div className="p-6">
                   {/* معلومات الكاتب */}
                   <div className="flex items-center mb-6 pb-6 border-b border-gray-100">
-                    <Avatar 
-                      src={authorAvatar} 
-                      alt={authorName}
-                      size="lg"
-                      className="border-4 border-white shadow-lg mr-4 rtl:ml-4 rtl:mr-0"
-                    />
+                    <Avatar className="w-14 h-14 border-4 border-white shadow-lg mr-4 rtl:ml-4 rtl:mr-0">
+                      <AvatarImage src={authorAvatar} alt={authorName} />
+                      <AvatarFallback>{(authorName || '?').charAt(0)}</AvatarFallback>
+                    </Avatar>
                     <div>
                       <div className="text-sm text-primary font-medium">
                         {t('article.by')}
@@ -321,12 +319,10 @@ export default function ArticleDetail({ initialArticleData, initialRelatedData }
                   <div className="p-6">
                     <div className="flex flex-col items-center">
                       <div className="relative mb-4">
-                        <Avatar 
-                          src={authorAvatar}
-                          alt={authorName}
-                          size="xl"
-                          className="border-4 border-white shadow-lg z-10 relative"
-                        />
+                        <Avatar className="w-20 h-20 border-4 border-white shadow-lg z-10 relative">
+                          <AvatarImage src={authorAvatar} alt={authorName} />
+                          <AvatarFallback>{(authorName || '?').charAt(0)}</AvatarFallback>
+                        </Avatar>
                         <div className="absolute inset-0 bg-primary/20 blur-xl -z-10 scale-150 rounded-full"></div>
                       </div>
                       <h3 className="text-xl font-bold text-gray-800 mb-2">{authorName}</h3>

@@ -1,4 +1,4 @@
-import React from 'react';
+// Remove duplicate React import to avoid type conflicts on server
 
 type AvatarSize = 'sm' | 'md' | 'lg' | 'xl';
 
