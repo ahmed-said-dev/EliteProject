@@ -35,25 +35,26 @@ async function createAdminUser() {
     await client.connect();
     console.log('✅ Connected to database successfully!');
 
-    // Create users table if it doesn't exist
-    console.log('📋 Creating users table if not exists...');
-    await client.query(`
-      CREATE TABLE IF NOT EXISTS "user" (
-        id SERIAL PRIMARY KEY,
-        email VARCHAR(255) UNIQUE NOT NULL,
-        password VARCHAR(255) NOT NULL,
-        name VARCHAR(255) NOT NULL,
-        role VARCHAR(50) DEFAULT 'user',
-        "isActive" BOOLEAN DEFAULT true,
-        "createdAt" TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-        "updatedAt" TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-      )
+    // Check if users table exists (TypeORM will create it automatically)
+    console.log('📋 Checking users table...');
+    const tableExists = await client.query(`
+      SELECT EXISTS (
+        SELECT FROM information_schema.tables 
+        WHERE table_schema = 'public' 
+        AND table_name = 'users'
+      );
     `);
+    
+    if (!tableExists.rows[0].exists) {
+      console.log('❌ Users table does not exist. Please run the backend application first to create the database schema.');
+      return;
+    }
 
     // Hash the password
     const adminEmail = process.env.ADMIN_EMAIL || 'admin@elitestore.com';
     const adminPassword = process.env.ADMIN_PASSWORD || 'admin123456';
-    const adminName = process.env.ADMIN_NAME || 'Elite Store Admin';
+    const firstName = 'Elite Store';
+    const lastName = 'Admin';
     
     console.log('🔒 Hashing admin password...');
     const hashedPassword = await bcrypt.hash(adminPassword, 12);
@@ -61,27 +62,27 @@ async function createAdminUser() {
     // Check if admin user already exists
     console.log('🔍 Checking if admin user exists...');
     const existingUser = await client.query(
-      'SELECT id FROM "user" WHERE email = $1',
+      'SELECT id FROM users WHERE email = $1',
       [adminEmail]
     );
 
     if (existingUser.rows.length > 0) {
       console.log('⚠️ Admin user already exists, updating password...');
       await client.query(
-        'UPDATE "user" SET password = $1, name = $2, role = $3, "updatedAt" = CURRENT_TIMESTAMP WHERE email = $4',
-        [hashedPassword, adminName, 'admin', adminEmail]
+        'UPDATE users SET password = $1, "firstName" = $2, "lastName" = $3, role = $4, "updatedAt" = CURRENT_TIMESTAMP WHERE email = $5',
+        [hashedPassword, firstName, lastName, 'admin', adminEmail]
       );
     } else {
       console.log('👤 Creating new admin user...');
       await client.query(
-        'INSERT INTO "user" (email, password, name, role, "isActive") VALUES ($1, $2, $3, $4, $5)',
-        [adminEmail, hashedPassword, adminName, 'admin', true]
+        'INSERT INTO users (id, email, password, "firstName", "lastName", role, status, "emailVerified", "createdAt", "updatedAt") VALUES (gen_random_uuid(), $1, $2, $3, $4, $5, $6, $7, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)',
+        [adminEmail, hashedPassword, firstName, lastName, 'admin', 'active', true]
       );
     }
 
     // Verify the user was created/updated
     const user = await client.query(
-      'SELECT id, email, name, role, "isActive", "createdAt" FROM "user" WHERE email = $1',
+      'SELECT id, email, "firstName", "lastName", role, status, "emailVerified", "createdAt" FROM users WHERE email = $1',
       [adminEmail]
     );
 
@@ -91,9 +92,10 @@ async function createAdminUser() {
       console.log('📋 User Details:');
       console.log(`   ID: ${userData.id}`);
       console.log(`   Email: ${userData.email}`);
-      console.log(`   Name: ${userData.name}`);
+      console.log(`   Name: ${userData.firstName} ${userData.lastName}`);
       console.log(`   Role: ${userData.role}`);
-      console.log(`   Active: ${userData.isActive}`);
+      console.log(`   Status: ${userData.status}`);
+      console.log(`   Email Verified: ${userData.emailVerified}`);
       console.log(`   Created: ${userData.createdAt}`);
       
       console.log('\n🔑 Login Credentials:');
