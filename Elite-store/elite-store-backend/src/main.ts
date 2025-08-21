@@ -62,6 +62,9 @@ async function bootstrap() {
   app.use(helmet({
     crossOriginEmbedderPolicy: false,
     crossOriginResourcePolicy: { policy: "cross-origin" },
+    // Disable COOP and Origin-Agent-Cluster on HTTP to avoid browser warnings
+    crossOriginOpenerPolicy: false,
+    originAgentCluster: false,
     contentSecurityPolicy: {
       directives: {
         defaultSrc: [`'self'`],
