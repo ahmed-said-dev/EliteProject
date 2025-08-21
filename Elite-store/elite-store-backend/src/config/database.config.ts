@@ -11,11 +11,11 @@ import { Review } from '../products/entities/review.entity';
 
 export const databaseConfig: TypeOrmModuleOptions = {
   type: 'postgres',
-  host: process.env.DB_HOST || 'elite-store-db-do-user-24606323-0.i.db.ondigitalocean.com',
-  port: parseInt(process.env.DB_PORT || '25060', 10),
-  username: process.env.DB_USERNAME || 'doadmin',
-  password: process.env.DB_PASSWORD || 'AVNS_Sfg3cMWF_zNOSTFufbo',
-  database: process.env.DB_NAME || 'defaultdb',
+  host: process.env.DB_HOST || 'localhost',
+  port: parseInt(process.env.DB_PORT || '5432', 10),
+  username: process.env.DB_USERNAME || 'postgres',
+  password: process.env.DB_PASSWORD || 'your_postgres_password',
+  database: process.env.DB_NAME || 'elite_store',
   entities: [
     User,
     Product,
@@ -27,15 +27,13 @@ export const databaseConfig: TypeOrmModuleOptions = {
     ProductImage,
     Review,
   ],
-  synchronize: true, // Auto-create tables for initial setup
+  synchronize: true, // في الإنتاج يجب تعطيل هذا واستخدام migrations
   logging: process.env.NODE_ENV === 'development',
-  ssl: { 
+  ssl: process.env.DATABASE_SSL === 'true' ? { 
     rejectUnauthorized: false,
-    ca: undefined 
-  },
-  extra: {
-    ssl: {
-      rejectUnauthorized: false
-    }
-  }
+    ca: undefined
+  } : false,
+  extra: process.env.DATABASE_SSL === 'true' ? {
+    ssl: { rejectUnauthorized: false }
+  } : {},
 };
