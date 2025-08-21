@@ -38,9 +38,13 @@ async function createAdminUser() {
 
     // Check if users table exists, create if not
     console.log('\n📋 Checking/Creating users table...');
+    
+    // Enable UUID extension if not already enabled
+    await client.query('CREATE EXTENSION IF NOT EXISTS "uuid-ossp";');
+    
     const createUsersTable = `
       CREATE TABLE IF NOT EXISTS "user" (
-        "id" SERIAL PRIMARY KEY,
+        "id" UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
         "email" VARCHAR(255) UNIQUE NOT NULL,
         "password" VARCHAR(255) NOT NULL,
         "firstName" VARCHAR(100),
@@ -92,8 +96,8 @@ async function createAdminUser() {
       
       // Create admin user
       const result = await client.query(
-        `INSERT INTO "user" (email, password, "firstName", "lastName", role, status, "emailVerified")
-         VALUES ($1, $2, $3, $4, $5, $6, $7)
+        `INSERT INTO "user" (id, email, password, "firstName", "lastName", role, status, "emailVerified")
+         VALUES (uuid_generate_v4(), $1, $2, $3, $4, $5, $6, $7)
          RETURNING id, email`,
         [
           adminData.email,
