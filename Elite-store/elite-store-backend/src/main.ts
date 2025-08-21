@@ -108,20 +108,19 @@ async function bootstrap() {
     .addBearerAuth()
     .build();
 
+  // Global prefix MUST be set BEFORE Swagger setup
+  app.setGlobalPrefix('api');
+
   const document = SwaggerModule.createDocument(app, config);
-  SwaggerModule.setup('api/docs', app, document, {
+  SwaggerModule.setup('docs', app, document, {
     swaggerOptions: {
       persistAuthorization: true,
       tagsSorter: 'alpha',
       operationsSorter: 'alpha',
     },
     customSiteTitle: 'Elite Store API Documentation',
-    customCss: '.swagger-ui .topbar { display: none }',
-    customJsStr: 'window.onload = function() { console.log("Swagger UI loaded successfully"); }'
+    customCss: '.swagger-ui .topbar { display: none }'
   });
-
-  // Global prefix
-  app.setGlobalPrefix('api');
 
   const port = configService.get<number>('port') || 3001;
   
