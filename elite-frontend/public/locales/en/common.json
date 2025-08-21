@@ -1492,5 +1492,70 @@
     "noArticlesFound": "No Articles Found",
     "tryDifferentFilters": "Try different filters or check back later for new content",
     "readMore": "Read more"
+  },
+  "filters": {
+    "priceRange": {
+      "noPriceInfo": "No price information available",
+      "title": "Price Range",
+      "reset": "Reset",
+      "min": "Min",
+      "max": "Max"
+    },
+    "tags": {
+      "selected": "%count% tags selected",
+      "clear": "Clear all",
+      "showing": "%filtered% of %total%",
+      "searchPlaceholder": "Search tags..."
+    }
+  },
+  "general": {
+    "of": "of",
+    "selected": "selected",
+    "search": "Search",
+    "reset": "Reset",
+    "clear": "Clear",
+    "loading": "Loading...",
+    "noResults": "No results found",
+    "tryAgain": "Try again"
+  },
+  "checkout": {
+    "title": "Checkout",
+    "errors": {
+      "noItems": "No Elite Store products in cart",
+      "error": "Error",
+      "fillRequired": "Please fill all required fields",
+      "missingFields": "Missing fields: %fields%",
+      "failed": "Order creation failed"
+    },
+    "success": {
+      "orderCreated": "Order created successfully!",
+      "orderNumber": "Order number: %number%",
+      "notAvailable": "Not available"
+    },
+    "form": {
+      "personalInfo": "Personal Information",
+      "firstName": "First Name",
+      "lastName": "Last Name",
+      "email": "Email Address",
+      "phone": "Phone Number",
+      "shippingInfo": "Shipping Information",
+      "address": "Address",
+      "city": "City",
+      "country": "Country",
+      "billingInfo": "Billing Information",
+      "notes": "Notes",
+      "paymentMethod": "Payment Method",
+      "cashOnDelivery": "Cash on Delivery",
+      "placeOrder": "Place Order",
+      "processing": "Processing..."
+    },
+    "summary": {
+      "orderSummary": "Order Summary",
+      "subtotal": "Subtotal",
+      "shipping": "Shipping",
+      "tax": "Tax",
+      "total": "Total",
+      "free": "Free"
+    }
   }
 }

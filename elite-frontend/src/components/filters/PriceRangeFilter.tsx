@@ -3,6 +3,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { DollarSign, Minus } from 'lucide-react';
 import { PriceRange, LanguageCode } from '@/utils/vendure/types';
+import { useLanguage } from '@/context/LanguageContext';
 
 interface PriceRangeFilterProps {
   priceRange: PriceRange;
@@ -19,6 +20,7 @@ const PriceRangeFilter: React.FC<PriceRangeFilterProps> = ({
   language,
   currency = 'USD',
 }) => {
+  const { t } = useLanguage();
   const [localMin, setLocalMin] = useState(selectedRange.min.toString());
   const [localMax, setLocalMax] = useState(selectedRange.max.toString());
   const [isSliderActive, setIsSliderActive] = useState(false);
@@ -102,10 +104,7 @@ const PriceRangeFilter: React.FC<PriceRangeFilterProps> = ({
   if (priceRange.min === priceRange.max || priceRange.max === 0) {
     return (
       <div className="text-center py-4 text-gray-500 text-sm">
-        {language === 'ar' 
-          ? 'لا توجد معلومات أسعار متاحة' 
-          : 'No price information available'
-        }
+        {t('filters.priceRange.noPriceInfo')}
       </div>
     );
   }
@@ -117,7 +116,7 @@ const PriceRangeFilter: React.FC<PriceRangeFilterProps> = ({
         <div className="flex items-center gap-2">
           <DollarSign className="w-4 h-4 text-gray-600" />
           <span className="text-sm font-medium text-gray-700">
-            {language === 'ar' ? 'نطاق السعر' : 'Price Range'}
+            {t('filters.priceRange.title')}
           </span>
         </div>
         {isRangeModified() && (
@@ -125,7 +124,7 @@ const PriceRangeFilter: React.FC<PriceRangeFilterProps> = ({
             onClick={resetRange}
             className="text-xs text-blue-600 hover:text-blue-700 transition-colors"
           >
-            {language === 'ar' ? 'إعادة تعيين' : 'Reset'}
+            {t('filters.priceRange.reset')}
           </button>
         )}
       </div>
@@ -134,7 +133,7 @@ const PriceRangeFilter: React.FC<PriceRangeFilterProps> = ({
       <div className="grid grid-cols-2 gap-3">
         <div>
           <label className="block text-xs text-gray-500 mb-1">
-            {language === 'ar' ? 'الحد الأدنى' : 'Min'}
+            {t('filters.priceRange.min')}
           </label>
           <div className="relative">
             <input
@@ -155,7 +154,7 @@ const PriceRangeFilter: React.FC<PriceRangeFilterProps> = ({
 
         <div>
           <label className="block text-xs text-gray-500 mb-1">
-            {language === 'ar' ? 'الحد الأقصى' : 'Max'}
+            {t('filters.priceRange.max')}
           </label>
           <div className="relative">
             <input

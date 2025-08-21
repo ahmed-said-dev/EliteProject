@@ -1499,5 +1499,70 @@
     "noArticlesFound": "لم يتم العثور على مقالات",
     "tryDifferentFilters": "جرب مرشحات مختلفة أو تحقق لاحقاً من المحتوى الجديد",
     "readMore": "اقرأ المزيد"
+  },
+  "filters": {
+    "priceRange": {
+      "noPriceInfo": "لا توجد معلومات أسعار متاحة",
+      "title": "نطاق السعر",
+      "reset": "إعادة تعيين",
+      "min": "الحد الأدنى",
+      "max": "الحد الأقصى"
+    },
+    "tags": {
+      "selected": "تم اختيار %count% تصنيف",
+      "clear": "مسح الكل",
+      "showing": "%filtered% من %total%",
+      "searchPlaceholder": "البحث في الوسوم..."
+    }
+  },
+  "general": {
+    "of": "من",
+    "selected": "مختار",
+    "search": "بحث",
+    "reset": "إعادة تعيين",
+    "clear": "مسح",
+    "loading": "جاري التحميل...",
+    "noResults": "لا توجد نتائج",
+    "tryAgain": "حاول مرة أخرى"
+  },
+  "checkout": {
+    "title": "الدفع",
+    "errors": {
+      "noItems": "لا توجد منتجات من متجر Elite في السلة",
+      "error": "خطأ",
+      "fillRequired": "يرجى تعبئة جميع الحقول المطلوبة",
+      "missingFields": "حقول مفقودة: %fields%",
+      "failed": "فشل في إنشاء الطلب"
+    },
+    "success": {
+      "orderCreated": "تم إنشاء الطلب بنجاح!",
+      "orderNumber": "رقم الطلب: %number%",
+      "notAvailable": "غير متاح"
+    },
+    "form": {
+      "personalInfo": "المعلومات الشخصية",
+      "firstName": "الاسم الأول",
+      "lastName": "اسم العائلة",
+      "email": "البريد الإلكتروني",
+      "phone": "رقم الهاتف",
+      "shippingInfo": "معلومات الشحن",
+      "address": "العنوان",
+      "city": "المدينة",
+      "country": "البلد",
+      "billingInfo": "معلومات الفاتورة",
+      "notes": "ملاحظات",
+      "paymentMethod": "طريقة الدفع",
+      "cashOnDelivery": "الدفع عند الاستلام",
+      "placeOrder": "تأكيد الطلب",
+      "processing": "جاري المعالجة..."
+    },
+    "summary": {
+      "orderSummary": "ملخص الطلب",
+      "subtotal": "المجموع الفرعي",
+      "shipping": "الشحن",
+      "tax": "الضريبة",
+      "total": "الإجمالي",
+      "free": "مجاني"
+    }
   }
 }
