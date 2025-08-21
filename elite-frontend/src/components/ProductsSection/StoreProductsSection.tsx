@@ -3,7 +3,7 @@ import { useStoreProducts } from '@/hooks/useStoreProducts';
 import StoreProductCard from './StoreProductCard';
 
 export default function StoreProductsSection() {
-  const { products, loading, error, params, setFilter } = useStoreProducts({ limit: 12, sortBy: 'createdAt', sortOrder: 'DESC' });
+  const { products, loading, error, params, setFilter } = useStoreProducts({ page: 1, limit: 10, sortBy: 'createdAt', sortOrder: 'DESC' });
 
   return (
     <div className="space-y-6">

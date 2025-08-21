@@ -19,7 +19,7 @@ export interface StoreQueryParams {
   sortOrder?: 'ASC' | 'DESC';
 }
 
-export function useStoreProducts(initial: StoreQueryParams = { page: 1, limit: 12, sortBy: 'createdAt', sortOrder: 'DESC' }) {
+export function useStoreProducts(initial: StoreQueryParams = { page: 1, limit: 10, sortBy: 'createdAt', sortOrder: 'DESC' }) {
   const [params, setParams] = useState<StoreQueryParams>(initial);
   const [data, setData] = useState<StoreProduct[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
