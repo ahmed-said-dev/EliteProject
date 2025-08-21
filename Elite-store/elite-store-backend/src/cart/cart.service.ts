@@ -13,7 +13,7 @@ export class CartService {
     private cartItemRepository: Repository<CartItem>,
   ) {}
 
-  async findUserCart(userId: string): Promise<Cart> {
+  async findUserCart(userId: number): Promise<Cart> {
     let cart = await this.cartRepository.findOne({
       where: { userId, isActive: true },
       relations: ['items', 'items.product', 'items.product.images'],
@@ -27,7 +27,7 @@ export class CartService {
     return cart;
   }
 
-  async addItem(userId: string, productId: string, quantity: number): Promise<Cart> {
+  async addItem(userId: number, productId: string, quantity: number): Promise<Cart> {
     const cart = await this.findUserCart(userId);
     
     let cartItem = await this.cartItemRepository.findOne({
@@ -49,7 +49,7 @@ export class CartService {
     return this.findUserCart(userId);
   }
 
-  async updateItemQuantity(userId: string, itemId: string, quantity: number): Promise<Cart> {
+  async updateItemQuantity(userId: number, itemId: string, quantity: number): Promise<Cart> {
     const cartItem = await this.cartItemRepository.findOne({
       where: { id: itemId },
       relations: ['cart'],
@@ -69,11 +69,11 @@ export class CartService {
     return this.findUserCart(userId);
   }
 
-  async removeItem(userId: string, itemId: string): Promise<Cart> {
+  async removeItem(userId: number, itemId: string): Promise<Cart> {
     return this.updateItemQuantity(userId, itemId, 0);
   }
 
-  async clearCart(userId: string): Promise<{ message: string }> {
+  async clearCart(userId: number): Promise<{ message: string }> {
     const cart = await this.findUserCart(userId);
     await this.cartItemRepository.delete({ cartId: cart.id });
     return { message: 'Cart cleared successfully' };

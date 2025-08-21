@@ -20,7 +20,7 @@ export class UsersService {
     });
   }
 
-  async findOne(id: string): Promise<User> {
+  async findOne(id: number): Promise<User> {
     const user = await this.userRepository.findOne({
       where: { id },
       relations: ['orders', 'carts', 'reviews'],
@@ -40,7 +40,7 @@ export class UsersService {
     });
   }
 
-  async update(id: string, updateUserDto: UpdateUserDto, currentUser: User): Promise<User> {
+  async update(id: number, updateUserDto: UpdateUserDto, currentUser: User): Promise<User> {
     // Users can only update their own profile unless they are admin
     if (currentUser.id !== id && currentUser.role !== UserRole.ADMIN) {
       throw new ForbiddenException('You can only update your own profile');
@@ -53,7 +53,7 @@ export class UsersService {
     return this.userRepository.save(user);
   }
 
-  async updatePassword(id: string, currentPassword: string, newPassword: string, currentUser: User): Promise<{ message: string }> {
+  async updatePassword(id: number, currentPassword: string, newPassword: string, currentUser: User): Promise<{ message: string }> {
     // Users can only update their own password unless they are admin
     if (currentUser.id !== id && currentUser.role !== UserRole.ADMIN) {
       throw new ForbiddenException('You can only update your own password');
