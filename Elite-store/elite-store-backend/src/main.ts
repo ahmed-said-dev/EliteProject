@@ -170,10 +170,8 @@ async function bootstrap() {
     res.send(html);
   });
   
-  // Still setup traditional Swagger for static files serving
-  SwaggerModule.setup('docs', app, document, {
-    customSiteTitle: 'Elite Store API Documentation'
-  });
+  // Serve static Swagger UI files
+  SwaggerModule.setup('docs-files', app, document);
 
   const port = configService.get<number>('port') || 3001;
   
