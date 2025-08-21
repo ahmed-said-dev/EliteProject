@@ -1,3 +1,49 @@
+import React from 'react';
+
+type AvatarSize = 'sm' | 'md' | 'lg' | 'xl';
+
+interface AvatarProps extends React.ImgHTMLAttributes<HTMLImageElement> {
+	src?: string;
+	alt?: string;
+	size?: AvatarSize;
+	className?: string;
+}
+
+const sizeToPx: Record<AvatarSize, number> = {
+	sm: 32,
+	md: 40,
+	lg: 56,
+	xl: 72,
+};
+
+export function Avatar({ src, alt = 'avatar', size = 'md', className = '', ...rest }: AvatarProps) {
+	const dimension = sizeToPx[size] || sizeToPx.md;
+	const baseClasses = `inline-block rounded-full object-cover bg-gray-200 ${className}`.trim();
+
+	if (!src) {
+		return (
+			<div
+				className={baseClasses}
+				style={{ width: dimension, height: dimension }}
+				aria-label={alt}
+			/>
+		);
+	}
+
+	return (
+		<img
+			src={src}
+			alt={alt}
+			width={dimension}
+			height={dimension}
+			className={baseClasses}
+			{...rest}
+		/>
+	);
+}
+
+export default Avatar;
+
 import * as React from "react"
 import * as AvatarPrimitive from "@radix-ui/react-avatar"
 

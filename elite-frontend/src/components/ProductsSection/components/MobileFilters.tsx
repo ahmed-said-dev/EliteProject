@@ -160,7 +160,7 @@ const MobileFilters: React.FC<MobileFiltersProps> = ({
                     Min
                   </label>
                   <div className={styles.inputWrapper}>
-                    <span className={styles.currencySymbol}>$</span>
+                    <span className={styles.currencySymbol}>﷼</span>
                     <input 
                       type="number" 
                       id="mobile-min-price" 
@@ -182,7 +182,7 @@ const MobileFilters: React.FC<MobileFiltersProps> = ({
                     Max
                   </label>
                   <div className={styles.inputWrapper}>
-                    <span className={styles.currencySymbol}>$</span>
+                    <span className={styles.currencySymbol}>﷼</span>
                     <input 
                       type="number" 
                       id="mobile-max-price" 

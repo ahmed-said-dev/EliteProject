@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { useLanguage } from '@/context/LanguageContext';
 import { useCart } from '@/context/SaleorCartContext';
 import styles from './CartSummary.module.css';
+import { formatCurrency } from '@/lib/currency';
 
 type ShippingOption = {
   id: string;
@@ -38,11 +39,7 @@ const CartSummary: React.FC = () => {
   const taxAmount = (subtotal - discount) * taxRate;
   const total = subtotal + shippingCost + taxAmount - discount;
 
-  const formatPrice = (price: number) => {
-    return isRTL 
-      ? `${Math.round(price)} ر.س` 
-      : `SAR ${Math.round(price)}`;
-  };
+  const formatPrice = (price: number) => formatCurrency(price, isRTL ? 'ar' : 'en');
 
   // طلب خيارات الشحن من API
   const [apiShippingOptions, setApiShippingOptions] = useState<any[]>([]);

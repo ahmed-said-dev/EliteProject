@@ -201,7 +201,7 @@ const FilterSidebar: React.FC<FilterSidebarProps> = ({
                   Min
                 </label>
                 <div className={styles.inputWrapper}>
-                  <span className={styles.currencySymbol}>$</span>
+                  <span className={styles.currencySymbol}>﷼</span>
                   <input 
                     type="number" 
                     id="min-price" 
@@ -223,7 +223,7 @@ const FilterSidebar: React.FC<FilterSidebarProps> = ({
                   Max
                 </label>
                 <div className={styles.inputWrapper}>
-                  <span className={styles.currencySymbol}>$</span>
+                  <span className={styles.currencySymbol}>﷼</span>
                   <input 
                     type="number" 
                     id="max-price" 

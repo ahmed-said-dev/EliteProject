@@ -18,6 +18,7 @@ import { useLanguage } from '@/context/LanguageContext';
 import { useUnifiedCart } from '@/context/UnifiedCartContext';
 import { useNotifications } from '@/context/NotificationContext';
 import { eliteApi } from '@/lib/eliteApi';
+import { formatCurrency } from '@/lib/currency';
 
 const CheckoutPage: React.FC = () => {
   const router = useRouter();
@@ -41,11 +42,7 @@ const CheckoutPage: React.FC = () => {
     paymentMethod: 'cash_on_delivery'
   });
 
-  const formatPrice = (price: number, currency: string = 'EGP') => {
-    return isRTL 
-      ? `${Math.round(price)} ج.م` 
-      : `${Math.round(price)} EGP`;
-  };
+  const formatPrice = (price: number) => formatCurrency(price, isRTL ? 'ar' : 'en');
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target;

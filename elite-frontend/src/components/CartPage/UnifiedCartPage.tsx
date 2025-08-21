@@ -17,6 +17,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { useLanguage } from '@/context/LanguageContext';
 import { useUnifiedCart } from '@/context/UnifiedCartContext';
+import { formatCurrency } from '@/lib/currency';
 
 const UnifiedCartPage: React.FC = () => {
   const router = useRouter();
@@ -30,11 +31,7 @@ const UnifiedCartPage: React.FC = () => {
     getCartCount 
   } = useUnifiedCart();
 
-  const formatPrice = (price: number, currency: string = 'EGP') => {
-    return isRTL 
-      ? `${Math.round(price)} ج.م` 
-      : `${Math.round(price)} EGP`;
-  };
+  const formatPrice = (price: number) => formatCurrency(price, isRTL ? 'ar' : 'en');
 
   const handleQuantityChange = (itemId: string, newQuantity: number) => {
     if (newQuantity >= 1) {

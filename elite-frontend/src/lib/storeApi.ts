@@ -5,7 +5,8 @@ export async function getJson<T>(path: string, params?: Record<string, any>): Pr
   const url = new URL(path.startsWith('http') ? path : `${STORE_API_BASE}${path}`);
   if (params) {
     Object.entries(params).forEach(([key, value]) => {
-      if (value !== undefined && value !== null && value !== '') {
+      const isEmptySearch = key === 'search' && value === '';
+      if (isEmptySearch || (value !== undefined && value !== null && value !== '')) {
         url.searchParams.set(key, String(value));
       }
     });

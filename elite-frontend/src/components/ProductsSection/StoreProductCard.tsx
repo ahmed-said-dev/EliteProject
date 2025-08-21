@@ -3,6 +3,8 @@ import Link from 'next/link';
 import { StoreProduct } from '@/hooks/useStoreProducts';
 import { resolveAssetUrl } from '@/lib/storeApi';
 import { useUnifiedCart } from '@/context/UnifiedCartContext';
+import { useLanguage } from '@/context/LanguageContext';
+import { formatCurrency } from '@/lib/currency';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faShoppingCart, faHeart, faEye, faCheck } from '@fortawesome/free-solid-svg-icons';
 
@@ -11,6 +13,7 @@ interface StoreProductCardProps {
 }
 
 export default function StoreProductCard({ product }: StoreProductCardProps) {
+  const { isRTL } = useLanguage();
   const [imageLoading, setImageLoading] = useState(true);
   const [imageError, setImageError] = useState(false);
   const [isAddingToCart, setIsAddingToCart] = useState(false);
@@ -150,15 +153,15 @@ export default function StoreProductCard({ product }: StoreProductCardProps) {
             {hasDiscount ? (
               <>
                 <span className="text-lg font-bold text-purple-600">
-                  {salePrice} ج.م
+                  {formatCurrency(salePrice || price, isRTL ? 'ar' : 'en')}
                 </span>
                 <span className="text-sm text-gray-500 line-through">
-                  {price} ج.م
+                  {formatCurrency(price, isRTL ? 'ar' : 'en')}
                 </span>
               </>
             ) : (
               <span className="text-lg font-bold text-purple-600">
-                {price} ج.م
+                {formatCurrency(price, isRTL ? 'ar' : 'en')}
               </span>
             )}
           </div>
@@ -221,7 +224,7 @@ export default function StoreProductCard({ product }: StoreProductCardProps) {
             <span className="text-red-500 font-medium">غير متوفر</span>
           )}
           <span className="text-gray-500">
-            {(salePrice || price) >= 500 ? 'شحن مجاني' : 'شحن 50 ج.م'}
+            {(salePrice || price) >= 500 ? 'شحن مجاني' : `شحن ${formatCurrency(50, isRTL ? 'ar' : 'en')}`}
           </span>
         </div>
       </div>

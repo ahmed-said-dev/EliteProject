@@ -91,7 +91,7 @@ const MembershipModal: React.FC<MembershipModalProps> = ({ isOpen, onClose, plan
                   <div className={styles.priceBlock}>
                     <h4 className={styles.priceLabel}>{isRTL ? 'الاشتراك الشهري' : 'Monthly Subscription'}</h4>
                     <div className={styles.priceValue}>
-                      <span className={styles.currency}>{isRTL ? 'ج.م' : 'EGP'}</span>
+                      <span className={styles.currency}>{isRTL ? '﷼' : 'SAR'}</span>
                       <span className={styles.amount}>{plan.price.monthly}</span>
                       <span className={styles.period}>{isRTL ? '/شهر' : '/month'}</span>
                     </div>
@@ -100,7 +100,7 @@ const MembershipModal: React.FC<MembershipModalProps> = ({ isOpen, onClose, plan
                   <div className={styles.priceBlock}>
                     <h4 className={styles.priceLabel}>{isRTL ? 'الاشتراك السنوي' : 'Annual Subscription'}</h4>
                     <div className={styles.priceValue}>
-                      <span className={styles.currency}>{isRTL ? 'ج.م' : 'EGP'}</span>
+                      <span className={styles.currency}>{isRTL ? '﷼' : 'SAR'}</span>
                       <span className={styles.amount}>{plan.price.annual}</span>
                       <span className={styles.period}>{isRTL ? '/سنة' : '/year'}</span>
                     </div>
