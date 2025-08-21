@@ -26,11 +26,11 @@ registerEnumType(UserStatus, {
 });
 
 @ObjectType()
-@Entity('users')
+@Entity('user')
 export class User {
   @Field(() => ID)
-  @PrimaryGeneratedColumn('uuid')
-  id: string;
+  @PrimaryGeneratedColumn()
+  id: number;
 
   @Field()
   @Column({ unique: true })

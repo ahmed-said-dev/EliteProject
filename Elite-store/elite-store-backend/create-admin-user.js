@@ -45,9 +45,17 @@ async function createAdminUser() {
         "password" VARCHAR(255) NOT NULL,
         "firstName" VARCHAR(100),
         "lastName" VARCHAR(100),
+        "phone" VARCHAR(20),
+        "address" TEXT,
+        "city" VARCHAR(100),
+        "country" VARCHAR(100),
+        "avatar" VARCHAR(500),
         "role" VARCHAR(50) DEFAULT 'user',
-        "isActive" BOOLEAN DEFAULT true,
-        "isEmailVerified" BOOLEAN DEFAULT false,
+        "status" VARCHAR(50) DEFAULT 'active',
+        "emailVerified" BOOLEAN DEFAULT false,
+        "emailVerificationToken" VARCHAR(255),
+        "passwordResetToken" VARCHAR(255),
+        "passwordResetExpires" TIMESTAMP,
         "createdAt" TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
         "updatedAt" TIMESTAMP DEFAULT CURRENT_TIMESTAMP
       );
@@ -84,7 +92,7 @@ async function createAdminUser() {
       
       // Create admin user
       const result = await client.query(
-        `INSERT INTO "user" (email, password, "firstName", "lastName", role, "isActive", "isEmailVerified")
+        `INSERT INTO "user" (email, password, "firstName", "lastName", role, status, "emailVerified")
          VALUES ($1, $2, $3, $4, $5, $6, $7)
          RETURNING id, email`,
         [
@@ -93,7 +101,7 @@ async function createAdminUser() {
           adminData.firstName,
           adminData.lastName,
           adminData.role,
-          true,
+          'active',
           true
         ]
       );
