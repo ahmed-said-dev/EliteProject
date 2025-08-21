@@ -109,13 +109,15 @@ async function bootstrap() {
     .build();
 
   const document = SwaggerModule.createDocument(app, config);
-  SwaggerModule.setup('docs', app, document, {
+  SwaggerModule.setup('api/docs', app, document, {
     swaggerOptions: {
       persistAuthorization: true,
       tagsSorter: 'alpha',
       operationsSorter: 'alpha',
     },
-    customSiteTitle: 'Elite Store API Documentation'
+    customSiteTitle: 'Elite Store API Documentation',
+    customCss: '.swagger-ui .topbar { display: none }',
+    customJsStr: 'window.onload = function() { console.log("Swagger UI loaded successfully"); }'
   });
 
   // Global prefix
