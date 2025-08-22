@@ -31,7 +31,7 @@ export const LocalizedContent: React.FC<LocalizedContentProps> = ({
 interface LocalizedTextProps {
   translationKey: string;
   params?: Record<string, string | number>;
-  tag?: keyof JSX.IntrinsicElements;
+  tag?: keyof React.JSX.IntrinsicElements;
   className?: string;
 }
 
