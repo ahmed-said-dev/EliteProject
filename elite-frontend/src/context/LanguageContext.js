@@ -53,8 +53,20 @@ export const LanguageProvider = ({ children }) => {
     }
   };
 
-  // Create a simple t function for translations
-  const t = (key) => translate(key, locale);
+  // Create an enhanced t function for translations with interpolation support
+  const t = (key, params = {}) => {
+    let translation = translate(key, locale);
+    
+    // Handle parameter interpolation
+    if (params && typeof translation === 'string') {
+      Object.keys(params).forEach(param => {
+        const regex = new RegExp(`{{\\s*${param}\\s*}}`, 'g');
+        translation = translation.replace(regex, params[param]);
+      });
+    }
+    
+    return translation;
+  };
   
   return (
     <LanguageContext.Provider value={{ locale, changeLanguage, isRTL, t }}>
