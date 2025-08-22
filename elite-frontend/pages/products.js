@@ -28,7 +28,7 @@ export default function Products() {
         <div className="container mx-auto px-4 relative z-10">
           <div className="text-center mb-10">
             <h2 className="text-4xl font-black mb-4 bg-gradient-to-r from-purple-700 via-indigo-600 to-violet-700 bg-clip-text text-transparent">
-              {t('productsSection.title') || 'تسوق منتجاتنا'}
+               Our Products
             </h2>
             <p className="text-gray-700 max-w-2xl mx-auto text-lg leading-relaxed font-medium">
               {t('productsSection.pageDescription') || 'اكتشف مجموعتنا المميزة من المنتجات عالية الجودة بأسعار تنافسية'}
