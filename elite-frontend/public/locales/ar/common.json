@@ -1492,7 +1492,8 @@
     }
   },
   "productsSection": {
-    "pageDescription": "تصفح مجموعتنا الواسعة من المنتجات عالية الجودة لحيواناتك الأليفة المحبوبة"
+    "pageDescription": "تصفح مجموعتنا الواسعة من المنتجات عالية الجودة لحيواناتك الأليفة المحبوبة",
+    "pageTitle": "منتجاتنا"
   },
   "productCard": {
     "quickView": "عرض سريع",
@@ -1578,6 +1579,11 @@
     "missingFields": "حقول مفقودة: {{fields}}",
     "noEliteStoreItems": "لا توجد منتجات من متجر Elite في السلة",
     "orderFailed": "فشل في إنشاء الطلب"
+  },
+  "countries": {
+    "egypt": "مصر",
+    "saudi": "السعودية",
+    "uae": "الإمارات"
   }
 }
   

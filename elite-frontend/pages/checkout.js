@@ -170,7 +170,7 @@ export default function CheckoutPage() {
         ]}
       />
         
-        <div className="container mx-auto px-4 py-20">
+        <div className="container mx-auto px-4 py-16 pt-20 pb-24">
           <div className="max-w-md mx-auto text-center">
             <div className="w-32 h-32 bg-gradient-to-br from-red-100 to-pink-100 rounded-full flex items-center justify-center mx-auto mb-8">
               <FontAwesomeIcon icon={faExclamationTriangle} className="text-5xl text-red-500" />
@@ -198,7 +198,7 @@ export default function CheckoutPage() {
           backgroundImage="https://images.pexels.com/photos/4498651/pexels-photo-4498651.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
         />
         
-        <div className="container mx-auto px-4 py-20">
+        <div className="container mx-auto px-4 py-16 pt-20 pb-24">
           <div className="max-w-2xl mx-auto text-center">
             <div className="w-32 h-32 bg-gradient-to-br from-green-100 to-emerald-100 rounded-full flex items-center justify-center mx-auto mb-8 animate-pulse">
               <FontAwesomeIcon icon={faCheckCircle} className="text-6xl text-green-500" />
@@ -271,7 +271,7 @@ export default function CheckoutPage() {
         backgroundImage="https://images.pexels.com/photos/4498651/pexels-photo-4498651.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
       />
 
-      <div className="container mx-auto px-4 py-8">
+      <div className="container mx-auto px-4 py-12 pt-16 pb-20" style={{ paddingTop: '50px', paddingBottom: '50px' }}>
         <form onSubmit={handleSubmit} className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           {/* Customer Information */}
           <div className="lg:col-span-2 space-y-6">
@@ -380,9 +380,9 @@ export default function CheckoutPage() {
                       onChange={handleInputChange}
                       className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-transparent"
                     >
-                      <option value="Egypt">مصر</option>
-                      <option value="Saudi">السعودية</option>
-                      <option value="UAE">الإمارات</option>
+                      <option value="Egypt">{t('countries.egypt')}</option>
+                      <option value="Saudi">{t('countries.saudi')}</option>
+                      <option value="UAE">{t('countries.uae')}</option>
                     </select>
                   </div>
                 </div>

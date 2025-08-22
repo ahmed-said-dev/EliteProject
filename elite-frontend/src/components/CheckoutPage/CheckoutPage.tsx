@@ -309,9 +309,9 @@ const CheckoutPage: React.FC = () => {
                         required
                         className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-transparent"
                       >
-                        <option value="Egypt">مصر</option>
-                        <option value="Saudi Arabia">السعودية</option>
-                        <option value="UAE">الإمارات</option>
+                        <option value="Egypt">{t('countries.egypt')}</option>
+                        <option value="Saudi Arabia">{t('countries.saudi')}</option>
+                        <option value="UAE">{t('countries.uae')}</option>
                       </select>
                     </div>
                   </div>

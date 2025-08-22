@@ -91,7 +91,7 @@ const UnifiedCartPage: React.FC = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-50 via-white to-indigo-50 relative overflow-hidden" dir={isRTL ? 'rtl' : 'ltr'}>
+    <div className="min-h-screen bg-gradient-to-br from-purple-50 via-white to-indigo-50 relative overflow-hidden" dir={isRTL ? 'rtl' : 'ltr'} style={{ paddingTop: '50px', paddingBottom: '50px' }}>
       {/* Decorative Background Elements */}
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute top-10 left-10 w-32 h-32 bg-gradient-to-br from-purple-200/30 to-transparent rounded-full blur-xl"></div>

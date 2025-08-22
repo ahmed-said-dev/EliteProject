@@ -1492,7 +1492,8 @@
     }
   },
   "productsSection": {
-    "pageDescription": "Browse our wide selection of high-quality products for your beloved pets"
+    "pageDescription": "Browse our wide selection of high-quality products for your beloved pets",
+    "pageTitle": "Our Products"
   },
   "productCard": {
     "quickView": "Quick View",
@@ -1578,5 +1579,10 @@
     "missingFields": "Missing fields: {{fields}}",
     "noEliteStoreItems": "No Elite Store products in cart",
     "orderFailed": "Order creation failed"
+  },
+  "countries": {
+    "egypt": "Egypt",
+    "saudi": "Saudi Arabia",
+    "uae": "UAE"
   }
 }

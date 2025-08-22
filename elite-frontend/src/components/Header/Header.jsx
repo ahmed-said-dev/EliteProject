@@ -142,7 +142,7 @@ const Header = () => {
                 )}
               </div>
             </Link>
-            <div className={styles.accountContainer} ref={accountMenuRef}>
+            {/* <div className={styles.accountContainer} ref={accountMenuRef}>
               <button 
                 className={styles.btnPrimary} 
                 onClick={() => setShowAccountMenu(!showAccountMenu)}
@@ -193,7 +193,7 @@ const Header = () => {
                   )}
                 </div>
               )}
-            </div>
+            </div> */}
             <Link href="/appointment" className={`${styles.btnPrimary} ${styles.desktopAppointmentBtn}`}>
               <i className="fa-solid fa-calendar-check"></i>
               <span>{t('header.bookAppointment')}</span>
