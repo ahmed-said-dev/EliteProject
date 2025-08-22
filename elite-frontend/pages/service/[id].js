@@ -4,6 +4,7 @@ import Head from 'next/head';
 import Link from 'next/link';
 import PageBanner from '../../src/components/PageBanner/PageBanner';
 import Footer from '../../src/components/Footer/Footer';
+import { useLanguage } from '../../src/context/LanguageContext';
 
 // Import services data directly from ServicesSection
 const getServices = async () => {
@@ -15,6 +16,8 @@ const getServices = async () => {
 export default function ServiceDetailPage() {
   const router = useRouter();
   const { id } = router.query;
+  const { t, isRTL } = useLanguage();
+  const dir = isRTL ? 'rtl' : 'ltr';
   const [service, setService] = useState(null);
   const [relatedServices, setRelatedServices] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -53,15 +56,15 @@ export default function ServiceDetailPage() {
   };
 
   if (loading) {
-    return <div className="loading-screen">جاري التحميل...</div>;
+    return <div className="loading-screen" dir={dir}>{t('loading.text')}</div>;
   }
 
   if (!service) {
     return (
-      <div className="error-screen">
-        <h2>الخدمة غير موجودة</h2>
+      <div className="error-screen" dir={dir}>
+        <h2>{t('serviceDetail.notFound')}</h2>
         <Link href="/services">
-          <a className="btn-primary">العودة للخدمات</a>
+          <a className="btn-primary">{t('serviceDetail.backToServices')}</a>
         </Link>
       </div>
     );
@@ -70,20 +73,20 @@ export default function ServiceDetailPage() {
   // Create FAQs based on the service type
   const faqs = [
     {
-      question: `What does the ${service.title.toLowerCase()} service include?`,
-      answer: `Our ${service.title.toLowerCase()} service includes comprehensive care tailored to your pet's specific needs. We use state-of-the-art equipment and techniques to ensure the highest quality of veterinary care.`
+      question: t('serviceDetail.faqs.whatIncludes'),
+      answer: t('serviceDetail.faqs.whatIncludesAnswer')
     },
     {
-      question: 'How long does a typical appointment take?',
-      answer: 'The duration of appointments varies depending on the specific service and your pet\'s individual needs. Basic consultations typically take 30-45 minutes, while more complex procedures may require additional time.'
+      question: t('serviceDetail.faqs.duration'),
+      answer: t('serviceDetail.faqs.durationAnswer')
     },
     {
-      question: 'Do I need to prepare my pet before bringing them in?',
-      answer: 'For most routine visits, no special preparation is required. However, for specific procedures, we may recommend fasting or other preparations. When you schedule your appointment, our staff will provide detailed instructions.'
+      question: t('serviceDetail.faqs.preparation'),
+      answer: t('serviceDetail.faqs.preparationAnswer')
     },
     {
-      question: 'What if my pet needs additional treatment?',
-      answer: 'If during the examination we identify that your pet requires additional treatment, we will discuss all options with you before proceeding. We provide detailed explanations of recommended procedures, associated costs, and expected outcomes.'
+      question: t('serviceDetail.faqs.additionalTreatment'),
+      answer: t('serviceDetail.faqs.additionalTreatmentAnswer')
     }
   ];
 
@@ -99,7 +102,7 @@ export default function ServiceDetailPage() {
         backgroundImage="/images/banner/bnr1.webp"
       />
       
-      <main>
+      <main dir={dir}>
         <div className="service-detail-page">
           {/* Hero Section */}
           <section className="service-hero">
@@ -125,7 +128,7 @@ export default function ServiceDetailPage() {
           {/* Service Description Section */}
           <section className="service-description">
             <div className="container">
-              <h2 className="section-title">Service Overview</h2>
+              <h2 className="section-title">{t('serviceDetail.aboutService')}</h2>
               
               <div className="description-content">
                 <div className="desc-text">
@@ -139,7 +142,7 @@ export default function ServiceDetailPage() {
                 </div>
                 
                 <div className="desc-icons-wrapper">
-                  <h3>Key Highlights</h3>
+                  <h3>{t('serviceDetail.featuresTitle')}</h3>
                   <div className="desc-icons-container">
                     {service.icons.map((icon, index) => (
                       <div key={index} className="icon-item">
@@ -155,7 +158,7 @@ export default function ServiceDetailPage() {
           {/* Service Features Section */}
           <section className="service-features">
             <div className="container">
-              <h2 className="section-title">What We Offer</h2>
+              <h2 className="section-title">{t('serviceDetail.featuresTitle')}</h2>
               
               <div className="features-container">
                 {service.features.map((feature, index) => (
@@ -177,7 +180,7 @@ export default function ServiceDetailPage() {
           {/* FAQ Section */}
           <section className="service-faq">
             <div className="container">
-              <h2 className="section-title">Frequently Asked Questions</h2>
+              <h2 className="section-title">{t('serviceDetail.faqs.title')}</h2>
               
               <div className="faq-container">
                 {faqs.map((faq, index) => (
@@ -203,7 +206,7 @@ export default function ServiceDetailPage() {
           {/* Related Services Section */}
           <section className="service-related">
             <div className="container">
-              <h2 className="section-title">Related Services</h2>
+              <h2 className="section-title">{t('serviceDetail.relatedServices')}</h2>
               
               <div className="related-grid">
                 {relatedServices.map((relatedService) => (
@@ -231,7 +234,7 @@ export default function ServiceDetailPage() {
                       
                       <Link href={`/service/${relatedService.id}`}>
                         <a className="related-btn">
-                          View Service
+                          {t('serviceDetail.aboutService')}
                         </a>
                       </Link>
                     </div>

@@ -6,12 +6,16 @@ import { AppointmentBookingForm } from '@/components/AppointmentBookingForm';
 import { EmergencyCare } from '@/components/EmergencyCare';
 import { SectionDivider } from '@/components/SectionDivider';
 import { EmergencyOutro } from '@/components/EmergencyOutro';
+import { useLanguage } from '@/context/LanguageContext';
 
 export default function Appointment() {
+  const { t, isRTL } = useLanguage();
+  const dir = isRTL ? 'rtl' : 'ltr';
+
   return (
-    <main>
+    <main dir={dir}>
       <PageBanner 
-        title="Book Appointment"
+        title={t('appointment.title.book')}
         backgroundImage="/appointment/pgbanner.jpg"
       />
       <AppointmentIntro />

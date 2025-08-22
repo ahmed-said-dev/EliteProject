@@ -22,7 +22,8 @@ import { formatCurrency } from '@/lib/currency';
 
 const CheckoutPage: React.FC = () => {
   const router = useRouter();
-  const { isRTL, t } = useLanguage();
+  const { t, isRTL } = useLanguage();
+  const dir = isRTL ? 'rtl' : 'ltr';
   const { state, getCartTotal, getCartCount, clearCart } = useUnifiedCart();
   const { addNotification } = useNotifications();
   
@@ -58,8 +59,8 @@ const CheckoutPage: React.FC = () => {
     if (state.items.filter(item => item.source === 'elite-store').length === 0) {
       addNotification({
         type: 'error',
-        title: t('checkout.errors.error'),
-        message: t('checkout.errors.noItems')
+        title: 'خطأ',
+        message: 'لا توجد منتجات من متجر Elite في السلة'
       });
       return;
     }
@@ -71,8 +72,8 @@ const CheckoutPage: React.FC = () => {
     if (missingFields.length > 0) {
       addNotification({
         type: 'error',
-        title: t('checkout.errors.fillRequired'),
-        message: t('checkout.errors.missingFields').replace('%fields%', missingFields.join(', ')),
+        title: 'يرجى تعبئة جميع الحقول المطلوبة',
+        message: `حقول مفقودة: ${missingFields.join(', ')}`,
         duration: 5000
       });
       return;
@@ -126,8 +127,8 @@ const CheckoutPage: React.FC = () => {
       
       addNotification({
         type: 'success',
-        title: t('checkout.success.orderCreated'),
-        message: t('checkout.success.orderNumber').replace('%number%', order?.orderNumber || t('checkout.success.notAvailable')),
+        title: 'تم إنشاء الطلب بنجاح!',
+        message: `رقم الطلب: ${order?.orderNumber || 'غير متاح'}`,
         duration: 8000
       });
 
@@ -139,8 +140,8 @@ const CheckoutPage: React.FC = () => {
       console.error('❌ Error details:', error.response || error.message);
       addNotification({
         type: 'error',
-        title: t('checkout.errors.failed'),
-        message: error.message || t('general.tryAgain')
+        title: 'فشل في إنشاء الطلب',
+        message: error.message || 'حدث خطأ غير متوقع'
       });
     } finally {
       setLoading(false);

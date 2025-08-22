@@ -3,7 +3,6 @@
 import React, { useState, useMemo } from 'react';
 import { Search, Tag, X, Hash } from 'lucide-react';
 import { FilterOption, LanguageCode } from '@/utils/vendure/types';
-import { useLanguage } from '@/context/LanguageContext';
 
 interface TagFilterProps {
   tags: FilterOption[];
@@ -24,7 +23,6 @@ const TagFilter: React.FC<TagFilterProps> = ({
   showSearch = true,
   displayStyle = 'list',
 }) => {
-  const { t } = useLanguage();
   const [searchTerm, setSearchTerm] = useState('');
   const [showOnlySelected, setShowOnlySelected] = useState(false);
 
@@ -171,13 +169,16 @@ const TagFilter: React.FC<TagFilterProps> = ({
         {selectedTags.length > 0 && (
           <div className="flex items-center justify-between pt-2 border-t border-gray-200">
             <span className="text-xs text-gray-500">
-              {t('filters.tags.selected').replace('%count%', selectedTags.length.toString())}
+              {language === 'ar' 
+                ? `تم اختيار ${selectedTags.length} تصنيف` 
+                : `${selectedTags.length} tags selected`
+              }
             </span>
             <button
               onClick={clearSelection}
               className="text-xs text-red-600 hover:text-red-700 transition-colors"
             >
-              {t('filters.tags.clear')}
+              {language === 'ar' ? 'مسح الكل' : 'Clear all'}
             </button>
           </div>
         )}
@@ -229,7 +230,10 @@ const TagFilter: React.FC<TagFilterProps> = ({
                 {language === 'ar' ? 'المحددة فقط' : 'Selected only'}
               </button>
               <span className="text-gray-500">
-                              {t('filters.tags.showing').replace('%filtered%', filteredTags.length.toString()).replace('%total%', tags.length.toString())}
+                {language === 'ar' 
+                  ? `${filteredTags.length} من ${tags.length}` 
+                  : `${filteredTags.length} of ${tags.length}`
+                }
               </span>
             </div>
 
@@ -338,7 +342,10 @@ const TagFilter: React.FC<TagFilterProps> = ({
       {selectedTags.length > 0 && !showOnlySelected && (
         <div className="pt-3 border-t border-gray-200">
           <div className="text-xs text-gray-500 mb-2">
-                          {t('filters.tags.selected').replace('%count%', selectedTags.length.toString())}
+            {language === 'ar' 
+              ? `تم اختيار ${selectedTags.length} تصنيف` 
+              : `${selectedTags.length} tags selected`
+            }
           </div>
           <div className="flex flex-wrap gap-1">
             {selectedTags.slice(0, 6).map(tagId => {

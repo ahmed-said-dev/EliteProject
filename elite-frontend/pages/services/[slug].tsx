@@ -208,39 +208,8 @@ const ServiceDetailPage: React.FC<ServiceDetailPageProps> = ({ initialService, e
     }
   }, [serviceId, formattedServiceDetail, serviceDetail, rawData]);
   
-  // Use custom translations instead of useTranslation
-  const t = (key: string) => {
-    const translations: {[key: string]: {[key: string]: string}} = {
-      en: {
-        'siteName': 'Elite Veterinary Clinic',
-        'loading': 'Loading...',
-        'serviceDetail.notFound': 'Service Not Found',
-        'serviceDetail.notFoundDesc': 'Sorry, the service you are looking for could not be found.',
-        'serviceDetail.backToServices': 'Back to Services',
-        'serviceDetail.defaultDesc': 'Elite Veterinary Clinic offers high quality services for your beloved pets.',
-        'serviceDetail.featuresTitle': 'Service Features',
-        'serviceDetail.aboutService': 'About This Service',
-        'serviceDetail.relatedServices': 'Related Services',
-        'nav.home': 'Home',
-        'nav.services': 'Services'
-      },
-      ar: {
-        'siteName': 'Elite Veterinary Clinic',
-        'loading': 'Loading...',
-        'serviceDetail.notFound': 'Service Not Found',
-        'serviceDetail.notFoundDesc': 'Sorry, the service you are looking for could not be found.',
-        'serviceDetail.backToServices': 'Back to Services',
-        'serviceDetail.defaultDesc': 'Elite Veterinary Clinic offers high quality services for your beloved pets.',
-        'serviceDetail.featuresTitle': 'Service Features',
-        'serviceDetail.aboutService': 'About This Service',
-        'serviceDetail.relatedServices': 'Related Services',
-        'nav.home': 'Home',
-        'nav.services': 'Services'
-      }
-    };
-    
-    return translations[locale || 'en'][key] || key;
-  };
+  // Use unified language context
+  const { t } = useLanguage();
 
   // Use the loading variable from hook instead of redefining it
   // Add optional delay to improve user experience
