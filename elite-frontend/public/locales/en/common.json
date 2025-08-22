@@ -777,58 +777,6 @@
       "signInAccount": "Sign in to your account"
     }
   },
-  "productsSection": {
-    "title": "Pet Care Products",
-    "description": "Browse our wide selection of high-quality products for your beloved pets. From premium food to fun toys and essential grooming tools, we have everything you need.",
-    "searchPlaceholder": "Search for products...",
-    "filterButton": "Filter",
-    "resultsCount": "%count% products found",
-    "resultsCountZero": "No products found",
-    "resultsCountOne": "1 product found",
-    "sortBy": "Sort by:",
-    "sortOptions": {
-      "popularity": "Popularity",
-      "priceLow": "Price: Low to High",
-      "priceHigh": "Price: High to Low",
-      "newest": "Newest Arrivals",
-      "topRated": "Top Rated"
-    },
-    "noResults": {
-      "title": "No Products Found",
-      "message": "We couldn't find any products matching your criteria."
-    },
-    "resetFilters": "Reset Filters",
-    "pagination": {
-      "previous": "Previous",
-      "next": "Next"
-    },
-    "petTypes": [
-      "Dogs",
-      "Cats",
-      "Birds",
-      "Small Pets",
-      "Fish",
-      "Reptiles"
-    ],
-    "productTypes": [
-      "Food",
-      "Toys",
-      "Medicine",
-      "Accessories",
-      "Grooming",
-      "Beds",
-      "Carriers"
-    ],
-    "brands": [
-      "Royal Canin",
-      "Purina",
-      "Hills",
-      "Pedigree",
-      "Whiskas",
-      "Kong",
-      "FURminator"
-    ]
-  },
   "products": {
     "badges": {
       "new": "New",
@@ -1413,47 +1361,6 @@
       "badge": "24/7 Emergency Care"
     }
   },
-  "cart": {
-    "title": "Your Shopping Cart",
-    "emptyCart": {
-      "message": "Your cart is empty",
-      "description": "You haven't added any products to your cart yet.",
-      "browseButton": "Browse Products"
-    },
-    "cartItems": {
-      "product": "Product",
-      "price": "Price",
-      "quantity": "Quantity",
-      "total": "Total",
-      "remove": "Remove"
-    },
-    "cartSummary": {
-      "title": "Cart Summary",
-      "subtotal": "Subtotal",
-      "shipping": "Shipping",
-      "shippingOptions": {
-        "standard": "Standard Delivery (3-5 business days)",
-        "express": "Express Delivery (1-2 business days)",
-        "free": "Free Shipping"
-      },
-      "tax": "Tax",
-      "total": "Total",
-      "proceedToCheckout": "Proceed to Checkout"
-    },
-    "coupon": {
-      "title": "Apply Coupon",
-      "placeholder": "Enter coupon code",
-      "apply": "Apply",
-      "success": "Coupon applied successfully!",
-      "error": "Invalid coupon code"
-    },
-    "continueShopping": "Continue Shopping",
-    "updateCart": "Update Cart",
-    "productCount": {
-      "singular": "1 product in your cart",
-      "plural": "%count% products in your cart"
-    }
-  },
   "storeProducts": {
   "filters": {
     "title": "Search Filters",
@@ -1583,5 +1490,91 @@
       "total": "Total",
       "free": "Free"
     }
+  },
+  "productsSection": {
+    "pageDescription": "Browse our wide selection of high-quality products for your beloved pets"
+  },
+  "productCard": {
+    "quickView": "Quick View",
+    "addToCart": "Add to Cart",
+    "adding": "Adding...",
+    "added": "Added!",
+    "inCart": "In Cart ({{quantity}})",
+    "inStock": "In Stock ({{quantity}} pieces)",
+    "outOfStock": "Out of Stock",
+    "freeShipping": "Free Shipping",
+    "shipping": "Shipping {{amount}}"
+  },
+  "productDetail": {
+    "loading": "Loading product...",
+    "notFound": "Product Not Found",
+    "notFoundDesc": "Sorry, we couldn't find this product",
+    "backToProducts": "Back to Products",
+    "addToCart": "Add to Cart",
+    "quantity": "Quantity",
+    "description": "Description",
+    "category": "Category",
+    "features": "Features",
+    "relatedProducts": "Related Products",
+    "addedToCart": "Added to Cart Successfully",
+    "shareProduct": "Share Product",
+    "availability": "Availability",
+    "available": "Available",
+    "unavailable": "Unavailable",
+    "price": "Price",
+    "originalPrice": "Original Price",
+    "discount": "{{percent}}% Off"
+  },
+  "cart": {
+    "title": "Shopping Cart",
+    "emptyCart": "Cart is Empty",
+    "emptyDescription": "You haven't added any products to your cart yet. Browse our products and choose what suits you!",
+    "browseProducts": "Browse Products",
+    "continueShopping": "Continue Shopping",
+    "clearCart": "Clear Cart",
+    "orderSummary": "Order Summary",
+    "subtotal": "Subtotal",
+    "shipping": "Shipping",
+    "tax": "Tax (14%)",
+    "total": "Total",
+    "freeShipping": "Free",
+    "freeShippingThreshold": "Add products worth {{amount}} for free shipping!",
+    "securePayment": "Secure and Protected Payment",
+    "checkout": "Checkout - {{amount}}",
+    "remove": "Remove",
+    "updateQuantity": "Update Quantity",
+    "productCount": "{{count}} products"
+  },
+  "checkoutPage": {
+    "title": "Checkout",
+    "backToCart": "Back to Cart",
+    "personalInfo": "Personal Information",
+    "firstName": "First Name",
+    "lastName": "Last Name",
+    "email": "Email Address",
+    "phone": "Phone Number",
+    "shippingInfo": "Shipping Information",
+    "address": "Address",
+    "city": "City",
+    "country": "Country",
+    "paymentMethod": "Payment Method",
+    "cashOnDelivery": "Cash on Delivery",
+    "payOnDelivery": "Pay cash when the product arrives",
+    "creditCard": "Credit Card (Coming Soon)",
+    "notes": "Additional Notes",
+    "notesPlaceholder": "Any special notes for your order...",
+    "orderSummary": "Order Summary",
+    "placeOrder": "Place Order",
+    "processing": "Processing...",
+    "confirmOrder": "Confirm Order - {{amount}}",
+    "orderSuccess": "Order Created Successfully!",
+    "orderNumber": "Order Number: {{number}}",
+    "contactIn24h": "We will contact you within 24 hours to confirm the order and arrange delivery",
+    "expectedDelivery": "Expected delivery time: 2-3 business days",
+    "secureTransaction": "Secure and Protected Transaction",
+    "requiredFields": "Please fill all required fields",
+    "missingFields": "Missing fields: {{fields}}",
+    "noEliteStoreItems": "No Elite Store products in cart",
+    "orderFailed": "Order creation failed"
   }
 }

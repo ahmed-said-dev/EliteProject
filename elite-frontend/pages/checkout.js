@@ -23,7 +23,8 @@ import PageBanner from '@/components/PageBanner/PageBanner';
 export default function CheckoutPage() {
   const router = useRouter();
   const { state, getCartTotal, getCartCount, clearCart } = useUnifiedCart();
-  const { t } = useLanguage();
+  const { t, isRTL } = useLanguage();
+  const dir = isRTL ? 'rtl' : 'ltr';
   const { addNotification } = useNotifications();
   const [formData, setFormData] = useState({
     customerFirstName: '',
@@ -158,28 +159,28 @@ export default function CheckoutPage() {
   // Redirect to cart if empty or no Elite Store items
   if (eliteStoreItems.length === 0 && !orderComplete) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-purple-50 via-white to-indigo-50">
-        <PageBanner
-          title="إتمام الطلب"
-          breadcrumbs={[
-            { label: 'الرئيسية', url: '/' },
-            { label: 'السلة', url: '/cart' },
-            { label: 'إتمام الطلب', url: '/checkout' }
-          ]}
-        />
+      <div className="min-h-screen bg-gradient-to-br from-purple-50 via-white to-indigo-50" dir={dir}>
+              <PageBanner
+        title={t('checkoutPage.title')}
+        breadcrumbs={[
+          { label: t('header.home'), url: '/' },
+          { label: t('cart.title'), url: '/cart' },
+          { label: t('checkoutPage.title'), url: '/checkout' }
+        ]}
+      />
         
         <div className="container mx-auto px-4 py-20">
           <div className="max-w-md mx-auto text-center">
             <div className="w-32 h-32 bg-gradient-to-br from-red-100 to-pink-100 rounded-full flex items-center justify-center mx-auto mb-8">
               <FontAwesomeIcon icon={faExclamationTriangle} className="text-5xl text-red-500" />
             </div>
-            <h2 className="text-3xl font-black mb-4 text-gray-800">السلة فارغة</h2>
-            <p className="text-gray-600 mb-8">لا يمكنك إتمام الطلب بدون منتجات في السلة</p>
+            <h2 className="text-3xl font-black mb-4 text-gray-800">{t('cart.emptyCart')}</h2>
+            <p className="text-gray-600 mb-8">{t('checkoutPage.noEliteStoreItems')}</p>
             <Link 
               href="/products"
               className="inline-flex items-center gap-3 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 text-white px-8 py-4 rounded-2xl font-bold transition-all duration-300 transform hover:scale-105 shadow-xl"
             >
-              تصفح المنتجات
+              {t('cart.browseProducts')}
             </Link>
           </div>
         </div>
@@ -190,9 +191,9 @@ export default function CheckoutPage() {
   // Order completion page
   if (orderComplete) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-green-50 via-white to-emerald-50">
+      <div className="min-h-screen bg-gradient-to-br from-green-50 via-white to-emerald-50" dir={dir}>
         <PageBanner
-          title="تم إتمام الطلب بنجاح"
+          title={t('checkoutPage.orderSuccess')}
           backgroundImage="https://images.pexels.com/photos/4498651/pexels-photo-4498651.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
         />
         
@@ -203,28 +204,28 @@ export default function CheckoutPage() {
             </div>
             
             <h1 className="text-4xl font-black mb-4 bg-gradient-to-r from-green-700 to-emerald-700 bg-clip-text text-transparent">
-              تم إتمام طلبك بنجاح!
+              {t('checkoutPage.orderSuccess')}
             </h1>
             
             <div className="bg-white/80 backdrop-blur-md rounded-3xl p-8 shadow-xl border border-green-200/50 mb-8">
-              <h3 className="text-xl font-bold text-gray-800 mb-4">تفاصيل الطلب</h3>
+              <h3 className="text-xl font-bold text-gray-800 mb-4">{t('checkoutPage.orderSummary')}</h3>
               <div className="space-y-3 text-right">
                 <div className="flex justify-between">
-                  <span className="text-gray-600">رقم الطلب:</span>
+                  <span className="text-gray-600">{t('checkoutPage.orderNumber', { number: '' })}</span>
                   <span className="font-bold text-green-600">#ORD-{Date.now().toString().slice(-6)}</span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-gray-600">إجمالي الطلب:</span>
+                  <span className="text-gray-600">{t('cart.total')}:</span>
                   <span className="font-bold text-gray-800">{formatPrice(total)}</span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-gray-600">طريقة الدفع:</span>
+                  <span className="text-gray-600">{t('checkoutPage.paymentMethod')}:</span>
                   <span className="font-bold text-gray-800">
-                    {formData.paymentMethod === 'cash_on_delivery' ? 'الدفع عند الاستلام' : 'بطاقة ائتمان'}
+                    {formData.paymentMethod === 'cash_on_delivery' ? t('checkoutPage.cashOnDelivery') : t('checkoutPage.creditCard')}
                   </span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-gray-600">وقت التسليم المتوقع:</span>
+                  <span className="text-gray-600">{t('checkoutPage.expectedDelivery')}:</span>
                   <span className="font-bold text-gray-800">2-3 أيام عمل</span>
                 </div>
               </div>
@@ -233,7 +234,7 @@ export default function CheckoutPage() {
             <div className="bg-gradient-to-r from-yellow-50 to-orange-50 rounded-2xl p-6 border border-yellow-200/50 mb-8">
               <p className="text-yellow-800 text-lg font-medium">
                 <FontAwesomeIcon icon={faSpinner} className="animate-spin mr-2" />
-                سيتم التواصل معك خلال 24 ساعة لتأكيد الطلب وترتيب التسليم
+                {t('checkoutPage.contactIn24h')}
               </p>
             </div>
 
@@ -242,13 +243,13 @@ export default function CheckoutPage() {
                 href="/products"
                 className="bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 text-white px-8 py-3 rounded-xl font-bold transition-all duration-300"
               >
-                متابعة التسوق
+                {t('cart.continueShopping')}
               </Link>
               <Link 
                 href="/"
                 className="bg-white hover:bg-gray-50 text-gray-800 border border-gray-300 px-8 py-3 rounded-xl font-bold transition-all duration-300"
               >
-                العودة للرئيسية
+                {t('header.home')}
               </Link>
             </div>
           </div>
@@ -258,13 +259,13 @@ export default function CheckoutPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-50 via-white to-indigo-50">
+    <div className="min-h-screen bg-gradient-to-br from-purple-50 via-white to-indigo-50" dir={dir}>
       <PageBanner
-        title="إتمام الطلب"
+        title={t('checkoutPage.title')}
         breadcrumbs={[
-          { label: 'الرئيسية', url: '/' },
-          { label: 'السلة', url: '/cart' },
-          { label: 'إتمام الطلب', url: '/checkout' }
+          { label: t('header.home'), url: '/' },
+          { label: t('cart.title'), url: '/cart' },
+          { label: t('checkoutPage.title'), url: '/checkout' }
         ]}
         backgroundImage="https://images.pexels.com/photos/4498651/pexels-photo-4498651.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
       />
@@ -277,12 +278,12 @@ export default function CheckoutPage() {
             <div className="bg-white/80 backdrop-blur-md rounded-3xl shadow-xl border border-purple-200/30 p-6">
               <h3 className="text-xl font-black text-gray-800 mb-6 flex items-center gap-3">
                 <FontAwesomeIcon icon={faUser} className="text-purple-600" />
-                المعلومات الشخصية
+                {t('checkoutPage.personalInfo')}
               </h3>
               
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-sm font-bold text-gray-700 mb-2">الاسم الأول *</label>
+                  <label className="block text-sm font-bold text-gray-700 mb-2">{t('checkoutPage.firstName')} *</label>
                   <input
                     type="text"
                     name="customerFirstName"
@@ -290,12 +291,12 @@ export default function CheckoutPage() {
                     onChange={handleInputChange}
                     required
                     className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-transparent"
-                    placeholder="أدخل الاسم الأول"
+                    placeholder={t('checkoutPage.firstName')}
                   />
                 </div>
                 
                 <div>
-                  <label className="block text-sm font-bold text-gray-700 mb-2">الاسم الأخير *</label>
+                  <label className="block text-sm font-bold text-gray-700 mb-2">{t('checkoutPage.lastName')} *</label>
                   <input
                     type="text"
                     name="customerLastName"
@@ -303,12 +304,12 @@ export default function CheckoutPage() {
                     onChange={handleInputChange}
                     required
                     className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-transparent"
-                    placeholder="أدخل الاسم الأخير"
+                    placeholder={t('checkoutPage.lastName')}
                   />
                 </div>
                 
                 <div>
-                  <label className="block text-sm font-bold text-gray-700 mb-2">البريد الإلكتروني *</label>
+                  <label className="block text-sm font-bold text-gray-700 mb-2">{t('checkoutPage.email')} *</label>
                   <input
                     type="email"
                     name="customerEmail"
@@ -321,7 +322,7 @@ export default function CheckoutPage() {
                 </div>
                 
                 <div>
-                  <label className="block text-sm font-bold text-gray-700 mb-2">رقم الهاتف *</label>
+                  <label className="block text-sm font-bold text-gray-700 mb-2">{t('checkoutPage.phone')} *</label>
                   <input
                     type="tel"
                     name="customerPhone"
@@ -339,12 +340,12 @@ export default function CheckoutPage() {
             <div className="bg-white/80 backdrop-blur-md rounded-3xl shadow-xl border border-purple-200/30 p-6">
               <h3 className="text-xl font-black text-gray-800 mb-6 flex items-center gap-3">
                 <FontAwesomeIcon icon={faMapMarkerAlt} className="text-purple-600" />
-                عنوان التسليم
+                {t('checkoutPage.shippingInfo')}
               </h3>
               
               <div className="space-y-4">
                 <div>
-                  <label className="block text-sm font-bold text-gray-700 mb-2">العنوان التفصيلي *</label>
+                  <label className="block text-sm font-bold text-gray-700 mb-2">{t('checkoutPage.address')} *</label>
                   <textarea
                     name="shippingAddress"
                     value={formData.shippingAddress}
@@ -352,13 +353,13 @@ export default function CheckoutPage() {
                     required
                     rows={3}
                     className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-transparent resize-none"
-                    placeholder="أدخل العنوان التفصيلي..."
+                    placeholder={t('checkoutPage.address')}
                   />
                 </div>
                 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-sm font-bold text-gray-700 mb-2">المدينة *</label>
+                    <label className="block text-sm font-bold text-gray-700 mb-2">{t('checkoutPage.city')} *</label>
                     <input
                       type="text"
                       name="shippingCity"
@@ -366,12 +367,12 @@ export default function CheckoutPage() {
                       onChange={handleInputChange}
                       required
                       className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-transparent"
-                      placeholder="القاهرة"
+                      placeholder={t('checkoutPage.city')}
                     />
                   </div>
                   
                   <div>
-                    <label className="block text-sm font-bold text-gray-700 mb-2">البلد *</label>
+                    <label className="block text-sm font-bold text-gray-700 mb-2">{t('checkoutPage.country')} *</label>
                     <select
                       name="shippingCountry"
                       value={formData.shippingCountry}
@@ -391,7 +392,7 @@ export default function CheckoutPage() {
             <div className="bg-white/80 backdrop-blur-md rounded-3xl shadow-xl border border-purple-200/30 p-6">
               <h3 className="text-xl font-black text-gray-800 mb-6 flex items-center gap-3">
                 <FontAwesomeIcon icon={faCreditCard} className="text-purple-600" />
-                طريقة الدفع
+                {t('checkoutPage.paymentMethod')}
               </h3>
               
               <div className="space-y-3">
@@ -406,7 +407,7 @@ export default function CheckoutPage() {
                   />
                   <div className="flex items-center gap-2">
                     <FontAwesomeIcon icon={faTruck} className="text-green-600" />
-                    <span className="font-medium">الدفع عند الاستلام</span>
+                    <span className="font-medium">{t('checkoutPage.cashOnDelivery')}</span>
                   </div>
                 </label>
                 
@@ -422,7 +423,7 @@ export default function CheckoutPage() {
                   />
                   <div className="flex items-center gap-2">
                     <FontAwesomeIcon icon={faCreditCard} className="text-blue-600" />
-                    <span className="font-medium">بطاقة ائتمان (قريباً)</span>
+                    <span className="font-medium">{t('checkoutPage.creditCard')}</span>
                   </div>
                 </label>
               </div>
@@ -430,14 +431,14 @@ export default function CheckoutPage() {
 
             {/* Order Notes */}
             <div className="bg-white/80 backdrop-blur-md rounded-3xl shadow-xl border border-purple-200/30 p-6">
-              <h3 className="text-xl font-black text-gray-800 mb-6">ملاحظات إضافية</h3>
+              <h3 className="text-xl font-black text-gray-800 mb-6">{t('checkoutPage.notes')}</h3>
               <textarea
                 name="notes"
                 value={formData.notes}
                 onChange={handleInputChange}
                 rows={4}
                 className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-transparent resize-none"
-                placeholder="أي ملاحظات أو طلبات خاصة (اختياري)..."
+                placeholder={t('checkoutPage.notesPlaceholder')}
               />
             </div>
           </div>
@@ -446,7 +447,7 @@ export default function CheckoutPage() {
           <div className="lg:col-span-1">
             <div className="bg-white/90 backdrop-blur-lg rounded-3xl shadow-2xl border border-purple-200/50 overflow-hidden sticky top-8">
               <div className="p-6 bg-gradient-to-r from-purple-500/10 to-indigo-500/10">
-                <h3 className="text-xl font-black text-gray-800">ملخص الطلب</h3>
+                <h3 className="text-xl font-black text-gray-800">{t('checkoutPage.orderSummary')}</h3>
               </div>
 
               <div className="p-6 space-y-4">
@@ -465,7 +466,7 @@ export default function CheckoutPage() {
                         </h4>
                         <div className="flex justify-between items-center mt-1">
                           <span className="text-xs text-gray-500">
-                            الكمية: {item.quantity}
+                            {t('productDetail.quantity')}: {item.quantity}
                           </span>
                           <span className="text-sm font-bold text-purple-600">
                             {formatPrice((item.salePrice || item.price) * item.quantity)}
@@ -478,15 +479,15 @@ export default function CheckoutPage() {
 
                 <div className="border-t border-gray-200 pt-4 space-y-3">
                   <div className="flex justify-between">
-                    <span className="text-gray-600">المجموع الفرعي</span>
+                    <span className="text-gray-600">{t('cart.subtotal')}</span>
                     <span className="font-bold">{formatPrice(subtotal)}</span>
                   </div>
                   
                   <div className="flex justify-between">
-                    <span className="text-gray-600">الشحن</span>
+                    <span className="text-gray-600">{t('cart.shipping')}</span>
                     <span className="font-bold">
                       {shippingCost === 0 ? (
-                        <span className="text-green-600">مجاني</span>
+                        <span className="text-green-600">{t('cart.freeShipping')}</span>
                       ) : (
                         formatPrice(shippingCost)
                       )}
@@ -494,13 +495,13 @@ export default function CheckoutPage() {
                   </div>
                   
                   <div className="flex justify-between">
-                    <span className="text-gray-600">الضريبة</span>
+                    <span className="text-gray-600">{t('cart.tax')}</span>
                     <span className="font-bold">{formatPrice(taxAmount)}</span>
                   </div>
                   
                   <div className="border-t border-gray-200 pt-3">
                     <div className="flex justify-between items-center">
-                      <span className="text-lg font-black text-gray-800">الإجمالي</span>
+                      <span className="text-lg font-black text-gray-800">{t('cart.total')}</span>
                       <span className="text-2xl font-black bg-gradient-to-r from-purple-600 to-indigo-600 bg-clip-text text-transparent">
                         {formatPrice(total)}
                       </span>
@@ -510,7 +511,7 @@ export default function CheckoutPage() {
 
                 <div className="flex items-center justify-center gap-2 text-sm text-gray-500 mt-4">
                   <FontAwesomeIcon icon={faShieldAlt} className="text-green-500" />
-                  دفع آمن ومحمي
+                  {t('checkoutPage.secureTransaction')}
                 </div>
 
                 <button
@@ -521,12 +522,12 @@ export default function CheckoutPage() {
                   {isProcessing ? (
                     <>
                       <FontAwesomeIcon icon={faSpinner} spin />
-                      جاري المعالجة...
+                      {t('checkoutPage.processing')}
                     </>
                   ) : (
                     <>
                       <FontAwesomeIcon icon={faCheckCircle} />
-                      تأكيد الطلب - {formatPrice(total)}
+                      {t('checkoutPage.confirmOrder', { amount: formatPrice(total) })}
                     </>
                   )}
                 </button>

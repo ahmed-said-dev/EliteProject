@@ -52,7 +52,7 @@ const UnifiedCartPage: React.FC = () => {
 
   if (state.items.length === 0) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-purple-50 via-white to-indigo-50 relative overflow-hidden">
+      <div className="min-h-screen bg-gradient-to-br from-purple-50 via-white to-indigo-50 relative overflow-hidden" dir={isRTL ? 'rtl' : 'ltr'}>
         {/* Decorative Background Elements */}
         <div className="absolute inset-0 pointer-events-none">
           <div className="absolute top-20 left-20 w-40 h-40 bg-gradient-to-br from-purple-200/20 to-transparent rounded-full blur-3xl"></div>
@@ -70,11 +70,11 @@ const UnifiedCartPage: React.FC = () => {
             </div>
             
             <h2 className="text-3xl font-black mb-4 bg-gradient-to-r from-purple-700 to-indigo-700 bg-clip-text text-transparent">
-              السلة فارغة
+              {t('cart.emptyCart')}
             </h2>
             
             <p className="text-gray-600 text-lg mb-8 leading-relaxed">
-              لم تقم بإضافة أي منتجات إلى سلة التسوق بعد. تصفح منتجاتنا واختر ما يناسبك!
+              {t('cart.emptyDescription')}
             </p>
             
             <Link 
@@ -82,7 +82,7 @@ const UnifiedCartPage: React.FC = () => {
               className="inline-flex items-center gap-3 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 text-white px-8 py-4 rounded-2xl font-bold transition-all duration-300 transform hover:scale-105 shadow-xl hover:shadow-purple-300/50"
             >
               <FontAwesomeIcon icon={faShoppingBag} />
-              تصفح المنتجات
+              {t('cart.browseProducts')}
             </Link>
           </div>
         </div>
@@ -91,7 +91,7 @@ const UnifiedCartPage: React.FC = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-50 via-white to-indigo-50 relative overflow-hidden">
+    <div className="min-h-screen bg-gradient-to-br from-purple-50 via-white to-indigo-50 relative overflow-hidden" dir={isRTL ? 'rtl' : 'ltr'}>
       {/* Decorative Background Elements */}
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute top-10 left-10 w-32 h-32 bg-gradient-to-br from-purple-200/30 to-transparent rounded-full blur-xl"></div>
@@ -105,11 +105,11 @@ const UnifiedCartPage: React.FC = () => {
         <div className="mb-8">
           <div className="flex items-center justify-between mb-4">
             <h1 className="text-4xl font-black bg-gradient-to-r from-purple-700 via-indigo-600 to-violet-700 bg-clip-text text-transparent">
-              سلة التسوق
+              {t('cart.title')}
             </h1>
             <div className="bg-gradient-to-r from-purple-100 to-indigo-100 px-4 py-2 rounded-full">
               <span className="text-purple-700 font-bold">
-                {getCartCount()} منتج
+                {t('cart.productCount', { count: getCartCount() })}
               </span>
             </div>
           </div>
@@ -236,7 +236,7 @@ const UnifiedCartPage: React.FC = () => {
                 className="flex items-center justify-center gap-3 bg-white/80 backdrop-blur-md hover:bg-white text-purple-600 hover:text-purple-700 px-6 py-3 rounded-2xl font-bold transition-all duration-300 border border-purple-200/50 hover:border-purple-300/50"
               >
                 <FontAwesomeIcon icon={faArrowLeft} />
-                متابعة التسوق
+                {t('cart.continueShopping')}
               </Link>
               
               <button
@@ -244,7 +244,7 @@ const UnifiedCartPage: React.FC = () => {
                 className="flex items-center justify-center gap-3 bg-red-50 hover:bg-red-100 text-red-600 hover:text-red-700 px-6 py-3 rounded-2xl font-bold transition-all duration-300 border border-red-200/50 hover:border-red-300/50"
               >
                 <FontAwesomeIcon icon={faTrash} />
-                إفراغ السلة
+                {t('cart.clearCart')}
               </button>
             </div>
           </div>
@@ -255,25 +255,25 @@ const UnifiedCartPage: React.FC = () => {
               <div className="p-6 bg-gradient-to-r from-purple-500/10 to-indigo-500/10">
                 <h3 className="text-xl font-black text-gray-800 mb-4 flex items-center gap-2">
                   <FontAwesomeIcon icon={faShoppingCart} className="text-purple-600" />
-                  ملخص الطلب
+                  {t('cart.orderSummary')}
                 </h3>
               </div>
 
               <div className="p-6 space-y-4">
                 {/* Summary Rows */}
                 <div className="flex justify-between items-center py-2">
-                  <span className="text-gray-600">المجموع الفرعي</span>
+                  <span className="text-gray-600">{t('cart.subtotal')}</span>
                   <span className="font-bold text-gray-800">{formatPrice(subtotal)}</span>
                 </div>
 
                 <div className="flex justify-between items-center py-2">
                   <span className="text-gray-600 flex items-center gap-2">
                     <FontAwesomeIcon icon={faTruck} className="text-purple-500" />
-                    الشحن
+                    {t('cart.shipping')}
                   </span>
                   <span className="font-bold text-gray-800">
                     {shippingCost === 0 ? (
-                      <span className="text-green-600">مجاني</span>
+                      <span className="text-green-600">{t('cart.freeShipping')}</span>
                     ) : (
                       formatPrice(shippingCost)
                     )}
@@ -281,13 +281,13 @@ const UnifiedCartPage: React.FC = () => {
                 </div>
 
                 <div className="flex justify-between items-center py-2">
-                  <span className="text-gray-600">الضريبة (14%)</span>
+                  <span className="text-gray-600">{t('cart.tax')}</span>
                   <span className="font-bold text-gray-800">{formatPrice(taxAmount)}</span>
                 </div>
 
                 <div className="border-t border-purple-200/50 pt-4">
                   <div className="flex justify-between items-center">
-                    <span className="text-lg font-black text-gray-800">الإجمالي</span>
+                    <span className="text-lg font-black text-gray-800">{t('cart.total')}</span>
                     <span className="text-2xl font-black bg-gradient-to-r from-purple-600 to-indigo-600 bg-clip-text text-transparent">
                       {formatPrice(total)}
                     </span>
@@ -297,7 +297,7 @@ const UnifiedCartPage: React.FC = () => {
                 {subtotal < 500 && (
                   <div className="bg-gradient-to-r from-green-50 to-emerald-50 p-4 rounded-2xl border border-green-200/50">
                     <p className="text-sm text-green-700 text-center">
-                      أضف منتجات بقيمة {formatPrice(500 - subtotal)} للحصول على شحن مجاني!
+                      {t('cart.freeShippingThreshold', { amount: formatPrice(500 - subtotal) })}
                     </p>
                   </div>
                 )}
@@ -305,7 +305,7 @@ const UnifiedCartPage: React.FC = () => {
                 {/* Security Badge */}
                 <div className="flex items-center justify-center gap-2 text-sm text-gray-500 mt-4">
                   <FontAwesomeIcon icon={faShieldAlt} className="text-green-500" />
-                  دفع آمن ومحمي
+                  {t('cart.securePayment')}
                 </div>
 
                 {/* Checkout Button */}
@@ -315,7 +315,7 @@ const UnifiedCartPage: React.FC = () => {
                   className="w-full bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 text-white px-6 py-4 rounded-2xl font-bold disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300 transform hover:scale-105 shadow-xl hover:shadow-purple-300/50 flex items-center justify-center gap-3"
                 >
                   <FontAwesomeIcon icon={faCreditCard} />
-                  إتمام الطلب - {formatPrice(total)}
+                  {t('cart.checkout', { amount: formatPrice(total) })}
                 </button>
               </div>
             </div>

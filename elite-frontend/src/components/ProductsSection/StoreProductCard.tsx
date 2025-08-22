@@ -13,7 +13,7 @@ interface StoreProductCardProps {
 }
 
 export default function StoreProductCard({ product }: StoreProductCardProps) {
-  const { isRTL } = useLanguage();
+  const { isRTL, t } = useLanguage();
   const [imageLoading, setImageLoading] = useState(true);
   const [imageError, setImageError] = useState(false);
   const [isAddingToCart, setIsAddingToCart] = useState(false);
@@ -62,7 +62,7 @@ export default function StoreProductCard({ product }: StoreProductCardProps) {
   };
 
   return (
-    <div className="group relative bg-white rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden border border-purple-100 hover:border-purple-300 hover:shadow-purple-200/25">
+    <div className="group relative bg-white rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden border border-purple-100 hover:border-purple-300 hover:shadow-purple-200/25" dir={isRTL ? 'rtl' : 'ltr'}>
       {/* Discount Badge */}
       {hasDiscount && (
         <div className="absolute top-3 left-3 z-10 bg-gradient-to-r from-purple-500 to-violet-600 text-white text-xs font-bold px-2 py-1 rounded-full shadow-lg">
@@ -79,7 +79,7 @@ export default function StoreProductCard({ product }: StoreProductCardProps) {
       {isProductInCart && (
         <div className="absolute top-3 left-3 z-20 bg-gradient-to-r from-green-500 to-emerald-500 text-white text-xs font-bold px-2 py-1 rounded-full shadow-lg flex items-center gap-1">
           <FontAwesomeIcon icon={faCheck} className="text-xs" />
-          في السلة ({cartItem?.quantity})
+          {t('productCard.inCart', { quantity: cartItem?.quantity })}
         </div>
       )}
 
@@ -108,7 +108,7 @@ export default function StoreProductCard({ product }: StoreProductCardProps) {
           <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
             <button className="bg-purple-600 text-white px-4 py-2 rounded-lg font-medium hover:bg-purple-700 transition-colors transform translate-y-2 group-hover:translate-y-0 shadow-lg flex items-center gap-2">
               <FontAwesomeIcon icon={faEye} />
-              عرض سريع
+              {t('productCard.quickView')}
             </button>
           </div>
         </div>
@@ -183,22 +183,22 @@ export default function StoreProductCard({ product }: StoreProductCardProps) {
             {isAddingToCart ? (
               <>
                 <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
-                جاري الإضافة...
+                {t('productCard.adding')}
               </>
             ) : addedToCart ? (
               <>
                 <FontAwesomeIcon icon={faCheck} />
-                تم الإضافة!
+                {t('productCard.added')}
               </>
             ) : isProductInCart ? (
               <>
                 <FontAwesomeIcon icon={faCheck} />
-                في السلة ({cartItem?.quantity})
+                {t('productCard.inCart', { quantity: cartItem?.quantity })}
               </>
             ) : (
               <>
                 <FontAwesomeIcon icon={faShoppingCart} />
-                أضف للسلة
+                {t('productCard.addToCart')}
               </>
             )}
           </button>
@@ -218,13 +218,13 @@ export default function StoreProductCard({ product }: StoreProductCardProps) {
           {(product as any).stockQuantity && (product as any).stockQuantity > 0 ? (
             <span className="text-green-600 font-medium flex items-center gap-1">
               <FontAwesomeIcon icon={faCheck} />
-               متوفر ({(product as any).stockQuantity} قطعة)
+              {t('productCard.inStock', { quantity: (product as any).stockQuantity })}
             </span>
           ) : (
-            <span className="text-red-500 font-medium">غير متوفر</span>
+            <span className="text-red-500 font-medium">{t('productCard.outOfStock')}</span>
           )}
           <span className="text-gray-500">
-            {(salePrice || price) >= 500 ? 'شحن مجاني' : `شحن ${formatCurrency(50, isRTL ? 'ar' : 'en')}`}
+            {(salePrice || price) >= 500 ? t('productCard.freeShipping') : t('productCard.shipping', { amount: formatCurrency(50, isRTL ? 'ar' : 'en') })}
           </span>
         </div>
       </div>

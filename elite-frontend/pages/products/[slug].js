@@ -141,7 +141,7 @@ export default function ProductPage() {
       <div className="min-h-screen flex items-center justify-center">
         <div className="text-center">
           <FontAwesomeIcon icon={faSpinner} spin className="text-4xl text-purple-600 mb-4" />
-          <p className="text-gray-600">جاري تحميل المنتج...</p>
+          <p className="text-gray-600">{t('productDetail.loading')}</p>
         </div>
       </div>
     );
@@ -151,10 +151,10 @@ export default function ProductPage() {
     return (
       <div className="min-h-screen flex items-center justify-center">
         <div className="text-center">
-          <h1 className="text-2xl font-bold text-gray-900 mb-4">المنتج غير موجود</h1>
-          <p className="text-gray-600 mb-8">عذراً، لم نتمكن من العثور على هذا المنتج</p>
+          <h1 className="text-2xl font-bold text-gray-900 mb-4">{t('productDetail.notFound')}</h1>
+          <p className="text-gray-600 mb-8">{t('productDetail.notFoundDesc')}</p>
           <Link href="/products" className="bg-purple-600 text-white px-6 py-3 rounded-lg hover:bg-purple-700 transition-colors">
-            العودة للمنتجات
+            {t('productDetail.backToProducts')}
           </Link>
         </div>
       </div>

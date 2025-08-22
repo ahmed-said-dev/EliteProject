@@ -803,61 +803,6 @@
         "signInAccount": "تسجيل الدخول إلى حسابك"
       }
     },
-    "productsSection": {
-      "title": "منتجات رعاية الحيوانات الأليفة",
-      "description": "تصفح مجموعتنا الواسعة من المنتجات عالية الجودة لحيواناتك الأليفة المحبوبة. من الطعام الممتاز إلى الألعاب المرحة وأدوات العناية الأساسية، لدينا كل ما تحتاجه.",
-      "searchPlaceholder": "ابحث عن المنتجات...",
-      "filterButton": "تصفية",
-      "resultsCountZero": "لم يتم العثور على منتجات",
-      "resultsCountOne": "تم العثور على %count% منتج",
-      "resultsCountTwo": "تم العثور على %count% منتجان",
-      "resultsCountFew": "%count% منتجات",
-      "resultsCountMany": "%count% منتج",
-      "resultsCountOther": "%count% منتج",
-      "sortBy": "ترتيب حسب:",
-      "sortOptions": {
-        "popularity": "الشهرة",
-        "priceLow": "السعر: من الأقل إلى الأعلى",
-        "priceHigh": "السعر: من الأعلى إلى الأقل",
-        "newest": "أحدث الوصول",
-        "topRated": "الأعلى تقييماً"
-      },
-      "noResults": {
-        "title": "لم يتم العثور على منتجات",
-        "message": "لم نتمكن من العثور على أي منتجات تطابق معاييرك."
-      },
-      "resetFilters": "إعادة تعيين التصفية",
-      "pagination": {
-        "previous": "السابق",
-        "next": "التالي"
-      },
-      "petTypes": [
-        "الكلاب",
-        "القطط",
-        "الطيور",
-        "الحيوانات الصغيرة",
-        "الأسماك",
-        "الزواحف"
-      ],
-      "productTypes": [
-        "الطعام",
-        "الألعاب",
-        "الأدوية",
-        "الاكسسوارات",
-        "منتجات العناية",
-        "الأسرة",
-        "ناقلات الحيوانات"
-      ],
-      "brands": [
-        "رويال كانين",
-        "بورينا",
-        "هيلز",
-        "بيديجري",
-        "ويسكاس",
-        "كونغ",
-        "فيرمينيتور"
-      ]
-    },
     "products": {
       "badges": {
         "new": "جديد",
@@ -1442,51 +1387,6 @@
         "badge": "رعاية طوارئ على مدار الساعة"
       }
     },
-    "cart": {
-      "title": "سلة التسوق الخاصة بك",
-      "emptyCart": {
-        "message": "سلة التسوق فارغة",
-        "description": "لم تقم بإضافة أي منتجات إلى سلة التسوق بعد.",
-        "browseButton": "تصفح المنتجات"
-      },
-      "cartItems": {
-        "product": "المنتج",
-        "price": "السعر",
-        "quantity": "الكمية",
-        "total": "المجموع",
-        "remove": "إزالة"
-      },
-      "cartSummary": {
-        "title": "ملخص السلة",
-        "subtotal": "المجموع الفرعي",
-        "shipping": "الشحن",
-        "shippingOptions": {
-          "standard": "التوصيل القياسي (3-5 أيام عمل)",
-          "express": "التوصيل السريع (1-2 يوم عمل)",
-          "free": "شحن مجاني"
-        },
-        "tax": "الضريبة",
-        "total": "الإجمالي",
-        "proceedToCheckout": "إتمام الشراء"
-      },
-      "coupon": {
-        "title": "تطبيق كوبون",
-        "placeholder": "أدخل رمز الكوبون",
-        "apply": "تطبيق",
-        "success": "تم تطبيق الكوبون بنجاح!",
-        "error": "رمز الكوبون غير صالح"
-      },
-      "continueShopping": "مواصلة التسوق",
-      "updateCart": "تحديث السلة",
-      "productCount": {
-        "zero": "لا توجد منتجات في سلتك",
-        "one": "منتج واحد في سلتك",
-        "two": "منتجان في سلتك",
-        "few": "%count% منتجات في سلتك",
-        "many": "%count% منتجًا في سلتك",
-        "other": "%count% منتج في سلتك"
-      }
-    },
     "article": {
       "blogDetail": "تفاصيل المقال",
       "readOurLatestArticles": "اقرأ أحدث مقالاتنا من خبراء الطب البيطري",
@@ -1587,9 +1487,95 @@
         "subtotal": "المجموع الفرعي",
         "shipping": "الشحن",
         "tax": "الضريبة",
-        "total": "الإجمالي",
-        "free": "مجاني"
-      }
+              "total": "الإجمالي",
+      "free": "مجاني"
     }
+  },
+  "productsSection": {
+    "pageDescription": "تصفح مجموعتنا الواسعة من المنتجات عالية الجودة لحيواناتك الأليفة المحبوبة"
+  },
+  "productCard": {
+    "quickView": "عرض سريع",
+    "addToCart": "أضف للسلة",
+    "adding": "جاري الإضافة...",
+    "added": "تم الإضافة!",
+    "inCart": "في السلة ({{quantity}})",
+    "inStock": "متوفر ({{quantity}} قطعة)",
+    "outOfStock": "غير متوفر",
+    "freeShipping": "شحن مجاني",
+    "shipping": "شحن {{amount}}"
+  },
+  "productDetail": {
+    "loading": "جاري تحميل المنتج...",
+    "notFound": "المنتج غير موجود",
+    "notFoundDesc": "عذراً، لم نتمكن من العثور على هذا المنتج",
+    "backToProducts": "العودة للمنتجات",
+    "addToCart": "أضف للسلة",
+    "quantity": "الكمية",
+    "description": "الوصف",
+    "category": "الفئة",
+    "features": "المميزات",
+    "relatedProducts": "منتجات ذات صلة",
+    "addedToCart": "تم إضافة المنتج إلى السلة بنجاح",
+    "shareProduct": "مشاركة المنتج",
+    "availability": "التوفر",
+    "available": "متوفر",
+    "unavailable": "غير متوفر",
+    "price": "السعر",
+    "originalPrice": "السعر الأصلي",
+    "discount": "خصم {{percent}}%"
+  },
+  "cart": {
+    "title": "سلة التسوق",
+    "emptyCart": "السلة فارغة",
+    "emptyDescription": "لم تقم بإضافة أي منتجات إلى سلة التسوق بعد. تصفح منتجاتنا واختر ما يناسبك!",
+    "browseProducts": "تصفح المنتجات",
+    "continueShopping": "متابعة التسوق",
+    "clearCart": "إفراغ السلة",
+    "orderSummary": "ملخص الطلب",
+    "subtotal": "المجموع الفرعي",
+    "shipping": "الشحن",
+    "tax": "الضريبة (14%)",
+    "total": "الإجمالي",
+    "freeShipping": "مجاني",
+    "freeShippingThreshold": "أضف منتجات بقيمة {{amount}} للحصول على شحن مجاني!",
+    "securePayment": "دفع آمن ومحمي",
+    "checkout": "إتمام الطلب - {{amount}}",
+    "remove": "إزالة",
+    "updateQuantity": "تحديث الكمية",
+    "productCount": "{{count}} منتج"
+  },
+  "checkoutPage": {
+    "title": "إتمام الطلب",
+    "backToCart": "العودة للسلة",
+    "personalInfo": "البيانات الشخصية",
+    "firstName": "الاسم الأول",
+    "lastName": "الاسم الأخير",
+    "email": "البريد الإلكتروني",
+    "phone": "رقم الهاتف",
+    "shippingInfo": "عنوان الشحن",
+    "address": "العنوان",
+    "city": "المدينة",
+    "country": "الدولة",
+    "paymentMethod": "طريقة الدفع",
+    "cashOnDelivery": "الدفع عند الاستلام",
+    "payOnDelivery": "ادفع نقداً عند وصول المنتج إليك",
+    "creditCard": "بطاقة ائتمان (قريباً)",
+    "notes": "ملاحظات إضافية",
+    "notesPlaceholder": "أي ملاحظات خاصة لطلبك...",
+    "orderSummary": "ملخص الطلب",
+    "placeOrder": "تأكيد الطلب",
+    "processing": "جاري المعالجة...",
+    "confirmOrder": "تأكيد الطلب - {{amount}}",
+    "orderSuccess": "تم إنشاء الطلب بنجاح!",
+    "orderNumber": "رقم الطلب: {{number}}",
+    "contactIn24h": "سيتم التواصل معك خلال 24 ساعة لتأكيد الطلب وترتيب التسليم",
+    "expectedDelivery": "وقت التسليم المتوقع: 2-3 أيام عمل",
+    "secureTransaction": "معاملة آمنة ومحمية",
+    "requiredFields": "يرجى تعبئة جميع الحقول المطلوبة",
+    "missingFields": "حقول مفقودة: {{fields}}",
+    "noEliteStoreItems": "لا توجد منتجات من متجر Elite في السلة",
+    "orderFailed": "فشل في إنشاء الطلب"
   }
+}
   
