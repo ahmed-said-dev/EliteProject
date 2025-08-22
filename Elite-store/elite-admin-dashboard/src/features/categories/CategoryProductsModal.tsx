@@ -34,7 +34,7 @@ const CategoryProductsModal: React.FC<Props> = ({ open, onClose, category, onAtt
   const columns: ColumnsType<Product> = useMemo(() => [
     { title: 'المنتج', dataIndex: 'name', key: 'name' },
     { title: 'SKU', dataIndex: 'sku', key: 'sku' },
-    { title: 'السعر', dataIndex: 'price', key: 'price', render: (v: number) => Number(v).toFixed(2) + ' ج.م' },
+    { title: 'السعر', dataIndex: 'price', key: 'price', render: (v: number) => Number(v).toFixed(2) + ' ر.س' },
     { title: 'الحالة', dataIndex: 'status', key: 'status' },
   ], []);
 

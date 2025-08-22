@@ -543,7 +543,7 @@ const OrderDetailsModal: React.FC<OrderDetailsModalProps> = ({
       key: 'price',
       width: '17.5%',
       align: 'center',
-      render: (price) => `${Number(price).toFixed(2)} ج.م`,
+      render: (price) => `${Number(price).toFixed(2)} ر.س`,
     },
     {
       title: 'الإجمالي',
@@ -551,7 +551,7 @@ const OrderDetailsModal: React.FC<OrderDetailsModalProps> = ({
       key: 'total',
       width: '17.5%',
       align: 'center',
-      render: (total) => <strong>{Number(total).toFixed(2)} ج.م</strong>,
+      render: (total) => <strong>{Number(total).toFixed(2)} ر.س</strong>,
     },
   ];
 
@@ -560,31 +560,31 @@ const OrderDetailsModal: React.FC<OrderDetailsModalProps> = ({
     {
       key: '1',
       field: 'المجموع الفرعي',
-      value: `${Number(order.subtotal).toFixed(2)} ج.م`,
+      value: `${Number(order.subtotal).toFixed(2)} ر.س`,
     },
     ...(order.shippingCost > 0 ? [{
       key: '2',
       field: 'تكلفة الشحن',
-      value: `${Number(order.shippingCost).toFixed(2)} ج.م`,
+      value: `${Number(order.shippingCost).toFixed(2)} ر.س`,
     }] : []),
     ...(order.taxAmount > 0 ? [{
       key: '3',
       field: 'الضرائب',
-      value: `${Number(order.taxAmount).toFixed(2)} ج.م`,
+      value: `${Number(order.taxAmount).toFixed(2)} ر.س`,
     }] : []),
     ...(order.discountAmount > 0 ? [{
       key: '4',
       field: 'الخصم',
       value: (
         <span style={{ color: '#52c41a' }}>
-          -{Number(order.discountAmount).toFixed(2)} ج.م
+          -{Number(order.discountAmount).toFixed(2)} ر.س
         </span>
       ),
     }] : []),
     {
       key: '5',
       field: 'الإجمالي النهائي',
-      value: <strong style={{ fontSize: '16px' }}>{Number(order.total).toFixed(2)} ج.م</strong>,
+      value: <strong style={{ fontSize: '16px' }}>{Number(order.total).toFixed(2)} ر.س</strong>,
     },
   ];
 

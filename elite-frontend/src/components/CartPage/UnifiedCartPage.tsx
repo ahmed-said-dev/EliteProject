@@ -154,7 +154,7 @@ const UnifiedCartPage: React.FC = () => {
                             </h3>
                             {item.sku && (
                               <p className="text-sm text-gray-500">
-                                رقم المنتج: {item.sku}
+                                {t('cart.productSku')} {item.sku}
                               </p>
                             )}
                             {item.category && (
@@ -219,7 +219,7 @@ const UnifiedCartPage: React.FC = () => {
                         {/* Item Total */}
                         <div className="mt-2 text-right">
                           <span className="text-lg font-black text-gray-800">
-                            الإجمالي: {formatPrice((item.salePrice || item.price) * item.quantity)}
+                            {t('cart.itemTotal')} {formatPrice((item.salePrice || item.price) * item.quantity)}
                           </span>
                         </div>
                       </div>

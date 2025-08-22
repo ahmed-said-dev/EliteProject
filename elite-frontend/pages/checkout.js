@@ -18,6 +18,7 @@ import { useUnifiedCart } from '@/context/UnifiedCartContext';
 import { useLanguage } from '@/context/LanguageContext';
 import { useNotifications } from '@/context/NotificationContext';
 import { eliteApi } from '@/lib/eliteApi';
+import { formatCurrency } from '@/lib/currency';
 import PageBanner from '@/components/PageBanner/PageBanner';
 
 export default function CheckoutPage() {
@@ -43,8 +44,8 @@ export default function CheckoutPage() {
   const [isProcessing, setIsProcessing] = useState(false);
   const [orderComplete, setOrderComplete] = useState(false);
 
-  const formatPrice = (price, currency = 'EGP') => {
-    return `${Math.round(price)} ج.م`;
+  const formatPrice = (price, currency = 'SAR') => {
+    return formatCurrency(price, isRTL ? 'ar' : 'en');
   };
 
   // Calculate totals for Elite Store items only

@@ -20,6 +20,7 @@ import { useStoreProduct } from '@/hooks/useStoreProduct';
 import { useCart } from '@/context/SaleorCartContext';
 import { useUnifiedCart } from '@/context/UnifiedCartContext';
 import { useLanguage } from '@/context/LanguageContext';
+import { formatCurrency } from '@/lib/currency';
 import PageBanner from '@/components/PageBanner/PageBanner';
 
 export default function ProductPage() {
@@ -88,11 +89,7 @@ export default function ProductPage() {
   };
 
   const formatPrice = (amount, currency) => {
-    return new Intl.NumberFormat('ar-SA', {
-      style: 'currency',
-      currency: currency,
-      minimumFractionDigits: 2,
-    }).format(amount);
+    return formatCurrency(amount, 'ar');
   };
 
     const getProductPrice = () => {
@@ -109,13 +106,13 @@ export default function ProductPage() {
     }
     // Store backend pricing
     const amount = (product.salePrice ?? product.price ?? 0)
-    return { amount, currency: 'EGP' }
+    return { amount, currency: 'SAR' }
   }
 
   const getOriginalPrice = () => {
     if (!product || !isUuid) return null
     if (product.salePrice && product.price && product.salePrice !== product.price) {
-      return { amount: product.price, currency: 'EGP' }
+      return { amount: product.price, currency: 'SAR' }
     }
     return null
   }
@@ -536,7 +533,7 @@ export default function ProductPage() {
                       <div className="mt-2">
                         <div className="font-semibold text-gray-800 group-hover:text-purple-600 transition-colors line-clamp-1">{r.name}</div>
                         {typeof r.price === 'number' && (
-                          <div className="text-purple-600 font-bold mt-1">{new Intl.NumberFormat('ar-EG').format(r.salePrice ?? r.price)} ج.م</div>
+                          <div className="text-purple-600 font-bold mt-1">{formatCurrency(r.salePrice ?? r.price, 'ar')}</div>
                         )}
                       </div>
                     </Link>

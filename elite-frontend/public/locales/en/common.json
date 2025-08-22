@@ -1543,7 +1543,9 @@
     "checkout": "Checkout - {{amount}}",
     "remove": "Remove",
     "updateQuantity": "Update Quantity",
-    "productCount": "{{count}} products"
+    "productCount": "{{count}} products",
+    "productSku": "Product SKU:",
+    "itemTotal": "Total:"
   },
   "checkoutPage": {
     "title": "Checkout",

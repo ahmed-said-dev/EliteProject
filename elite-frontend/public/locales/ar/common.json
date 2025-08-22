@@ -1543,7 +1543,9 @@
     "checkout": "إتمام الطلب - {{amount}}",
     "remove": "إزالة",
     "updateQuantity": "تحديث الكمية",
-    "productCount": "{{count}} منتج"
+    "productCount": "{{count}} منتج",
+    "productSku": "رقم المنتج:",
+    "itemTotal": "الإجمالي:"
   },
   "checkoutPage": {
     "title": "إتمام الطلب",
