@@ -75,7 +75,7 @@ export const LocalizedPrice: React.FC<LocalizedPriceProps> = ({
   const { locale } = useLanguage();
   
   const formattedPrice = showCurrency 
-    ? formatCurrency(amount, currency, locale === 'ar' ? 'ar-SA' : 'en-US')
+    ? formatCurrency(amount, locale === 'ar' ? 'ar' : 'en')
     : new Intl.NumberFormat(locale === 'ar' ? 'ar-SA' : 'en-US').format(amount);
 
   return <span className={className}>{formattedPrice}</span>;
