@@ -1454,6 +1454,32 @@
       "plural": "%count% products in your cart"
     }
   },
+  "storeProducts": {
+  "filters": {
+    "title": "Search Filters",
+    "searchName": "Search by Name",
+    "searchPlaceholder": "Search for a product...",
+    "priceFrom": "Price From",
+    "priceTo": "Price To",
+    "status": "Status",
+    "allProducts": "All Products",
+    "published": "Published",
+    "unpublished": "Unpublished",
+    "sortBy": "Sort By",
+    "newestFirst": "Newest First",
+    "oldestFirst": "Oldest First",
+    "priceAsc": "Price (Low to High)",
+    "priceDesc": "Price (High to Low)",
+    "nameAsc": "Name (A-Z)",
+    "nameDesc": "Name (Z-A)"
+  },
+  "loading": "Loading products...",
+  "error": "Error: {{message}}",
+  "emptyState": {
+    "title": "No Products Found",
+    "message": "We couldn't find any products matching your current search criteria"
+  }
+},
   "article": {
     "blogDetail": "Blog Detail",
     "readOurLatestArticles": "Read our latest articles from our veterinary experts",

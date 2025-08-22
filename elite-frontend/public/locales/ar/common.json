@@ -13,6 +13,32 @@
       "bookAppointment": "حجز موعد",
       "language": "اللغة"
     },
+    "storeProducts": {
+  "filters": {
+    "title": "فلاتر البحث",
+    "searchName": "بحث بالاسم",
+    "searchPlaceholder": "ابحث عن منتج...",
+    "priceFrom": "السعر من",
+    "priceTo": "السعر إلى",
+    "status": "الحالة",
+    "allProducts": "جميع المنتجات",
+    "published": "منشور",
+    "unpublished": "غير منشور",
+    "sortBy": "الترتيب",
+    "newestFirst": "الأحدث أولاً",
+    "oldestFirst": "الأقدم أولاً",
+    "priceAsc": "السعر (تصاعدي)",
+    "priceDesc": "السعر (تنازلي)",
+    "nameAsc": "الاسم (أ-ي)",
+    "nameDesc": "الاسم (ي-أ)"
+  },
+  "loading": "جاري تحميل المنتجات...",
+  "error": "خطأ: {{message}}",
+  "emptyState": {
+    "title": "لا توجد منتجات",
+    "message": "لم نجد أي منتجات تطابق معايير البحث الحالية"
+  }
+},
     "direction": "rtl",
     "loading": {
       "text": "جاري التحميل..."
