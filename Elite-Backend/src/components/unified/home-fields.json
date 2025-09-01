@@ -1,0 +1,18 @@
+{
+  "collectionName": "components_unified_home_fields",
+  "info": {
+    "displayName": "home-fields",
+    "description": "Fields used for Home page service cards"
+  },
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "iconName": {
+      "type": "string"
+    }
+  }
+}
+
+
