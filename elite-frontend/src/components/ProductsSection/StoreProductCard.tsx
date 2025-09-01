@@ -85,7 +85,7 @@ export default function StoreProductCard({ product }: StoreProductCardProps) {
 
       {/* Product Image */}
       <Link href={`/products/${product.id}`} className="block relative overflow-hidden">
-        <div className="aspect-square bg-gray-100 relative">
+        <div className="w-full h-64 bg-gray-100 relative">
           {imageLoading && !imageError && (
             <div className="absolute inset-0 flex items-center justify-center">
               <div className="w-8 h-8 border-2 border-gray-300 border-t-purple-500 rounded-full animate-spin"></div>

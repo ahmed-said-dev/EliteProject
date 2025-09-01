@@ -112,6 +112,22 @@
     "social": {
       "title": "Follow us:"
     },
+    "services": {
+      "title": "Our Services",
+      "generalCheckup": "General Checkup",
+      "surgery": "Surgery",
+      "emergency": "Emergency Care",
+      "vaccination": "Vaccination",
+      "dental": "Dental Care",
+      "grooming": "Grooming"
+    },
+    "certifications": {
+      "title": "Certifications & Accreditations",
+      "veterinaryBoard": "Veterinary Board Certified",
+      "animalWelfare": "Animal Welfare Accredited",
+      "iso9001": "ISO 9001 Quality Certified",
+      "excellence": "Excellence in Pet Care"
+    },
     "workingHours": {
       "title": "Working hours",
       "hours": "09:00 AM - 10:00 PM",

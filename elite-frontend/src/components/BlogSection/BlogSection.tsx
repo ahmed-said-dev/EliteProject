@@ -72,106 +72,113 @@ const BlogSection: React.FC<BlogSectionProps> = ({ articles = [], isHomePage = f
         
         {/* المقالات المميزة */}
         {featuredArticles.length > 0 && (
-          <div key={featuredArticles[0].id} className={styles.featuredPost}>
-            <div className={styles.featuredContent}>
-              <div className={styles.categoryBadge}>
-                {getCategoryName(featuredArticles[0])}
-              </div>
-              <h2 className={styles.featuredTitle}>
-                {featuredArticles[0].title}
-              </h2>
-              <p className={styles.featuredExcerpt}>
-                {featuredArticles[0].excerpt}
-              </p>
-              <div className={styles.postMeta}>
-                <div className={styles.author}>
-                  <img 
-                    src={getAuthorImage(featuredArticles[0])} 
-                    alt={getAuthorName(featuredArticles[0])} 
-                    className={styles.authorImage} 
-                  />
-                  <span>{getAuthorName(featuredArticles[0])}</span>
+          <Link href={`/media/${featuredArticles[0].slug}`} className="cursor-pointer hover:opacity-90 transition-opacity block">
+            <div key={featuredArticles[0].id} className={styles.featuredPost}>
+              <div className={styles.featuredContent}>
+                <div className={styles.categoryBadge}>
+                  {getCategoryName(featuredArticles[0])}
                 </div>
-                
-                <div className={styles.postInfo}>
-                  <span className={styles.date}>
-                    {formatDate(featuredArticles[0].publishDate)}
-                  </span>
-                  <span className={styles.dot}>•</span>
-                  <span className={styles.readTime}>{featuredArticles[0].readTime}</span>
+                <h2 className={styles.featuredTitle}>
+                  {featuredArticles[0].title}
+                </h2>
+                <p className={styles.featuredExcerpt}>
+                  {featuredArticles[0].excerpt}
+                </p>
+                <div className={styles.postMeta}>
+                  <div className={styles.author}>
+                    <img 
+                      src={getAuthorImage(featuredArticles[0])} 
+                      alt={getAuthorName(featuredArticles[0])} 
+                      className={styles.authorImage} 
+                    />
+                    <span>{getAuthorName(featuredArticles[0])}</span>
+                  </div>
+                  
+                  <div className={styles.postInfo}>
+                    <span className={styles.date}>
+                      {formatDate(featuredArticles[0].publishDate)}
+                    </span>
+                    <span className={styles.dot}>•</span>
+                    <span className={styles.readTime}>{featuredArticles[0].readTime}</span>
+                  </div>
+                </div>
+                <div className={styles.readMoreBtn}>
+                  {t('blogSection.readMore')}
                 </div>
               </div>
-              <Link href={`/media/${featuredArticles[0].slug}`} className={styles.readMoreBtn}>
-                {t('blogSection.readMore')}
-              </Link>
+              <div className={styles.featuredImageWrapper}>
+                <img 
+                  src={getArticleImage(featuredArticles[0])} 
+                  alt={featuredArticles[0].title} 
+                  className={styles.featuredImage} 
+                />
+              </div>
             </div>
-            <div className={styles.featuredImageWrapper}>
-              <img 
-                src={getArticleImage(featuredArticles[0])} 
-                alt={featuredArticles[0].title} 
-                className={styles.featuredImage} 
-              />
-            </div>
-          </div>
+          </Link>
         )}
 
         <div className={styles.blogGrid}>
           {regularArticles.slice(0, isHomePage ? 6 : regularArticles.length).map((article, index) => (
-            <div 
+            <Link 
               key={article.id} 
-              className={`${styles.blogCard} ${styles.wowFadeInUp}`}
-              data-wow-delay={`0.${index + 1}s`}
+              href={`/media/${article.slug}`}
+              className="cursor-pointer hover:opacity-90 transition-opacity block"
             >
-              <div className={styles.blogCardWrapper}>
-                <div className={styles.imageContainer}>
-                  <img 
-                    src={getArticleImage(article)} 
-                    alt={article.title} 
-                    className={styles.blogImage} 
-                  />
-                  <div className={styles.categoryBadge}>
-                    {getCategoryName(article)}
-                  </div>
-                </div>
-                
-                <div className={styles.blogContent}>
-                  <div className={styles.postMeta}>
-                    <div className={styles.postInfo}>
-                      <span className={styles.date}>
-                        {formatDate(article.publishDate)}
-                      </span>
-                      <span className={styles.dot}>•</span>
-                      <span className={styles.readTime}>{article.readTime}</span>
+              <div 
+                className={`${styles.blogCard} ${styles.wowFadeInUp}`}
+                data-wow-delay={`0.${index + 1}s`}
+              >
+                <div className={styles.blogCardWrapper}>
+                  <div className={styles.imageContainer}>
+                    <img 
+                      src={getArticleImage(article)} 
+                      alt={article.title} 
+                      className={styles.blogImage} 
+                    />
+                    <div className={styles.categoryBadge}>
+                      {getCategoryName(article)}
                     </div>
                   </div>
                   
-                  <h3 className={styles.blogTitle}>{article.title}</h3>
-                  <p className={styles.blogExcerpt}>{article.excerpt}</p>
+                  <div className={styles.blogContent}>
+                    <div className={styles.postMeta}>
+                      <div className={styles.postInfo}>
+                        <span className={styles.date}>
+                          {formatDate(article.publishDate)}
+                        </span>
+                        <span className={styles.dot}>•</span>
+                        <span className={styles.readTime}>{article.readTime}</span>
+                      </div>
+                    </div>
+                    
+                    <h3 className={styles.blogTitle}>{article.title}</h3>
+                    <p className={styles.blogExcerpt}>{article.excerpt}</p>
+                    
+                    <div className={styles.authorSection}>
+                      <img 
+                        src={getAuthorImage(article)} 
+                        alt={getAuthorName(article)} 
+                        className={styles.authorImage} 
+                      />
+                      <span className={styles.authorName}>{getAuthorName(article)}</span>
+                    </div>
+                  </div>
                   
-                  <div className={styles.authorSection}>
-                    <img 
-                      src={getAuthorImage(article)} 
-                      alt={getAuthorName(article)} 
-                      className={styles.authorImage} 
-                    />
-                    <span className={styles.authorName}>{getAuthorName(article)}</span>
+                  <div className={styles.blogCardFooter}>
+                    <div className={styles.tagsList}>
+                      {article.tags?.slice(0, 3).map((tag) => (
+                        <span key={tag.id} className={styles.tag}>
+                          #{tag.name}
+                        </span>
+                      ))}
+                    </div>
+                    <div className={styles.btnPrimary}>
+                      <i className="fas fa-arrow-right"></i>
+                    </div>
                   </div>
-                </div>
-                
-                <div className={styles.blogCardFooter}>
-                  <div className={styles.tagsList}>
-                    {article.tags?.slice(0, 3).map((tag) => (
-                      <span key={tag.id} className={styles.tag}>
-                        #{tag.name}
-                      </span>
-                    ))}
-                  </div>
-                  <Link href={`/media/${article.slug}`} className={styles.btnPrimary}>
-                    <i className="fas fa-arrow-right"></i>
-                  </Link>
                 </div>
               </div>
-            </div>
+            </Link>
           ))}
         </div>
 

@@ -12,10 +12,10 @@ export default function Memberships() {
   
   return (
     <main>
-      <PageBanner 
+      {/* <PageBanner 
         title={t('pageBanner.memberships.title')}
         backgroundImage="https://images.unsplash.com/photo-1601758124277-f0086d5ab050?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1920&q=80"
-      />
+      /> */}
       {/* <MembershipIntro /> */}
       <Membership />
       <Divider />

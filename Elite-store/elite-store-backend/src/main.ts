@@ -117,17 +117,22 @@ async function bootstrap() {
   // Force HTTP protocol detection (use the underlying Express instance)
   const expressApp = app.getHttpAdapter().getInstance();
   expressApp.set('trust proxy', true);
+  // Get the underlying Express instance
+  const expressApp = app.getHttpAdapter().getInstance();
+  
+  // Force HTTP protocol detection
+  expressApp.set('trust proxy', true);
   
   // Custom HTTP-only Swagger implementation
   const document = SwaggerModule.createDocument(app, config);
   
   // Serve docs-json endpoint
-  expressApp.get('/api/docs-json', (req: Request, res: Response) => {
+  expressApp.get('/api/docs-json', (req, res) => {
     res.json(document);
   });
   
   // Custom Swagger UI HTML page
-  expressApp.get('/api/docs', (req: Request, res: Response) => {
+  expressApp.get('/api/docs', (req, res) => {
     const html = `
 <!DOCTYPE html>
 <html>

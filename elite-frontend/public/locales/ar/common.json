@@ -138,6 +138,22 @@
       "social": {
         "title": "تابعنا:"
       },
+      "services": {
+        "title": "خدماتنا",
+        "generalCheckup": "الفحص العام",
+        "surgery": "الجراحة",
+        "emergency": "الرعاية الطارئة",
+        "vaccination": "التطعيم",
+        "dental": "رعاية الأسنان",
+        "grooming": "العناية والتجميل"
+      },
+      "certifications": {
+        "title": "الشهادات والاعتمادات",
+        "veterinaryBoard": "معتمد من المجلس البيطري",
+        "animalWelfare": "معتمد لرعاية الحيوان",
+        "iso9001": "معتمد بجودة ISO 9001",
+        "excellence": "التميز في رعاية الحيوانات الأليفة"
+      },
       "workingHours": {
         "title": "ساعات العمل",
         "hours": "09:00 صباحاً - 10:00 مساءً",

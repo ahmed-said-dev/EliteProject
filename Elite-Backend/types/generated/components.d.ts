@@ -126,6 +126,36 @@ export interface SharedSpecialties extends Struct.ComponentSchema {
   };
 }
 
+export interface UnifiedHomeFields extends Struct.ComponentSchema {
+  collectionName: 'components_unified_home_fields';
+  info: {
+    description: 'Fields used for Home page service cards';
+    displayName: 'home-fields';
+  };
+  attributes: {
+    iconName: Schema.Attribute.String;
+    title: Schema.Attribute.String & Schema.Attribute.Required;
+  };
+}
+
+export interface UnifiedPageFields extends Struct.ComponentSchema {
+  collectionName: 'components_unified_page_fields';
+  info: {
+    description: 'Fields used for Services page details';
+    displayName: 'page-fields';
+  };
+  attributes: {
+    badge: Schema.Attribute.String;
+    description: Schema.Attribute.Text;
+    features: Schema.Attribute.Component<'shared.service-feature', true>;
+    icons: Schema.Attribute.Component<'shared.service-icon', true>;
+    image: Schema.Attribute.Media<'images'>;
+    isActive: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
+    order: Schema.Attribute.Integer & Schema.Attribute.DefaultTo<0>;
+    title: Schema.Attribute.String & Schema.Attribute.Required;
+  };
+}
+
 declare module '@strapi/strapi' {
   export module Public {
     export interface ComponentSchemas {
@@ -139,6 +169,8 @@ declare module '@strapi/strapi' {
       'shared.slider': SharedSlider;
       'shared.social-links': SharedSocialLinks;
       'shared.specialties': SharedSpecialties;
+      'unified.home-fields': UnifiedHomeFields;
+      'unified.page-fields': UnifiedPageFields;
     }
   }
 }

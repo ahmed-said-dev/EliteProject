@@ -1,12 +1,21 @@
 import React from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 import styles from './Footer.module.css';
 import { useLanguage } from '@/context/LanguageContext';
 import { translate } from '../../../i18n';
+import useServicePages from '@/hooks/useServicePages';
 
 const Footer = () => {
   const { locale, isRTL } = useLanguage();
   const dir = isRTL ? 'rtl' : 'ltr';
+  
+  // جلب الخدمات من الباك اند
+  const { formattedServicePages, isLoading, error } = useServicePages({
+    page: 1,
+    pageSize: 6,
+    sort: 'order:asc'
+  });
   return (
     <footer className={styles.elite_footer} dir={dir}>
       <div className={styles.container}>
@@ -35,6 +44,77 @@ const Footer = () => {
                 <path d="M0 10C20 5, 30 15, 50 10C70 5, 80 15, 100 10" stroke="#FFD700" strokeWidth="2" fill="none"/>
               </svg>
             </div>
+          </div>
+
+          {/* Services Section */}
+          <div className={styles.footer_services_section}>
+            <h3 className={styles.section_title}>{translate('footer.services.title', locale)}</h3>
+            {isLoading ? (
+              <div className={styles.services_loading}>
+                <i className="fas fa-spinner fa-spin"></i>
+                {isRTL ? 'جاري تحميل الخدمات...' : 'Loading services...'}
+              </div>
+            ) : error ? (
+              <div className={styles.services_error}>
+                <i className="fas fa-exclamation-triangle"></i>
+                {isRTL ? 'خطأ في تحميل الخدمات' : 'Error loading services'}
+              </div>
+            ) : (
+              <ul className={styles.services_list}>
+                {formattedServicePages.slice(0, 6).map((service, index) => (
+                  <li key={service.id}>
+                    <Link href={`/services/${service.slug}`} className={styles.service_link}>
+                      {service.icons && service.icons[0] ? (
+                        <i className={`fas ${service.icons[0].icon}`}></i>
+                      ) : (
+                        <i className="fas fa-stethoscope"></i>
+                      )}
+                      {service.title}
+                    </Link>
+                  </li>
+                ))}
+                {formattedServicePages.length === 0 && (
+                  <>
+                    <li>
+                      <Link href="/services/general-checkup" className={styles.service_link}>
+                        <i className="fas fa-stethoscope"></i>
+                        {translate('footer.services.generalCheckup', locale)}
+                      </Link>
+                    </li>
+                    <li>
+                      <Link href="/services/surgery" className={styles.service_link}>
+                        <i className="fas fa-cut"></i>
+                        {translate('footer.services.surgery', locale)}
+                      </Link>
+                    </li>
+                    <li>
+                      <Link href="/services/emergency" className={styles.service_link}>
+                        <i className="fas fa-ambulance"></i>
+                        {translate('footer.services.emergency', locale)}
+                      </Link>
+                    </li>
+                    <li>
+                      <Link href="/services/vaccination" className={styles.service_link}>
+                        <i className="fas fa-syringe"></i>
+                        {translate('footer.services.vaccination', locale)}
+                      </Link>
+                    </li>
+                    <li>
+                      <Link href="/services/dental" className={styles.service_link}>
+                        <i className="fas fa-tooth"></i>
+                        {translate('footer.services.dental', locale)}
+                      </Link>
+                    </li>
+                    <li>
+                      <Link href="/services/grooming" className={styles.service_link}>
+                        <i className="fas fa-cut"></i>
+                        {translate('footer.services.grooming', locale)}
+                      </Link>
+                    </li>
+                  </>
+                )}
+              </ul>
+            )}
           </div>
 
           {/* Contact Information Column */}
@@ -80,6 +160,42 @@ const Footer = () => {
               </li>
             </ul>
           </div>
+
+          {/* Certifications and Accreditations Column */}
+          {/* <div className={styles.footer_certifications_section}>
+            <h3 className={styles.section_title}>{translate('footer.certifications.title', locale)}</h3>
+            <div className={styles.certifications_grid}>
+              <div className={styles.certification_item}>
+                <div className={styles.cert_icon}>
+                  <i className="fas fa-certificate"></i>
+                </div>
+                <span className={styles.cert_text}>{translate('footer.certifications.veterinaryBoard', locale)}</span>
+              </div>
+              <div className={styles.certification_item}>
+                <div className={styles.cert_icon}>
+                  <i className="fas fa-award"></i>
+                </div>
+                <span className={styles.cert_text}>{translate('footer.certifications.animalWelfare', locale)}</span>
+              </div>
+              <div className={styles.certification_item}>
+                <div className={styles.cert_icon}>
+                  <i className="fas fa-shield-alt"></i>
+                </div>
+                <span className={styles.cert_text}>{translate('footer.certifications.iso9001', locale)}</span>
+              </div>
+              <div className={styles.certification_item}>
+                <div className={styles.cert_icon}>
+                  <i className="fas fa-star"></i>
+                </div>
+                <span className={styles.cert_text}>{translate('footer.certifications.excellence', locale)}</span>
+              </div>
+            </div>
+            <div className={styles.footer_wave_decoration}>
+              <svg width="100" height="20" viewBox="0 0 100 20" fill="none">
+                <path d="M0 10C20 5, 30 15, 50 10C70 5, 80 15, 100 10" stroke="#FFD700" strokeWidth="2" fill="none"/>
+              </svg>
+            </div>
+          </div> */}
 
           {/* Working Hours and Social Media Column */}
           <div className={styles.footer_social_section}>
