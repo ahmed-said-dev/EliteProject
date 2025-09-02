@@ -4,18 +4,14 @@ import Link from 'next/link';
 import styles from './Footer.module.css';
 import { useLanguage } from '@/context/LanguageContext';
 import { translate } from '../../../i18n';
-import useServicePages from '@/hooks/useServicePages';
+import { useHomeServices } from '@/hooks/useHomeServices';
 
 const Footer = () => {
   const { locale, isRTL } = useLanguage();
   const dir = isRTL ? 'rtl' : 'ltr';
   
-  // جلب الخدمات من الباك اند
-  const { formattedServicePages, isLoading, error } = useServicePages({
-    page: 1,
-    pageSize: 6,
-    sort: 'order:asc'
-  });
+  // جلب الخدمات من نفس مصدر الهيدر
+  const { pages, isLoading, error } = useHomeServices();
   return (
     <footer className={styles.elite_footer} dir={dir}>
       <div className={styles.container}>
@@ -61,9 +57,9 @@ const Footer = () => {
               </div>
             ) : (
               <ul className={styles.services_list}>
-                {formattedServicePages.slice(0, 6).map((service, index) => (
+                {pages && pages.slice(0, 6).map((service, index) => (
                   <li key={service.id}>
-                    <Link href={`/services/${service.slug}`} className={styles.service_link}>
+                    <Link href={`/service/${service.id}`} className={styles.service_link}>
                       {service.icons && service.icons[0] ? (
                         <i className={`fas ${service.icons[0].icon}`}></i>
                       ) : (
@@ -73,7 +69,7 @@ const Footer = () => {
                     </Link>
                   </li>
                 ))}
-                {formattedServicePages.length === 0 && (
+                {(!pages || pages.length === 0) && (
                   <>
                     <li>
                       <Link href="/services/general-checkup" className={styles.service_link}>
