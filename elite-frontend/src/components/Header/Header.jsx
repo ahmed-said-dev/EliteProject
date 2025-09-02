@@ -8,6 +8,7 @@ import { useUnifiedCart } from '@/context/UnifiedCartContext';
 import { useLanguage } from '@/context/LanguageContext';
 import { useAuth } from '@/context/SaleorAuthContext';
 import LanguageSwitcher from '@/components/LanguageSwitcher';
+import useHomeServices from '@/hooks/useHomeServices';
 
 const Header = () => {
   const pathname = usePathname();
@@ -18,8 +19,13 @@ const Header = () => {
   const { user, isAuthenticated, logout } = useAuth();
   const [showAccountMenu, setShowAccountMenu] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [showServicesDropdown, setShowServicesDropdown] = useState(false);
   const accountMenuRef = useRef(null);
   const mobileMenuRef = useRef(null);
+  const servicesDropdownRef = useRef(null);
+  
+  // Fetch services data
+  const { services, pages, isLoading: servicesLoading, error: servicesError } = useHomeServices();
 
   const isActive = (path) => {
     if (!pathname) return false; // Protección contra pathname null durante SSR
@@ -33,6 +39,10 @@ const Header = () => {
     const handleClickOutside = (event) => {
       if (accountMenuRef.current && !accountMenuRef.current.contains(event.target)) {
         setShowAccountMenu(false);
+      }
+      
+      if (servicesDropdownRef.current && !servicesDropdownRef.current.contains(event.target)) {
+        setShowServicesDropdown(false);
       }
       
       if (mobileMenuRef.current && !mobileMenuRef.current.contains(event.target) && 
@@ -111,7 +121,50 @@ const Header = () => {
             <ul className={styles.nav}>
               <li><Link href="/" className={isActive('/') ? styles.active : ''} onClick={() => setMobileMenuOpen(false)}>{t('header.home')}</Link></li>
               <li><Link href="/about" className={isActive('/about') ? styles.active : ''} onClick={() => setMobileMenuOpen(false)}>{t('header.aboutUs')}</Link></li>
-              <li><Link href="/services" className={isActive('/services') ? styles.active : ''} onClick={() => setMobileMenuOpen(false)}>{t('header.services')}</Link></li>
+              <li 
+                className={styles.servicesDropdownContainer}
+                ref={servicesDropdownRef}
+                onMouseEnter={() => setShowServicesDropdown(true)}
+                onMouseLeave={() => setShowServicesDropdown(false)}
+              >
+                <Link href="/services" className={isActive('/services') ? styles.active : ''}>
+                  {t('header.services')}
+                  <i className={`fa-solid fa-chevron-down ${styles.dropdownIcon}`}></i>
+                </Link>
+                {showServicesDropdown && (
+                  <div className={styles.servicesDropdown}>
+                    {servicesLoading ? (
+                      <div className={styles.dropdownLoading}>
+                        <i className="fa-solid fa-spinner fa-spin"></i>
+                        <span>Loading services...</span>
+                      </div>
+                    ) : servicesError ? (
+                      <div className={styles.dropdownError}>
+                        <span>Error loading services</span>
+                      </div>
+                    ) : pages && pages.length > 0 ? (
+                      pages.map((service) => (
+                        <Link 
+                          key={service.id}
+                          href={`/service/${service.id}`}
+                          className={styles.dropdownItem}
+                          onClick={() => {
+                            setShowServicesDropdown(false);
+                            setMobileMenuOpen(false);
+                          }}
+                        >
+                          <i className={`fa-solid fa-paw ${styles.serviceIcon}`}></i>
+                          <span>{service.title}</span>
+                        </Link>
+                      ))
+                    ) : (
+                      <div className={styles.dropdownEmpty}>
+                        <span>No services available</span>
+                      </div>
+                    )}
+                  </div>
+                )}
+              </li>
               <li><Link href="/products" className={isActive('/products') ? styles.active : ''} onClick={() => setMobileMenuOpen(false)}>{t('header.products')}</Link></li>
               <li><Link href="/media" className={isActive('/media') ? styles.active : ''} onClick={() => setMobileMenuOpen(false)}>{t('header.media')}</Link></li>
               <li><Link href="/memberships" className={isActive('/memberships') ? styles.active : ''} onClick={() => setMobileMenuOpen(false)}>{t('header.memberships')}</Link></li>

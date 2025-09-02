@@ -5,6 +5,7 @@ import { faPaw, faCat, faDog, faFish, faOtter, faDove, faHorse, faSpider, faCrow
 import { translate } from "../../i18n";
 import { useLanguage } from "@/context/LanguageContext";
 import useHomeServices from "@/hooks/useHomeServices";
+import { useRouter } from "next/router";
 
 // قاموس لتحويل اسم الأيقونة إلى الأيقونة الفعلية
 const iconMap = {
@@ -21,18 +22,26 @@ const iconMap = {
   faStar: faStar
 };
 
-const ServiceCard = ({ title, icon }: { 
+const ServiceCard = ({ title, icon, serviceId, onClick }: { 
   title: string;
   icon: React.ReactNode;
+  serviceId: number;
+  onClick: () => void;
 }) => {
   return (
-    <div className="bg-white rounded-3xl shadow-lg p-8 text-center relative flex flex-col items-center justify-center h-full min-h-[250px] hover:bg-[#E5EDF8] transition-colors duration-300">
+    <div 
+      onClick={onClick}
+      className="bg-white rounded-3xl shadow-lg p-8 text-center relative flex flex-col items-center justify-center h-full min-h-[250px] hover:bg-[#E5EDF8] hover:shadow-xl hover:scale-105 transition-all duration-300 cursor-pointer group"
+    >
       {icon}
-      <h3 className="text-xl font-bold text-[#44396F] mb-4">{title}</h3>
-      <FontAwesomeIcon icon={faStar} className="text-purple-300 absolute top-3 left-8" />
-      <FontAwesomeIcon icon={faStar} className="text-purple-400 absolute top-10 right-10" />
-      <FontAwesomeIcon icon={faStar} className="text-purple-500 absolute bottom-4 left-4" />
-      <FontAwesomeIcon icon={faStar} className="text-purple-600 absolute bottom-8 right-6" />
+      <h3 className="text-xl font-bold text-[#44396F] mb-4 group-hover:text-[#9b87f5] transition-colors">{title}</h3>
+      <FontAwesomeIcon icon={faStar} className="text-purple-300 absolute top-3 left-8 group-hover:text-purple-400 transition-colors" />
+      <FontAwesomeIcon icon={faStar} className="text-purple-400 absolute top-10 right-10 group-hover:text-purple-500 transition-colors" />
+      <FontAwesomeIcon icon={faStar} className="text-purple-500 absolute bottom-4 left-4 group-hover:text-purple-600 transition-colors" />
+      <FontAwesomeIcon icon={faStar} className="text-purple-600 absolute bottom-8 right-6 group-hover:text-purple-700 transition-colors" />
+      
+      {/* إضافة مؤشر للنقر */}
+      <div className="absolute inset-0 rounded-3xl border-2 border-transparent group-hover:border-[#9b87f5] transition-colors"></div>
     </div>
   );
 };
@@ -40,9 +49,20 @@ const ServiceCard = ({ title, icon }: {
 const Services = () => {
   const { locale, isRTL } = useLanguage();
   const dir = isRTL ? 'rtl' : 'ltr';
+  const router = useRouter();
+
+  // Handle View All button click
+  const handleViewAll = () => {
+    router.push('/services');
+  };
   
   // استخدام hook لجلب بيانات الخدمات من API
   const { formattedServices, isLoading, error } = useHomeServices();
+  
+  // دالة للانتقال إلى صفحة تفاصيل الخدمة
+  const handleServiceClick = (serviceId: number) => {
+    router.push(`/service/${serviceId}`);
+  };
   
   // الحصول على الأيقونة المناسبة بناءً على الاسم
   const getIconByName = (iconName: string) => {
@@ -57,7 +77,7 @@ const Services = () => {
   return (
     <div className="w-full py-16 bg-[#F5F5F7] relative overflow-hidden" dir={dir}>
       {/* Background animal icons */}
-      <div className="absolute inset-0 overflow-hidden opacity-10">
+      <div className="absolute inset-0 overflow-hidden opacity-10 pointer-events-none">
         <div className="absolute top-10 left-10">
           <FontAwesomeIcon icon={faPaw} style={{ height: '4em', width: '4em' }} className="text-purple-600 transform rotate-45 opacity-90" />
         </div>
@@ -133,7 +153,9 @@ const Services = () => {
               formattedServices.map((service) => (
                 <ServiceCard
                   key={service.id}
+                  serviceId={service.id}
                   title={service.title}
+                  onClick={() => handleServiceClick(service.id)}
                   icon={<FontAwesomeIcon 
                     icon={getIconByName(service.iconName)} 
                     style={{ height: '2em', width: '2em' }} 
@@ -145,27 +167,39 @@ const Services = () => {
               // عرض بيانات افتراضية إذا لم يكن هناك بيانات من API
               <>
                 <ServiceCard
+                  serviceId={1}
                   title={translate('services.service1', locale)}
+                  onClick={() => handleServiceClick(1)}
                   icon={<FontAwesomeIcon icon={faPaw} style={{ height: '2em', width: '2em' }} className="text-purple-600 opacity-20 transform rotate-45" />}
                 />
                 <ServiceCard
+                  serviceId={2}
                   title={translate('services.service2', locale)}
+                  onClick={() => handleServiceClick(2)}
                   icon={<FontAwesomeIcon icon={faSyringe} style={{ height: '2em', width: '2em' }} className="text-purple-600 opacity-20 transform rotate-45" />}
                 />
                 <ServiceCard
+                  serviceId={3}
                   title={translate('services.service3', locale)}
+                  onClick={() => handleServiceClick(3)}
                   icon={<FontAwesomeIcon icon={faTooth} style={{ height: '2em', width: '2em' }} className="text-purple-600 opacity-20 transform rotate-45" />}
                 />
                 <ServiceCard
+                  serviceId={4}
                   title={translate('services.service4', locale)}
+                  onClick={() => handleServiceClick(4)}
                   icon={<FontAwesomeIcon icon={faEye} style={{ height: '2em', width: '2em' }} className="text-purple-600 opacity-20 transform rotate-45" />}
                 />
                 <ServiceCard
+                  serviceId={5}
                   title={translate('services.service5', locale)}
+                  onClick={() => handleServiceClick(5)}
                   icon={<FontAwesomeIcon icon={faBone} style={{ height: '2em', width: '2em' }} className="text-purple-600 opacity-20 transform rotate-45" />}
                 />
                 <ServiceCard
+                  serviceId={6}
                   title={translate('services.service6', locale)}
+                  onClick={() => handleServiceClick(6)}
                   icon={<FontAwesomeIcon icon={faScissors} style={{ height: '2em', width: '2em' }} className="text-purple-600 opacity-20 transform rotate-45" />}
                 />
               </>
@@ -174,7 +208,10 @@ const Services = () => {
         )}
         
         <div className="text-center mt-8">
-          <Button className="bg-yellow-500 hover:bg-yellow-600 text-white">
+          <Button 
+            onClick={handleViewAll}
+            className="bg-yellow-500 hover:bg-yellow-600 text-white"
+          >
             {translate('services.viewAllButton', locale)}
             <FontAwesomeIcon icon={faPlus} className={`${dir === 'rtl' ? 'mr-2' : 'ml-2'}`} />
           </Button>

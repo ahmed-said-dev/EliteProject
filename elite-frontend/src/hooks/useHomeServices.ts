@@ -14,17 +14,45 @@ export interface HomeService {
   publishedAt: string;
 }
 
-// واجهة لنوع البيانات المرجعة من API
-interface HomeServicesResponse {
-  data: HomeService[];
-  meta: {
-    pagination: {
-      page: number;
-      pageSize: number;
-      pageCount: number;
-      total: number;
-    };
+// واجهة لبيانات الصفحة
+interface ServicePage {
+  id: number;
+  title: string;
+  description: string;
+  badge?: string;
+  isActive: boolean;
+  image?: {
+    id: number;
+    url: string;
+    alternativeText?: string;
   };
+  features?: Array<{
+    id: number;
+    text: string;
+  }>;
+  icons?: Array<{
+    id: number;
+    icon: string;
+  }>;
+  faq?: Array<{
+    id: number;
+    question: string;
+    answer: string;
+  }>;
+}
+
+// واجهة لنوع البيانات المرجعة من unified-services API
+interface UnifiedServicesResponse {
+  data: {
+    id: number;
+    documentId: string;
+    home: HomeService[];
+    pages: ServicePage[];
+    createdAt: string;
+    updatedAt: string;
+    publishedAt: string;
+  }[];
+  meta: object;
 }
 
 /**
@@ -40,15 +68,15 @@ export const useHomeServices = () => {
   const queryKey = ['home-services', locale];
   
   // استخدام React Query مع Axios لجلب البيانات
-  const { data, isLoading, error, refetch, dataUpdatedAt } = useQuery<HomeServicesResponse, Error>(
+  const { data, isLoading, error, refetch, dataUpdatedAt } = useQuery<UnifiedServicesResponse, Error>(
     queryKey,
     async () => {
-      // إضافة معلمات اللغة إلى عنوان URL للحصول على البيانات بلغة المستخدم الحالية
-      const url = `${process.env.NEXT_PUBLIC_API_URL}/api/home-services?locale=${locale}`;      
+      // استخدام unified-services endpoint
+      const url = `http://localhost:1337/api/unified-services`;      
       
       const response = await axios.get(url);
       
-      console.log('🔍 استجابة API الخدمات:', response.data);
+      console.log('🔍 استجابة API الخدمات الموحدة:', response.data);
       
       return response.data;
     },
@@ -89,8 +117,8 @@ export const useHomeServices = () => {
     }
   }, [dataUpdatedAt]);
   
-  // تحويل البيانات للصيغة المطلوبة
-  const formattedServices = data?.data.map(service => ({
+  // تحويل البيانات للصيغة المطلوبة - استخراج البيانات من data[0].home
+  const formattedServices = data?.data?.[0]?.home?.map(service => ({
     id: service.id,
     title: service.title,
     iconName: service.iconName,
@@ -102,7 +130,8 @@ export const useHomeServices = () => {
   };
   
   return {
-    services: data?.data || [],
+    services: data?.data?.[0]?.home || [],
+    pages: data?.data?.[0]?.pages || [],
     isLoading,
     error,
     formattedServices,

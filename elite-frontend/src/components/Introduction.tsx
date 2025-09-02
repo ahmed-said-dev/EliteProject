@@ -6,15 +6,22 @@ import { faPaw, faCat, faDog, faFish, faOtter, faDove, faHorse, faSpider, faCrow
 import Image from "next/image";
 import { translate } from "../../i18n";
 import { useLanguage } from "@/context/LanguageContext";
+import { useRouter } from "next/router";
 
 const Introduction = () => {
   const { locale, isRTL } = useLanguage();
   const dir = isRTL ? 'rtl' : 'ltr';
+  const router = useRouter();
+
+  // Handle Learn More button click
+  const handleLearnMore = () => {
+    router.push('/about');
+  };
   
   return (
     <div className="w-full relative overflow-hidden" dir={dir}>
       {/* Background animal icons */}
-      <div className="absolute inset-0 overflow-hidden opacity-10">
+      <div className="absolute inset-0 overflow-hidden opacity-10 pointer-events-none">
         <div className="absolute top-10 left-10">
           <FontAwesomeIcon icon={faPaw} style={{ height: '4em', width: '4em' }} className="text-purple-600 transform rotate-45 opacity-90" />
         </div>
@@ -67,7 +74,10 @@ const Introduction = () => {
             <p className="text-gray-600 mt-4 max-w-4xl mx-auto mb-12">
               {translate('introduction.description', locale)}
             </p>
-            <Button className="bg-yellow-500 hover:bg-yellow-600 text-white">
+            <Button 
+              onClick={handleLearnMore}
+              className="bg-yellow-500 hover:bg-yellow-600 text-white"
+            >
               {translate('introduction.learnMoreButton', locale)}
               <FontAwesomeIcon icon={faPaw} className={`${dir === 'rtl' ? 'mr-6' : 'ml-6'} h-4 w-4 transform -rotate-45`} />
             </Button>

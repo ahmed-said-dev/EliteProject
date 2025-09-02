@@ -114,9 +114,6 @@ async function bootstrap() {
   // Global prefix MUST be set BEFORE Swagger setup
   app.setGlobalPrefix('api');
 
-  // Force HTTP protocol detection (use the underlying Express instance)
-  const expressApp = app.getHttpAdapter().getInstance();
-  expressApp.set('trust proxy', true);
   // Get the underlying Express instance
   const expressApp = app.getHttpAdapter().getInstance();
   

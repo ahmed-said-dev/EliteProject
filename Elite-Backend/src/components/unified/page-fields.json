@@ -12,7 +12,8 @@
     "order": { "type": "integer", "default": 0 },
     "image": { "type": "media", "multiple": false, "allowedTypes": ["images"] },
     "features": { "type": "component", "repeatable": true, "component": "shared.service-feature" },
-    "icons": { "type": "component", "repeatable": true, "component": "shared.service-icon" }
+    "icons": { "type": "component", "repeatable": true, "component": "shared.service-icon" },
+    "faq": { "type": "component", "repeatable": true, "component": "shared.faq-item" }
   }
 }
 

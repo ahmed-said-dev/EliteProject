@@ -13,6 +13,18 @@ export interface MembershipFeature extends Struct.ComponentSchema {
   };
 }
 
+export interface SharedFaqItem extends Struct.ComponentSchema {
+  collectionName: 'components_shared_faq_items';
+  info: {
+    description: 'Frequently Asked Questions item with question and answer';
+    displayName: 'FAQ Item';
+  };
+  attributes: {
+    answer: Schema.Attribute.Text & Schema.Attribute.Required;
+    question: Schema.Attribute.String & Schema.Attribute.Required;
+  };
+}
+
 export interface SharedMedia extends Struct.ComponentSchema {
   collectionName: 'components_shared_media';
   info: {
@@ -147,6 +159,7 @@ export interface UnifiedPageFields extends Struct.ComponentSchema {
   attributes: {
     badge: Schema.Attribute.String;
     description: Schema.Attribute.Text;
+    faq: Schema.Attribute.Component<'shared.faq-item', true>;
     features: Schema.Attribute.Component<'shared.service-feature', true>;
     icons: Schema.Attribute.Component<'shared.service-icon', true>;
     image: Schema.Attribute.Media<'images'>;
@@ -160,6 +173,7 @@ declare module '@strapi/strapi' {
   export module Public {
     export interface ComponentSchemas {
       'membership.feature': MembershipFeature;
+      'shared.faq-item': SharedFaqItem;
       'shared.media': SharedMedia;
       'shared.quote': SharedQuote;
       'shared.rich-text': SharedRichText;
