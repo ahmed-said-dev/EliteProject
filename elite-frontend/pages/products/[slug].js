@@ -26,7 +26,8 @@ import PageBanner from '@/components/PageBanner/PageBanner';
 export default function ProductPage() {
   const router = useRouter();
   const { slug } = router.query;
-  const { t } = useLanguage();
+  const { t, isRTL } = useLanguage();
+  const dir = isRTL ? 'rtl' : 'ltr';
   const { addToCart: addToSaleorCart } = useCart();
   const { addToCart: addToUnifiedCart, isInCart, getCartItem } = useUnifiedCart();
   
@@ -170,7 +171,7 @@ export default function ProductPage() {
   const mainImage = product?.images?.[selectedImageIndex]?.url || product?.thumbnail?.url || '/placeholder-product.jpg';
 
   return (
-    <div className="min-h-screen relative bg-gradient-to-br from-purple-50 via-white to-indigo-50" style={{ paddingBottom: '100px' }} >
+    <div className="min-h-screen relative bg-gradient-to-br from-purple-50 via-white to-indigo-50" style={{ paddingBottom: '100px' }} dir={dir}>
       {/* Decorative Background Elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-20 left-10 w-32 h-32 bg-purple-200/20 rounded-full blur-xl animate-pulse"></div>

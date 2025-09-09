@@ -5,6 +5,15 @@
   position: relative;
   overflow: hidden;
   font-family: 'Poppins', 'Cairo', sans-serif;
+}
+
+/* RTL/LTR Direction Support */
+.elite_footer[dir="rtl"] {
+  direction: rtl;
+  text-align: right;
+}
+
+.elite_footer[dir="ltr"] {
   direction: ltr;
   text-align: left;
 }
@@ -29,6 +38,12 @@
 .footer_logo_section {
   padding-right: 0;
   padding-left: 30px;
+}
+
+/* RTL Logo Section */
+.elite_footer[dir="rtl"] .footer_logo_section {
+  padding-right: 30px;
+  padding-left: 0;
 }
 
 .footer_logo {
@@ -94,6 +109,12 @@
   background-color: #FFD700;
 }
 
+/* RTL Section Title */
+.elite_footer[dir="rtl"] .section_title::after {
+  left: auto;
+  right: 0;
+}
+
 .contact_list {
   list-style: none;
   padding: 0;
@@ -111,6 +132,11 @@
   transform: translateX(5px);
 }
 
+/* RTL Contact List Hover */
+.elite_footer[dir="rtl"] .contact_list li:hover {
+  transform: translateX(-5px);
+}
+
 .icon_wrapper {
   width: 40px;
   height: 40px;
@@ -123,6 +149,12 @@
   color: #FFD700;
   font-size: 16px;
   transition: all 0.3s ease;
+}
+
+/* RTL Icon Wrapper */
+.elite_footer[dir="rtl"] .icon_wrapper {
+  margin-right: 0;
+  margin-left: 15px;
 }
 
 .contact_list li:hover .icon_wrapper {
@@ -209,11 +241,22 @@
   transform: translateX(5px);
 }
 
+/* RTL Service Link Hover */
+.elite_footer[dir="rtl"] .service_link:hover {
+  transform: translateX(-5px);
+}
+
 .service_link i {
   margin-right: 10px;
   width: 16px;
   color: #FFD700;
   font-size: 14px;
+}
+
+/* RTL Service Link Icon */
+.elite_footer[dir="rtl"] .service_link i {
+  margin-right: 0;
+  margin-left: 10px;
 }
 
 /* Certifications Section */
@@ -258,6 +301,12 @@
   flex-shrink: 0;
 }
 
+/* RTL Certification Icon */
+.elite_footer[dir="rtl"] .cert_icon {
+  margin-right: 0;
+  margin-left: 12px;
+}
+
 .cert_text {
   font-size: 13px;
   color: rgba(255, 255, 255, 0.9);
@@ -269,6 +318,12 @@
 .footer_social_section {
   padding-right: 0;
   padding-left: 20px;
+}
+
+/* RTL Social Section */
+.elite_footer[dir="rtl"] .footer_social_section {
+  padding-right: 20px;
+  padding-left: 0;
 }
 
 .social_icons {

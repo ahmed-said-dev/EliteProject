@@ -10,12 +10,16 @@ import {
   faMedkit
 } from '@fortawesome/free-solid-svg-icons';
 import styles from '@/styles/components/AuthPageDecorations.module.css';
+import { useLanguage } from '@/context/LanguageContext';
 
 export default function AuthPageDecorations() {
+  const { isRTL } = useLanguage();
+  const dir = isRTL ? 'rtl' : 'ltr';
+  
   return (
     <>
       {/* Decorative background elements */}
-      <div className="absolute inset-0 pointer-events-none">
+      <div className="absolute inset-0 pointer-events-none" dir={dir}>
         <div className={styles.floatingIcon} style={{ top: '10%', left: '5%', animationDuration: '6s' }}>
           <FontAwesomeIcon icon={faPaw} className="text-purple-200 text-4xl" />
         </div>

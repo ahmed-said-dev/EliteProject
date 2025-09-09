@@ -1,0 +1,87 @@
+/* Introduction Component RTL/LTR Support */
+
+.introductionSection {
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+.introductionSection[dir="rtl"] {
+  direction: rtl;
+}
+
+.introductionSection[dir="ltr"] {
+  direction: ltr;
+}
+
+/* Content Container */
+.contentContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+/* RTL Content Container - Move to far left */
+.introductionSection[dir="rtl"] .contentContainer {
+  align-items: flex-start;
+  text-align: right;
+  margin-right: auto;
+  margin-left: 0;
+}
+
+/* Grid Layout */
+.gridContainer {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 3rem;
+}
+
+@media (min-width: 768px) {
+  .gridContainer {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+/* RTL Grid Layout */
+.introductionSection[dir="rtl"] .gridContainer {
+  direction: rtl;
+}
+
+/* Button Alignment */
+.buttonContainer {
+  display: flex;
+  justify-content: center;
+}
+
+.introductionSection[dir="rtl"] .buttonContainer {
+  justify-content: flex-start;
+}
+
+/* Text Alignment */
+.titleText {
+  text-align: center;
+}
+
+.introductionSection[dir="rtl"] .titleText {
+  text-align: right;
+}
+
+.descriptionText {
+  text-align: center;
+}
+
+.introductionSection[dir="rtl"] .descriptionText {
+  text-align: right;
+}
+
+/* Icon positioning for RTL */
+.iconButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.introductionSection[dir="rtl"] .iconButton {
+  flex-direction: row-reverse;
+}

@@ -21,16 +21,15 @@ const formatDate = (dateString, locale) => {
   });
 };
 
-export default function ArticleDetail({ initialArticleData, initialRelatedData }) {
+export default function ArticleDetail() {
   const router = useRouter();
   const { id } = router.query;
   const { t, locale, dir } = useLanguage();
   
-  const { data: article, isLoading, error } = useBlogArticle(id, initialArticleData);
+  const { data: article, isLoading, error } = useBlogArticle(id);
   const { data: relatedArticles, isLoading: relatedLoading } = useRelatedArticles(
     article?.id, 
-    3, 
-    initialRelatedData
+    3
   );
 
   // عرض حالة التحميل عندما لا يكون هناك معرف أو في مرحلة التحميل الأولية
@@ -390,55 +389,6 @@ export default function ArticleDetail({ initialArticleData, initialRelatedData }
   );
 }
 
-export async function getServerSideProps({ params, locale }) {
-  try {
-    // الحصول على الـ slug أو id من المعلمات
-    const { id } = params;
-    
-    const apiUrl = `${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:1337'}/api`;
-    
-    // جلب بيانات المقالة - استخدام الـ endpoint مباشرة
-    const articleResponse = await fetch(`${apiUrl}/blog-articles/${id}?populate=*&locale=${locale}`);
-    
-    // إذا لم يتم العثور على المقالة، أعد توجيه إلى صفحة 404
-    if (!articleResponse.ok) {
-      return {
-        notFound: true,
-      };
-    }
-    
-    const articleData = await articleResponse.json();
-    
-    // جلب المقالات ذات الصلة
-    let relatedData = { data: [] };
-    try {
-      const relatedResponse = await fetch(`${apiUrl}/blog-articles/${articleData.data.id}/related?limit=3&populate=*&locale=${locale}`);
-      
-      if (relatedResponse.ok) {
-        relatedData = await relatedResponse.json();
-      } else if (relatedResponse.status === 404) {
-        // إذا لم تكن نقطة النهاية متاحة، جلب مقالات عشوائية بدلاً من ذلك
-        const randomResponse = await fetch(`${apiUrl}/blog-articles?pagination[pageSize]=3&populate=*&locale=${locale}&filters[id][$ne]=${articleData.data.id}`);
-        
-        if (randomResponse.ok) {
-          relatedData = await randomResponse.json();
-        }
-      }
-    } catch (error) {
-      console.error('Error fetching related articles:', error);
-    }
-    
-    return {
-      props: {
-        initialArticleData: articleData.data,
-        initialRelatedData: relatedData.data,
-      },
-    };
-  } catch (error) {
-    console.error('Error fetching article data:', error);
-    
-    return {
-      notFound: true,
-    };
-  }
-}
+// Remove getServerSideProps to use client-side rendering only
+// This prevents Next.js from trying to fetch data at build time
+// and allows the useBlogArticle hook to handle all data fetching

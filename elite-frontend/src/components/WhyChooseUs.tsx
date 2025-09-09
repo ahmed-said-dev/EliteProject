@@ -9,7 +9,7 @@ import { useLanguage } from "@/context/LanguageContext";
 
 const WhyChooseUs = () => {
   const { locale, isRTL } = useLanguage();
-  // تم تثبيت اتجاه هذا المكون على ltr كما طلب المستخدم سابقاً
+  const dir = isRTL ? 'rtl' : 'ltr';
   
   return (
     <>
@@ -68,7 +68,7 @@ const WhyChooseUs = () => {
               </svg>
             </div>
             
-            <div className="flex flex-col md:flex-row md:space-x-8 pt-2 px-4 md:px-0">
+            <div className={`flex flex-col md:flex-row ${isRTL ? 'md:space-x-reverse md:space-x-8' : 'md:space-x-8'} pt-2 px-4 md:px-0`}>
               {/* White cloud background using the exact SVG shape provided - extended to cover entire section */}
               {/* <div className="absolute left-0 top-24 right-0 w-full bottom-0 z-0 overflow-visible">
                 <svg className="w-full h-full" viewBox="0 0 800 600" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
@@ -91,15 +91,15 @@ const WhyChooseUs = () => {
                 </svg>
               </div>
 
-              {/* Features section - left side */}
-              <div className="md:w-3/5 mb-10 md:mb-0 relative mx-auto md:mx-0" style={{ zIndex: 20 }}>
-                <div className="text-white text-xl mb-10 text-center md:text-left">
+              {/* Features section - positioned based on RTL/LTR */}
+              <div className={`md:w-3/5 mb-10 md:mb-0 relative ${isRTL ? 'md:mr-0 md:ml-auto' : 'mx-auto md:mx-0'}`} style={{ zIndex: 20 }}>
+                <div className={`text-white text-xl mb-10 ${isRTL ? 'text-right md:text-right' : 'text-center md:text-left'}`}>
                   <p>{translate('whyChooseUs.description', locale)}</p>
                 </div>
                 
-                <div className="flex flex-col md:flex-row justify-center md:justify-between mb-8 space-y-8 md:space-y-0 md:space-x-4 px-2 sm:px-0" style={{ position: 'relative', zIndex: 30 }}>
+                <div className={`flex flex-col md:flex-row ${isRTL ? 'md:justify-start' : 'justify-center md:justify-between'} mb-8 space-y-8 md:space-y-0 ${isRTL ? 'md:space-x-reverse md:space-x-4' : 'md:space-x-4'} px-2 sm:px-0`} style={{ position: 'relative', zIndex: 30 }}>
                   {/* Feature 1 */}
-                  <div className="flex flex-col items-center md:items-start text-center md:text-start md:w-1/3 w-full max-w-xs mx-auto md:mx-0">
+                  <div className={`flex flex-col ${isRTL ? 'items-end md:items-end text-right md:text-right' : 'items-center md:items-start text-center md:text-start'} md:w-1/3 w-full max-w-xs ${isRTL ? 'md:mr-0' : 'mx-auto md:mx-0'}`}>
                     <div className="bg-[#E5E7F4] w-20 h-20 sm:w-24 sm:h-24 rounded-3xl flex items-center justify-center mb-4">
                       <svg width="45" height="45" viewBox="0 0 50 50" fill="none">
                         <path d="M25 12C28 12 30 14 30 17C30 20 28 22 25 22C22 22 20 20 20 17C20 14 22 12 25 12Z" fill="#9678D3"/>
@@ -113,7 +113,7 @@ const WhyChooseUs = () => {
                   </div>
                   
                   {/* Feature 2 */}
-                  <div className="flex flex-col items-center md:items-start text-center md:text-start md:w-1/3 w-full max-w-xs mx-auto md:mx-0">
+                  <div className={`flex flex-col ${isRTL ? 'items-end md:items-end text-right md:text-right' : 'items-center md:items-start text-center md:text-start'} md:w-1/3 w-full max-w-xs ${isRTL ? 'md:mr-0' : 'mx-auto md:mx-0'}`}>
                     <div className="bg-[#E5E7F4] w-20 h-20 sm:w-24 sm:h-24 rounded-3xl flex items-center justify-center mb-4">
                       <svg width="45" height="45" viewBox="0 0 50 50" fill="none">
                         <path d="M35 15L15 35M15 15L35 35" stroke="#9678D3" strokeWidth="4" strokeLinecap="round"/>
@@ -126,7 +126,7 @@ const WhyChooseUs = () => {
                   </div>
                   
                   {/* Feature 3 */}
-                  <div className="flex flex-col items-center md:items-start text-center md:text-start md:w-1/3 w-full max-w-xs mx-auto md:mx-0">
+                  <div className={`flex flex-col ${isRTL ? 'items-end md:items-end text-right md:text-right' : 'items-center md:items-start text-center md:text-start'} md:w-1/3 w-full max-w-xs ${isRTL ? 'md:mr-0' : 'mx-auto md:mx-0'}`}>
                     <div className="bg-[#E5E7F4] w-20 h-20 sm:w-24 sm:h-24 rounded-3xl flex items-center justify-center mb-4">
                       <Image 
                         src="/SVGs/why1.svg" 
@@ -140,7 +140,7 @@ const WhyChooseUs = () => {
                   </div>
                 </div>
                 
-                <div className="flex justify-center md:justify-start mt-8">
+                <div className={`flex ${isRTL ? 'justify-end md:justify-end' : 'justify-center md:justify-start'} mt-8`}>
                   <button className="bg-yellow-400 hover:bg-yellow-500 text-[#44396F] font-medium py-2.5 px-6 rounded-full flex items-center gap-2 transition-colors">
                     {translate('whyChooseUs.readMoreButton', locale)}
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">

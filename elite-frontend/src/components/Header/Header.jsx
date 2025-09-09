@@ -72,7 +72,7 @@ const Header = () => {
   };
 
   return (
-    <header className={styles.header_section}>
+    <header className={styles.header_section} dir={isRTL ? 'rtl' : 'ltr'}>
       <div className={styles.header_top}>
         <div className={styles.topContainer + " container"}>
           <div className={styles.logoContainer}>

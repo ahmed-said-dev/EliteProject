@@ -3,4 +3,19 @@
   background-color: rgba(255, 255, 255, 0.95);
 }
 
+/* RTL Support */
+[dir="rtl"] .formCard {
+  text-align: right;
+}
+
+[dir="rtl"] .formCard .absolute.top-0.left-0 {
+  left: auto;
+  right: 0;
+}
+
+[dir="rtl"] .formCard .absolute.bottom-0.right-0 {
+  right: auto;
+  left: 0;
+}
+
 /* CSS module styles will be used with the Tailwind CSS classes */

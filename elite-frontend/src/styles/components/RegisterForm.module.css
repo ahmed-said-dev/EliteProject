@@ -3,3 +3,18 @@
     isolation: isolate;
     backdrop-filter: blur(10px);
 }
+
+/* RTL Support */
+[dir="rtl"] .formCard {
+  text-align: right;
+}
+
+[dir="rtl"] .formCard .absolute.top-0.left-0 {
+  left: auto;
+  right: 0;
+}
+
+[dir="rtl"] .formCard .absolute.bottom-0.right-0 {
+  right: auto;
+  left: 0;
+}

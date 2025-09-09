@@ -9,7 +9,7 @@ import { useLanguage } from "@/context/LanguageContext";
 
 const Hero = () => {
   const { locale, isRTL } = useLanguage();
-  const dir = 'rtl' ;
+  const dir = isRTL ? 'rtl' : 'ltr';
   const [showBookingModal, setShowBookingModal] = useState(false);
 
   // Handle booking button click

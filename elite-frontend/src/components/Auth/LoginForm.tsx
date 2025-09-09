@@ -133,7 +133,7 @@ export default function LoginForm({ onToggleMode, isLogin }: LoginFormProps) {
   };
 
   return (
-    <div className={`w-full md:w-1/2 bg-white rounded-2xl shadow-2xl overflow-hidden transition-all duration-500 transform hover:shadow-purple-100 border border-purple-100 relative ${styles.formCard}`}>
+    <div className={`w-full md:w-1/2 bg-white rounded-2xl shadow-2xl overflow-hidden transition-all duration-500 transform hover:shadow-purple-100 border border-purple-100 relative ${styles.formCard}`} dir={dir}>
       {/* Purple Decorative Edge with pattern */}
       <div className="absolute top-0 left-0 w-full h-3 bg-gradient-to-r from-purple-500 to-purple-800 pattern-overlay"></div>
       

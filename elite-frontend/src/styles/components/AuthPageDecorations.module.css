@@ -13,3 +13,8 @@
     transform: translateY(20px) rotate(10deg);
   }
 }
+
+/* RTL Support for floating icons */
+[dir="rtl"] .floatingIcon {
+  transform: scaleX(-1);
+}

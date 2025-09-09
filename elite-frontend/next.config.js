@@ -7,7 +7,7 @@ const nextConfig = {
     localeDetection: false,
   },
   images: {
-    domains: ['images.pexels.com', 'www.svgrepo.com', 'images.unsplash.com', 'localhost', '134.122.102.182'],
+    domains: ['images.pexels.com', 'www.svgrepo.com', 'images.unsplash.com', 'localhost', '134.122.102.182','localhost:1337'],
   },
   env: {
     NEXT_PUBLIC_API_URL: 'http://134.122.102.182:8080',

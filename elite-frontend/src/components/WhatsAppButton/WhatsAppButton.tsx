@@ -13,7 +13,8 @@ const WhatsAppButton: React.FC<WhatsAppButtonProps> = ({
   message,
   position = 'bottom-right'
 }) => {
-  const { t, language } = useLanguage();
+  const { t, language, isRTL } = useLanguage();
+  const dir = isRTL ? 'rtl' : 'ltr';
   const [isExpanded, setIsExpanded] = useState(false);
 
   const defaultMessage = message || t('whatsapp.defaultMessage');
@@ -30,7 +31,7 @@ const WhatsAppButton: React.FC<WhatsAppButtonProps> = ({
   };
 
   return (
-    <div className={`${styles.whatsappContainer} ${styles[position]}`}>
+    <div className={`${styles.whatsappContainer} ${styles[position]}`} dir={dir}>
       {isExpanded && (
         <div className={styles.chatBubble}>
           <div className={styles.bubbleHeader}>
