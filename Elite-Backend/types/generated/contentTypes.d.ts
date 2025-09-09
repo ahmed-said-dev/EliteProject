@@ -1053,51 +1053,6 @@ export interface ApiTestoneTestone extends Struct.CollectionTypeSchema {
   };
 }
 
-export interface ApiUnifiedServiceUnifiedService
-  extends Struct.CollectionTypeSchema {
-  collectionName: 'unified_services';
-  info: {
-    description: 'Virtual aggregator combining home-services and service-pages';
-    displayName: 'Unified Services (aggregator)';
-    pluralName: 'unified-services';
-    singularName: 'unified-service';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  pluginOptions: {
-    i18n: {
-      localized: true;
-    };
-  };
-  attributes: {
-    createdAt: Schema.Attribute.DateTime;
-    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    home: Schema.Attribute.Component<'unified.home-fields', true> &
-      Schema.Attribute.SetPluginOptions<{
-        i18n: {
-          localized: true;
-        };
-      }>;
-    locale: Schema.Attribute.String;
-    localizations: Schema.Attribute.Relation<
-      'oneToMany',
-      'api::unified-service.unified-service'
-    >;
-    pages: Schema.Attribute.Component<'unified.page-fields', true> &
-      Schema.Attribute.SetPluginOptions<{
-        i18n: {
-          localized: true;
-        };
-      }>;
-    publishedAt: Schema.Attribute.DateTime;
-    updatedAt: Schema.Attribute.DateTime;
-    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-  };
-}
-
 export interface PluginCommentsComment extends Struct.CollectionTypeSchema {
   collectionName: 'plugin_comments_comments';
   info: {
@@ -1729,7 +1684,6 @@ declare module '@strapi/strapi' {
       'api::service-page.service-page': ApiServicePageServicePage;
       'api::team-member.team-member': ApiTeamMemberTeamMember;
       'api::testone.testone': ApiTestoneTestone;
-      'api::unified-service.unified-service': ApiUnifiedServiceUnifiedService;
       'plugin::comments.comment': PluginCommentsComment;
       'plugin::comments.comment-report': PluginCommentsCommentReport;
       'plugin::content-releases.release': PluginContentReleasesRelease;

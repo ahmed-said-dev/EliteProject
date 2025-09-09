@@ -15,14 +15,14 @@ export default {
       sort: { id: 'asc' },
     };
     if (locale) opts.locale = locale;
-    const entries = await strapi.entityService.findMany('api::unified-service.unified-service', opts);
+    const entries = await strapi.entityService.findMany('api::unified-service.unified-service' as any, opts);
     ctx.body = { data: entries };
   },
 
   async create(ctx: Context) {
     try {
       const { data } = ctx.request.body;
-      const entry = await strapi.entityService.create('api::unified-service.unified-service', {
+      const entry = await strapi.entityService.create('api::unified-service.unified-service' as any, {
         data: {
           ...data,
           publishedAt: new Date(),
