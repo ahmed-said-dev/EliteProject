@@ -23,8 +23,10 @@ const LanguageSwitcher = () => {
     setShowLanguageMenu(!showLanguageMenu);
   };
 
+  const { isRTL } = useLanguage();
+  
   return (
-    <div className={styles.languageContainer} ref={languageMenuRef}>
+    <div className={styles.languageContainer} ref={languageMenuRef} dir={isRTL ? 'rtl' : 'ltr'}>
       <button 
         className={styles.languageButton} 
         onClick={toggleLanguageMenu}

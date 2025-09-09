@@ -1,14 +1,36 @@
-import React from "react";
+import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPaw, faCat, faDog, faFish, faOtter, faDove, faHorse, faSpider, faCrow } from "@fortawesome/free-solid-svg-icons";
+import { faPaw, faCat, faDog, faFish, faOtter, faDove, faHorse, faSpider, faCrow, faPhone, faCalendarAlt, faTimes } from "@fortawesome/free-solid-svg-icons";
+import { faWhatsapp } from "@fortawesome/free-brands-svg-icons";
 import { Plus } from "lucide-react";
 import { translate } from "../../i18n";
 import { useLanguage } from "@/context/LanguageContext";
 
 const Hero = () => {
   const { locale, isRTL } = useLanguage();
-  const dir = 'rtl' ;
+  const dir = isRTL ? 'rtl' : 'ltr';
+  const [showBookingModal, setShowBookingModal] = useState(false);
+
+  // Handle booking button click
+  const handleBookAppointment = () => {
+    setShowBookingModal(true);
+  };
+
+  // Handle call button click
+  const handleCallUs = () => {
+    const phoneNumber = '+966123456789'; // رقم العيادة
+    window.open(`tel:${phoneNumber}`, '_self');
+  };
+
+  // Handle WhatsApp booking
+  const handleWhatsAppBooking = () => {
+    const phoneNumber = '+966123456789';
+    const message = encodeURIComponent(
+      `مرحباً، أريد حجز موعد في عيادة النخبة البيطرية`
+    );
+    window.open(`https://wa.me/${phoneNumber}?text=${message}`, '_blank');
+  };
 
   return (
     <div className="relative w-full min-h-[600px] overflow-hidden" dir={dir}>
@@ -39,7 +61,10 @@ const Hero = () => {
                   {translate('hero.subtitle', locale)}
                 </p>
                 
-                <Button className="bg-yellow-400 hover:bg-yellow-500 text-[#6B4E98] font-bold text-lg rounded-full w-fit px-8 py-2 flex items-center gap-2">
+                <Button 
+                  onClick={handleBookAppointment}
+                  className="bg-yellow-400 hover:bg-yellow-500 text-[#6B4E98] font-bold text-lg rounded-full w-fit px-8 py-2 flex items-center gap-2"
+                >
                   {translate('hero.bookButton', locale)}
                   <Plus className="h-5 w-5" />
                 </Button>
@@ -91,6 +116,69 @@ const Hero = () => {
           </div>
         </div>
       </div>
+      
+      {/* Booking Modal */}
+      {showBookingModal && (
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
+          <div className="bg-white rounded-2xl max-w-md w-full p-6 relative" dir={dir}>
+            {/* Close button */}
+            <button
+              onClick={() => setShowBookingModal(false)}
+              className="absolute top-4 right-4 text-gray-500 hover:text-gray-700"
+            >
+              <FontAwesomeIcon icon={faTimes} className="text-xl" />
+            </button>
+            
+            {/* Modal content */}
+            <div className="text-center">
+              <div className="mb-6">
+                <FontAwesomeIcon 
+                  icon={faPaw} 
+                  className="text-4xl text-[#44396F] mb-4"
+                />
+                <h3 className="text-2xl font-bold text-[#44396F] mb-2">
+                  {translate('hero.bookButton', locale)}
+                </h3>
+                <p className="text-gray-600">
+                  {translate('hero.subtitle', locale)}
+                </p>
+              </div>
+              
+              <div className="space-y-4">
+                {/* WhatsApp booking */}
+                <button
+                  onClick={handleWhatsAppBooking}
+                  className="w-full bg-green-500 hover:bg-green-600 text-white px-6 py-3 rounded-lg font-semibold transition-colors flex items-center justify-center"
+                >
+                  <FontAwesomeIcon icon={faWhatsapp} className={`${dir === 'rtl' ? 'ml-2' : 'mr-2'}`} />
+                  {translate('serviceDetail.bookViaWhatsApp', locale) || 'احجز عبر واتساب'}
+                </button>
+                
+                {/* Phone booking */}
+                <button
+                  onClick={handleCallUs}
+                  className="w-full bg-[#44396F] hover:bg-[#9b87f5] text-white px-6 py-3 rounded-lg font-semibold transition-colors flex items-center justify-center"
+                >
+                  <FontAwesomeIcon icon={faPhone} className={`${dir === 'rtl' ? 'ml-2' : 'mr-2'}`} />
+                  {translate('serviceDetail.callToBook', locale) || 'اتصل للحجز'}
+                </button>
+                
+                {/* Cancel button */}
+                <button
+                  onClick={() => setShowBookingModal(false)}
+                  className="w-full bg-gray-200 hover:bg-gray-300 text-gray-700 px-6 py-3 rounded-lg font-semibold transition-colors"
+                >
+                  {translate('common.cancel', locale) || 'إلغاء'}
+                </button>
+              </div>
+              
+              <div className="mt-6 text-sm text-gray-500 text-center">
+                <p>{translate('serviceDetail.bookingNote', locale) || 'سيتم تأكيد موعدك خلال 24 ساعة'}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

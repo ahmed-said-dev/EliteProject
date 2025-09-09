@@ -1,0 +1,42 @@
+{
+  "kind": "collectionType",
+  "collectionName": "unified_services",
+  "info": {
+    "singularName": "unified-service",
+    "pluralName": "unified-services",
+    "displayName": "Unified Services (aggregator)",
+    "description": "Virtual aggregator combining home-services and service-pages"
+  },
+  "options": { "draftAndPublish": true },
+  "pluginOptions": {
+    "i18n": { "localized": true }
+  },
+  "attributes": {
+    "home": {
+      "type": "component",
+      "repeatable": true,
+      "component": "unified.home-fields",
+      "pluginOptions": { "i18n": { "localized": true } }
+    },
+    "pages": {
+      "type": "component",
+      "repeatable": true,
+      "component": "unified.page-fields",
+      "pluginOptions": { "i18n": { "localized": true } }
+    }
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+

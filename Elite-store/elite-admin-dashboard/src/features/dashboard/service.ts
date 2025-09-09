@@ -62,7 +62,7 @@ export const dashboardService = {
   },
 
   // Get monthly revenue data
-  async getMonthlyRevenue(months: number = 12): Promise<number[]> {
+  async getMonthlyRevenue(_months: number = 12): Promise<number[]> {
     const response = await apiService.get<number[]>(`/admin/revenue`);
     return (response as any) as number[];
   },

@@ -4,10 +4,11 @@ import UnifiedCartPage from '@/components/CartPage/UnifiedCartPage';
 import { useLanguage } from '@/context/LanguageContext';
 
 const Cart = () => {
-  const { t } = useLanguage();
+  const { t, isRTL } = useLanguage();
+  const dir = isRTL ? 'rtl' : 'ltr';
   
   return (
-    <>
+    <div dir={dir}>
       <PageBanner
         breadcrumbs={[
           { label: t('pageBanner.home'), url: '/' },
@@ -17,7 +18,7 @@ const Cart = () => {
         backgroundImage="https://images.pexels.com/photos/4498651/pexels-photo-4498651.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
       />
       <UnifiedCartPage />
-    </>
+    </div>
   );
 };
 

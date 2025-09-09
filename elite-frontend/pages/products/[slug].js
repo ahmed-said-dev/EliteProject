@@ -26,7 +26,8 @@ import PageBanner from '@/components/PageBanner/PageBanner';
 export default function ProductPage() {
   const router = useRouter();
   const { slug } = router.query;
-  const { t } = useLanguage();
+  const { t, isRTL } = useLanguage();
+  const dir = isRTL ? 'rtl' : 'ltr';
   const { addToCart: addToSaleorCart } = useCart();
   const { addToCart: addToUnifiedCart, isInCart, getCartItem } = useUnifiedCart();
   
@@ -35,6 +36,7 @@ export default function ProductPage() {
   const [isWishlisted, setIsWishlisted] = useState(false);
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
   const [isAddingToCart, setIsAddingToCart] = useState(false);
+  const [addedToCart, setAddedToCart] = useState(false);
 
   // Decide data source: if slug looks like UUID (backend id), use store backend; else use Saleor by slug
   const isUuid = typeof slug === 'string' && /^[0-9a-fA-F-]{32,36}$/.test(slug)
@@ -80,6 +82,10 @@ export default function ProductPage() {
         await addToSaleorCart(selectedVariant.id, quantity);
         console.log('تم إضافة المنتج إلى السلة بنجاح');
       }
+      
+      // Show success state
+      setAddedToCart(true);
+      setTimeout(() => setAddedToCart(false), 3000);
     } catch (error) {
       console.error('Error adding to cart:', error);
       // Show error message here
@@ -165,7 +171,7 @@ export default function ProductPage() {
   const mainImage = product?.images?.[selectedImageIndex]?.url || product?.thumbnail?.url || '/placeholder-product.jpg';
 
   return (
-    <div className="min-h-screen relative bg-gradient-to-br from-purple-50 via-white to-indigo-50" style={{ paddingBottom: '100px' }} >
+    <div className="min-h-screen relative bg-gradient-to-br from-purple-50 via-white to-indigo-50" style={{ paddingBottom: '100px' }} dir={dir}>
       {/* Decorative Background Elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-20 left-10 w-32 h-32 bg-purple-200/20 rounded-full blur-xl animate-pulse"></div>
@@ -346,6 +352,95 @@ export default function ProductPage() {
               )}
             </div>
 
+            {/* Variants */}
+            {product.variants && product.variants.length > 1 && (
+              <div className="relative z-10 space-y-3">
+                <h3 className="font-semibold text-gray-900">الخيارات المتاحة:</h3>
+                <div className="flex flex-wrap gap-2">
+                  {product.variants.map((variant) => (
+                    <button
+                      key={variant.id}
+                      onClick={() => setSelectedVariant(variant)}
+                      className={`px-4 py-2 rounded-lg border transition-all ${
+                        selectedVariant?.id === variant.id
+                          ? 'border-purple-600 bg-purple-50 text-purple-700'
+                          : 'border-gray-300 hover:border-gray-400'
+                      }`}
+                    >
+                      {variant.name}
+                    </button>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {/* Sticky Add to Cart Section */}
+            <div className="relative z-10 sticky top-4 bg-gradient-to-r from-white/90 via-purple-50/80 to-indigo-50/80 backdrop-blur-lg p-6 rounded-2xl border border-purple-300/50 shadow-xl">
+              <div className="flex items-center gap-4">
+                {/* Quantity Selector */}
+                <div className="flex items-center border-2 border-purple-200 rounded-xl bg-white/70 shadow-sm">
+                  <button
+                    onClick={() => setQuantity(Math.max(1, quantity - 1))}
+                    className="px-4 py-3 hover:bg-purple-50 transition-colors text-purple-600 font-bold"
+                  >
+                    -
+                  </button>
+                  <span className="px-6 py-3 font-bold text-gray-800 bg-purple-50/50">{quantity}</span>
+                  <button
+                    onClick={() => setQuantity(quantity + 1)}
+                    className="px-4 py-3 hover:bg-purple-50 transition-colors text-purple-600 font-bold"
+                  >
+                    +
+                  </button>
+                </div>
+
+                {/* Add to Cart Button */}
+                <button
+                  onClick={handleAddToCart}
+                  disabled={!isAvailable || isAddingToCart}
+                  className={`flex-1 px-6 py-4 rounded-xl font-bold disabled:opacity-50 disabled:cursor-not-allowed transition-all flex items-center justify-center gap-3 shadow-lg transform hover:scale-105 disabled:hover:scale-100 text-lg ${
+                    addedToCart
+                      ? 'bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-600 hover:to-emerald-600 text-white shadow-green-300/50'
+                      : 'bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 text-white shadow-purple-300/50'
+                  }`}
+                >
+                  {isAddingToCart ? (
+                    <>
+                      <FontAwesomeIcon icon={faSpinner} spin className="text-xl" />
+                      جاري الإضافة...
+                    </>
+                  ) : addedToCart ? (
+                    <>
+                      <FontAwesomeIcon icon={faCheck} className="text-xl" />
+                      تم الإضافة بنجاح!
+                    </>
+                  ) : !isAvailable ? (
+                    <>
+                      <FontAwesomeIcon icon={faTimes} className="text-xl" />
+                      غير متوفر
+                    </>
+                  ) : (
+                    <>
+                      <FontAwesomeIcon icon={faShoppingCart} className="text-xl" />
+                      أضف للسلة - {formatPrice(price.amount, price.currency)}
+                    </>
+                  )}
+                </button>
+
+                {/* Wishlist Button */}
+                <button
+                  onClick={() => setIsWishlisted(!isWishlisted)}
+                  className={`px-4 py-4 rounded-xl border-2 transition-all shadow-sm ${
+                    isWishlisted
+                      ? 'border-red-500 bg-red-50 text-red-600 shadow-red-200/50'
+                      : 'border-gray-300 hover:border-red-300 hover:text-red-600 bg-white/70 hover:bg-red-50/50'
+                  }`}
+                >
+                  <FontAwesomeIcon icon={faHeart} className="text-xl" />
+                </button>
+              </div>
+            </div>
+
             {/* Description */}
             {(product.description || product.shortDescription) && (
               <div className="relative z-10 bg-gradient-to-r from-white/60 via-purple-50/40 to-indigo-50/40 backdrop-blur-sm p-6 rounded-2xl border border-purple-300/30 shadow-sm">
@@ -369,84 +464,6 @@ export default function ProductPage() {
                 )}
               </div>
             )}
-
-            {/* Variants */}
-            {product.variants && product.variants.length > 1 && (
-              <div className="space-y-3">
-                <h3 className="font-semibold text-gray-900">الخيارات المتاحة:</h3>
-                <div className="flex flex-wrap gap-2">
-                  {product.variants.map((variant) => (
-                    <button
-                      key={variant.id}
-                      onClick={() => setSelectedVariant(variant)}
-                      className={`px-4 py-2 rounded-lg border transition-all ${
-                        selectedVariant?.id === variant.id
-                          ? 'border-purple-600 bg-purple-50 text-purple-700'
-                          : 'border-gray-300 hover:border-gray-400'
-                      }`}
-                    >
-                      {variant.name}
-                    </button>
-                  ))}
-                </div>
-              </div>
-            )}
-
-            {/* Quantity and Add to Cart */}
-            <div className="flex items-center gap-4">
-              {/* Quantity Selector */}
-              <div className="flex items-center border border-gray-300 rounded-lg">
-                <button
-                  onClick={() => setQuantity(Math.max(1, quantity - 1))}
-                  className="px-3 py-2 hover:bg-gray-100 transition-colors"
-                >
-                  -
-                </button>
-                <span className="px-4 py-2 font-semibold">{quantity}</span>
-                <button
-                  onClick={() => setQuantity(quantity + 1)}
-                  className="px-3 py-2 hover:bg-gray-100 transition-colors"
-                >
-                  +
-                </button>
-              </div>
-
-              {/* Add to Cart Button */}
-              <button
-                onClick={handleAddToCart}
-                disabled={!isAvailable || isAddingToCart}
-                className="flex-1 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 text-white px-6 py-3 rounded-xl font-bold disabled:opacity-50 disabled:cursor-not-allowed transition-all flex items-center justify-center gap-2 shadow-lg hover:shadow-purple-300/50 transform hover:scale-105 disabled:hover:scale-100"
-              >
-                {isAddingToCart ? (
-                  <>
-                    <FontAwesomeIcon icon={faSpinner} spin />
-                    جاري الإضافة...
-                  </>
-                ) : !isAvailable ? (
-                  <>
-                    <FontAwesomeIcon icon={faTimes} />
-                    غير متوفر
-                  </>
-                ) : (
-                  <>
-                    <FontAwesomeIcon icon={faShoppingCart} />
-                    أضف للسلة - {formatPrice(price.amount, price.currency)}
-                  </>
-                )}
-              </button>
-
-              {/* Wishlist Button */}
-              <button
-                onClick={() => setIsWishlisted(!isWishlisted)}
-                className={`px-4 py-3 rounded-lg border transition-all ${
-                  isWishlisted
-                    ? 'border-red-500 bg-red-50 text-red-600'
-                    : 'border-gray-300 hover:border-red-300 hover:text-red-600'
-                }`}
-              >
-                <FontAwesomeIcon icon={faHeart} />
-              </button>
-            </div>
 
             {/* Product Details Section */}
             {isUuid && (

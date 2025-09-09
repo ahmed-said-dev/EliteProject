@@ -404,6 +404,42 @@
   }
 }
 
+/* RTL Support */
+[dir="rtl"] .row {
+  flex-direction: row-reverse;
+}
+
+[dir="rtl"] .sectionContent {
+  padding-right: 0;
+  padding-left: 3rem;
+}
+
+[dir="rtl"] .itemIcon {
+  margin-right: 0;
+  margin-left: 0.5rem;
+}
+
+[dir="rtl"] .btnIcon {
+  margin-left: 0;
+  margin-right: 0.5rem;
+}
+
+[dir="rtl"] .shape1 {
+  right: auto;
+  left: -30px;
+}
+
+[dir="rtl"] .shape2 {
+  left: auto;
+  right: -20px;
+}
+
+@media screen and (max-width: 991px) {
+  [dir="rtl"] .sectionContent {
+    padding-left: 0;
+  }
+}
+
 /* Responsive styles */
 @media screen and (max-width: 991px) {
   .col {

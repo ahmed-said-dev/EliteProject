@@ -3,7 +3,9 @@ import { useLanguage } from '@/context/LanguageContext';
 
 // إضافة دالة useApiUrl لاستخدامها في الدوال الأخرى
 function useApiUrl() {
-  return { data: process.env.NEXT_PUBLIC_API_URL || 'http://localhost:1337' };
+  return { data: 
+    process.env.NEXT_PUBLIC_API_URL || 
+    'http://localhost:1337' };
 }
 
 // تعريف واجهات البيانات المحدثة حسب هيكل API الجديد

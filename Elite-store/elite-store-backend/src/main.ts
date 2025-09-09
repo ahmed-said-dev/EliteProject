@@ -5,6 +5,7 @@ import { ConfigService } from '@nestjs/config';
 import helmet from 'helmet';
 import compression from 'compression';
 import { AppModule } from './app.module';
+import type { Request, Response } from 'express';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -113,19 +114,22 @@ async function bootstrap() {
   // Global prefix MUST be set BEFORE Swagger setup
   app.setGlobalPrefix('api');
 
+  // Get the underlying Express instance
+  const expressApp = app.getHttpAdapter().getInstance();
+  
   // Force HTTP protocol detection
-  app.set('trust proxy', true);
+  expressApp.set('trust proxy', true);
   
   // Custom HTTP-only Swagger implementation
   const document = SwaggerModule.createDocument(app, config);
   
   // Serve docs-json endpoint
-  app.get('/api/docs-json', (req, res) => {
+  expressApp.get('/api/docs-json', (req, res) => {
     res.json(document);
   });
   
   // Custom Swagger UI HTML page
-  app.get('/api/docs', (req, res) => {
+  expressApp.get('/api/docs', (req, res) => {
     const html = `
 <!DOCTYPE html>
 <html>

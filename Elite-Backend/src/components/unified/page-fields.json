@@ -1,0 +1,20 @@
+{
+  "collectionName": "components_unified_page_fields",
+  "info": {
+    "displayName": "page-fields",
+    "description": "Fields used for Services page details"
+  },
+  "attributes": {
+    "title": { "type": "string", "required": true },
+    "description": { "type": "text" },
+    "badge": { "type": "string" },
+    "isActive": { "type": "boolean", "default": false },
+    "order": { "type": "integer", "default": 0 },
+    "image": { "type": "media", "multiple": false, "allowedTypes": ["images"] },
+    "features": { "type": "component", "repeatable": true, "component": "shared.service-feature" },
+    "icons": { "type": "component", "repeatable": true, "component": "shared.service-icon" },
+    "faq": { "type": "component", "repeatable": true, "component": "shared.faq-item" }
+  }
+}
+
+

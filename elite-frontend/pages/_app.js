@@ -20,6 +20,7 @@ import { AuthProvider } from '@/context/SaleorAuthContext';
 import { NotificationProvider } from '@/context/NotificationContext';
 import LoadingSpinner from '@/components/LoadingSpinner';
 import NotificationContainer from '@/components/common/NotificationContainer';
+import WhatsAppButton from '@/components/WhatsAppButton/WhatsAppButton';
 import { useRouter } from 'next/router';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { ReactQueryDevtools } from 'react-query/devtools';
@@ -84,6 +85,7 @@ function MyApp({ Component, pageProps }) {
                     <Layout>
                       <Component {...pageProps} />
                     </Layout>
+                    <WhatsAppButton />
                     <NotificationContainer />
                   </NotificationProvider>
                 </LanguageProvider>

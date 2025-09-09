@@ -9,36 +9,80 @@ const defaultPopulate = {
   category: true,
   tags: true,
   author: {
-    populate: ['avatar', 'socialLinks']
+    populate: {
+      avatar: true,
+      socialLinks: true
+    }
   },
   featuredImage: true
-};
+} as any;
 
 export default factories.createCoreController('api::blog-article.blog-article', ({ strapi }) => ({
   async find(ctx) {
-    // تطبيق نفس منطق الاستعلام الافتراضي
     const { query } = ctx;
-    return await super.find(ctx);
+    
+    // استخراج اللغة من الاستعلام
+    const locale = query.locale || 'en';
+    
+    // إضافة معاملات populate الافتراضية إذا لم تكن موجودة
+    if (!query.populate) {
+      query.populate = defaultPopulate;
+    }
+    
+    // إضافة اللغة إلى الاستعلام
+    query.locale = locale;
+    
+    try {
+      // استخدام entityService للحصول على النتائج مع دعم i18n
+      const entities = await strapi.entityService.findMany('api::blog-article.blog-article', {
+        filters: query.filters || {},
+        sort: query.sort || { publishDate: 'desc' },
+        pagination: query.pagination || {},
+        locale: locale,
+        populate: query.populate || defaultPopulate
+      });
+      
+      // تنظيف النتائج وإرجاعها
+      const sanitizedEntities = await Promise.all(
+        entities.map(entity => this.sanitizeOutput(entity, ctx))
+      );
+      
+      return {
+        data: sanitizedEntities,
+        meta: {
+          pagination: query.pagination || {},
+          locale: locale
+        }
+      };
+    } catch (error) {
+      console.error('Error in find with locale:', error);
+      return await super.find(ctx);
+    }
   },
 
   async findOne(ctx) {
     const { id } = ctx.params;
+    const { query } = ctx;
+    const locale = query.locale || 'en';
     
     try {
       let entity;
       
-      // البحث عن مقالة باستخدام الslug أو المعرف
+      // البحث عن مقالة باستخدام الslug أو المعرف مع دعم اللغة
       if (isNaN(parseInt(id))) {
-        // بحث باستخدام الslug
-        entity = await strapi.db.query('api::blog-article.blog-article').findOne({
-          where: { slug: id },
-          populate: defaultPopulate
+        // بحث باستخدام الslug مع اللغة
+        const entities = await strapi.entityService.findMany('api::blog-article.blog-article', {
+          filters: { slug: id },
+          populate: defaultPopulate,
+          locale: locale,
+          limit: 1
         });
+        entity = entities[0]; // أخذ أول نتيجة
       } else {
-        // بحث باستخدام المعرف
-        entity = await strapi.db.query('api::blog-article.blog-article').findOne({
-          where: { id: parseInt(id) },
-          populate: defaultPopulate
+        // بحث باستخدام المعرف مع اللغة
+        entity = await strapi.entityService.findOne('api::blog-article.blog-article', parseInt(id), {
+          populate: defaultPopulate,
+          locale: locale
         });
       }
       
@@ -66,19 +110,20 @@ export default factories.createCoreController('api::blog-article.blog-article', 
   async findRelated(ctx) {
     const { id } = ctx.params;
     const { query } = ctx;
+    const locale = query.locale || 'en';
     
     // الحصول على limit من الاستعلام أو استخدام القيمة الافتراضية
     const limit = query.limit ? parseInt(query.limit as string) : 3;
     
     try {
-      // البحث عن المقالة الحالية
-      const article = await strapi.db.query('api::blog-article.blog-article').findOne({
-        where: { id },
+      // البحث عن المقالة الحالية مع دعم اللغة
+      const article = await strapi.entityService.findOne('api::blog-article.blog-article', id, {
         populate: {
           category: true,
           tags: true
-        }
-      });
+        },
+        locale: locale
+      }) as any;
       
       if (!article) {
         return ctx.notFound(`No blog article found with id: ${id}`);
@@ -86,20 +131,31 @@ export default factories.createCoreController('api::blog-article.blog-article', 
       
       // الحصول على معرفات التصنيفات والعلامات للمقالة الحالية
       const categoryId = article.category?.id;
-      const tagIds = article.tags?.map(tag => tag.id) || [];
+      const tagIds = article.tags?.map((tag: any) => tag.id) || [];
       
-      // استخدام query.findMany مباشرة بدلاً من entityService.findMany لتجنب مشكلات التوافق
-      const relatedArticles = await strapi.db.query('api::blog-article.blog-article').findMany({
-        where: {
-          id: { $ne: article.id },
-          $or: [
-            categoryId ? { category: categoryId } : {},
-            tagIds.length > 0 ? { tags: { id: { $in: tagIds } } } : {}
-          ].filter(cond => Object.keys(cond).length > 0) // تصفية الشروط الفارغة
-        },
-        orderBy: { publishDate: 'desc' },
+      // بناء فلاتر البحث للمقالات المرتبطة
+      const filters: any = {
+        id: { $ne: article.id }
+      };
+      
+      // إضافة شروط البحث حسب التصنيف أو العلامات
+      if (categoryId || tagIds.length > 0) {
+        filters.$or = [];
+        if (categoryId) {
+          filters.$or.push({ category: { id: categoryId } });
+        }
+        if (tagIds.length > 0) {
+          filters.$or.push({ tags: { id: { $in: tagIds } } });
+        }
+      }
+      
+      // البحث عن المقالات المرتبطة مع دعم اللغة
+      const relatedArticles = await strapi.entityService.findMany('api::blog-article.blog-article', {
+        filters: filters,
+        sort: { publishDate: 'desc' },
         populate: defaultPopulate,
-        limit
+        locale: locale,
+        limit: limit
       });
       
       // تنظيف النتائج وإرجاعها

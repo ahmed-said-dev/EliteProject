@@ -10,7 +10,8 @@ import { useBlogArticles } from '@/hooks/useBlogApi';
 
 export default function Media() {
   const router = useRouter();
-  const { t, locale } = useLanguage();
+  const { t, locale, isRTL } = useLanguage();
+  const dir = isRTL ? 'rtl' : 'ltr';
   const [currentPage, setCurrentPage] = useState(1);
   const [pageSize] = useState(9);
   
@@ -53,7 +54,7 @@ export default function Media() {
   const hasActiveFilters = Object.keys(filters).length > 0;
   
   return (
-    <main>
+    <main dir={dir}>
       <PageBanner 
         title={t('pageBanner.media.title')}
         backgroundImage="/images/backgrounds/media-banner.jpg"

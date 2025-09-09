@@ -6,15 +6,23 @@ import { faPaw, faCat, faDog, faFish, faOtter, faDove, faHorse, faSpider, faCrow
 import Image from "next/image";
 import { translate } from "../../i18n";
 import { useLanguage } from "@/context/LanguageContext";
+import { useRouter } from "next/router";
+// Using inline styles for RTL/LTR support instead of CSS modules
 
 const Introduction = () => {
   const { locale, isRTL } = useLanguage();
   const dir = isRTL ? 'rtl' : 'ltr';
+  const router = useRouter();
+
+  // Handle Learn More button click
+  const handleLearnMore = () => {
+    router.push('/about');
+  };
   
   return (
     <div className="w-full relative overflow-hidden" dir={dir}>
       {/* Background animal icons */}
-      <div className="absolute inset-0 overflow-hidden opacity-10">
+      <div className="absolute inset-0 overflow-hidden opacity-10 pointer-events-none">
         <div className="absolute top-10 left-10">
           <FontAwesomeIcon icon={faPaw} style={{ height: '4em', width: '4em' }} className="text-purple-600 transform rotate-45 opacity-90" />
         </div>
@@ -56,21 +64,26 @@ const Introduction = () => {
 
       <div className="bg-gradient-to-b from-[#FFFFFF] via-[#FFFFFF] to-[#F5F5F7] py-16 min-h-screen">
         <div className="container mx-auto px-4">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-[#44396F] mb-4">{translate('introduction.title', locale)}</h2>
+          <div className={`mb-12 ${isRTL ? 'text-right' : 'text-center'}`}>
+            <h2 className={`text-3xl font-bold text-[#44396F] mb-4 ${isRTL ? 'text-right' : 'text-center'}`}>{translate('introduction.title', locale)}</h2>
             {/* Wavy divider */}
-            <div className="w-32 h-6 mx-auto relative mb-6">
+            <div className={`w-32 h-6 ${isRTL ? 'mr-0 ml-auto' : 'mx-auto'} relative mb-6`}>
               <svg viewBox="0 0 200 30" className="w-full">
                 <path d="M0,15 Q40,0 80,15 Q120,30 160,15 Q200,0 240,15" stroke="#8B5CF6" fill="none" strokeWidth="4"/>
               </svg>
             </div>
-            <p className="text-gray-600 mt-4 max-w-4xl mx-auto mb-12">
+            <p className={`text-gray-600 mt-4 max-w-4xl ${isRTL ? 'mr-0 text-right' : 'mx-auto text-center'} mb-12`}>
               {translate('introduction.description', locale)}
             </p>
-            <Button className="bg-yellow-500 hover:bg-yellow-600 text-white">
-              {translate('introduction.learnMoreButton', locale)}
-              <FontAwesomeIcon icon={faPaw} className={`${dir === 'rtl' ? 'mr-6' : 'ml-6'} h-4 w-4 transform -rotate-45`} />
-            </Button>
+            <div className={`${isRTL ? 'flex justify-start' : 'flex justify-center'}`}>
+              <Button 
+                onClick={handleLearnMore}
+                className="bg-yellow-500 hover:bg-yellow-600 text-white inline-flex items-center"
+              >
+                {translate('introduction.learnMoreButton', locale)}
+                <FontAwesomeIcon icon={faPaw} className={`${dir === 'rtl' ? 'mr-6' : 'ml-6'} h-4 w-4 transform -rotate-45`} />
+              </Button>
+            </div>
           </div>
           
           {/* Split Sections */}

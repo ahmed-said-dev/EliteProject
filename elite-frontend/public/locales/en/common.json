@@ -14,6 +14,12 @@
     "language": "Language"
   },
   "direction": "ltr",
+  "common": {
+    "loading": "Loading...",
+    "back": "Back",
+    "minutes": "minutes",
+    "cancel": "Cancel"
+  },
   "loading": {
     "text": "Loading..."
   },
@@ -112,11 +118,34 @@
     "social": {
       "title": "Follow us:"
     },
+    "services": {
+      "title": "Our Services",
+      "generalCheckup": "General Checkup",
+      "surgery": "Surgery",
+      "emergency": "Emergency Care",
+      "vaccination": "Vaccination",
+      "dental": "Dental Care",
+      "grooming": "Grooming"
+    },
+    "certifications": {
+      "title": "Certifications & Accreditations",
+      "veterinaryBoard": "Veterinary Board Certified",
+      "animalWelfare": "Animal Welfare Accredited",
+      "iso9001": "ISO 9001 Quality Certified",
+      "excellence": "Excellence in Pet Care"
+    },
     "workingHours": {
       "title": "Working hours",
       "hours": "09:00 AM - 10:00 PM",
       "emergency": "24/7 Emergency Services"
     }
+  },
+  "whatsapp": {
+    "contactUs": "Contact Us",
+    "defaultMessage": "Hello! I would like to inquire about your veterinary services.",
+    "welcomeMessage": "Hello! How can we help you today?",
+    "startChat": "Start Chat",
+    "online": "Online now"
   },
   "serviceSection": {
     "title": "Our Services",
@@ -922,6 +951,41 @@
     "28": {
       "name": "Cat Toy Set - Interactive Variety",
       "description": "Set of 10 different interactive cat toys including feathers, mice, balls, and catnip toys. Great for keeping cats mentally and physically active."
+    }
+  },
+  "serviceDetail": {
+    "notFound": "Service Not Found",
+    "backToHome": "Back to Home",
+    "heroDescription": "We provide comprehensive and specialized veterinary services for your pet using the latest technologies and medical equipment",
+    "aboutService": "About This Service",
+    "description": "We provide comprehensive and specialized veterinary services for your pet using the latest technologies and medical equipment. Our team of specialized veterinarians ensures your pet receives the best possible care.",
+    "feature1": "Comprehensive and accurate examination",
+    "feature2": "Specialized and experienced doctors",
+    "feature3": "Modern medical equipment",
+    "expert": "Specialist Doctor",
+    "bookNow": "Book Now",
+    "callUs": "Call Us",
+    "faq": "Frequently Asked Questions",
+    "faq1Question": "How long does the examination take?",
+    "faq1Answer": "The examination usually takes 30 to 60 minutes depending on the type of service.",
+    "faq2Question": "Do I need to book an appointment in advance?",
+    "faq2Answer": "Yes, we recommend booking an appointment in advance to ensure availability at a suitable time.",
+    "faq3Question": "What is the cost of the service?",
+    "faq3Answer": "The cost varies depending on the type of service, please call to inquire about prices.",
+    "relatedServices": "Related Services",
+    "learnMore": "Learn More",
+    "bookViaWhatsApp": "Book via WhatsApp",
+    "callToBook": "Call to Book",
+    "bookingNote": "Your appointment will be confirmed within 24 hours",
+    "faqs": {
+      "whatIncludes": "What does this service include?",
+      "whatIncludesAnswer": "Our services include comprehensive examination and careful monitoring of your pet's condition using the latest medical technologies.",
+      "duration": "How long does the service take?",
+      "durationAnswer": "The duration of the service varies depending on the type of examination, but most services take 30 to 60 minutes.",
+      "preparation": "How do I prepare my pet?",
+      "preparationAnswer": "We recommend bringing your pet in a calm state, and fasting for 8 hours before some examinations is preferred.",
+      "additionalTreatment": "Might I need additional treatment?",
+      "additionalTreatmentAnswer": "The veterinarian will assess your pet's condition and inform you of any additional treatment it may need."
     }
   },
   "mediaHero": {
