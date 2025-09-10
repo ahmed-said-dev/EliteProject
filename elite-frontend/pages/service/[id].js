@@ -7,8 +7,9 @@ import {
   faPaw, faSyringe, faTooth, faEye, faBone, faScissors, 
   faCheckCircle, faChevronDown, faArrowLeft, faArrowRight,
   faClock, faUserMd, faHeart, faStar, faPhone, faCalendarAlt,
-  faTimes, faWhatsapp
+  faTimes
 } from '@fortawesome/free-solid-svg-icons';
+import { faWhatsapp } from '@fortawesome/free-brands-svg-icons';
 import Footer from '../../src/components/Footer/Footer';
 import { useLanguage } from '../../src/context/LanguageContext';
 import { translate } from '../../i18n';
@@ -261,7 +262,7 @@ export default function ServiceDetailPage() {
                   {serviceDetails?.image?.url ? (
                     <div className="mb-6">
                       <img 
-                        src={`http://localhost:1337${serviceDetails.image.url}`}
+                        src={`${process.env.NEXT_PUBLIC_API_URL}${serviceDetails.image.url}`}
                         alt={serviceDetails.image.alternativeText || service.title}
                         className="w-full h-48 object-cover rounded-xl"
                       />
@@ -473,7 +474,6 @@ export default function ServiceDetailPage() {
         )}
       </main>
       
-      <Footer />
     </>
   );
 }

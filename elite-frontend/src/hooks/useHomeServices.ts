@@ -72,7 +72,7 @@ export const useHomeServices = () => {
     queryKey,
     async () => {
       // استخدام unified-services endpoint
-      const url = `http://localhost:1337/api/unified-services`;      
+      const url = `${process.env.NEXT_PUBLIC_API_URL}/api/unified-services?locale=${locale}`;
       
       const response = await axios.get(url);
       

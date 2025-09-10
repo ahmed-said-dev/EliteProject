@@ -82,7 +82,7 @@ export default function Services() {
                       {service.image && (
                         <div className={styles.cardImageWrapper}>
                           <img 
-                            src={`http://localhost:1337${service.image.url}`}
+                            src={`${process.env.NEXT_PUBLIC_API_URL}${service.image.url}`}
                             alt={service.title} 
                             className={styles.cardImage}
                           />
