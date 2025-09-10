@@ -59,7 +59,7 @@ async function deployToServer() {
     );
     
     await executeSSHCommand(
-      'cd Elite-Backend && npm install',
+      "if [ -d 'elite-backend' ]; then cd elite-backend; else cd Elite-Backend; fi && npm install",
       'Installing backend dependencies'
     );
     
@@ -68,10 +68,14 @@ async function deployToServer() {
       'Installing store backend dependencies'
     );
     
-    await executeSSHCommand(
-      'cd Elite-store/elite-admin-dashboard && npm install',
-      'Installing admin dashboard dependencies'
-    );
+    try {
+      await executeSSHCommand(
+        'cd Elite-store/elite-admin-dashboard && npm install',
+        'Installing admin dashboard dependencies'
+      );
+    } catch (e) {
+      console.warn('⚠️ Admin dashboard npm install failed. Continuing deployment to restart services.');
+    }
     
     // Step 3: Build all projects
     await executeSSHCommand(
@@ -80,7 +84,7 @@ async function deployToServer() {
     );
     
     await executeSSHCommand(
-      'cd Elite-Backend && npm run build',
+      "if [ -d 'elite-backend' ]; then cd elite-backend; else cd Elite-Backend; fi && npm run build",
       'Building backend'
     );
     
@@ -89,10 +93,15 @@ async function deployToServer() {
       'Building store backend'
     );
     
-    await executeSSHCommand(
-      'cd Elite-store/elite-admin-dashboard && npm run build',
-      'Building admin dashboard'
-    );
+    // Build admin dashboard but do not fail the whole deployment if it errors
+    try {
+      await executeSSHCommand(
+        'cd Elite-store/elite-admin-dashboard && npm run build',
+        'Building admin dashboard'
+      );
+    } catch (e) {
+      console.warn('⚠️ Admin dashboard build failed. Continuing deployment to restart services.');
+    }
     
     // Step 4: Restart PM2 processes
     await executeSSHCommand(

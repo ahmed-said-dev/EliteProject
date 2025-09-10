@@ -63,8 +63,8 @@ fi
 cd ..
 
 # Backend (Strapi)
-print_status "Building Elite-Backend (Strapi)"
-cd Elite-Backend
+print_status "Building elite-backend (Strapi)"
+cd elite-backend
 npm install --production
 npm run build
 if [ $? -eq 0 ]; then
