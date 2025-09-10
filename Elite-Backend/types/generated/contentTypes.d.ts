@@ -696,6 +696,61 @@ export interface ApiDoctorHomeDoctorHome extends Struct.CollectionTypeSchema {
   };
 }
 
+export interface ApiGalleryImageGalleryImage
+  extends Struct.CollectionTypeSchema {
+  collectionName: 'gallery_images';
+  info: {
+    description: 'Images for the image gallery slider';
+    displayName: 'Gallery Images';
+    pluralName: 'gallery-images';
+    singularName: 'gallery-image';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  pluginOptions: {
+    i18n: {
+      localized: true;
+    };
+  };
+  attributes: {
+    altText: Schema.Attribute.String &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    description: Schema.Attribute.Text &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    image: Schema.Attribute.Media<'images'> & Schema.Attribute.Required;
+    isActive: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<true>;
+    locale: Schema.Attribute.String;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::gallery-image.gallery-image'
+    >;
+    order: Schema.Attribute.Integer & Schema.Attribute.DefaultTo<0>;
+    publishedAt: Schema.Attribute.DateTime;
+    title: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiGlobalGlobal extends Struct.SingleTypeSchema {
   collectionName: 'globals';
   info: {
@@ -1722,6 +1777,7 @@ declare module '@strapi/strapi' {
       'api::blog-tag.blog-tag': ApiBlogTagBlogTag;
       'api::category.category': ApiCategoryCategory;
       'api::doctor-home.doctor-home': ApiDoctorHomeDoctorHome;
+      'api::gallery-image.gallery-image': ApiGalleryImageGalleryImage;
       'api::global.global': ApiGlobalGlobal;
       'api::home-service.home-service': ApiHomeServiceHomeService;
       'api::membership-intro.membership-intro': ApiMembershipIntroMembershipIntro;
