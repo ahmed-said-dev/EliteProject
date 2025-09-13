@@ -1,4 +1,4 @@
-export const STORE_API_BASE = process.env.NEXT_PUBLIC_STORE_API_URL || 'http://134.122.102.182:3001/api';
+export const STORE_API_BASE = process.env.NEXT_PUBLIC_STORE_API_URL || 'http://localhost:3001/api';
 export const STORE_ASSETS_BASE = STORE_API_BASE.replace(/\/api\/?$/, '');
 
 export async function getJson<T>(path: string, params?: Record<string, any>): Promise<T> {

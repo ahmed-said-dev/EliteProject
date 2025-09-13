@@ -2,7 +2,7 @@
 
 export type HttpMethod = 'GET' | 'POST' | 'PATCH' | 'DELETE';
 
-const BASE_URL = process.env.NEXT_PUBLIC_STORE_API_URL || 'http://134.122.102.182:3001/api';
+const BASE_URL = process.env.NEXT_PUBLIC_STORE_API_URL || 'http://localhost:3001/api';
 
 let eliteToken: string | null = null;
 
