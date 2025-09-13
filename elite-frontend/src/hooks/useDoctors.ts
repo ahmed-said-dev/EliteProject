@@ -47,9 +47,11 @@ export const useDoctors = () => {
   const { data, isLoading, error } = useQuery<any, Error>(
     ['doctors', locale], // مفتاح التخزين المؤقت (يتغير مع تغير اللغة)
     async () => {
+      // استخدام متغيرات البيئة لتحديد الـ API الأساسي
+      const API_BASE = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:1337';
+      const IMAGE_BASE = process.env.NEXT_PUBLIC_IMAGE_BASE_URL || API_BASE;
       // إضافة معلمات اللغة إلى عنوان URL للحصول على البيانات بلغة المستخدم الحالية
-      const apiUrl = 'http://134.122.102.182:8080'; // الرابط المباشر للـ API
-      const url = `${apiUrl}/api/doctor-homes?populate=image&locale=${locale}`;      
+      const url = `${API_BASE}/api/doctor-homes?populate=image&locale=${locale}`;      
       
       console.log('🔗 محاولة الوصول للرابط:', url);
       
@@ -85,6 +87,8 @@ export const useDoctors = () => {
       '/DoctorsSections/Asset 30-.png'
     ];
     
+    const API_BASE = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:1337';
+    const IMAGE_BASE = process.env.NEXT_PUBLIC_IMAGE_BASE_URL || API_BASE;
     const formattedDoctor = {
       id: doctor?.id,
       documentId: doctor?.documentId,
@@ -93,7 +97,7 @@ export const useDoctors = () => {
       specialty: doctor?.specialty || 'أخصائي بيطري',
       // استخدام صورة افتراضية بناءً على الفهرس أو من البيانات إذا كانت متوفرة
       image: doctor?.image?.url 
-        ? `http://134.122.102.182:8080${doctor.image.url}`
+        ? `${IMAGE_BASE}${doctor.image.url}`
         : defaultImages[index % defaultImages.length] // توزيع الصور الافتراضية
     };
     

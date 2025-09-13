@@ -7,14 +7,14 @@ const nextConfig = {
     localeDetection: false,
   },
   images: {
-    domains: ['images.pexels.com', 'www.svgrepo.com', 'images.unsplash.com', 'localhost', '134.122.102.182','localhost:1337'],
+    domains: ['images.pexels.com', 'www.svgrepo.com', 'images.unsplash.com', 'localhost', '134.122.102.182','localhost:1337', 'elitevetksa.com'],
   },
   env: {
-    NEXT_PUBLIC_API_URL: 'http://134.122.102.182:8080',
-    NEXT_PUBLIC_STRAPI_URL: 'http://134.122.102.182:8080',
-    NEXT_PUBLIC_IMAGE_BASE_URL: 'http://134.122.102.182:8080',
+    NEXT_PUBLIC_API_URL: 'https://elitevetksa.com',
+    NEXT_PUBLIC_STRAPI_URL: 'https://elitevetksa.com',
+    NEXT_PUBLIC_IMAGE_BASE_URL: 'https://elitevetksa.com',
     NEXT_PUBLIC_STORE_API_URL: 'http://134.122.102.182:3001/api',
-    NEXT_PUBLIC_GRAPHQL_URL: 'http://134.122.102.182/graphql',
+    NEXT_PUBLIC_GRAPHQL_URL: 'https://elitevetksa.com/graphql',
   },
   webpack: (config) => {
     config.resolve.alias = {
