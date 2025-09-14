@@ -94,13 +94,21 @@ export default function StoreProductCard({ product }: StoreProductCardProps) {
           <img
             src={imageUrl}
             alt={product.name}
+            loading="lazy"
+            decoding="async"
             className={`w-full h-full object-cover transition-transform duration-300 group-hover:scale-105 ${
               imageLoading ? 'opacity-0' : 'opacity-100'
             }`}
             onLoad={() => setImageLoading(false)}
-            onError={() => {
+            onError={(e) => {
               setImageError(true);
               setImageLoading(false);
+              // fallback image
+              try {
+                if (e.currentTarget && e.currentTarget.src !== '/placeholder.png') {
+                  e.currentTarget.src = '/placeholder.png';
+                }
+              } catch (_) {}
             }}
           />
           
