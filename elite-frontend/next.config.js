@@ -14,6 +14,7 @@ const nextConfig = {
     NEXT_PUBLIC_STRAPI_URL: 'https://elitevetksa.com',
     NEXT_PUBLIC_IMAGE_BASE_URL: 'https://elitevetksa.com',
     NEXT_PUBLIC_STORE_API_URL: 'https://elitevetksa.com/store-api',
+    NEXT_PUBLIC_STORE_ASSETS_BASE: 'https://elitevetksa.com/store-assets',
     NEXT_PUBLIC_GRAPHQL_URL: 'https://elitevetksa.com/graphql',
   },
   webpack: (config) => {
