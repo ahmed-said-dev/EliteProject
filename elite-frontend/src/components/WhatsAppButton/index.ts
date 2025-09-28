@@ -1,2 +1,2 @@
-export { default } from './WhatsAppButton.tsx';
-export type { WhatsAppButtonProps } from './WhatsAppButton.tsx';
+export { default } from './WhatsAppButton';
+export type { default as WhatsAppButtonProps } from './WhatsAppButton';
