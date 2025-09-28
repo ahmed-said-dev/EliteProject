@@ -186,6 +186,20 @@
   color: #FFD700;
 }
 
+/* Phone Number LTR Direction */
+.phone_number {
+  direction: ltr !important;
+  unicode-bidi: bidi-override;
+  text-align: left !important;
+}
+
+/* RTL Phone Number Override */
+.elite_footer[dir="rtl"] .phone_number {
+  direction: ltr !important;
+  unicode-bidi: bidi-override;
+  text-align: left !important;
+}
+
 .address {
   font-size: 14px;
   line-height: 1.5;

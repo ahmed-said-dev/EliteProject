@@ -1,4 +1,5 @@
 import React from "react";
+import Link from 'next/link';
 import { Button } from "@/components/ui/button";
 import { Plus } from "lucide-react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -141,12 +142,15 @@ const WhyChooseUs = () => {
                 </div>
                 
                 <div className={`flex ${isRTL ? 'justify-end md:justify-end' : 'justify-center md:justify-start'} mt-8`}>
-                  <button className="bg-yellow-400 hover:bg-yellow-500 text-[#44396F] font-medium py-2.5 px-6 rounded-full flex items-center gap-2 transition-colors">
+                  <Link 
+                    href="/about"
+                    className="bg-yellow-400 hover:bg-yellow-500 text-[#44396F] font-medium py-2.5 px-6 rounded-full flex items-center gap-2 transition-colors"
+                  >
                     {translate('whyChooseUs.readMoreButton', locale)}
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                       <path d="M12 5v14M5 12h14" />
                     </svg>
-                  </button>
+                  </Link>
                 </div>
               </div>
               

@@ -87,17 +87,20 @@ const Header = () => {
             </Link>
           </div>
           <div className={styles.socialLinks}>
-            <Link href="https://facebook.com" aria-label="Facebook" className={styles.socialIcon}>
+            <Link href="https://www.facebook.com/EliteVetKsa/?locale=ar_AR" aria-label="Facebook" className={styles.socialIcon} target="_blank" rel="noopener noreferrer">
               <i className="fa-brands fa-facebook-f"></i>
             </Link>
-            <Link href="https://twitter.com" aria-label="Twitter" className={styles.socialIcon}>
-              <i className="fa-brands fa-twitter"></i>
+            <Link href="https://x.com/elitevetksa" aria-label="X" className={styles.socialIcon} target="_blank" rel="noopener noreferrer">
+              <i className="fa-brands fa-x-twitter"></i>
             </Link>
-            <Link href="https://instagram.com" aria-label="Instagram" className={styles.socialIcon}>
+            <Link href="https://www.instagram.com/elitevetsa/" aria-label="Instagram" className={styles.socialIcon} target="_blank" rel="noopener noreferrer">
               <i className="fa-brands fa-instagram"></i>
             </Link>
-            <Link href="https://tiktok.com" aria-label="TikTok" className={styles.socialIcon}>
+            <Link href="https://www.tiktok.com/@elitevetksa" aria-label="TikTok" className={styles.socialIcon} target="_blank" rel="noopener noreferrer">
               <i className="fa-brands fa-tiktok"></i>
+            </Link>
+            <Link href="https://www.snapchat.com/@elitevetksa" aria-label="Snapchat" className={styles.socialIcon} target="_blank" rel="noopener noreferrer">
+              <i className="fa-brands fa-snapchat-ghost"></i>
             </Link>
           </div>
         </div>
@@ -146,14 +149,14 @@ const Header = () => {
                       pages.map((service) => (
                         <Link 
                           key={service.id}
-                          href={`/service/${service.id}`}
+                          href={`/service-detail/${service.id}`}
                           className={styles.dropdownItem}
                           onClick={() => {
                             setShowServicesDropdown(false);
                             setMobileMenuOpen(false);
                           }}
                         >
-                          <i className={`fa-solid fa-paw ${styles.serviceIcon}`}></i>
+                          <i className={`fa-solid fa-paw ${styles.serviceIcon}`} ></i>
                           <span>{service.title}</span>
                         </Link>
                       ))

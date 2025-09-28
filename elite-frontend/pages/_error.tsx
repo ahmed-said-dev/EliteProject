@@ -20,7 +20,7 @@ const Error: NextPage<ErrorProps> = ({ statusCode }) => {
         </p>
         <Link
           href="/"
-          className="inline-block bg-purple-800 text-white px-6 py-3 rounded-lg hover:bg-purple-700 transition-colors"
+          className="inline-block bg-gray-600 text-white px-6 py-3 rounded-lg hover:bg-purple-600 transition-colors"
         >
           العودة إلى الصفحة الرئيسية
         </Link>

@@ -123,10 +123,10 @@ export default function Services() {
                     </div>
 
                     <div className={styles.iconBxFooter}>
-                      <Link href={`/service/${service.id}`} className={styles.readMoreBtn}>
+                      <Link href={`/service-detail/${service.id}`} className={styles.readMoreBtn}>
                         {isRTL ? 'اقرأ المزيد' : 'Read More'}
                       </Link>
-                      <Link href={`/service/${service.id}`} className={styles.btnPrimary}>
+                      <Link href={`/service-detail/${service.id}`} className={styles.btnPrimary}>
                         <i className={`fas ${isRTL ? 'fa-arrow-left' : 'fa-arrow-right'}`}></i>
                       </Link>
                     </div>

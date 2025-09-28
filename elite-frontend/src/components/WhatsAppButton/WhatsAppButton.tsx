@@ -9,7 +9,7 @@ interface WhatsAppButtonProps {
 }
 
 const WhatsAppButton: React.FC<WhatsAppButtonProps> = ({
-  phoneNumber = '+971501234567', // Default UAE number - replace with actual business number
+  phoneNumber = '+966920011626', // Default Elite Vet KSA number
   message,
   position = 'bottom-right'
 }) => {

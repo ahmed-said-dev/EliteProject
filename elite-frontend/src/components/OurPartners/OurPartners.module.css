@@ -98,11 +98,13 @@
   transition-property: transform;
   box-sizing: content-box;
   transform: translate3d(0px, 0px, 0px);
+  gap: 10px;
+  justify-content: center;
 }
 
 .swiperSlide {
   flex-shrink: 0;
-  width: 100%;
+  width: auto;
   height: 100%;
   position: relative;
   transition-property: transform;
@@ -130,20 +132,25 @@
 
 .clientsLogo {
   border-radius: 20px;
-  padding: 30px;
+  padding: 10px;
   transition: 0.2s;
   text-align: center;
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: 110px;
+  min-height: 80px;
+  max-width: 160px;
+  margin: 0 5px;
 }
 
 .logoImage {
   border-style: none;
   height: auto;
-  max-width: 100%;
+  max-width: 120px;
+  max-height: 80px;
+  width: auto;
   vertical-align: middle;
+  object-fit: contain;
 }
 
 .swiperPagination {

@@ -41,7 +41,9 @@ export default function CorporateSocialResponsibility() {
             <div className={styles.textColumn}>
               <div className={styles.sectionHead}>
                 <h2 className={`${styles.mainTitle} ${styles.wow}`}>
+                  {isRTL && <i className="fas fa-handshake" style={{ marginRight: '10px' }} />}
                   {t('about.csr.title')}
+                  {!isRTL && <i className="fas fa-handshake" style={{ marginLeft: '10px' }} />}
                 </h2>
                 <p className={`${styles.description} ${styles.wow}`}>
                   {t('about.csr.description')}
@@ -53,7 +55,9 @@ export default function CorporateSocialResponsibility() {
               <ul className={`${styles.listCheckCircle} ${styles.wow}`}>
                 {initiatives.map((initiative, index) => (
                   <li key={index} className={styles.listItem}>
-                    <i className={`fas fa-${initiative.icon}`} /> {initiative.text}
+                    {isRTL && <i className={`fas fa-${initiative.icon}`} style={{ marginLeft: '10px' }} />}
+                    <span>{initiative.text}</span>
+                    {!isRTL && <i className={`fas fa-${initiative.icon}`} style={{ marginRight: '10px' }} />}
                   </li>
                 ))}
               </ul>

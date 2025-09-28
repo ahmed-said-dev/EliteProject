@@ -5,7 +5,18 @@ import { useLanguage } from "@/context/LanguageContext";
 export default function OurPartners() {
   const { locale, isRTL, t } = useLanguage();
   const dir = isRTL ? 'rtl' : 'ltr';
-  const logos = t('about.partners.logos', { returnObjects: true });
+  
+  // Use the specified logo image repeated twice
+  const logos = [
+    {
+      src: '/logo-placeholder.jpg',
+      alt: 'Partner Logo 1'
+    },
+    {
+      src: '/logo-placeholder.jpg',
+      alt: 'Partner Logo 2'
+    }
+  ];
 
   return (
     <>

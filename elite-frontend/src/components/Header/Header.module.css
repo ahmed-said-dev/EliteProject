@@ -48,9 +48,9 @@
   box-shadow: 0 25px 50px rgba(107, 78, 152, 0.4), 
               0 0 0 1px rgba(255, 255, 255, 0.25),
               inset 0 1px 0 rgba(255, 255, 255, 0.3);
-  min-width: 320px;
-  max-width: 400px;
-  padding: 24px 0;
+  min-width: 280px; /* أصغر قليلاً */
+  max-width: 340px; /* تصغير عرض البوكس */
+  padding: 16px 0; /* تقليل الحشو الداخلي */
   z-index: 1000;
   opacity: 0;
   visibility: hidden;
@@ -77,6 +77,13 @@
   font-size: 14px;
   position: relative;
   overflow: hidden;
+}
+
+/* تخصيص عناصر خدمات الهيدر: تصغير الحشو وإضافة gap للتحكم في المسافة بين الأيقونة والاسم */
+.servicesDropdown .dropdownItem {
+  padding: 12px 16px; /* أصغر */
+  gap: 0; /* سنتحكم بالمسافة حسب الاتجاه عبر الهوامش */
+  column-gap: 0;
 }
 
 .dropdownItem:last-child {
@@ -107,6 +114,20 @@
   box-shadow: inset 0 0 20px rgba(255, 215, 0, 0.1);
 }
 
+/* ضبط اتجاه الحواف والحشو في قائمة الخدمات فقط */
+.servicesDropdown .dropdownItem:hover {
+  padding-left: 16px; /* متسق مع الحشو الجديد */
+  border-left-width: 2px;
+}
+
+.header_section[dir="rtl"] .servicesDropdown .dropdownItem:hover {
+  transform: translateX(-4px);
+  border-left: none;
+  padding-left: 16px; /* يحافظ على التوازن عند وجود الحدود اليمنى */
+  border-right: 2px solid #FFD700;
+  padding-right: 16px;
+}
+
 .serviceIcon {
   margin-right: 12px;
   color: rgba(255, 255, 255, 0.8);
@@ -114,6 +135,12 @@
   width: 18px;
   text-align: center;
   transition: all 0.3s ease;
+}
+
+/* داخل قائمة الخدمات نعتمد على gap بدل الهوامش */
+.servicesDropdown .serviceIcon {
+  margin-right: 0;
+  margin-left: 0;
 }
 
 /* RTL Service Icon */
@@ -126,6 +153,23 @@
   color: #FFD700;
   transform: scale(1.15);
   text-shadow: 0 0 8px rgba(255, 215, 0, 0.3);
+}
+
+/* RTL override inside services dropdown: نعتمد على gap فقط بدون هوامش */
+.header_section[dir="rtl"] .servicesDropdown .serviceIcon {
+  margin-left: 0;
+  margin-right: 0;
+}
+
+/* Direction-aware spacing between icon and text */
+.header_section[dir="ltr"] .servicesDropdown .serviceIcon {
+  margin-right: 10px;
+  margin-left: 0;
+}
+
+.header_section[dir="rtl"] .servicesDropdown .serviceIcon {
+  margin-left: 10px;
+  margin-right: 0;
 }
 
 .dropdownLoading,

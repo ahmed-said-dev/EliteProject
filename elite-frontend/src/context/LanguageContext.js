@@ -35,6 +35,14 @@ export const LanguageProvider = ({ children }) => {
   const changeLanguage = (lng) => {
     // Only access localStorage on the client-side
     if (typeof window !== 'undefined') {
+      console.log(`🌐 [LanguageContext] Changing language from ${locale} to ${lng}`);
+      console.log(`🔍 [LanguageContext] Current router state:`, {
+        pathname: router.pathname,
+        asPath: router.asPath,
+        query: router.query,
+        locale: router.locale
+      });
+      
       // Save to localStorage
       window.localStorage.setItem('locale', lng);
       setLocale(lng);
@@ -49,7 +57,41 @@ export const LanguageProvider = ({ children }) => {
       
       // Use Next.js router to change the locale in the URL
       const { pathname, asPath, query } = router;
-      router.push({ pathname, query }, asPath, { locale: lng });
+      
+      // تحسين معالجة تغيير اللغة للصفحات الديناميكية
+      try {
+        // إنشاء URL جديد باللغة الجديدة
+        let newAsPath = asPath;
+        
+        // إزالة الـ locale الحالي من بداية الـ path إذا كان موجوداً
+        if (router.locale && router.locale !== 'en') {
+          newAsPath = asPath.replace(`/${router.locale}`, '');
+        }
+        
+        // إضافة الـ locale الجديد إذا لم يكن الإنجليزية (default)
+        if (lng !== 'en') {
+          newAsPath = `/${lng}${newAsPath}`;
+        }
+        
+        console.log(`🔄 [LanguageContext] Navigating to: ${newAsPath} with locale: ${lng}`);
+        console.log(`🔍 [LanguageContext] Preserving query:`, query);
+        
+        // استخدام router.push مع الـ URL الجديد والاحتفاظ بالـ query parameters
+        router.push({ pathname, query }, newAsPath, { 
+          locale: lng,
+          scroll: false // Don't scroll to top to maintain user position
+        }).then(() => {
+          console.log(`✅ [LanguageContext] Navigation completed successfully`);
+        }).catch((error) => {
+          console.error(`❌ [LanguageContext] Navigation failed:`, error);
+        });
+        
+      } catch (error) {
+        console.error(`❌ [LanguageContext] Error changing language:`, error);
+        
+        // Fallback: استخدام الطريقة الأساسية
+        router.push({ pathname, query }, asPath, { locale: lng, scroll: false });
+      }
     }
   };
 
@@ -69,7 +111,7 @@ export const LanguageProvider = ({ children }) => {
   };
   
   return (
-    <LanguageContext.Provider value={{ locale, changeLanguage, isRTL, t }}>
+    <LanguageContext.Provider value={{ locale, changeLanguage, isRTL, t, dir: isRTL ? 'rtl' : 'ltr' }}>
       {children && !isLoading ? children : <div>Loading...</div>}
     </LanguageContext.Provider>
   );

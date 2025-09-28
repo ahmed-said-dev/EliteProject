@@ -178,7 +178,7 @@ const CheckoutPage: React.FC = () => {
         <div className="mb-8">
           <button
             onClick={() => router.push('/cart')}
-            className="flex items-center gap-2 text-purple-600 hover:text-purple-700 mb-4"
+            className="flex items-center gap-2 text-gray-600 hover:text-purple-600 mb-4 transition-colors"
           >
             <FontAwesomeIcon icon={faArrowLeft} />
             العودة للسلة

@@ -15,6 +15,7 @@ declare const styles: {
   readonly actionButton: string;
   readonly servicesArea: string;
   readonly serviceBox: string;
+  readonly serviceHeader: string;
   readonly serviceIconWrap: string;
   readonly iconBox: string;
   readonly serviceIcon: string;

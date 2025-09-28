@@ -17,12 +17,14 @@ export const ServiceBox: React.FC<ServiceBoxProps> = ({
 }) => {
   return (
     <div className={styles.serviceBox} style={{ animationDelay: delay }}>
-      <div className={styles.serviceIconWrap}>
-        <div className={styles.iconBox}>
-          <i className={`${icon} ${styles.serviceIcon}`}></i>
+      <div className={styles.serviceHeader}>
+        <div className={styles.serviceIconWrap}>
+          <div className={styles.iconBox}>
+            <i className={`${icon} ${styles.serviceIcon}`}></i>
+          </div>
         </div>
+        <h4 className={styles.serviceTitle}>{title}</h4>
       </div>
-      <h4 className={styles.serviceTitle}>{title}</h4>
       <p className={styles.serviceDescription}>{description}</p>
     </div>
   );

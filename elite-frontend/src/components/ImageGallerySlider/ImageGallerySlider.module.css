@@ -1,21 +1,24 @@
 .sliderContainer {
   width: 100%;
-  padding: 4rem 0;
+  padding: 4rem 0 6rem 0;
   direction: ltr;
   background: #fafafa;
   border-radius: 28px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-  overflow: hidden;
+  overflow: visible;
+  position: relative;
 }
 
 .swiper {
   width: 100%;
   padding: 2rem;
-  padding-bottom: 4rem;
+  padding-bottom: 5rem;
+  position: relative;
 }
 
 .swiperSlide {
-  height: 320px;
+  height: 400px;
+  width: 300px;
   border-radius: 24px;
   overflow: hidden;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
@@ -36,7 +39,10 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: center;
   transition: transform 0.5s ease;
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: crisp-edges;
 }
 
 .swiperSlide:hover .image {
@@ -145,25 +151,34 @@
 
 /* Custom pagination */
 .swiperPagination {
+  position: absolute !important;
   bottom: 20px !important;
-  text-align: center !important;
   left: 50% !important;
   transform: translateX(-50%) !important;
   width: auto !important;
+  text-align: center !important;
+  z-index: 15 !important;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
 }
 
 .swiperPagination :global(.swiper-pagination-bullet) {
-  width: 12px;
-  height: 12px;
-  background: rgba(68, 57, 111, 0.3);
-  opacity: 1;
-  margin: 0 6px;
-  transition: all 0.3s ease;
+  width: 14px !important;
+  height: 14px !important;
+  background: rgba(68, 57, 111, 0.4) !important;
+  opacity: 1 !important;
+  margin: 0 8px !important;
+  transition: all 0.3s ease !important;
+  border-radius: 50% !important;
+  cursor: pointer !important;
+  display: inline-block !important;
 }
 
 .swiperPagination :global(.swiper-pagination-bullet-active) {
-  background: #44396F;
-  transform: scale(1.2);
+  background: #44396F !important;
+  transform: scale(1.3) !important;
+  box-shadow: 0 2px 8px rgba(68, 57, 111, 0.4) !important;
 }
 
 /* Loading state */
@@ -215,7 +230,8 @@
   }
 
   .swiperSlide {
-    height: 250px;
+    height: 280px;
+    width: 220px;
     border-radius: 16px;
   }
 
@@ -257,11 +273,18 @@
   .swiperPagination {
     bottom: 15px !important;
   }
+  
+  .swiperPagination :global(.swiper-pagination-bullet) {
+    width: 12px !important;
+    height: 12px !important;
+    margin: 0 6px !important;
+  }
 }
 
 @media (max-width: 480px) {
   .swiperSlide {
-    height: 200px;
+    height: 220px;
+    width: 180px;
     border-radius: 12px;
   }
 
@@ -279,8 +302,8 @@
   }
 
   .swiperPagination :global(.swiper-pagination-bullet) {
-    width: 10px;
-    height: 10px;
-    margin: 0 4px;
+    width: 10px !important;
+    height: 10px !important;
+    margin: 0 5px !important;
   }
 }

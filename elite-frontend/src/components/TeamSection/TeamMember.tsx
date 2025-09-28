@@ -53,7 +53,7 @@ const TeamMember: React.FC<TeamMemberProps> = ({
         <div className={styles.teamContent}>
           <div className={styles.clearfix}>
             <h3 className={styles.teamName}>
-              {/* <Link href="/team-detail">{name}</Link> */}
+              
             </h3>
             <span className={styles.teamPosition}>{position}</span>
           </div>
@@ -91,9 +91,7 @@ const TeamMember: React.FC<TeamMemberProps> = ({
               </li>
             )}
           </ul>
-          <Link href="/doctor-details" className={styles.readMoreButton}>
-            Read More
-          </Link>
+
         </div>
       </div>
     </div>

@@ -11,6 +11,16 @@ export default {
       },
     },
     {
+      method: 'GET',
+      path: '/unified-services/:id',
+      handler: 'unified-service.findOne',
+      config: {
+        auth: false,
+        policies: [],
+        middlewares: [],
+      },
+    },
+    {
       method: 'POST',
       path: '/unified-services',
       handler: 'unified-service.create',

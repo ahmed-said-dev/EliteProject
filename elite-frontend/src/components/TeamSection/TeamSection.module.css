@@ -276,7 +276,7 @@
 .teamCard {
   box-sizing: border-box;
   outline: none;
-  padding: 0;
+  padding: 0 0 1px 0;
   scrollbar-color: rgba(223, 223, 223, 0.9) rgba(255, 255, 255, 0);
   scrollbar-width: thin;
   transition: all 0.3s ease;
@@ -511,7 +511,7 @@
   scrollbar-width: thin;
   padding: 25px;
   border-radius: 16px;
-  margin: 15px auto;
+  margin: 15px auto 40px;
   border: 1px solid rgba(74, 45, 113, 0.1);
   background-color: rgb(248, 247, 255);
   box-shadow: rgba(74, 45, 113, 0.08) 0px 8px 20px;

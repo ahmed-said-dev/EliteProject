@@ -59,7 +59,7 @@ const Footer = () => {
               <ul className={styles.services_list}>
                 {pages && pages.slice(0, 6).map((service, index) => (
                   <li key={service.id}>
-                    <Link href={`/service/${service.id}`} className={styles.service_link}>
+                    <Link href={`/service-detail/${service.id}`} className={styles.service_link}>
                       {service.icons && service.icons[0] ? (
                         <i className={`fas ${service.icons[0].icon}`}></i>
                       ) : (
@@ -123,7 +123,7 @@ const Footer = () => {
                 </div>
                 <div className={styles.contact_info}>
                   <span className={styles.label}>{translate('footer.contact.call', locale)}</span>
-                  <a href="tel:+96592011626" className={styles.contact_link}>+965 920 011 626</a>
+                  <a href="tel:+966920011626" className={`${styles.contact_link} ${styles.phone_number}`}>+966 9200 11 626</a>
                 </div>
               </li>
               <li>
@@ -132,8 +132,8 @@ const Footer = () => {
                 </div>
                 <div className={styles.contact_info}>
                   <span className={styles.label}>{translate('footer.contact.emergency', locale)}</span>
-                  <a href="tel:+96592011626" className={styles.contact_link}>+965 920 011 626</a>
-                  <a href="tel:+966504045640" className={styles.contact_link}>+966 50 404 5640</a>
+                  <a href="tel:+966920011626" className={`${styles.contact_link} ${styles.phone_number}`}>+966 9200 11 626</a>
+                  {/* <a href="tel:+966504045640" className={styles.contact_link}>+966 50 404 5640</a> */}
                 </div>
               </li>
               <li>
@@ -142,7 +142,7 @@ const Footer = () => {
                 </div>
                 <div className={styles.contact_info}>
                   <span className={styles.label}>{translate('footer.contact.email', locale)}</span>
-                  <a href="mailto:info@elitevevetksa.com" className={styles.contact_link}>info@elitevevetksa.com</a>
+                  <a href="mailto:info@elitevetksa.com" className={styles.contact_link}>info@elitevetksa.com</a>
                 </div>
               </li>
               <li>
@@ -151,7 +151,14 @@ const Footer = () => {
                 </div>
                 <div className={styles.contact_info}>
                   <span className={styles.label}>{translate('footer.contact.address', locale)}</span>
-                  <span className={styles.address}>Qurtubah gate, Al Thoumamah Rd, Qurtubah, Riyadh 13248</span>
+                  <a
+                    href="https://www.google.com/maps?q=Qurtubah%20gate,%20Al%20Thoumamah%20Rd,%20Qurtubah,%20Riyadh%2013248"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={`${styles.address} ${styles.contact_link}`}
+                  >
+                    Qurtubah gate, Al Thoumamah Rd, Qurtubah, Riyadh 13248
+                  </a>
                 </div>
               </li>
             </ul>
@@ -197,19 +204,19 @@ const Footer = () => {
           <div className={styles.footer_social_section}>
             <h3 className={styles.section_title}>{translate('footer.social.title', locale)}</h3>
             <div className={styles.social_icons}>
-              <a href="https://facebook.com" className={styles.social_icon} aria-label="Facebook" target="_blank" rel="noopener noreferrer">
+              <a href="https://www.facebook.com/EliteVetKsa/?locale=ar_AR" className={styles.social_icon} aria-label="Facebook" target="_blank" rel="noopener noreferrer">
                 <i className="fab fa-facebook-f"></i>
               </a>
-              <a href="https://twitter.com" className={styles.social_icon} aria-label="Twitter" target="_blank" rel="noopener noreferrer">
-                <i className="fab fa-twitter"></i>
+              <a href="https://x.com/elitevetksa" className={styles.social_icon} aria-label="X" target="_blank" rel="noopener noreferrer">
+                <i className="fab fa-x-twitter"></i>
               </a>
-              <a href="https://instagram.com" className={styles.social_icon} aria-label="Instagram" target="_blank" rel="noopener noreferrer">
+              <a href="https://www.instagram.com/elitevetsa/" className={styles.social_icon} aria-label="Instagram" target="_blank" rel="noopener noreferrer">
                 <i className="fab fa-instagram"></i>
               </a>
-              <a href="https://tiktok.com" className={styles.social_icon} aria-label="TikTok" target="_blank" rel="noopener noreferrer">
+              <a href="https://www.tiktok.com/@elitevetksa" className={styles.social_icon} aria-label="TikTok" target="_blank" rel="noopener noreferrer">
                 <i className="fab fa-tiktok"></i>
               </a>
-              <a href="https://snapchat.com" className={styles.social_icon} aria-label="Snapchat" target="_blank" rel="noopener noreferrer">
+              <a href="https://www.snapchat.com/@elitevetksa" className={styles.social_icon} aria-label="Snapchat" target="_blank" rel="noopener noreferrer">
                 <i className="fab fa-snapchat-ghost"></i>
               </a>
             </div>

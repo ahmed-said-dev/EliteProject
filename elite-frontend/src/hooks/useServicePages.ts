@@ -140,6 +140,8 @@ export interface ServicePageParams {
   locale?: string;
   filters?: any;
   id?: number;
+  // New: fetch a single service by slug instead of id
+  slug?: string;
 }
 
 /**
@@ -155,8 +157,11 @@ export const useServicePages = (params: ServicePageParams = {}) => {
   const queryClient = useQueryClient();
   
   // تعريف مفتاح الاستعلام لاستخدامه في التخزين المؤقت وعمليات الإبطال
-  // إضافة معرف الخدمة (إذا كان موجودًا) إلى مفتاح الاستعلام للتميز بين جلب قائمة الخدمات وجلب خدمة واحدة
-  const queryKey = params.id ? ['service-page', locale, params.id] : ['service-pages', locale, currentPage, pageSize];
+  // إضافة معرف الخدمة أو السلاج (إذا كان موجودًا) إلى مفتاح الاستعلام
+  const isDetail = !!params.id || !!params.slug;
+  const queryKey = isDetail
+    ? ['service-page', locale, params.id ?? null, params.slug ?? null]
+    : ['service-pages', locale, currentPage, pageSize];
   
   // استخدام React Query مع Axios لجلب البيانات
   const { data, isLoading, error, refetch, dataUpdatedAt } = useQuery<any, Error>(
@@ -165,50 +170,102 @@ export const useServicePages = (params: ServicePageParams = {}) => {
       // إضافة معلمات التصفح واللغة إلى عنوان URL
       let url;
       
-      // إذا تم تحديد معرف خدمة محددة، فسيتم استخدام طريقة findOne للحصول على تفاصيل الخدمة
+      // إذا تم تحديد معرف خدمة محددة
       if (params.id) {
         url = `${process.env.NEXT_PUBLIC_API_URL}/api/service-pages/${params.id}?populate=*&locale=${locale}`;
-        console.log(`🔍 طلب تفاصيل خدمة برقم المعرف: ${params.id}`);
+        console.log(`🔍 طلب تفاصيل خدمة برقم المعرف: ${params.id} باللغة: ${locale}`);
+      } else if (params.slug) {
+        // جلب تفاصيل خدمة واحدة باستخدام الـ slug عبر الفلاتر
+        const encodedSlug = encodeURIComponent(params.slug);
+        // 1) حاول باللغة الحالية أولاً
+        url = `${process.env.NEXT_PUBLIC_API_URL}/api/service-pages?populate=*&filters[slug][$eq]=${encodedSlug}&locale=${locale}`;
+        console.log(`🔍 طلب تفاصيل خدمة بالـ slug: ${params.slug} باللغة: ${locale}`);
       } else {
         // طلب قائمة الخدمات بالطريقة المعتادة
         url = `${process.env.NEXT_PUBLIC_API_URL}/api/service-pages?populate=*&locale=${locale}&pagination[page]=${currentPage}&pagination[pageSize]=${pageSize}&sort=order:asc`;
-        console.log('🔍 طلب قائمة الخدمات');
+        console.log(`🔍 طلب قائمة الخدمات باللغة: ${locale}`);
       }
       
       const response = await axios.get(url);
-      
-      if (params.id) {
+
+      // إذا كان الجلب بالـ slug ولم نجد نتيجة في اللغة الحالية، نحاول الاستدلال عبر documentId
+      if (params.slug) {
+        const list = response.data?.data;
+        if (Array.isArray(list) && list.length === 0) {
+          console.log('⚠️ لم يتم العثور على خدمة بهذا الـ slug في هذه اللغة. سنحاول إيجادها عبر جميع اللغات ثم اختيار النسخة الموافقة للغة المطلوبة');
+          const encodedSlug = encodeURIComponent(params.slug);
+          // 2) ابحث في كل اللغات عن نفس slug للحصول على documentId
+          const allLocalesUrl = `${process.env.NEXT_PUBLIC_API_URL}/api/service-pages?populate=*&filters[slug][$eq]=${encodedSlug}&locale=all`;
+          const allLocalesRes = await axios.get(allLocalesUrl);
+          const allList = allLocalesRes.data?.data;
+          if (Array.isArray(allList) && allList.length > 0) {
+            const baseItem = allList[0];
+            const documentId = baseItem?.documentId || baseItem?.attributes?.documentId;
+            if (documentId) {
+              // 3) اطلب بالـ documentId مع اللغة الحالية
+              const byDocUrl = `${process.env.NEXT_PUBLIC_API_URL}/api/service-pages?populate=*&filters[documentId][$eq]=${encodeURIComponent(documentId)}&locale=${locale}`;
+              const byDocRes = await axios.get(byDocUrl);
+              const byDocList = byDocRes.data?.data;
+              if (Array.isArray(byDocList) && byDocList.length > 0) {
+                console.log('✅ تم العثور على النسخة المطابقة للغة عبر documentId');
+                return { data: byDocList[0] };
+              }
+              console.log('🔄 لم يتم العثور على نسخة بهذه اللغة عبر documentId. سيتم استخدام أول عنصر كـ fallback');
+              return { data: baseItem };
+            }
+          }
+        }
+      }
+
+      if (params.id || params.slug) {
         console.log('🔍 استجابة API لتفاصيل الخدمة:', response.data);
       } else {
         console.log('🔍 استجابة API لقائمة الخدمات:', response.data);
       }
-      
+
       return response.data;
     },
     {
-      refetchOnWindowFocus: true, // إعادة التحميل عند التركيز على النافذة
-      staleTime: 60 * 1000, // اعتبار البيانات قديمة بعد دقيقة
+      refetchOnWindowFocus: false, // تعطيل إعادة التحميل عند التركيز على النافذة
+      staleTime: 0, // اعتبار البيانات قديمة فوراً
+      cacheTime: 0, // عدم تخزين البيانات في الكاش نهائياً
+      refetchOnMount: true, // إعادة جلب البيانات عند تحميل المكون
+      refetchOnReconnect: true, // إعادة جلب البيانات عند إعادة الاتصال
       // إضافة كود إعادة المحاولة في حالة فشل الاتصال
       retry: 2,
       // استدعاء عند نجاح جلب البيانات
       onSuccess: (data) => {
         if (params.id) {
-          console.log('✅ تم جلب تفاصيل الخدمة بنجاح:', data);
+          console.log(`✅ تم جلب تفاصيل الخدمة بنجاح باللغة ${locale}:`, data);
         } else {
-          console.log('✅ تم جلب بيانات صفحات الخدمات بنجاح:', data);
+          console.log(`✅ تم جلب بيانات صفحات الخدمات بنجاح باللغة ${locale}:`, data);
         }
       },
       // استدعاء عند فشل جلب البيانات
       onError: (error) => {
         if (params.id) {
-          console.error(`❌ حدث خطأ أثناء جلب تفاصيل الخدمة رقم ${params.id}:`, error);
+          console.error(`❌ حدث خطأ أثناء جلب تفاصيل الخدمة رقم ${params.id} باللغة ${locale}:`, error);
         } else {
-          console.error('❌ حدث خطأ أثناء جلب بيانات صفحات الخدمات:', error);
+          console.error(`❌ حدث خطأ أثناء جلب بيانات صفحات الخدمات باللغة ${locale}:`, error);
         }
       }
     }
   );
   
+  // إعادة جلب البيانات عند تغيير اللغة
+  useEffect(() => {
+    console.log(`🌐 تغيرت اللغة إلى: ${locale} - سيتم إعادة جلب البيانات فوراً`);
+    
+    // إزالة جميع البيانات المخزنة مؤقتاً لهذا الاستعلام
+    queryClient.removeQueries(queryKey);
+    
+    // إبطال الكاش وإعادة تحميل البيانات عند تغيير اللغة
+    queryClient.invalidateQueries(queryKey);
+    
+    // إعادة جلب البيانات فوراً
+    queryClient.refetchQueries(queryKey);
+  }, [locale, queryClient, queryKey]);
+
   // استخدام interval لعمل تحديث دوري للبيانات (يشبه polling) - فقط للقوائم وليس للتفاصيل
   useEffect(() => {
     // لا داعي للتحديث الدوري في حالة جلب تفاصيل خدمة واحدة
@@ -264,9 +321,11 @@ export const useServicePages = (params: ServicePageParams = {}) => {
   let formattedServicePages: FormattedServicePage[] = [];
   
   // معالجة البيانات حسب نوع الاستجابة (تفاصيل خدمة واحدة أو قائمة خدمات)
-  if (params.id && data?.data) {
+  if ((params.id || params.slug) && data?.data) {
     // حالة تفاصيل خدمة واحدة
-    const service = data.data;
+    // في حالة الجلب بالـ id، data.data كائن واحد
+    // في حالة الجلب بالـ slug، data.data مصفوفة ونحتاج أول عنصر
+    const service = Array.isArray(data.data) ? data.data[0] : data.data;
     
     // طباعة بيانات الخدمة الكاملة للتصحيح
     console.log('Service data from API:', service);
@@ -378,6 +437,14 @@ export const useServicePages = (params: ServicePageParams = {}) => {
   const invalidateServicePages = () => {
     return queryClient.invalidateQueries(queryKey);
   };
+
+  // دالة لإزالة الكاش تماماً وإعادة جلب البيانات
+  const forceRefreshServicePages = () => {
+    console.log('🗑️ إزالة الكاش تماماً وإعادة جلب البيانات...');
+    queryClient.removeQueries(queryKey);
+    queryClient.invalidateQueries(queryKey);
+    return queryClient.refetchQueries(queryKey);
+  };
   
   // دوال للتعامل مع التصفح
   const loadNextPage = () => {
@@ -410,7 +477,9 @@ export const useServicePages = (params: ServicePageParams = {}) => {
     // إتاحة وظائف لتحديث البيانات من الخارج
     refetch,           // إعادة جلب البيانات يدويًا
     invalidateServicePages, // إبطال صلاحية البيانات في التخزين المؤقت
+    forceRefreshServicePages, // إزالة الكاش تماماً وإعادة جلب البيانات
     refresh: invalidateServicePages, // اختصار لتسهيل الاستخدام
+    forceRefresh: forceRefreshServicePages, // اختصار لإجبار التحديث
     // معلومات ودوال التصفح (فقط في حالة قوائم الخدمات)
     pagination: params.id ? null : (data?.meta?.pagination || { page: 1, pageSize, pageCount: 1, total: 0 }),
     currentPage: params.id ? null : currentPage,

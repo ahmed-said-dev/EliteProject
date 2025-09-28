@@ -209,6 +209,24 @@
   animation-duration: 0.8s;
   animation-delay: 0.2s;
   animation-name: fadeInUp;
+  display: flex;
+  align-items: center;
+}
+
+.mainTitle i {
+  color: #7c58d3;
+  font-size: 40px;
+}
+
+/* RTL support for title icon */
+[dir="rtl"] .mainTitle {
+  flex-direction: row;
+  text-align: right;
+}
+
+[dir="ltr"] .mainTitle {
+  flex-direction: row;
+  text-align: left;
 }
 
 .description {
@@ -289,9 +307,11 @@
   position: relative;
   font-family: 'Poppins', sans-serif;
   font-size: 16px;
-  padding: 14px 5px 14px 50px;
+  padding: 14px 5px;
   width: 50%;
   color: #4a2d71;
+  display: flex;
+  align-items: center;
 }
 
 .listItem i {
@@ -300,9 +320,6 @@
   padding: 0;
   scrollbar-color: rgba(223, 223, 223, 0.9) rgba(255, 255, 255, 0);
   scrollbar-width: thin;
-  position: absolute;
-  left: 10px;
-  top: 16px;
   background-color: #4a2d71;
   color: #ffffff;
   border-radius: 50%;
@@ -310,6 +327,18 @@
   height: 30px;
   line-height: 30px;
   text-align: center;
+  flex-shrink: 0;
+}
+
+/* RTL support for list items */
+[dir="rtl"] .listItem {
+  flex-direction: row;
+  text-align: right;
+}
+
+[dir="ltr"] .listItem {
+  flex-direction: row-reverse;
+  text-align: left;
 }
 
 .conclusion {

@@ -18,7 +18,44 @@
     "loading": "Loading...",
     "back": "Back",
     "minutes": "minutes",
-    "cancel": "Cancel"
+    "cancel": "Cancel",
+    "refresh": "Retry",
+    "share": "Share",
+    "linkCopied": "Link copied to clipboard!",
+    "duration": "Duration",
+    "location": "Location",
+    "clinic": "Clinic",
+    "bookAppointment": "Book Appointment",
+    "askQuestion": "Ask Question",
+    "keyFeatures": "Key Features",
+    "serviceDetails": "Service Details",
+    "frequentlyAskedQuestions": "Frequently Asked Questions",
+    "quickContact": "Quick Contact",
+    "phone": "Call",
+    "emergency": "Emergency", 
+    "email": "Email",
+    "address": "Address",
+    "clinicAddress": "123 Vet Street, Medical District, City",
+    "contactNow": "Contact Now",
+    "workingHours": "Working Hours",
+    "monday": "Monday",
+    "friday": "Friday",
+    "saturday": "Saturday",
+    "thursday": "Thursday",
+    "sunday": "Sunday",
+    "closed": "Closed",
+    "emergencyCare": "Emergency Care"
+  },
+  "nav": {
+    "home": "Home",
+    "services": "Services"
+  },
+  "siteName": "Elite Veterinary Clinic",
+  "serviceDetail": {
+    "notFound": "Service not found",
+    "notFoundDesc": "Sorry, the requested service was not found in the selected language.",
+    "noDataFound": "No data available for this service in the selected language.",
+    "defaultDesc": "Premium veterinary services for your pet"
   },
   "loading": {
     "text": "Loading..."
@@ -630,7 +667,7 @@
       "actions": {
         "bookAppointment": "Book an Appointment",
         "emergencyHotline": "Emergency Hotline",
-        "phoneNumber": "+966 123 456 789"
+        "phoneNumber": "+966 9200 11 626"
       }
     },
     "infoCollapse": {
@@ -646,8 +683,8 @@
       },
       "workingHours": {
         "title": "Working Hours",
-        "weekdays": "Monday - Saturday",
-        "weekdayHours": "08:00 - 22:00",
+        "weekdays": "Saturday – Thursday",
+        "weekdayHours": "09:00 - 22:00",
         "emergency": "Emergency Care",
         "emergencyHours": "24/7"
       }

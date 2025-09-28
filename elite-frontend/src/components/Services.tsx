@@ -61,7 +61,7 @@ const Services = () => {
   
   // دالة للانتقال إلى صفحة تفاصيل الخدمة
   const handleServiceClick = (serviceId: number) => {
-    router.push(`/service/${serviceId}`);
+    router.push(`/service-detail/${serviceId}`);
   };
   
   // الحصول على الأيقونة المناسبة بناءً على الاسم

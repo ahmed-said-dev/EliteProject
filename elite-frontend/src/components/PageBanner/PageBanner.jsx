@@ -54,13 +54,13 @@ const PageBanner = ({ title, backgroundImage }) => {
       </div>
       <div className={styles.phoneContainer}>
         <a
-          href="tel:78904561231"
+          href="tel:+966920011626"
           className={styles.phoneButton}
         >
           <span className={styles.phoneIcon}>
             <i className="fa-solid fa-phone"></i>
           </span>
-          +965 920 011 626
+          <span className={styles.phoneNumber}>+966 9200 11 626</span>
         </a>
       </div>
       <span 

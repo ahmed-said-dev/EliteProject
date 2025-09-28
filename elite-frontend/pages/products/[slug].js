@@ -210,7 +210,7 @@ export default function ProductPage() {
         {/* Back Button */}
         <button 
           onClick={() => router.back()}
-          className="flex items-center gap-2 text-purple-600 hover:text-purple-700 mb-6 transition-colors mt-10"
+          className="flex items-center gap-2 text-gray-600 hover:text-purple-600 mb-6 transition-colors mt-10"
         >
           <FontAwesomeIcon icon={faArrowLeft} />
           العودة

@@ -1,9 +1,7 @@
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
-import { GetServerSideProps } from 'next';
-import axios from 'axios';
+// CSR only; no getServerSideProps here
 import Head from 'next/head';
-import Image from 'next/image';
 import Link from 'next/link';
 import { FaCheckCircle, FaPaw, FaStethoscope, FaMicroscope, FaHeartbeat, FaShieldVirus, FaChevronRight, FaArrowRight, FaChevronLeft } from 'react-icons/fa';
 
@@ -149,17 +147,17 @@ const SectionDivider = ({ icon }: { icon: string }) => {
 
 // Page props interface
 interface ServiceDetailPageProps {
-  initialService: ServicePage | null;
+  initialService?: ServicePage | null;
+  service?: ServicePage | null;
   error?: string;
 }
 
-const ServiceDetailPage: React.FC<ServiceDetailPageProps> = ({ initialService, error: initialError }) => {
+const ServiceDetailPage: React.FC<ServiceDetailPageProps> = ({ initialService, service: serverService, error: initialError }) => {
   const router = useRouter();
   const { locale, dir } = useLanguage();
   
-  // Get service ID from slug
+  // Get slug from the route
   const { slug } = router.query;
-  const [serviceId, setServiceId] = useState<number | undefined>(undefined);
   
   // Use hook to fetch service details by ID
   const { 
@@ -167,47 +165,24 @@ const ServiceDetailPage: React.FC<ServiceDetailPageProps> = ({ initialService, e
     serviceDetail,
     rawData,
     isLoading, 
-    error: serviceError 
+    error: serviceError,
+    refetch,
+    forceRefresh
   } = useServicePages({ 
-    id: serviceId,
+    slug: typeof slug === 'string' ? slug : undefined,
     locale 
   });
 
-  // Extract service ID from slug and set it
+  // On locale change, force refresh (hook invalidates automatically, this ensures no stale cache)
   useEffect(() => {
-    if (slug && typeof slug === 'string') {
-      // Check if slug contains numeric ID
-      const match = slug.match(/(\d+)$/);
-      if (match && match[1]) {
-        const id = parseInt(match[1], 10);
-        console.log('Service ID found:', id);
-        setServiceId(id);
-      } else {
-        // If no numeric ID, can search for service by slug
-        console.log('No numeric ID found in slug:', slug);
-      }
+    if (forceRefresh) {
+      console.log(`🌐 Locale changed to ${locale}. Forcing refresh for slug:`, slug);
+      forceRefresh();
     }
-  }, [slug]);
+  }, [locale, forceRefresh, slug]);
 
-  // Print service data in console
-  useEffect(() => {
-    if (serviceId) {
-      console.log('Requested service ID:', serviceId);
-    }
-    
-    if (formattedServiceDetail) {
-      console.log('Formatted service details:', formattedServiceDetail);
-    }
-    
-    if (serviceDetail) {
-      console.log('Original service data:', serviceDetail);
-    }
-    
-    if (rawData) {
-      console.log('Raw API data:', rawData);
-    }
-  }, [serviceId, formattedServiceDetail, serviceDetail, rawData]);
-  
+  // (Removed old ID-based refetch effect)
+
   // Use unified language context
   const { t } = useLanguage();
 
@@ -216,23 +191,46 @@ const ServiceDetailPage: React.FC<ServiceDetailPageProps> = ({ initialService, e
   const [uiReady, setUiReady] = useState<boolean>(false);
 
   useEffect(() => {
-    // Effect to control UI ready state
     if (isLoading) {
       setUiReady(false);
     } else {
-      // Small delay to improve user experience
-      const timer = setTimeout(() => {
-        setUiReady(true);
-      }, 600);
+      const timer = setTimeout(() => setUiReady(true), 200);
       return () => clearTimeout(timer);
     }
   }, [isLoading]);
 
-  // Determine displayed service: either from hook or initial data
-  const serviceToDisplay = formattedServiceDetail || null;
+  // Determine displayed service: priority order - hook data, initial server data, server service data
+  const serviceToDisplay = formattedServiceDetail || serviceDetail || (initialService as any)?.data || serverService;
 
-  // If page is loading or in fallback state
-  if (isLoading || router.isFallback) {
+  // Print service data in console
+  useEffect(() => {
+    console.log('=== Service Detail Debug Info ===');
+    console.log('Slug:', slug);
+    console.log('Current locale:', locale);
+    console.log('Router locale:', router.locale);
+    console.log('Formatted service detail (from hook):', formattedServiceDetail);
+    console.log('Service detail (raw from hook):', serviceDetail);
+    console.log('Raw API data:', rawData);
+    console.log('Final service to display:', serviceToDisplay);
+    console.log('=== End Debug Info ===');
+  }, [slug, locale, router.locale, formattedServiceDetail, serviceDetail, rawData, serviceToDisplay]);
+
+  // Handle locale mismatch - when URL locale doesn't match context locale
+  useEffect(() => {
+    if (router.locale && locale && router.locale !== locale) {
+      console.log(`⚠️ [ServiceDetail] Locale mismatch detected: URL=${router.locale}, Context=${locale}`);
+      
+      // If we have service data but locale mismatch, trigger a refetch
+      if (serviceToDisplay && !isLoading) {
+        console.log(`🔄 [ServiceDetail] Triggering refetch due to locale mismatch`);
+        // The useServicePages hook will automatically refetch when locale changes
+      }
+    }
+  }, [router.locale, locale, serviceToDisplay, isLoading]);
+
+  // If page is loading or waiting for ID/data resolution, keep blocking with a loading state
+  const waitingForData = (!formattedServiceDetail && !serviceDetail && !(initialService as any)?.data && !serverService);
+  if (isLoading || router.isFallback || (waitingForData && !initialError) || !uiReady) {
     return (
       <PageLayout dir={dir}>
         <div className={styles.loadingContainer}>
@@ -244,7 +242,7 @@ const ServiceDetailPage: React.FC<ServiceDetailPageProps> = ({ initialService, e
   }
 
   // If no service data available
-  if (!serviceToDisplay && !initialService) {
+  if (!serviceToDisplay) {
     return (
       <PageLayout dir={dir}>
         <div className={styles.errorContainer}>
@@ -266,12 +264,25 @@ const ServiceDetailPage: React.FC<ServiceDetailPageProps> = ({ initialService, e
       return formattedServiceDetail.image || '/images/default-service.jpg';
     }
     
+    // Check if we have server-side data with image
+    const serviceData = (initialService as any)?.data || service;
+    if (serviceData?.image) {
+      // Handle different image data structures
+      if (typeof serviceData.image === 'string') {
+        return serviceData.image;
+      } else if (serviceData.image?.url) {
+        return `${process.env.NEXT_PUBLIC_IMAGE_BASE_URL}${serviceData.image.url}`;
+      } else if (serviceData.image?.data?.attributes?.url) {
+        return `${process.env.NEXT_PUBLIC_IMAGE_BASE_URL}${serviceData.image.data.attributes.url}`;
+      }
+    }
+    
     // Use default value
     return '/images/default-service.jpg';
   };
 
-  // Use formatted data from hook instead of accessing attributes
-  const service = serviceToDisplay || initialService;
+  // Use the determined service data
+  const service = serviceToDisplay;
   
   return (
     <PageLayout dir={dir}>
@@ -337,8 +348,8 @@ const ServiceDetailPage: React.FC<ServiceDetailPageProps> = ({ initialService, e
 
       {/* Service features section */}
       <ServiceFeatures 
-        features={(service?.features || []).map(item => ({ 
-          id: item.id, 
+        features={(service?.features || []).map((item, index) => ({ 
+          id: item.id || index, 
           text: item.text || '' 
         }))} 
         title={t('serviceDetail.featuresTitle')} 
@@ -367,71 +378,6 @@ const ServiceDetailPage: React.FC<ServiceDetailPageProps> = ({ initialService, e
 };
 
 // Import initial data from server
-export const getServerSideProps: GetServerSideProps = async ({ params, locale }) => {
-  // Execute at page build time on server, not in browser
-  try {
-    if (!params?.slug) {
-      return { 
-        props: { 
-          service: null, 
-          error: 'Service slug is required' 
-        } 
-      };
-    }
-    
-    // Extract service ID number from slug if it exists
-    const slug = params.slug as string;
-    const match = slug.match(/(\d+)$/);
-    let serviceId: number | null = null;
-    
-    if (match && match[1]) {
-      serviceId = parseInt(match[1], 10);
-    }
-    
-    const localeToUse = locale || 'ar';
-    
-    // If ID found, use it in API request
-    if (serviceId) {
-      const url = `${process.env.NEXT_PUBLIC_API_URL}/api/service-pages/${serviceId}?locale=${localeToUse}`;
-      
-      try {
-        const response = await axios.get(url);
-        
-        return {
-          props: {
-            service: response.data || null,
-            error: null
-          }
-        };
-      } catch (error) {
-        console.error(`Error fetching service with ID ${serviceId}:`, error);
-        
-        return {
-          props: {
-            service: null,
-            error: `Error fetching service details: ${error}`
-          }
-        };
-      }
-    }
-    
-    // If no ID found, search using slug
-    return {
-      props: {
-        service: null,
-        error: 'Service not found'
-      }
-    };
-  } catch (error) {
-    console.error('Error in getServerSideProps:', error);
-    
-    return {
-      props: {
-        service: null,
-        error: `Server error: ${error}`
-      }
-    };
-  }
-};
+// Removed getServerSideProps: this page is CSR-only to avoid SSR locale mismatch issues
 
 export default ServiceDetailPage;

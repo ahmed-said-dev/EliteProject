@@ -88,20 +88,25 @@ const ContactUs = () => {
                   
                   <div className="flex items-start mb-4">
                     <MapPin className={`h-5 w-5 ${dir === 'rtl' ? 'ml-3' : 'mr-3'} mt-1 text-[#9b87f5]`} />
-                    <div>
-                      <p className="text-[#44396F] font-medium">{translate('contactUs.contactInfo.address1', locale)}</p>
-                      <p className="text-[#44396F] font-medium">{translate('contactUs.contactInfo.address2', locale)}</p>
-                    </div>
+                    <a
+                      href="https://www.google.com/maps?q=Qurtubah%20gate,%20Al%20Thoumamah%20Rd,%20Qurtubah,%20Riyadh%2013248"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-[#44396F] font-medium hover:underline"
+                    >
+                      <p>Qurtubah gate, Al Thoumamah Rd,</p>
+                      <p>Qurtubah, Riyadh 13248</p>
+                    </a>
                   </div>
                   
                   <div className="flex items-center mb-4">
                     <Mail className={`h-5 w-5 ${dir === 'rtl' ? 'ml-3' : 'mr-3'} text-[#9b87f5]`} />
-                    <p className="text-[#44396F] font-medium">{translate('contactUs.contactInfo.email', locale)}</p>
+                    <a href="mailto:info@elitevetksa.com" className="text-[#44396F] font-medium hover:underline">info@elitevetksa.com</a>
                   </div>
                   
                   <div className="flex items-center mb-2">
                     <PhoneCall className={`h-5 w-5 ${dir === 'rtl' ? 'ml-3' : 'mr-3'} text-[#9b87f5]`} />
-                    <p className="text-[#44396F] font-medium">{translate('contactUs.contactInfo.phone', locale)}</p>
+                    <a href="tel:+966920011626" className="text-[#44396F] font-medium hover:underline" style={{direction: 'ltr', unicodeBidi: 'bidi-override'}}>+966 9200 11 626</a>
                   </div>
                 </div>
                 

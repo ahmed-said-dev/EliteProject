@@ -19,17 +19,19 @@ const Hero = () => {
 
   // Handle call button click
   const handleCallUs = () => {
-    const phoneNumber = '+966123456789'; // رقم العيادة
+    const phoneNumber = '+966920011626'; // رقم العيادة الرسمي
     window.open(`tel:${phoneNumber}`, '_self');
   };
 
   // Handle WhatsApp booking
   const handleWhatsAppBooking = () => {
-    const phoneNumber = '+966123456789';
+    const phoneNumber = '+966920011626';
     const message = encodeURIComponent(
       `مرحباً، أريد حجز موعد في عيادة النخبة البيطرية`
     );
-    window.open(`https://wa.me/${phoneNumber}?text=${message}`, '_blank');
+    // إزالة أي مسافات قبل إنشاء رابط wa.me
+    const cleaned = phoneNumber.replace(/[^0-9]/g, '');
+    window.open(`https://wa.me/${cleaned}?text=${message}`, '_blank');
   };
 
   return (
@@ -105,7 +107,8 @@ const Hero = () => {
           <img 
             src="/Home/Asset 1-.png"
             alt="Clinic Interior"
-            className="absolute inset-0 w-full h-full object-cover"
+            className="absolute inset-0 w-full h-full object-cover transition-transform duration-300"
+            style={{ transform: isRTL ?  'none' : 'scaleX(-1)' }}
           />
           {/* Dots */}
           <div className="absolute bottom-6 left-1/2 transform -translate-x-1/2 flex gap-2">
@@ -155,13 +158,13 @@ const Hero = () => {
                 </button>
                 
                 {/* Phone booking */}
-                <button
-                  onClick={handleCallUs}
+                <a
+                  href="tel:+966920011626"
                   className="w-full bg-[#44396F] hover:bg-[#9b87f5] text-white px-6 py-3 rounded-lg font-semibold transition-colors flex items-center justify-center"
                 >
                   <FontAwesomeIcon icon={faPhone} className={`${dir === 'rtl' ? 'ml-2' : 'mr-2'}`} />
                   {translate('serviceDetail.callToBook', locale) || 'اتصل للحجز'}
-                </button>
+                </a>
                 
                 {/* Cancel button */}
                 <button
