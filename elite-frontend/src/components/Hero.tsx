@@ -105,7 +105,7 @@ const Hero = () => {
           </div>
           {/* Interior image */}
           <img 
-            src="/Home/Asset 1-.png"
+            src="/Home/Hero.png"
             alt="Clinic Interior"
             className="absolute inset-0 w-full h-full object-cover transition-transform duration-300"
             style={{ transform: isRTL ?  'none' : 'scaleX(-1)' }}
