@@ -56,7 +56,7 @@ const ServiceRelated: React.FC<ServiceRelatedProps> = ({ currentServiceId }) => 
                   ))}
                 </div>
                 
-                <Link href={`/service-detail/${service.id}`} passHref>
+                <Link href={`/service-detail/${service.documentId || service.id}`} passHref>
                   <a className={styles.relatedBtn}>
                     {t('View Service')}
                   </a>

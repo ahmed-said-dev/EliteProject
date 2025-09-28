@@ -149,7 +149,7 @@ const Header = () => {
                       pages.map((service) => (
                         <Link 
                           key={service.id}
-                          href={`/service-detail/${service.id}`}
+                          href={`/service-detail/${service.documentId || service.id}`}
                           className={styles.dropdownItem}
                           onClick={() => {
                             setShowServicesDropdown(false);

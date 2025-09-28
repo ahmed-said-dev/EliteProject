@@ -61,15 +61,29 @@ function useUnifiedServiceById(id?: string | number) {
     ['unified-service-detail', id, locale],
     async () => {
       if (!id) return null;
-      const api = 
-      process.env.NEXT_PUBLIC_API_URL || 'http://localhost:1337';
-      const url = `${api}/api/unified-services/${id}?locale=${locale}`;
-      console.log(`🔍 [useUnifiedServiceById] Fetching service with URL: ${url}`);
+      const api = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:1337';
+      
+      // Try first with documentId (recommended)
+      let url = `${api}/api/unified-services?filters[documentId][$eq]=${id}&locale=${locale}`;
+      console.log(`🔍 [useUnifiedServiceById] Fetching service by documentId with URL: ${url}`);
       
       try {
-        const res = await axios.get(url, { headers: { Accept: 'application/json' } });
-        console.log(`✅ [useUnifiedServiceById] Service data received:`, res.data?.data);
+        let res = await axios.get(url, { headers: { Accept: 'application/json' } });
+        
+        // If found by documentId, use the first result
+        if (res.data?.data && Array.isArray(res.data.data) && res.data.data.length > 0) {
+          console.log(`✅ [useUnifiedServiceById] Service found by documentId:`, res.data.data[0]);
+          return res.data.data[0] as UnifiedServiceEntry;
+        }
+        
+        // Fallback: try with numeric ID for backward compatibility
+        url = `${api}/api/unified-services/${id}?locale=${locale}`;
+        console.log(`🔍 [useUnifiedServiceById] Fallback: fetching service by ID with URL: ${url}`);
+        
+        res = await axios.get(url, { headers: { Accept: 'application/json' } });
+        console.log(`✅ [useUnifiedServiceById] Service found by ID:`, res.data?.data);
         return res.data?.data as UnifiedServiceEntry;
+        
       } catch (error) {
         console.error(`❌ [useUnifiedServiceById] Error fetching service:`, error.response?.data || error.message);
         throw error;

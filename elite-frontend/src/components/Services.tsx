@@ -60,8 +60,10 @@ const Services = () => {
   const { formattedServices, isLoading, error } = useHomeServices();
   
   // دالة للانتقال إلى صفحة تفاصيل الخدمة
-  const handleServiceClick = (serviceId: number) => {
-    router.push(`/service-detail/${serviceId}`);
+  const handleServiceClick = (service: any) => {
+    // Use documentId if available, fallback to id for backward compatibility
+    const serviceIdentifier = service.documentId || service.id;
+    router.push(`/service-detail/${serviceIdentifier}`);
   };
   
   // الحصول على الأيقونة المناسبة بناءً على الاسم
@@ -155,7 +157,7 @@ const Services = () => {
                   key={service.id}
                   serviceId={service.id}
                   title={service.title}
-                  onClick={() => handleServiceClick(service.id)}
+                  onClick={() => handleServiceClick(service)}
                   icon={<FontAwesomeIcon 
                     icon={getIconByName(service.iconName)} 
                     style={{ height: '2em', width: '2em' }} 
@@ -169,37 +171,37 @@ const Services = () => {
                 <ServiceCard
                   serviceId={1}
                   title={translate('services.service1', locale)}
-                  onClick={() => handleServiceClick(1)}
+                  onClick={() => handleServiceClick({ id: 1 })}
                   icon={<FontAwesomeIcon icon={faPaw} style={{ height: '2em', width: '2em' }} className="text-purple-600 opacity-20 transform rotate-45" />}
                 />
                 <ServiceCard
                   serviceId={2}
                   title={translate('services.service2', locale)}
-                  onClick={() => handleServiceClick(2)}
+                  onClick={() => handleServiceClick({ id: 2 })}
                   icon={<FontAwesomeIcon icon={faSyringe} style={{ height: '2em', width: '2em' }} className="text-purple-600 opacity-20 transform rotate-45" />}
                 />
                 <ServiceCard
                   serviceId={3}
                   title={translate('services.service3', locale)}
-                  onClick={() => handleServiceClick(3)}
+                  onClick={() => handleServiceClick({ id: 3 })}
                   icon={<FontAwesomeIcon icon={faTooth} style={{ height: '2em', width: '2em' }} className="text-purple-600 opacity-20 transform rotate-45" />}
                 />
                 <ServiceCard
                   serviceId={4}
                   title={translate('services.service4', locale)}
-                  onClick={() => handleServiceClick(4)}
+                  onClick={() => handleServiceClick({ id: 4 })}
                   icon={<FontAwesomeIcon icon={faEye} style={{ height: '2em', width: '2em' }} className="text-purple-600 opacity-20 transform rotate-45" />}
                 />
                 <ServiceCard
                   serviceId={5}
                   title={translate('services.service5', locale)}
-                  onClick={() => handleServiceClick(5)}
+                  onClick={() => handleServiceClick({ id: 5 })}
                   icon={<FontAwesomeIcon icon={faBone} style={{ height: '2em', width: '2em' }} className="text-purple-600 opacity-20 transform rotate-45" />}
                 />
                 <ServiceCard
                   serviceId={6}
                   title={translate('services.service6', locale)}
-                  onClick={() => handleServiceClick(6)}
+                  onClick={() => handleServiceClick({ id: 6 })}
                   icon={<FontAwesomeIcon icon={faScissors} style={{ height: '2em', width: '2em' }} className="text-purple-600 opacity-20 transform rotate-45" />}
                 />
               </>

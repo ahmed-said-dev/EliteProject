@@ -59,7 +59,7 @@ const Footer = () => {
               <ul className={styles.services_list}>
                 {pages && pages.slice(0, 6).map((service, index) => (
                   <li key={service.id}>
-                    <Link href={`/service-detail/${service.id}`} className={styles.service_link}>
+                    <Link href={`/service-detail/${service.documentId || service.id}`} className={styles.service_link}>
                       {service.icons && service.icons[0] ? (
                         <i className={`fas ${service.icons[0].icon}`}></i>
                       ) : (
