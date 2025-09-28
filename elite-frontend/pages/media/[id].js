@@ -221,13 +221,9 @@ export default function ArticleDetail() {
                 <div className="p-6">
                   {/* معلومات الكاتب */}
                   <div className="flex items-center mb-6 pb-6 border-b border-gray-100">
-                    <Avatar className="w-14 h-14 border-4 border-white shadow-lg mr-4 rtl:ml-4 rtl:mr-0">
-                      <AvatarImage src={authorAvatar} alt={authorName} />
-                      <AvatarFallback>{(authorName || '?').charAt(0)}</AvatarFallback>
-                    </Avatar>
                     <div>
                       <div className="text-sm text-primary font-medium">
-                        {t('article.by')}
+                        By:
                       </div>
                       <h3 className="font-bold text-xl text-gray-800">
                         {authorName}
@@ -317,14 +313,9 @@ export default function ArticleDetail() {
                   </div>
                   <div className="p-6">
                     <div className="flex flex-col items-center">
-                      <div className="relative mb-4">
-                        <Avatar className="w-20 h-20 border-4 border-white shadow-lg z-10 relative">
-                          <AvatarImage src={authorAvatar} alt={authorName} />
-                          <AvatarFallback>{(authorName || '?').charAt(0)}</AvatarFallback>
-                        </Avatar>
-                        <div className="absolute inset-0 bg-primary/20 blur-xl -z-10 scale-150 rounded-full"></div>
+                      <div className="mb-4">
+                        <h3 className="text-xl font-bold text-gray-800 text-center">By: {authorName}</h3>
                       </div>
-                      <h3 className="text-xl font-bold text-gray-800 mb-2">{authorName}</h3>
                       
                       {authorBio && (
                         <p className="text-gray-600 text-center mb-4">{authorBio}</p>

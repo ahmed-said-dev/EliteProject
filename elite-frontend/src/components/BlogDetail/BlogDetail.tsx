@@ -81,13 +81,8 @@ const BlogDetail: React.FC<BlogDetailProps> = ({ post }) => {
           
           <div className={styles.authorInfo}>
             <div className={styles.author}>
-              <img 
-                src={post.authorImage} 
-                alt={post.author} 
-                className={styles.authorImage} 
-              />
               <div className={styles.authorMeta}>
-                <span className={styles.authorName}>{post.author}</span>
+                <span className={styles.authorName}>By: {post.author}</span>
                 <span className={styles.authorTitle}>Elite Veterinary Specialist</span>
               </div>
             </div>
@@ -160,11 +155,8 @@ const BlogDetail: React.FC<BlogDetailProps> = ({ post }) => {
           </div>
           
           <div className={styles.authorBio}>
-            <div className={styles.authorImage}>
-              <img src={post.authorImage} alt={post.author} />
-            </div>
             <div className={styles.bioContent}>
-              <h3 className={styles.bioName}>{post.author}</h3>
+              <h3 className={styles.bioName}>By: {post.author}</h3>
               <p className={styles.bioText}>
                 Dr. {post.author.split(' ')[1]} is a highly experienced veterinarian at Elite Veterinary Clinic with over 10 years of specialized experience in small animal medicine. Passionate about animal welfare and client education, they regularly contribute valuable insights to our blog to help pet owners provide the best care for their beloved companions.
               </p>
@@ -211,9 +203,6 @@ const BlogDetail: React.FC<BlogDetailProps> = ({ post }) => {
               </div>
               
               <div className={`${styles.commentItem} ${styles.commentReply}`}>
-                <div className={styles.commentAvatar}>
-                  <img src={post.authorImage} alt={post.author} />
-                </div>
                 <div className={styles.commentBody}>
                   <div className={styles.commentMeta}>
                     <h4 className={styles.commentAuthor}>{post.author}</h4>

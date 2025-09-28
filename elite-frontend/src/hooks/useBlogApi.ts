@@ -253,33 +253,51 @@ export function useBlogArticle(id: string | number | undefined, initialData?: an
       return;
     }
 
+    console.log(`🔍 [useBlogArticle] Fetching article: ${id}, locale: ${locale}`);
+
     // إعادة تعيين حالة التحميل إذا تغير المعرف
     if (!initialData) {
       setIsLoading(true);
+      setError(null);
     }
 
+    const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:1337';
+    const fetchUrl = `${apiUrl}/api/blog-articles/${id}?populate=*&locale=${locale}`;
+    
+    console.log(`🔍 [useBlogArticle] Fetch URL: ${fetchUrl}`);
+
     // استدعاء مباشر للـ endpoint بالمعرف
-    fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:1337'}/api/blog-articles/${id}?populate=*&locale=${locale}`)
+    fetch(fetchUrl)
       .then((response) => {
+        console.log(`🔍 [useBlogArticle] Response status: ${response.status}`);
+        
         if (!response.ok) {
-          throw new Error(`${response.status}: ${response.statusText}`);
+          if (response.status === 404) {
+            throw new Error(`Article not found: ${id}`);
+          }
+          throw new Error(`HTTP ${response.status}: ${response.statusText}`);
         }
         return response.json();
       })
       .then((responseData) => {
+        console.log(`✅ [useBlogArticle] Article data received:`, responseData?.data?.title || 'No title');
+        
         if (responseData && responseData.data) {
           setData(responseData.data);
+          setError(null);
         } else {
-          setError('No article found');
+          console.log(`❌ [useBlogArticle] No article data in response`);
+          setError('Article not found');
         }
         setIsLoading(false);
       })
       .catch((err) => {
-        console.error('Error fetching blog article:', err);
+        console.error('❌ [useBlogArticle] Error fetching article:', err);
         setError(err.message || 'Failed to fetch blog article');
+        setData(null);
         setIsLoading(false);
       });
-  }, [id, locale, initialData]);
+  }, [id, locale]);
 
   return { data, isLoading, error };
 }
@@ -328,13 +346,8 @@ export function useRelatedArticles(articleId: string | number | undefined, limit
 
         if (!response.ok) {
           // إذا لم تكن الإضافة مدعومة، نستخدم طريقة بديلة
-          if (response.status === 404) {
-            // جلب مقالات عشوائية بدلاً من ذلك
-            return await fetchRandomArticles(articleId, limit);
-          }
-          
-          const errorData: ApiError = await response.json();
-          throw new Error(errorData.error?.message || 'حدث خطأ أثناء جلب المقالات ذات الصلة');
+          console.log(`⚠️ [useRelatedArticles] /related endpoint not available (${response.status}), using fallback`);
+          return await fetchRandomArticles(articleId, limit);
         }
 
         const responseData = await response.json();
@@ -344,11 +357,17 @@ export function useRelatedArticles(articleId: string | number | undefined, limit
           error: null,
         });
       } catch (error) {
-        setState({
-          data: null,
-          isLoading: false,
-          error: error instanceof Error ? error.message : 'حدث خطأ غير متوقع',
-        });
+        console.error('❌ [useRelatedArticles] Error:', error);
+        // في حالة فشل الـ related articles، نحاول جلب مقالات عشوائية
+        try {
+          await fetchRandomArticles(articleId, limit);
+        } catch (fallbackError) {
+          setState({
+            data: null,
+            isLoading: false,
+            error: error instanceof Error ? error.message : 'حدث خطأ غير متوقع',
+          });
+        }
       }
     };
 

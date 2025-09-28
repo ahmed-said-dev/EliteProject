@@ -86,12 +86,7 @@ const BlogSection: React.FC<BlogSectionProps> = ({ articles = [], isHomePage = f
                 </p>
                 <div className={styles.postMeta}>
                   <div className={styles.author}>
-                    <img 
-                      src={getAuthorImage(featuredArticles[0])} 
-                      alt={getAuthorName(featuredArticles[0])} 
-                      className={styles.authorImage} 
-                    />
-                    <span>{getAuthorName(featuredArticles[0])}</span>
+                    <span>By: {getAuthorName(featuredArticles[0])}</span>
                   </div>
                   
                   <div className={styles.postInfo}>
@@ -155,12 +150,7 @@ const BlogSection: React.FC<BlogSectionProps> = ({ articles = [], isHomePage = f
                     <p className={styles.blogExcerpt}>{article.excerpt}</p>
                     
                     <div className={styles.authorSection}>
-                      <img 
-                        src={getAuthorImage(article)} 
-                        alt={getAuthorName(article)} 
-                        className={styles.authorImage} 
-                      />
-                      <span className={styles.authorName}>{getAuthorName(article)}</span>
+                      <span className={styles.authorName}>By: {getAuthorName(article)}</span>
                     </div>
                   </div>
                   
