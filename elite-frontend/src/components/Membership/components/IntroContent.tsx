@@ -68,16 +68,28 @@ const IntroContent: React.FC = () => {
 // Call to Action Button Component
 const CallToActionButton: React.FC = () => {
   const { t } = useLanguage();
+  
+  const scrollToPricing = () => {
+    const pricingSection = document.getElementById('pricing-plans');
+    if (pricingSection) {
+      pricingSection.scrollIntoView({ 
+        behavior: 'smooth',
+        block: 'start'
+      });
+    }
+  };
+  
   return (
     <div className={styles.actionBox}>
       <h5 className={styles.callToAction}>{t('membership.cta.title')}</h5>
-      <a 
+      <button 
         className={styles.btnPrimary} 
-        href="#membership-form"
+        onClick={scrollToPricing}
+        type="button"
       >
         {t('membership.cta.button')}
         <i className={`fas fa-paw ${styles.btnIcon}`} />
-      </a>
+      </button>
     </div>
   );
 };

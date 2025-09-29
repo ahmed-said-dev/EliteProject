@@ -264,7 +264,7 @@
   text-decoration: none;
   border: 1px solid #7c58d3;
   border-radius: 15px;
-  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  transition: all 0.3s ease;
   display: inline-block;
   font-family: var(--bs-btn-font-family);
   font-size: 1.125rem;
@@ -274,21 +274,22 @@
   user-select: none;
   overflow: hidden;
   line-height: 1.223;
-  background: rgb(122, 73, 163);
-  border-color: rgb(122, 73, 163);
-  background-color: rgb(122, 73, 163);
+  background: linear-gradient(135deg, #8b5cf6, #7c3aed);
+  border-color: #8b5cf6;
   padding: 15px 30px;
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 1px;
-  box-shadow: 0 5px 20px rgba(var(--primary-rgb), 0.3);
+  box-shadow: 0 10px 25px rgba(139, 92, 246, 0.4);
   color: rgb(255, 255, 255);
 }
 
 .btnPrimary:hover {
-  background-color: #4a2d71;
+  background: linear-gradient(135deg, #7c3aed, #6d28d9);
+  border-color: #7c3aed;
   color: white;
-  transform: translateY(-3px);
+  transform: translateY(-4px) scale(1.05);
+  box-shadow: 0 20px 40px rgba(139, 92, 246, 0.6);
 }
 
 .btnIcon {

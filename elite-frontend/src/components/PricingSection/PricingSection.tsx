@@ -37,7 +37,7 @@ const PricingSection: React.FC = () => {
   // If data is loading, show loader
   if (loading) {
     return (
-      <section className={styles['pricingSection']} dir={dir}>
+      <section id="pricing-plans" className={styles['pricingSection']} dir={dir}>
         <div className={styles['pricingBgOverlay']}></div>
         <div className={styles['container']}>
           <div className={styles['loaderWrapper']}>
@@ -51,7 +51,7 @@ const PricingSection: React.FC = () => {
   // If no plans are available from API, show error message
   if (error || plans.length === 0) {
     return (
-      <section className={styles['pricingSection']} dir={dir}>
+      <section id="pricing-plans" className={styles['pricingSection']} dir={dir}>
         <div className={styles['pricingBgOverlay']}></div>
         <div className={styles['container']}>
           <div className={styles['sectionHead']}>
@@ -73,7 +73,7 @@ const PricingSection: React.FC = () => {
   };
 
   return (
-    <section className={styles['pricingSection']} dir={dir}>
+    <section id="pricing-plans" className={styles['pricingSection']} dir={dir}>
       <div className={styles['pricingBgOverlay']}></div>
       <div className={styles['container']}>
         <div className={styles['sectionHead']}>
