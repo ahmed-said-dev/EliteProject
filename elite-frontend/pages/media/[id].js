@@ -24,7 +24,7 @@ export default function ArticleDetailPage() {
   console.log(`Locale: ${locale}`);
   
   // جلب بيانات المقالة
-  const { data: article, isLoading, error } = useBlogArticle(id);
+  const { data: article, isLoading, error, languageWarning } = useBlogArticle(id);
   
   console.log(`Page State:`, { 
     hasId: !!id, 
@@ -166,6 +166,18 @@ export default function ArticleDetailPage() {
             
             {/* Article Info */}
             <div className="p-6 sm:p-8">
+              {/* Language Warning */}
+              {languageWarning && (
+                <div className="mb-4 p-4 bg-yellow-50 border border-yellow-200 rounded-lg">
+                  <div className="flex items-center">
+                    <div className="text-yellow-600 text-sm flex items-center">
+                      <span className="mr-2">⚠️</span>
+                      {languageWarning}
+                    </div>
+                  </div>
+                </div>
+              )}
+              
               <h1 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4 leading-tight">
                 {title}
               </h1>

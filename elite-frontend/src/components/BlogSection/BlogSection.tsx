@@ -72,7 +72,7 @@ const BlogSection: React.FC<BlogSectionProps> = ({ articles = [], isHomePage = f
         
         {/* المقالات المميزة */}
         {featuredArticles.length > 0 && (
-          <Link href={`/media/${featuredArticles[0].slug}`} className="cursor-pointer hover:opacity-90 transition-opacity block">
+          <Link href={`/media/${featuredArticles[0].documentId}`} className="cursor-pointer hover:opacity-90 transition-opacity block">
             <div key={featuredArticles[0].id} className={styles.featuredPost}>
               <div className={styles.featuredContent}>
                 <div className={styles.categoryBadge}>
@@ -116,7 +116,7 @@ const BlogSection: React.FC<BlogSectionProps> = ({ articles = [], isHomePage = f
           {regularArticles.slice(0, isHomePage ? 6 : regularArticles.length).map((article, index) => (
             <Link 
               key={article.id} 
-              href={`/media/${article.documentId || article.id}`}
+              href={`/media/${article.documentId}`}
               className="cursor-pointer hover:opacity-90 transition-opacity block"
             >
               <div 

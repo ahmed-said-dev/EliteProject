@@ -504,7 +504,13 @@ export interface ApiBlogArticleBlogArticle extends Struct.CollectionTypeSchema {
           localized: true;
         };
       }>;
-    slug: Schema.Attribute.UID<'title'> & Schema.Attribute.Required;
+    slug: Schema.Attribute.UID<'title'> &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
     tags: Schema.Attribute.Relation<'manyToMany', 'api::blog-tag.blog-tag'>;
     title: Schema.Attribute.String &
       Schema.Attribute.Required &

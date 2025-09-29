@@ -114,17 +114,15 @@ export function useBlogArticle(id: string | number | undefined) {
     
     async function fetchUnifiedArticle() {
       try {
-        // الإستراتيجية 1: البحث بـ documentId (مثل الخدمات تماماً)
-        console.log(`🔍 [useBlogArticle] Strategy 1: Search by documentId with locale`);
-        let searchUrl = `${API_BASE}/api/blog-articles?filters[documentId][$eq]=${id}&locale=${locale}&populate=*`;
-        console.log(`🔍 [useBlogArticle] URL: ${searchUrl}`);
-        
+        // الإستراتيجية 1: البحث بـ unifiedSlug (إذا كان متاحاً)
+        console.log(`🔍 [useBlogArticle] Strategy 1: Search by unifiedSlug`);
+        let searchUrl = `${API_BASE}/api/blog-articles?filters[unifiedSlug][$eq]=${id}&locale=${locale}&populate=*`;
         let response = await fetch(searchUrl);
         
         if (response.ok) {
           const data = await response.json();
           if (data.data && data.data.length > 0) {
-            console.log(`✅ [useBlogArticle] Found by documentId: "${data.data[0].title}"`);
+            console.log(`✅ [useBlogArticle] Found by unifiedSlug: "${data.data[0].title}"`);
             setArticle(data.data[0]);
             setError(null);
             setIsLoading(false);
@@ -132,24 +130,8 @@ export function useBlogArticle(id: string | number | undefined) {
           }
         }
 
-        // الإستراتيجية 2: البحث المباشر بـ documentId (للتوافق مع القديم)
-        console.log(`🔍 [useBlogArticle] Strategy 2: Direct access by documentId`);
-        const directUrl = `${API_BASE}/api/blog-articles/${id}?locale=${locale}&populate=*`;
-        response = await fetch(directUrl);
-        
-        if (response.ok) {
-          const data = await response.json();
-          if (data.data) {
-            console.log(`✅ [useBlogArticle] Found by direct access: "${data.data.title}"`);
-            setArticle(data.data);
-            setError(null);
-            setIsLoading(false);
-            return;
-          }
-        }
-
-        // الإستراتيجية 3: البحث بـ slug (للتوافق مع الحالي)
-        console.log(`🔍 [useBlogArticle] Strategy 3: Search by slug`);
+        // الإستراتيجية 2: البحث بـ slug (الحالي)
+        console.log(`🔍 [useBlogArticle] Strategy 2: Search by slug`);
         searchUrl = `${API_BASE}/api/blog-articles?filters[slug][$eq]=${id}&locale=${locale}&populate=*`;
         response = await fetch(searchUrl);
         
@@ -158,6 +140,22 @@ export function useBlogArticle(id: string | number | undefined) {
           if (data.data && data.data.length > 0) {
             console.log(`✅ [useBlogArticle] Found by slug: "${data.data[0].title}"`);
             setArticle(data.data[0]);
+            setError(null);
+            setIsLoading(false);
+            return;
+          }
+        }
+
+        // الإستراتيجية 3: البحث المباشر بـ documentId
+        console.log(`🔍 [useBlogArticle] Strategy 3: Direct access by documentId`);
+        const directUrl = `${API_BASE}/api/blog-articles/${id}?locale=${locale}&populate=*`;
+        response = await fetch(directUrl);
+        
+        if (response.ok) {
+          const data = await response.json();
+          if (data.data) {
+            console.log(`✅ [useBlogArticle] Found by direct access: "${data.data.title}"`);
+            setArticle(data.data);
             setError(null);
             setIsLoading(false);
             return;

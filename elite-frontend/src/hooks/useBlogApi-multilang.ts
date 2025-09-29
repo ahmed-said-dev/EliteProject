@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useLanguage } from '@/context/LanguageContext';
 
 // إضافة دالة useApiUrl لاستخدامها في الدوال الأخرى
@@ -67,7 +67,6 @@ export interface BlogArticle {
   documentId: string; // إضافة Document ID لـ Strapi v5
   title: string;
   slug: string;
-  unifiedSlug?: string; // Slug موحد للربط بين اللغات
   content: string;
   excerpt: string;
   publishDate?: string;
@@ -85,173 +84,180 @@ export interface BlogArticle {
   localizations?: any[];
 }
 
-// دالة موحدة للحصول على مقالة بطريقة مشابهة للخدمات
-export function useBlogArticle(id: string | number | undefined) {
+// دالة محسنة للحصول على مقالة واحدة تدعم تغيير اللغة الذكي
+export function useBlogArticle(articleId: string | number | undefined) {
   const { locale } = useLanguage();
   
   // حالة البيانات
   const [article, setArticle] = useState<BlogArticle | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [languageWarning, setLanguageWarning] = useState<string | null>(null);
+  
+  // تتبع المقالة الأصلية لحالة تغيير اللغة
+  const originalArticleRef = useRef<BlogArticle | null>(null);
+  const currentLocaleRef = useRef<string>(locale);
 
   useEffect(() => {
     // إذا لم يكن هناك ID، أعد تعيين الحالة
-    if (!id) {
+    if (!articleId) {
       setArticle(null);
       setIsLoading(false);
       setError(null);
+      setLanguageWarning(null);
+      originalArticleRef.current = null;
       return;
     }
 
-    console.log(`\n🔍 [useBlogArticle] Fetching article: ${id}`);
-    console.log(`🌍 [useBlogArticle] Locale: ${locale}`);
+    console.log(`\n🔍 Starting to fetch article: ${articleId}`);
+    console.log(`🌍 Locale: ${locale}`);
+    console.log(`📝 Previous locale: ${currentLocaleRef.current}`);
+    
+    // تحقق إذا كان هذا تغيير لغة لنفس المقالة
+    const isLanguageSwitch = currentLocaleRef.current !== locale && originalArticleRef.current;
+    currentLocaleRef.current = locale;
     
     // بدء عملية التحميل
     setIsLoading(true);
     setError(null);
+    setLanguageWarning(null);
 
     const API_BASE = 'http://localhost:1337';
     
-    async function fetchUnifiedArticle() {
+    async function fetchArticle() {
       try {
-        // الإستراتيجية 1: البحث بـ documentId (مثل الخدمات تماماً)
-        console.log(`🔍 [useBlogArticle] Strategy 1: Search by documentId with locale`);
-        let searchUrl = `${API_BASE}/api/blog-articles?filters[documentId][$eq]=${id}&locale=${locale}&populate=*`;
-        console.log(`🔍 [useBlogArticle] URL: ${searchUrl}`);
+        // المحاولة 1: البحث المباشر بـ articleId في اللغة المطلوبة
+        console.log(`🔍 Trying direct access in ${locale}...`);
         
-        let response = await fetch(searchUrl);
+        const directUrl = `${API_BASE}/api/blog-articles/${articleId}?populate=*&locale=${locale}`;
+        const directResponse = await fetch(directUrl);
         
-        if (response.ok) {
-          const data = await response.json();
-          if (data.data && data.data.length > 0) {
-            console.log(`✅ [useBlogArticle] Found by documentId: "${data.data[0].title}"`);
-            setArticle(data.data[0]);
-            setError(null);
-            setIsLoading(false);
-            return;
+        if (directResponse.ok) {
+          const responseData = await directResponse.json();
+          const foundArticle = responseData.data;
+          
+          console.log(`✅ Direct access successful: "${foundArticle.title}"`);
+          setArticle(foundArticle);
+          setError(null);
+          setLanguageWarning(null);
+          
+          // حفظ المقالة كمرجع أصلي
+          if (!originalArticleRef.current || !isLanguageSwitch) {
+            originalArticleRef.current = foundArticle;
           }
+          
+          setIsLoading(false);
+          return;
         }
-
-        // الإستراتيجية 2: البحث المباشر بـ documentId (للتوافق مع القديم)
-        console.log(`🔍 [useBlogArticle] Strategy 2: Direct access by documentId`);
-        const directUrl = `${API_BASE}/api/blog-articles/${id}?locale=${locale}&populate=*`;
-        response = await fetch(directUrl);
         
-        if (response.ok) {
-          const data = await response.json();
-          if (data.data) {
-            console.log(`✅ [useBlogArticle] Found by direct access: "${data.data.title}"`);
-            setArticle(data.data);
-            setError(null);
-            setIsLoading(false);
-            return;
+        console.log(`❌ Direct access failed (${directResponse.status})`);
+        
+        // المحاولة 2: إذا كان هذا تغيير لغة، ابحث عن مقالة بديلة
+        if (isLanguageSwitch && originalArticleRef.current) {
+          console.log(`🔄 Language switch detected, searching for equivalent article...`);
+          
+          const searchResponse = await fetch(`${API_BASE}/api/blog-articles?populate=*&locale=${locale}&pagination[pageSize]=100`);
+          
+          if (searchResponse.ok) {
+            const searchData = await searchResponse.json();
+            const allArticles = searchData.data || [];
+            
+            // البحث بالـ slug أولاً
+            let equivalentArticle = allArticles.find((art: BlogArticle) => 
+              art.slug === originalArticleRef.current?.slug
+            );
+            
+            // إذا لم توجد بالـ slug، ابحث بالعنوان المشابه
+            if (!equivalentArticle) {
+              const originalTitle = originalArticleRef.current.title.toLowerCase();
+              equivalentArticle = allArticles.find((art: BlogArticle) => 
+                art.title.toLowerCase().includes(originalTitle.split(' ')[0]) ||
+                originalTitle.includes(art.title.toLowerCase().split(' ')[0])
+              );
+            }
+            
+            if (equivalentArticle) {
+              console.log(`✅ Found equivalent article: "${equivalentArticle.title}"`);
+              setArticle(equivalentArticle);
+              setError(null);
+              setLanguageWarning(null);
+              setIsLoading(false);
+              return;
+            }
           }
+          
+          // المحاولة 3: إذا لم توجد ترجمة، اعرض المقالة الأصلية مع تحذير
+          console.log(`⚠️ No translation found, showing original with warning`);
+          setArticle(originalArticleRef.current);
+          setError(null);
+          setLanguageWarning(
+            locale === 'ar' 
+              ? 'هذه المقالة غير متوفرة باللغة العربية. يتم عرض النسخة الإنجليزية.'
+              : 'This article is not available in English. Showing Arabic version.'
+          );
+          setIsLoading(false);
+          return;
         }
-
-        // الإستراتيجية 3: البحث بـ slug (للتوافق مع الحالي)
-        console.log(`🔍 [useBlogArticle] Strategy 3: Search by slug`);
-        searchUrl = `${API_BASE}/api/blog-articles?filters[slug][$eq]=${id}&locale=${locale}&populate=*`;
-        response = await fetch(searchUrl);
         
-        if (response.ok) {
-          const data = await response.json();
-          if (data.data && data.data.length > 0) {
-            console.log(`✅ [useBlogArticle] Found by slug: "${data.data[0].title}"`);
-            setArticle(data.data[0]);
-            setError(null);
-            setIsLoading(false);
-            return;
-          }
-        }
-
-        // الإستراتيجية 4: البحث في جميع المقالات
-        console.log(`🔍 [useBlogArticle] Strategy 4: Search all articles`);
-        const allUrl = `${API_BASE}/api/blog-articles?locale=${locale}&populate=*&pagination[pageSize]=100`;
-        response = await fetch(allUrl);
+        // المحاولة 4: البحث العام في جميع المقالات (للـ ID أو slug)
+        console.log(`🔍 Searching all articles for ID/slug match...`);
         
-        if (response.ok) {
-          const data = await response.json();
-          const articles = data.data || [];
+        const allArticlesResponse = await fetch(`${API_BASE}/api/blog-articles?populate=*&locale=${locale}&pagination[pageSize]=100`);
+        
+        if (allArticlesResponse.ok) {
+          const allData = await allArticlesResponse.json();
+          const articles = allData.data || [];
           
           // البحث بـ ID, documentId, أو slug
           const foundArticle = articles.find((article: BlogArticle) => 
-            article.id.toString() === id.toString() ||
-            article.documentId === id ||
-            article.slug === id ||
-            article.unifiedSlug === id
+            article.id.toString() === articleId.toString() ||
+            article.documentId === articleId ||
+            article.slug === articleId
           );
           
           if (foundArticle) {
-            console.log(`✅ [useBlogArticle] Found in search: "${foundArticle.title}"`);
+            console.log(`✅ Found article by search: "${foundArticle.title}"`);
             setArticle(foundArticle);
             setError(null);
+            setLanguageWarning(null);
+            
+            // حفظ كمرجع أصلي
+            if (!originalArticleRef.current) {
+              originalArticleRef.current = foundArticle;
+            }
+            
             setIsLoading(false);
             return;
           }
         }
-
-        // الإستراتيجية 5: إذا لم توجد، ابحث في اللغة الأخرى وأعد تحديد التوجه
-        console.log(`🔍 [useBlogArticle] Strategy 5: Cross-language search`);
-        const otherLocale = locale === 'ar' ? 'en' : 'ar';
-        const crossUrl = `${API_BASE}/api/blog-articles?locale=${otherLocale}&populate=*&pagination[pageSize]=100`;
-        response = await fetch(crossUrl);
         
-        if (response.ok) {
-          const data = await response.json();
-          const articles = data.data || [];
-          
-          const originalArticle = articles.find((article: BlogArticle) => 
-            article.id.toString() === id.toString() ||
-            article.documentId === id ||
-            article.slug === id
-          );
-          
-          if (originalArticle) {
-            console.log(`🔄 [useBlogArticle] Found in ${otherLocale}, redirecting...`);
-            // البحث عن المقالة المقابلة في اللغة المطلوبة
-            const equivalentSlug = originalArticle.unifiedSlug || originalArticle.slug;
-            
-            // إعادة البحث بـ slug موحد
-            const redirectUrl = `${API_BASE}/api/blog-articles?filters[slug][$eq]=${equivalentSlug}&locale=${locale}&populate=*`;
-            const redirectResponse = await fetch(redirectUrl);
-            
-            if (redirectResponse.ok) {
-              const redirectData = await redirectResponse.json();
-              if (redirectData.data && redirectData.data.length > 0) {
-                console.log(`✅ [useBlogArticle] Found equivalent: "${redirectData.data[0].title}"`);
-                setArticle(redirectData.data[0]);
-                setError(null);
-                setIsLoading(false);
-                return;
-              }
-            }
-          }
-        }
-
         // لم توجد المقالة
-        console.log(`❌ [useBlogArticle] Article not found: ${id}`);
-        setError(`Article not found: ${id}`);
+        console.log(`❌ Article not found anywhere`);
+        setError(`Article not found: ${articleId}`);
         setArticle(null);
+        setLanguageWarning(null);
         
       } catch (fetchError: any) {
-        console.error(`❌ [useBlogArticle] Fetch error:`, fetchError.message);
+        console.error(`❌ Fetch error:`, fetchError.message);
         setError(fetchError.message);
         setArticle(null);
+        setLanguageWarning(null);
       } finally {
         setIsLoading(false);
       }
     }
     
-    fetchUnifiedArticle();
+    fetchArticle();
 
-  }, [id, locale]);
+  }, [articleId, locale]);
 
-  console.log(`📈 [useBlogArticle] State: loading=${isLoading}, hasArticle=${!!article}, error=${error}`);
+  console.log(`📈 Hook state: loading=${isLoading}, hasArticle=${!!article}, error=${error}, warning=${languageWarning}`);
 
   return {
     data: article,
     isLoading,
-    error
+    error,
+    languageWarning // تحذير عندما تكون المقالة بلغة مختلفة عن المطلوبة
   };
 }
 
@@ -293,7 +299,7 @@ export function useBlogArticles(page = 1, pageSize = 10, filters?: Record<string
         }
 
         const url = `${API_BASE}/api/blog-articles?${params}`;
-        console.log(`🔗 [useBlogArticles] Fetching: ${url}`);
+        console.log(`🔗 Fetching articles: ${url}`);
 
         const response = await fetch(url);
         
@@ -303,13 +309,13 @@ export function useBlogArticles(page = 1, pageSize = 10, filters?: Record<string
 
         const data = await response.json();
         
-        console.log(`✅ [useBlogArticles] Loaded: ${data.data?.length || 0} items`);
+        console.log(`✅ Articles loaded: ${data.data?.length || 0} items`);
         
         setArticles(data.data || []);
         setPagination(data.meta?.pagination || pagination);
         
       } catch (err: any) {
-        console.error('❌ [useBlogArticles] Error:', err.message);
+        console.error('❌ Error fetching articles:', err.message);
         setError(err.message);
         setArticles([]);
       } finally {
@@ -327,6 +333,7 @@ export function useBlogArticles(page = 1, pageSize = 10, filters?: Record<string
     pagination,
     refetch: () => {
       setLoading(true);
+      // إعادة تحميل البيانات
     }
   };
 }
