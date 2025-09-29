@@ -16,10 +16,12 @@
   "direction": "ltr",
   "common": {
     "loading": "Loading...",
+    "loadingArticle": "Loading article...",
     "back": "Back",
     "minutes": "minutes",
     "cancel": "Cancel",
     "refresh": "Retry",
+    "tryAgain": "Try Again",
     "share": "Share",
     "linkCopied": "Link copied to clipboard!",
     "duration": "Duration",
@@ -1508,6 +1510,16 @@
     "noRelatedArticles": "No related articles found",
     "minutes": "minutes",
     "shareOn": "Share on"
+  },
+  "articleDetail": {
+    "notFound": "Article Not Found",
+    "notFoundDesc": "The article you are looking for does not exist or has been removed.",
+    "backToArticles": "Back to Articles",
+    "loadingArticle": "Loading article...",
+    "tags": "Tags",
+    "moreArticles": "Discover More Articles",
+    "moreArticlesDesc": "Explore our comprehensive collection of veterinary articles and pet care guides.",
+    "exploreArticles": "Explore All Articles"
   },
   "blogSidebar": {
     "search": "Search",
