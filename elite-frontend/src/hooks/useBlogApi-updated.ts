@@ -69,8 +69,8 @@ export interface BlogArticle {
   slug: string;
   content: string;
   excerpt: string;
-  publishDate?: string;
-  readTime?: string;
+  publishDate: string;
+  readTime: string;
   featured?: boolean;
   viewCount?: number;
   featuredImage?: BlogImage;
@@ -308,28 +308,4 @@ export const getImageUrl = (image: BlogImage | undefined) => {
 
 export const getCategoryName = (article: BlogArticle) => {
   return article?.category?.name || 'Uncategorized';
-};
-
-// دوال مساعدة إضافية للتوافق مع الكود الحالي
-export const getArticleImage = (article: BlogArticle) => {
-  return getImageUrl(article.featuredImage);
-};
-
-export const getAuthorImage = (article: BlogArticle) => {
-  return getImageUrl(article.author?.avatar);
-};
-
-export const getAuthorName = (article: BlogArticle) => {
-  return article?.author?.name || 'Unknown Author';
-};
-
-// دالة لتنسيق التاريخ
-export const formatArticleDate = (dateString: string, locale: string = 'en') => {
-  if (!dateString) return '';
-  const date = new Date(dateString);
-  return date.toLocaleDateString(locale === 'ar' ? 'ar-SA' : 'en-US', {
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric',
-  });
 };

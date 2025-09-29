@@ -39,7 +39,7 @@ export default function Media() {
   }, [router.query.page]);
   
   // استخدام hook لجلب المقالات مع تطبيق الفلاتر
-  const { articles, loading, error, pagination } = useBlogArticles(currentPage, pageSize, filters);
+  const { data: articles, loading, error, pagination } = useBlogArticles(currentPage, pageSize, filters);
   
   // التعامل مع تغيير الصفحة
   const handlePageChange = (page) => {

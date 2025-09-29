@@ -116,7 +116,7 @@ const BlogSection: React.FC<BlogSectionProps> = ({ articles = [], isHomePage = f
           {regularArticles.slice(0, isHomePage ? 6 : regularArticles.length).map((article, index) => (
             <Link 
               key={article.id} 
-              href={`/media/${article.slug}`}
+              href={`/media/${article.documentId || article.id}`}
               className="cursor-pointer hover:opacity-90 transition-opacity block"
             >
               <div 
