@@ -369,3 +369,101 @@ export const formatArticleDate = (dateString: string, locale: string = 'en') => 
     day: 'numeric',
   });
 };
+
+// دالة للحصول على التصنيفات
+export function useBlogCategories() {
+  const { locale } = useLanguage();
+  const [categories, setCategories] = useState<Category[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    const fetchCategories = async () => {
+      try {
+        setLoading(true);
+        setError(null);
+
+        const API_BASE = 'http://localhost:1337';
+        const url = `${API_BASE}/api/categories?locale=${locale}&populate=*`;
+        
+        console.log(`🔗 [useBlogCategories] Fetching: ${url}`);
+
+        const response = await fetch(url);
+        
+        if (!response.ok) {
+          throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+        }
+
+        const data = await response.json();
+        
+        console.log(`✅ [useBlogCategories] Loaded: ${data.data?.length || 0} categories`);
+        
+        setCategories(data.data || []);
+        
+      } catch (err: any) {
+        console.error('❌ [useBlogCategories] Error:', err.message);
+        setError(err.message);
+        setCategories([]);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchCategories();
+  }, [locale]);
+
+  return {
+    categories,
+    loading,
+    error
+  };
+}
+
+// دالة للحصول على الوسوم
+export function useBlogTags() {
+  const { locale } = useLanguage();
+  const [tags, setTags] = useState<Tag[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    const fetchTags = async () => {
+      try {
+        setLoading(true);
+        setError(null);
+
+        const API_BASE = 'http://localhost:1337';
+        const url = `${API_BASE}/api/tags?locale=${locale}&populate=*`;
+        
+        console.log(`🔗 [useBlogTags] Fetching: ${url}`);
+
+        const response = await fetch(url);
+        
+        if (!response.ok) {
+          throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+        }
+
+        const data = await response.json();
+        
+        console.log(`✅ [useBlogTags] Loaded: ${data.data?.length || 0} tags`);
+        
+        setTags(data.data || []);
+        
+      } catch (err: any) {
+        console.error('❌ [useBlogTags] Error:', err.message);
+        setError(err.message);
+        setTags([]);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchTags();
+  }, [locale]);
+
+  return {
+    tags,
+    loading,
+    error
+  };
+}
