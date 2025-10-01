@@ -99,9 +99,9 @@ const BlogSidebar: React.FC<BlogSidebarProps> = ({
                         className={`flex items-center py-2 px-3 rounded-lg transition-colors hover:bg-gray-100 ${activeCategoryId === category.id.toString() ? 'bg-gray-100 text-primary font-medium' : ''}`}
                       >
                         <FaFolder className={`${isRTL ? 'ml-2' : 'mr-2'} text-primary/70`} />
-                        {category.attributes?.name || category.name}
+                        {category.name}
                         <span className="ml-auto bg-gray-100 text-gray-600 text-xs px-2 py-1 rounded-full">
-                          {category.articlesCount || category.attributes?.articles?.data?.length || 0}
+                          0
                         </span>
                       </Link>
                     </li>
@@ -142,7 +142,7 @@ const BlogSidebar: React.FC<BlogSidebarProps> = ({
                       className={`inline-flex items-center py-1.5 px-3 rounded-full text-sm ${activeTagId === tag.id.toString() ? 'bg-primary text-white' : 'bg-gray-100 hover:bg-gray-200 text-gray-700'}`}
                     >
                       <FaTag className={`${isRTL ? 'ml-1.5' : 'mr-1.5'} text-xs`} />
-                      {tag.attributes?.name || tag.name}
+                      {tag.name}
                     </Link>
                   ))}
                 </>
