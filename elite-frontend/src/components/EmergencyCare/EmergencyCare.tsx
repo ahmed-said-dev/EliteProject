@@ -58,10 +58,13 @@ export const EmergencyCare: React.FC = () => {
             ))}
           </div>
           
-          <div className={styles.emergencyContact}>
+          <a 
+            href={`tel:${t('appointment.emergencyCare.contactNumber').replace(/[^0-9]/g, '')}`}
+            className={styles.emergencyContact}
+          >
             <i className={`fas fa-phone-alt ${styles.phoneIcon}`}></i>
             <span className={styles.phoneNumber}>{t('appointment.emergencyCare.contactNumber')}</span>
-          </div>
+          </a>
           
           <a href="/contact" className={styles.actionButton}>
             {t('appointment.emergencyCare.contactButton')}

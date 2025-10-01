@@ -7,7 +7,7 @@ const WhatsAppButton = ({ position = 'bottom-right' }) => {
   const [showBubble, setShowBubble] = useState(false);
   
   // WhatsApp business number - replace with actual business number
-  const whatsappNumber = '+966501234567'; // Replace with actual business WhatsApp number
+  const whatsappNumber = '+966540456405'; // Elite Vet WhatsApp number
   const message = encodeURIComponent(
     t('whatsapp.defaultMessage') || 
     'مرحباً! أود الاستفسار عن خدماتكم البيطرية.'

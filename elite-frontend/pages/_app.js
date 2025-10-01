@@ -1,5 +1,6 @@
 import '@/styles/globals.css';
 import '@/styles/global.css';
+import '@/styles/mobile-layout.css';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import '@fortawesome/fontawesome-svg-core/styles.css';
 import { config } from '@fortawesome/fontawesome-svg-core';
@@ -72,6 +73,7 @@ function MyApp({ Component, pageProps }) {
       <Head>
         <title>عيادة إيليت البيطرية</title>
         <meta name="description" content="عيادة إيليت البيطرية - شريكك الموثوق في رعاية حيوانك الأليف" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <ApolloProvider client={apolloClient}>

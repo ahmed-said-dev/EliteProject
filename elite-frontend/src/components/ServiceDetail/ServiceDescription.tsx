@@ -52,7 +52,7 @@ const ServiceDescription: React.FC<ServiceDescriptionProps> = ({ service, title 
             </div>
             <div className={styles.infoContent}>
               <h4 className={styles.infoLabel}>للحجز والاستفسار</h4>
-              <p className={styles.infoValue}>+123 456 7890</p>
+              <p className={styles.infoValue}>920011626</p>
             </div>
           </div>
           

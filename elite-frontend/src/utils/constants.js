@@ -2,7 +2,7 @@ export const SITE_CONFIG = {
   name: 'Elite Vet',
   description: 'عيادة بيطرية متخصصة تقدم خدمات رعاية متكاملة على مدار الساعة',
   contact: {
-    phone: '123-456-789',
+    phone: '920011626',
     email: 'info@elitevet.com',
     address: 'شارع الرئيسي، المدينة'
   },

@@ -21,7 +21,7 @@ const ContactForm: React.FC = () => {
           <h2 className={styles.title}>{t('contact.form.title')}</h2>
         </div>
         
-        <form className={styles.dzForm} action="../assets/script/contact_smtp.php" method="POST" dir={dir}>
+        <form className={styles.dzForm} dir={dir}>
           <input 
             className={styles.formControl} 
             name="dzToDo" 

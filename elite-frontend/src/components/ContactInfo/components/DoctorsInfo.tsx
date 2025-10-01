@@ -41,7 +41,7 @@ const DoctorsInfo: React.FC = () => {
             <span className={styles.infoText}>{t('contact.doctors.count')}</span>
           </div>
         </div>
-        <a className={styles.btnLink} href="/team" aria-label={t('contact.doctors.meetTeam')}>
+        <a className={styles.btnLink} aria-label={t('contact.doctors.meetTeam')} style={{ cursor: 'default' }}>
           <svg
             height="24"
             width="24"

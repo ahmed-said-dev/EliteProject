@@ -173,7 +173,7 @@ export const AppointmentBookingForm = () => {
   const { t } = useLanguage();
   
   return (
-    <section className={styles.bookingSection}>
+    <section id="appointment-form" className={styles.bookingSection}>
       <div className={styles.container}>
         <div className={styles.row}>
           <div className={styles.colImage}>

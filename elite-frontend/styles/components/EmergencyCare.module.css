@@ -74,6 +74,25 @@
   display: flex;
   align-items: center;
   margin-top: 1rem;
+  text-decoration: none;
+  cursor: pointer;
+  padding: 0.75rem 1rem;
+  border-radius: 10px;
+  transition: all 0.3s ease;
+  background: rgba(255, 255, 255, 0.1);
+  border: 2px solid rgba(255, 215, 0, 0.3);
+}
+
+.emergencyContact:hover {
+  background: rgba(255, 215, 0, 0.2);
+  border-color: rgba(255, 215, 0, 0.6);
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(255, 215, 0, 0.3);
+}
+
+.clickablePhone {
+  /* Additional styles for clickable phone if needed */
+  color: inherit;
 }
 
 .phoneIcon {

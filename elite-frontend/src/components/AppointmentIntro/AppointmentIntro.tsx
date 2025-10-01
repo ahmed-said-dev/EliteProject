@@ -40,9 +40,21 @@ export const AppointmentIntro = () => {
               </div>
             </div>
             <div className={styles.cta}>
-              <a className={styles.btnPrimary} href="#appointment-form">
+              <button 
+                className={styles.btnPrimary} 
+                onClick={() => {
+                  const element = document.getElementById('appointment-form');
+                  if (element) {
+                    element.scrollIntoView({ 
+                      behavior: 'smooth',
+                      block: 'start'
+                    });
+                  }
+                }}
+                type="button"
+              >
                 {t('appointment.intro.cta.button')}
-              </a>
+              </button>
               <p className={styles.ctaText}>
                 {t('appointment.intro.cta.text')}
               </p>

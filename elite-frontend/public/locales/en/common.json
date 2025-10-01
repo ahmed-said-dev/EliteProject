@@ -1000,6 +1000,7 @@
       "description": "Set of 10 different interactive cat toys including feathers, mice, balls, and catnip toys. Great for keeping cats mentally and physically active."
     }
   },
+  "serviceBooking": {
     "bookNow": "Book Now",
     "callUs": "Call Us",
     "faq": "Frequently Asked Questions",
@@ -1430,7 +1431,7 @@
         "Advanced Medical Equipment",
         "Dedicated Intensive Care Units"
       ],
-      "contactNumber": "1-800-PET-HELP",
+      "contactNumber": "920011626",
       "contactButton": "Contact Emergency Services",
       "services": [
         {

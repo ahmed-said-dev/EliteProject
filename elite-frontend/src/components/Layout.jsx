@@ -8,9 +8,9 @@ const Layout = ({ children }) => {
   const { isRTL } = useLanguage();
   
   return (
-    <div dir={isRTL ? 'rtl' : 'ltr'}>
+    <div dir={isRTL ? 'rtl' : 'ltr'} className="layout-wrapper">
       <Header />
-      <main>{children}</main>
+      <main className="main-content">{children}</main>
       <Footer />
     </div>
   );

@@ -36,10 +36,7 @@ export const EmergencyOutro: React.FC = () => {
                     phoneNumber={t('appointment.emergencyOutro.phones.landline')}
                     icon="fas fa-phone-alt" 
                   />
-                  <PhoneLink 
-                    phoneNumber={t('appointment.emergencyOutro.phones.mobile')}
-                    icon="fas fa-mobile-alt" 
-                  />
+
                 </div>
                 <EmergencyBadge text={t('appointment.emergencyOutro.badge')} />
               </div>

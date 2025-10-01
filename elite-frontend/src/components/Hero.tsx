@@ -54,21 +54,23 @@ const Hero = () => {
 
             {/* Content wrapper with higher z-index */}
             <div className="absolute inset-0 z-10">
-              <div className="max-w-lg absolute left-6 md:left-12 top-12" dir={dir === 'rtl' ? 'rtl' : 'ltr'}>
-                <h1 className={`text-4xl font-bold text-yellow-300 mb-4 leading-tight ${dir === 'rtl' ? 'text-right' : 'text-left'}`}>
+              <div className="max-w-lg absolute left-1/2 transform -translate-x-1/2 top-16 md:left-12 md:transform-none md:top-12 w-full md:w-auto px-4 md:px-0" dir={dir === 'rtl' ? 'rtl' : 'ltr'}>
+                <h1 className={`text-2xl md:text-4xl font-bold text-yellow-300 mb-4 leading-tight text-center md:${dir === 'rtl' ? 'text-right' : 'text-left'}`}>
                   {translate('hero.title', locale)}
                 </h1>
                 
-                <p className={`text-white text-lg mb-8 ${dir === 'rtl' ? 'text-right' : 'text-left'}`}>
+                <p className={`text-white text-base md:text-lg mb-6 md:mb-8 text-center md:${dir === 'rtl' ? 'text-right' : 'text-left'}`}>
                   {translate('hero.subtitle', locale)}
                 </p>
                 
                 <Button 
                   onClick={handleBookAppointment}
-                  className="bg-yellow-400 hover:bg-yellow-500 text-[#6B4E98] font-bold text-lg rounded-full w-fit px-8 py-2 flex items-center gap-2"
+                  className="bg-yellow-400 hover:bg-yellow-500 text-[#6B4E98] font-bold rounded-full flex items-center gap-2 
+                            px-4 py-1.5 text-sm mx-auto hero-button-mobile
+                            md:px-8 md:py-2 md:text-lg md:mx-0"
                 >
                   {translate('hero.bookButton', locale)}
-                  <Plus className="h-5 w-5" />
+                  <Plus className="h-4 w-4 md:h-5 md:w-5" />
                 </Button>
               </div>
 
